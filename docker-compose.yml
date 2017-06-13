@@ -5,8 +5,9 @@ services:
                 restart: always
                 volumes:
                         - usock:/usock
-                        - go_app:/go/src/app
-                        - web-vol:/web
+                        - ./volumes/go_app:/go/src/app
+#                        - go_app:/go/src/app
+#                        - web-vol:/web
 
         nginx:
                 build: nginx
@@ -18,14 +19,16 @@ services:
                 restart: always
                 volumes:
                         - usock:/usock
-                        - web-vol:/web
+                        - ./volumes/web-vol:/web
+#                        - web-vol:/web
 
         mysql:
                 build: mysql
                 restart: always
                 volumes:
                         - usock:/usock
-                        - db_data:/var/lib/mysql
+                        - ./volumes/db_data:/var/lib/mysql
+#                        - db_data:/var/lib/mysql
 
 volumes:
         usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー

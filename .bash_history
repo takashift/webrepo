@@ -1,44 +1,3 @@
-ls
-docker images
-docker rm cd1d6cd0a712
-docker rmi cd1d6cd0a712
-docker rm -f cd1d6cd0a712
-docker rmi cd1d6cd0a712
-docker rmi 01be33134972
-docker rmi golang
-docker images
-docker rm cd1d6cd0a712
-docker rmi cd1d6cd0a712
-docker rmi -f cd1d6cd0a712
-docker images
-docker build -t echo .
-docker run --rm -p 1323:1323 --name echo echo
-docker rm echo
-docker images
-docker rmi echo
-mv server.go ..
-ls
-docker build -t echo .
-mv ../server.go .
-ls
-docker images
-ls
-cd nginx/
-ls
-vi Dockerfile 
-ps -a
-docker ps
-docker stop nginx-test
-docker rm nginx-test
-docker rmi nginx-test
-docker build -t nginx-test
-docker build -t nginx-test .
-docker run --name nginx-test -d -p 443:443 -p 80:80 nginx-test
-docker ps
-docker images
-docker run -d -p 1323:1323 --name echo echo
-docker run -d -p 1323:1323 --name echo golang
-docker rm bd71f56db10b
 docker rm -f bd71f56db10b
 docker rmi bd71f56db10b
 docker stop bd71f56db10b
@@ -997,4 +956,45 @@ ls -l
 exit
 sudo sud
 sudo su
+exit
+git
+sudo yum install git
+git
+git -V
+git -v
+git -version
+git --version
+ls
+git init
+ls -a
+rm -r .git
+ls -a
+cat .bashrc
+cat .bash_history 
+ls -a
+cat .bash_logout 
+cat .bash_profile 
+git init
+ls
+git add docker-compose.yml  docker-compose.yml.bk  echo  mysql  nginx
+git status
+ls -a
+git add .bash_logout
+git reset HEAD .bash_logout
+git reset HEAD
+git reset HEAD -- .bash_logout
+git status
+git add .bash_history 
+git status
+cat .rnd 
+1;2c
+git commit -m 'first commit'
+vi .git/config 
+git git config --global user.email "e145771@ie.u-ryukyu.ac.jp"
+git config --global user.email "e145771@ie.u-ryukyu.ac.jp"
+git config --global user.name "takashift"
+git commit -m 'first commit'
+git remote add origin https://github.com/takashift/webrepo.git
+git push
+git credential-osxkeychain
 exit
