@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+        echo:
+                build: echo
+                restart: always
+                volumes:
+                        - web-vol:/web
+                        - usock:/usock
+
+        nginx:
+                build: nginx
+                ports:
+                        - "443:443"
+                        - "80:80"
+#                links:
+#                        - echo
+                restart: always
+                volumes:
+                        - web-vol:/web
+                        - usock:/usock
+
+volumes:
+        usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
+                external: true
+        web-vol: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
+                external: true
+

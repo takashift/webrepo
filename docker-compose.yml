@@ -1,0 +1,39 @@
+version: '3'
+services:
+        echo:
+                build: echo
+                restart: always
+                volumes:
+                        - usock:/usock
+                        - go_app:/go/src/app
+                        - web-vol:/web
+
+        nginx:
+                build: nginx
+                ports:
+                        - "443:443"
+                        - "80:80"
+#                links:
+#                        - echo
+                restart: always
+                volumes:
+                        - usock:/usock
+                        - web-vol:/web
+
+        mysql:
+                build: mysql
+                restart: always
+                volumes:
+                        - usock:/usock
+                        - db_data:/var/lib/mysql
+
+volumes:
+        usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
+                external: true
+        web-vol: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
+                external: true
+        go_app:
+                external: true
+        db_data:
+                external: true
+

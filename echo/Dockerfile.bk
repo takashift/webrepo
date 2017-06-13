@@ -1,0 +1,9 @@
+FROM golang:onbuild
+
+MAINTAINER hgcr
+
+#ENTRYPOINT ["go", "get", "github.com/labstack/echo"]
+#ENTRYPOINT ["", ""]
+#CMD ["go", "run", "/fcgi/server.go"]
+
+#EXPOSE 1323
