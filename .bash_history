@@ -1,4 +1,3 @@
-sudo iptables -L -n
 vi docker-comporse.yml
 cd echo
 ls
@@ -998,3 +997,4 @@ docker-compose logs
 vi volumes/go_app/Gododir/main.go 
 git log
 git pull
+exit

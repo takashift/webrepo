@@ -9,6 +9,8 @@ services:
                         - ./volumes/web-vol:/web
 #                        - go_app:/go/src/app
 #                        - web-vol:/web
+                links:
+                        - mysql
 
         nginx:
                 build: nginx
@@ -25,6 +27,8 @@ services:
 
         mysql:
                 build: mysql
+                ports:
+                        - "3306:3306"
                 restart: always
                 volumes:
                         - usock:/usock
