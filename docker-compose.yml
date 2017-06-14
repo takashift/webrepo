@@ -6,6 +6,7 @@ services:
                 volumes:
                         - usock:/usock
                         - ./volumes/go_app:/go/src/app
+                        - ./volumes/web-vol:/web
 #                        - go_app:/go/src/app
 #                        - web-vol:/web
 
@@ -33,10 +34,10 @@ services:
 volumes:
         usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
                 external: true
-        web-vol: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
-                external: true
-        go_app:
-                external: true
-        db_data:
-                external: true
+#        web-vol: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
+#                external: true
+#        go_app:
+#                external: true
+#        db_data:
+#                external: true
 

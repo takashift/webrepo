@@ -1,98 +1,3 @@
-docker rm -f bd71f56db10b
-docker rmi bd71f56db10b
-docker stop bd71f56db10b
-docker rm -f bd71f56db10b
-docker rmi -f bd71f56db10b
-docker ps -a
-docker rm golang
-docker rm echo
-docker ps -a
-docker rm goofy_minsky
-docker rm agitated_blackwell
-docker ps
-docker ps -a
-docker rm goofy_saha
-docker rm youthful_archimedes
-docker rm flamboyant_fermat
-docker ps -a
-docker rm determined_kirch
-docker rm quirky_mahavira
-docker rm epic_davinci
-docker rm pedantic_hodgkin
-docker ps -a
-docker images
-cd ..
-cd echo/
-docker build -t echo .
-docker images
-docker run -d -p 1323:1323 --name echo echo
-docker ps
-docker ps -a
-exit
-docker pull postgres:alpine
-docker image
-docker images
-exit
-cat /etc/tmpfiles.d/gopher.conf
-cd /etc/tmpfiles.d
-ls
-ls a-
-ls -a
-vi gopher.conf
-sudo vi gopher.conf
-systemd-tmpfiles --create /etc/tmpfiles.d/gopher.conf
-sudo systemd-tmpfiles --create /etc/tmpfiles.d/gopher.conf
-sudo systemctl daemon-reload
-sudo /etc/nginx/nginx.conf
-sudo vi /etc/nginx/nginx.conf
-cd /etc/nginx/
-cd /etc/
-ls
-cd httpd
-ls
-cd ..
-docker list
-docker ps -a
-docker ps
-docker stop nginx-test
-cd ~
-ls
-cd nginx/
-lls
-ls
-app.conf
-vi app.conf
-docker rm nginx-test
-docker build -t nginx-test .
-docker start nginx-test
-docker images
-docker start nginx-test
-docker run --name nginx-test -d -p 443:443 -p 80:80 nginx-test
-docker ps -a
-docker ps
-docker stop nginx-test
-docker rm nginx-test
-vi app.conf
-docker build -t nginx-test .
-docker run --name nginx-test -d -p 443:443 -p 80:80 nginx-test
-docker ps -a
-docker ps
-cd echo/
-sudo rm /etc/nginx/nginx.conf
-cat /etc/tmpfiles.d/gopher.conf
-sudo rm /etc/tmpfiles.d/gopher.conf
-ls
-systemctl daemon-reload
-sudo systemctl daemon-reload
-ls
-systemd-tmpfiles --remove /etc/tmpfiles.d/gopher.conf
-systemd-tmpfiles --clean
-systemctl daemon-reload
-sudosystemctl daemon-reload
-sudo systemctl daemon-reload
-iptables
-iptables -h
-iptables -L -n
 sudo iptables -L -n
 vi docker-comporse.yml
 cd echo
@@ -998,3 +903,98 @@ git remote add origin https://github.com/takashift/webrepo.git
 git push
 git credential-osxkeychain
 exit
+sudo su
+cat .bash_history | grep ln
+pwd
+mkdir mounttest
+cat .bash_history | grep -it
+cat .bash_history | grep it
+cat .bash_history | grep ti
+cat .bash_history | grep docker
+cat .bash_history | grep exec
+docker ps
+docker exec -it tuna_echo_1 /bin/ash
+touch mounttest/test.txt
+ls mounttest/
+docker exec -it tuna_echo_1 /bin/ash
+cat .bash_history | grep ln
+
+docker exec -it tuna_echo_1 /bin/ash
+vi docker-compose.yml
+cat nginx/Dockerfile 
+vi docker-compose.yml
+cat nginx/Dockerfile
+vi echo/vol/server.go 
+vi docker-compose.yml
+git status
+vi docker-compose.yml
+ls
+mkdir volumes
+ls
+mv db_data/_data/ volumes/db_data/
+ls db_data/
+ls -l db_data/
+ls -l go_app/
+ls -l web-vol/
+ls -l usock/
+rm -r db_data/ go_app/ usock/ web-vol/
+sudo rm -r db_data/ go_app/ usock/ web-vol/
+ls -l
+ls 
+git status
+cd mounttest/
+ls
+cd ..
+rm -r mounttest/
+ls
+volumes/
+cd volumes/
+ls
+mkdir db_data go_app web-vol
+ls
+ls db_data/
+ls go_app/
+ls -l
+ls -l go_app/
+ls -l go_app/_data/
+ls -al go_app/_data/
+mv go_app/_data/* go_app/
+sudo rm -r go_app/_data/
+ls -l go_app/
+ls -al go_app/
+ls -al db_data/
+cd ..
+cd volumes/
+cd go_app/
+cd ..
+cd ~
+cat .bash_history | grep chown
+cd volumes/
+cd go_app/
+pwd
+cd ..
+git add volumes/
+ls -al volumes/db_data/
+git add volumes/
+git status
+ls -al
+ls -a
+ls .pki/
+ls .pki/nssdb/
+cat .git
+cat .gitconfig 
+git commit -m 'copy 3 volume dir'
+vi docker-compose.yml
+git commit -am 'modification volume directory on host docker-compose.yml'
+git ls
+git ls-files
+vi docker-compose.yml
+cat .bash_history | grep docker-compose
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/server.go 
+docker-compose logs
+vi volumes/go_app/Gododir/main.go 
+git log
+git pull
