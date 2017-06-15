@@ -1,323 +1,3 @@
-vi docker-comporse.yml
-cd echo
-ls
-..
-cd ..
-ls
-vi docker-comporse.yml
-mv docker-comporse.yml echo/
-ls
-cd echo/
-ls
-cd e
-vi main.go
-cd /etc/tmpfiles.d/
-ls
-vi gopher.conf
-sudo vi gopher.conf
-sudo systemd-tmpfiles --create /etc/tmpfiles.d/gopher.conf
-sudo systemctl daemon-reload
-ls
-cd ~/echo
-ls
-vi Dockerfile 
-docker stop echo
-docker rm echo
-docker-compose up
-yum install docker-compose
-sudo yum update
-sudo yum install docker-compose
-pip install docker-compose
-curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-sudo curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-sudo su
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose virsion
-docker-compose version
-docker-compose up
-ls
-mv docker-comporse.yml docker-compose.yml 
-docker-compose up
-vi Dockerfile 
-vi docker-compose.yml 
-vi Dockerfile 
-vi docker-compose.yml
-docker-compose up
-ls
-docker ps
-vi docker-compose.yml
-vi main.go 
-vi main.go
-vi docker-compose.yml
-docker-compose up
-vi docker-compose.yml
-docker-compose up
-vi main.go
-cd e
-docker-compose up
-vi server.go 
-docker-compose up
-vi main.go
-docker-compose up
-socat stdio UNIX-CONNECT:/var/run/gopher/go.sock
-sudo yum install socat
-socat stdio UNIX-CONNECT:/var/run/gopher/go.sock
-vi docker-compose.yml
-docker-compose up
-vi docker-compose.yml
-vi docker-compose.ymlecho -en 'GET / HTTP/1.0\r\n\r\n' | socat stdio UNIX-CONNECT:/var/run/gopher/go.sock
-cd echo/
-vi main.go
-cat /etc/tmpfiles.d/gopher.conf
-systemd-tmpfiles --create /etc/tmpfiles.d/gopher.conf
-sudo systemctl daemon-reload
-echo -en 'GET / HTTP/1.0\r\n\r\n' | socat stdio UNIX-CONNECT:/var/run/gopher/go.sock
-vi docker-compose.yml 
-docker-compose up
-exit
-docker ps
-exit
-docker -v
-cd nginx/
-la
-ls
-vi Dockerfile 
-vi app.conf 
-cat app.conf 
-cat Dockerfile 
-vi Dockerfile 
-
-docker images
-pwd
-cat Dockerfile 
-vi Dockerfile 
-cat Dockerfile 
-vi Dockerfile 
-cat Dockerfile 
-cd ..
-cd echo/
-ls
-vi server.go 
-cat Dockerfile 
-ls
-mkdir server
-ls
-mv server.go server
-cd server/
-ls
-cd ..
-mv server/ fcgi
-ls
-cd fcgi/
-la
-ls
-pwd
-cd ~
-cat docker-compose.yml
-vi nginx/Dockerfile 
-vi echo/Dockerfile 
-vi nginx/Dockerfile
-vi echo/Docke
-vi nginx/app.conf 
-vi nginx/Dockerfile
-vi echo/Dockerfile 
-vi nginx/Dockerfile
-vi echo/Dockerfile 
-vi nginx/app.conf 
-vi echo/Dockerfile 
-vi docker-compose.yml
-vi echo/Dockerfile 
-vi docker-compose.yml
-vi echo/Dockerfile 
-vi echo/fcgi/server.go 
-vi echo/Dockerfile 
-vi nginx/app.conf 
-vi nginx/Dockerfile
-vi echo/Dockerfile 
-vi echo/fcgi/server.go 
-vi echo/Dockerfile 
-vi echo/fcgi/server.go 
-vi echo/Dockerfile 
-mv echo/fcgi/server.go .
-ls
-mv main.go server.go
-mv server.go echo/
-ls
-vi echo/Dockerfile 
-vi nginx/Dockerfile
-vi nginx/app.conf 
-vi nginx/Dockerfile
-vi echo/Dockerfile 
-cd echo/
-ls
-rm -r fcgi/
-vi echo/Dockerfile 
-cd ..
-vi echo/Dockerfile 
-vi docker-compose.yml
-vi nginx/app.conf 
-mv server.go echo/
-vi echo/fcgi/server.go 
-vi echo/server.go 
-vi echo/fcgi/server.go 
-vi echo/server.go 
-vi echo/fcgi/server.go 
-vi echo/server.go 
-vi echo/fcgi/server.go 
-vi echo/server.go 
-cd echo/
-mv server.go server.go.test
-vi fcgitest.go
-mv fcgitest.go fcgitest.go.tst
-mv server.go.test server.go
-cd..
-cd ..
-vi echo/server.go 
-docker ps -a
-docker ps
-idn
-idn （笑）
-idn 笑
-ssh ie-user@笑.nal.ie.u-ryukyu.ac.jp
-ssh ie-user@xn--rvz.nal.ie.u-ryukyu.ac.jp
-ls
-cd echo
-ls
-mv docker-compose.yml ../
-ls
-cd ..
-;s
-ls
-cd nginx/
-ls
-cd ..
-ls
-less docker-compose.yml 
-cat docker-compose.yml 
-cd docker-compose.yml 
-cd echo/
-ls
-cat Dockerfile 
-vi Dockerfile 
-vi Dockerfile
-ls
-vi main.go 
-vi server.go 
-cd ../nginx/
-ls
-vi Dockerfile 
-vi app.conf 
-vi Dockerfile 
-vi app.conf 
-cat Dockerfile 
-vi app.conf 
-cat Dockerfile 
-vi Dockerfile 
-ls
-cd e
-cd ../echo/
-ls
-cat main.go 
-mv main.go main.go.tst
-cat server.go 
-vi server.go 
-vi Dockerfile 
-vi server.go 
-cat Dockerfile 
-vi Dockerfile
-cat server.go 
-vi server.go 
-cat server.go 
-vi server.go 
-cd ..
-ls
-vi docker-compose.yml 
-mv docker-compose.yml  docker-compose.yml.unk
-ls
-vi D
-vi echo/Dockerfile 
-cp docker-compose.yml.unk docker-compose.yml
-ls
-vi docker-compose.yml
-docker -h
-docker ps
-docker stop nginx-test
-docker-compose up
-vi docker-compose.yml
-docker-compose up
-vi docker-compose.yml
-docker-compose up
-docker ps
-docker ps -a
-docker-compose up
-vi docker-compose.yml
-docker-compose up -d
-docker ps
-docker stop tuna_nginx_1 tuna_echo_1
-docker ps
-docker-compose up
-docker ps
-docker ps -a
-docker rm tuna_nginx tuna_echo
-docker rm tuna_nginx_1 tuna_echo_1
-docker ps -a
-docker image
-docker images
-docker rmi tuna_nginx tuna_echo
-docker images
-docker-compose up
-docker-compose rm
-docker-compose up
-docker-compose stop
-docker-compose rm
-docker-compose rmi
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker ps -a
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-ls
-mv server.go main.go
-docker-compose up
-docker-compose down --rmi all
-docker-compose up
-docker-compose stop
-docker-compose start -d
-docker-compose start
-docker ps
-vi docker-compose.yml
-docker-compose down --rmi all
-docker ps
 docker-compose up
 docker-compose up -d
 docker-compose down --rmi all
@@ -997,4 +677,324 @@ docker-compose logs
 vi volumes/go_app/Gododir/main.go 
 git log
 git pull
+exit
+git pull origin master
+ls -a
+git status
+git commit -m 'merge remote repository'
+git log
+git commit -am 'merge remote repository'
+ls -l volumes/db_data/
+git rm --cached volumes/db_data/
+git rm -r --cached volumes/db_data/
+ls -l volumes/db_data/
+git status
+git commit -am 'merge remote repository & rm --cached db_data'
+git log
+git push
+ls -a
+ls -a .pki/
+ls -a .pki/nssdb/
+ls -al
+rm -r .pki/
+ls -al .ssh
+ssh-keygen -t ed25519
+pdcopy < .ssh/id_ed25519
+cat .ssh/id_ed25519
+cat .ssh/id_ed25519.pub 
+git push
+vi .git/config 
+git push
+vi .ssh/config 
+ls
+ls -a .ssh/
+vi .ssh/known_hosts 
+vi .bashrc
+ssh-add
+eval `ssh-agent`
+ssh-add
+git push
+cat .bashrc
+vi .bashrc
+vi gitpush
+git push
+vi gitpush
+echo $PATH
+ls
+pwd
+mkdir bin
+ls
+mv gitpush bin/
+ls bin
+mv bin/gitpush ./
+ls bin
+ls
+mv gitpush bin/
+ls bin
+mv gitpush pushgit
+cd bin/
+mv gitpush pushgit
+mv pushgit gitpush
+ls
+ls -l
+chmod 700 gitpush 
+ls
+ls -l
+cd ..
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+cat .bash_history | grep docker ash
+cat .bash_history | grep ash
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+vi volumes/go_app/server.go_ 
+vi docker-compose.yml
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+vi volumes/go_app/server.go.cm 
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi echo/Dockerfile
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+vi volumes/go_app/server.go.cm 
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/server.go.cm 
+docker-compose down --rmi all
+vi echo/Dockerfile
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/server.go.cm 
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+cat volumes/go_app/db.go
+vi volumes/go_app/db.go
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go
+docker-compose logs
+vi volumes/go_app/db.go
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+vi volumes/go_app/db.go
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+vi volumes/go_app/db.go
+docker-compose logs
+docker-compose up -d
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go
+docker-compose logs
+vi volumes/go_app/db.go
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose logs
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose up -d
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+git status
+git add volumes/go_app/db.go volumes/go_app/server.go.cm 
+git status
+git commit -am 'まだGoとMySQLとの接続がうまくいかない'
+git push
+vi .gitconfig 
+git push
+ls
+./gitpush
+ls -l
+./gitpush
+ls -l
+chmod 744 gitpush 
+ls -l
+git push
+./gitpush 
+yum install -y expect
+sudo yum install -y expect
+./gitpush 
+chmod 777 gitpush 
+./gitpush 
+chmod 740 gitpush 
+ls -l
+./gitpush 
+time ./gitpush
+gitpush
+vi .git
+vi .gitconfig 
+git push
+vi .gitconfig 
+git push
+vi .gitconfig 
+gitpush
+vi mysql/Dockerfile 
+ls -l mysql/
+vi mysql/Dockerfile 
+chmod 700 mysql/Dockerfile 
+cd mysql/
+ls init/
+ls -a in
+cd ../volumes/
+ls db_data/
+ls db_data/Webrepo/
+sudo ls db_data/Webrepo/
+vi mysql/Dockerfile 
+vi ../mysql/Dockerfile 
+cd ..
+cd echo/
+ls
+rm vol
+ls
+cd ..
+ls nginx/
+rm nginx/vol/
+rm nginx/vol
+ls mysql/
+rm mysql/vol/
+rm mysql/vol
+ls
+ls echo/
+ls mysql/
+ls nginx/
+cd volumes/
+ls
+cd go_app/
+ls
+mv server.go server.go_
+vi db.go
+ls
+mv server.go_ server.go
+ls
+mv server.go server.go_
+ls
+vi db.go
+ls
+vi db.go
+vi server.go_ 
+vi db.go
+vi Gododir/main.go 
+cd ..
+ls
+cd go_app/
+ls
+mv server.go_ server.go.cm
+vi db.go 
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+curl - -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+curl  -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+sudo mkdir /usr/share/curl/
+curl http://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
+sudo curl http://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
+sudo touch /usr/share/curl/curl-ca-bundle.crt
+sudo curl http://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
+cat /usr/share/curl/curl-ca-bundle.crt
+sudo curl -k https://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
+cat /usr/share/curl/curl-ca-bundle.crt
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+cp /usr/share/curl/curl-ca-bundle.crt /etc/ssl/certs/
+sudo cp /usr/share/curl/curl-ca-bundle.crt /etc/ssl/certs/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+vi db.go 
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhostusers/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:users/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost:users/
+curl -X -k POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost:users/
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost:users/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost:users/
+cp /usr/share/curl/curl-ca-bundle.crt /etc/ssl/certs/
+rm /etc/ssl/certs/curl-ca-bundle.crt 
+sudo rm /etc/ssl/certs/curl-ca-bundle.crt 
+ls /etc/ssl/certs/
+sudo ls /usr/share
+sudo ls -l /usr/share
+sudo rm /usr/share/curl/
+sudo rm -r /usr/share/curl/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost:users/
+cat ~/echo/Dockerfile
+cat ~/mysql/Dockerfile
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+cd ..
+vi docker-compose.yml
+vi volumes/go_app/db.go 
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+docker exec -it tuna_echo_1 /bin/ash
+docker exec -it tuna_mysql_1 /bin/bash
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+vi volumes/go_app/db.go 
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+vi docker-compose.yml
+docker ps
+docker ps -a
+docker ps
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+mysql localhost:3306
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "first_name" : "poyoc" , "last_name" : "negi" }' -k https://localhost/users/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
+curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:443/users/
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:443/users/
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
+vi volumes/go_app/db.go 
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
+vi volumes/go_app/db.go 
 exit

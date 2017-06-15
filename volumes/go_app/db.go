@@ -35,8 +35,9 @@ type (
 var (
     tablename = "userinfo"
     seq   = 1
-    conn, _ = dbr.Open("mysql", "rtuna:USER_PASSWORD@tcp(localhost:3306)/Webrepo", nil)
-    sess = conn.NewSession(nil)
+    conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@tcp(mysql:3306)/Webrepo", nil)
+    ssess = conn.NewSession(nil)
+    sess, seserr = ssess.Begin()
 )
 
 
@@ -103,6 +104,13 @@ func main() {
     e.Use(middleware.Logger())
     e.Use(middleware.Recover())
 
+    if dberr != nil {
+      e.Logger.Fatal(dberr)
+    }
+
+    if seserr != nil {
+      e.Logger.Fatal(seserr)
+    }
 
     // Routes
     e.POST("/users/", insertUser)

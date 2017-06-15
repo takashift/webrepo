@@ -27,8 +27,8 @@ services:
 
         mysql:
                 build: mysql
-                ports:
-                        - "3306:3306"
+#                ports:
+#                        - "3306:3306"
                 restart: always
                 volumes:
                         - usock:/usock

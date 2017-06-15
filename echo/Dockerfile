@@ -23,5 +23,3 @@ CMD ["/go/bin/godo", "server", "--watch"]
 #ENTRYPOINT ["go", "get", "github.com/labstack/echo"]
 #ENTRYPOINT ["", ""]
 #CMD ["go", "run", "/fcgi/server.go"]
-
-#EXPOSE 1323
