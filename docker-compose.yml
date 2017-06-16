@@ -4,6 +4,7 @@ services:
                 build: echo
                 restart: always
                 volumes:
+                        - /etc/localtime:/etc/localtime:ro
                         - usock:/usock
                         - ./volumes/go_app:/go/src/app
                         - ./volumes/web-vol:/web
@@ -21,6 +22,7 @@ services:
 #                        - echo
                 restart: always
                 volumes:
+                        - /etc/localtime:/etc/localtime:ro
                         - usock:/usock
                         - ./volumes/web-vol:/web
 #                        - web-vol:/web
@@ -31,9 +33,11 @@ services:
 #                        - "3306:3306"
                 restart: always
                 volumes:
-                        - usock:/usock
+                        - usock:/var/run/mysqld/
                         - ./volumes/db_data:/var/lib/mysql
 #                        - db_data:/var/lib/mysql
+                environment:
+                        TZ: Asia/Tokyo
 
 volumes:
         usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー

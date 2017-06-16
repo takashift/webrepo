@@ -1,193 +1,3 @@
-docker-compose up
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose log
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d
-docker-compose logs
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi echo/fcgitest.go.tst
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi echo/server.go 
-exit
-vi nginx/app.conf 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi nginx/app.conf 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-exit
-vi echo/Dockerfile 
-vi docker-compose.yml
-docker-compose down --rmi all
-cd /var/lib/docker/volumes
-sudo su
-docker volume ls
-docker volume rm cfd5ed2c9d371a5fcafbcdeb41199e74392777f755aa3c7c3ba12da1af0a3a2c
-docker ps
-docker ps -a
-docker rm `docker ps -a`
-docker rm `docker ps -a -q`
-docker ps -a
-docker volume ls
-docker volume rm cfd5ed2c9d371a5fcafbcdeb41199e74392777f755aa3c7c3ba12da1af0a3a2c
-docker volume ls
-docker volume rm echo_data
-docker volume ls
-docker images
-docker rmi b33b154cc00f 17f8f3f170ba 1b92a8881b43 4f69c5b4e795 1f6fc6cf69df fe1d4926af72 2c390f3ee9a0 361e873d95f0 31a2a6b6b830 d24c4f729b2e 62cc9c93e2fa e2b65f61f414 1f0e9df6fcd1
-docker images
-ls
-mkdir contents
-ls
-mv contents/ web-data
-ls
-mv web-data web-vol
-ls
-cd web-vol/
-touch test.txt
-ls
-cd ..
-docker-compose up -d
-docker volume create --name=web-vol
-docker volume ls
-docker volume -h
-docker volume inspect
-docker volume inspect web-vol
-rm web-vol/
-rm -r web-vol/
-sudo su
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker volume ls
-docker ps
-docker-compose down --rmi all
-docker ps -a
-docker rm `docker ps -a`
-docker rm `docker ps -a -q`
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker rm `docker ps -a -q`
-docker ps -a
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker ps -a
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker attach tuna_nginx_1
-docker exec -i -t tuna_nginx_1
-docker exec -i -t tuna_nginx_1 /bin/bash
-docker exec -i -t tuna_echo_1 /bin/bash
-docker ps -a
-docker ps
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-curl --unix-socket /var/lib/docker/volumes/web-vol/_data
-curl --unix-socket /var/lib/docker/volumes/web-vol/_data/domain.sock http:/
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker ps -a
-docker rm `docker ps -a -q`
-docker images
-docker-compose up -d
-docker rm `docker ps -a -q`
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker-compose down --rmi all
-docker rm `docker ps -a -q`
-docker stop `docker ps -a -q`
-docker rm `docker ps -a -q`
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d
-docker-compose logs
-docker exec -i -t tuna_nginx_1 /bin/ash
-vi echo/server.go 
 vi nginx/app.conf 
 vi echo/server.go 
 vi docker-compose.yml
@@ -998,3 +808,193 @@ vi volumes/go_app/db.go
 curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
 vi volumes/go_app/db.go 
 exit
+yum
+yum list chrony
+yum install -y chrony
+sudo yum install -y chrony
+vi /etc/chrony.conf 
+sudo vi /etc/chrony.conf 
+systemctl enable chronyd
+sudo systemctl enable chronyd
+sudo systemctl start chronyd
+sudo systemctl status chronyd
+date
+sudo vi /etc/chrony.conf 
+sudo systemctl restart chronyd
+chronyc sources
+sudo systemctl status chronyd
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+cat docker-compose.yml
+vi mysql/Dockerfile
+curl -k -X GET https://127.0.0.1/users/
+curl -k -X GET https://127.0.0.1
+yum -y remove mysql
+sudo yum -y install mysql
+mysql -h localhost -u rtuna -p Webrepo
+mysql -h 127.0.0.1 -u rtuna -p Webrepo
+docker-compose logs
+vi mysql/Dockerfile
+vi e/Dockerfile
+vi echo/Dockerfile
+vi docker-compose.yml
+curl -k -X GET https://127.0.0.1/users/
+vi mysql/Dockerfile
+vi echo/Dockerfile
+vi docker-compose.yml
+vi echo/Dockerfile
+vi docker-compose.yml
+vi mysql/Dockerfile
+vi echo/Dockerfile
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+date
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+git status
+ls bin
+cat bin/gitpush 
+git commit -am 'MySQLへのTCP接続不能問題が解決！'
+gitpush 
+vi volumes/go_app/db.go 
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+docker exec -it tuna_mysql_1 /bin/bash
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+docker exec -it tuna_mysql_1 /bin/bash
+cat docker-compose.yml
+docker exec -it tuna_mysql_1 /bin/bash
+cd /var/lib/docker/volum
+ls /home/tuna/volumes/
+sudo su
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+docker exec -it tuna_mysql_1 /bin/bash
+sudo su
+vi echo/Dockerfile
+docker exec -it tuna_mysql_1 /bin/bash
+exit
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 2 , "email" : "test@koumon.unk" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+vi volumes/go_app/db.go 
+ls volumes/db_data/
+ls -l volumes/db_data/mysql/
+sudo ls -l volumes/db_data/mysql/
+cd ..
+cd ~\
+sudo ls -l volumes/db_data
+sudo ls -al volumes/db_data
+vi docker-compose.yml
+docker-compose down --rmi all
+vi docker-compose.yml
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 3 , "email" : "test@koumon.unk" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
+vi volumes/go_app/db.go 
+docker-compose logs
+vi volumes/go_app/db.go 
+docker-compose logs
+curl -k -X POST -H 'Content-Type: application/json' -d '{ "email" : "test@koumon.unk" , "firstName" : "mitsukuni" , "lastName" : "mito" }' https://127.0.0.1/users/
+docker-compose logs
+vi echo/Dockerfile
+vi mysql/
+vi mysql/Dockerfile 
+vi nginx/Dockerfile 
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose up -d
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker exec -it tuna_echo_1 /bin/bash
+docker exec -it tuna_echo_1 /bin/ash
+vi echo/Dockerfile
+vi mysql/Dockerfile
+vi echo/Dockerfile
+vi nginx/Dockerfile
+docker exec -it tuna_echo_1 /bin/ash
+vi echo/Dockerfile
+vi nginx/Dockerfile
+vi mysql/Dockerfile
+vi docker-compose.yml
+docker exec -it tuna_echo_1 /bin/ash
+docker exec -it tuna_mysql_1 /bin/bash
+docker exec -it tuna_nginx_1 /bin/ash
+date
+vi docker-compose.yml
+docker exec -it tuna_nginx_1 /bin/ash
+docker exec -it tuna_echo_1 /bin/ash
+docker exec -it tuna_mysql_1 /bin/bash

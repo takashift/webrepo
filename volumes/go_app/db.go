@@ -35,9 +35,10 @@ type (
 var (
     tablename = "userinfo"
     seq   = 1
-    conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@tcp(mysql:3306)/Webrepo", nil)
-    ssess = conn.NewSession(nil)
-    sess, seserr = ssess.Begin()
+//    conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@tcp(mysql:3306)/Webrepo", nil)
+    conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
+    sess = conn.NewSession(nil)
+//    sess, seserr = ssess.Begin()
 )
 
 
@@ -108,10 +109,10 @@ func main() {
       e.Logger.Fatal(dberr)
     }
 
-    if seserr != nil {
+/*    if seserr != nil {
       e.Logger.Fatal(seserr)
     }
-
+*/
     // Routes
     e.POST("/users/", insertUser)
     e.GET("/user/:id", selectUser)
