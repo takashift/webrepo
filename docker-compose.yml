@@ -41,7 +41,7 @@ services:
 
 volumes:
         usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
-                external: true
+#                external: true
 #        web-vol: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
 #                external: true
 #        go_app:

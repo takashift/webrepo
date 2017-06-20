@@ -1,8 +1,3 @@
-vi nginx/app.conf 
-vi echo/server.go 
-vi docker-compose.yml
-vi echo/server.go 
-vi nginx/app.conf 
 sudo su
 vi nginx/app.conf 
 vi echo/server.go 
@@ -998,3 +993,8 @@ vi docker-compose.yml
 docker exec -it tuna_nginx_1 /bin/ash
 docker exec -it tuna_echo_1 /bin/ash
 docker exec -it tuna_mysql_1 /bin/bash
+git status
+git commit -am "UNIX domain socket で Echoコンテナ と接続するように変更"
+gitpush
+vi volumes/go_app/db.go
+vi docker-compose.yml
