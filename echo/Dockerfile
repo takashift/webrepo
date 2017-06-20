@@ -14,7 +14,7 @@ RUN go get -u gopkg.in/godo.v2/cmd/godo
 RUN go get -u github.com/labstack/echo
 RUN go get -u github.com/go-sql-driver/mysql
 RUN go get -u github.com/gocraft/dbr
-RUN go get -u github.com/labstack/echo/middleware
+RUN go get -u github.com/yosssi/ace
 
 WORKDIR /go/src/app
 

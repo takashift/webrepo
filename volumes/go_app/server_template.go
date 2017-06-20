@@ -42,7 +42,7 @@ func main() {
         Content string
       } {
         ServiceInfo: serviceInfo,
-        Content: "ページのコンテンツ",
+        Content: "おっぱい",
       }
       return c.Render(http.StatusOK, "page1", data)
     })
