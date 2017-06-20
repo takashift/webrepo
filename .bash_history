@@ -1,56 +1,3 @@
-sudo su
-vi nginx/app.conf 
-vi echo/server.go 
-vi nginx/app.conf 
-vi docker-compose.yml
-vi echo/Dockerfile 
-vi nginx/app.conf
-vi nginx/Dockerfile 
-vi echo/server.go 
-vi nginx/Dockerfile 
-vi echo/Dockerfile 
-vi nginx/Dockerfile 
-vi docker-compose.yml
-vi nginx/Dockerfile 
-
-vi nginx/Dockerfile 
-vi docker-compose.yml
-vi nginx/Dockerfile 
-vi echo/server.go 
-vi nginx/app.conf
-vi nginx/Dockerfile 
-cd nginx/
-ls
-vi usock.conf
-docker volume
-docker volume ls
-vi docker-compose.yml
-cd ..
-vi docker-compose.yml
-vi echo/server.go 
-vi nginx/app.conf
-vi docker-compose.yml
-docker volume create --name=usock
-cd nginx/usock.conf
-vi nginx/usock.conf
-vi echo/server.go 
-vi nginx/Dockerfile 
-vi echo/server.go 
-vi echo/Dockerfile 
-cp echo/Dockerfile echo/Dockerfile.bk
-ls echo
-cp echo/server.go echo/server.go.bk
-ls echo/fcgi
-ls echo/
-rm -f echo/fcgi
-rm -r echo/fcgi
-ls
-cat docker-compose.yml.unk 
-cd docker-compose.yml
-cat docker-compose.yml
-rm docker-compose.yml.unk 
-ls
-cp docker-compose.yml docker-compose.yml.bk
 ls
 vi docker-compose.yml
 cd echo/
@@ -998,3 +945,56 @@ git commit -am "UNIX domain socket で Echoコンテナ と接続するように
 gitpush
 vi volumes/go_app/db.go
 vi docker-compose.yml
+vi volumes/go_app/server_text.go.cm 
+
+docker-compose logs
+vi volumes/go_app/views/page1.html 
+vi echo/Dockerfile
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d
+docker-compose logs
+docker-compose down --rmi all
+vi echo/Dockerfile
+docker-compose up -d
+docker-compose logs
+vi volumes/go_app/db.go
+cd volumes/go_app/
+ls
+mv db.go db.go.cm
+ls
+mv server.go.cm server_text.go.cm
+ls
+vi server_template.go
+cp server_text.go.cm server_template.go
+ls
+vi server_template.go
+mkdir views
+ls
+cd views/
+vi header.html
+vi page1.html
+cd ..
+vi server_template.go
+git status
+git add server_text.go.cm server_template.go db.go.cm views/
+git status
+git commit -am 'HTMLテンプレート使用テスト'
+gitpush 
+git pull
+git pull origin master
+git log
+gitpush 
+vi server_template.go
+vi header.html
+vi views/header.html
+cd ~
+vi echo/Dockerfile
+git status
+vi volumes/go_app/server_template.go 
+git status
+vi volumes/go_app/views/header.html
+vi volumes/go_app/server_template.go 
+git commit -am 'echoのDockerfileでわざわざ別にmiddlewareをインストールする部分を削除'
