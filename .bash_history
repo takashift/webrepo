@@ -1,130 +1,3 @@
-ls
-vi docker-compose.yml
-cd echo/
-ls
-pw
-pwd
-la
-ls
-cd ..
-ls
-cd ..
-ls
-cd ..
-pwd
-~
-cd ~
-ls
-mkdir echo
-ls
-cd echo/
-ls
-mv Dockerfile Dockerfile.bk
-mv server.go server.go.bk
-ls
-vi Dockerfile
-vi d
-cd ..
-vi docker-compose.yml
-vi echo/Dockerfile 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi docker-compose.yml
-vi /var/lib/docker/volumes/_data/echo/server.go 
-docker exec -i -t tuna_echo_1 /bin/bash
-vi docker-compose.yml
-vi echo/Dockerfile 
-docker volume create --name=go_app
-cd /var/lib/docker/volumes
-sudo su
-docker-compose logs
-docker-compose down --rmi all
-vi docker-compose.yml
-vi echo/Dockerfile 
-docker-compose up -d
-docker-compose down --rmi all
-vi echo/Dockerfile 
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi echo/Dockerfile 
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-ls 
-mkdir mysql
-cd echo
-ls 
-ln -s /var/lib/docker/volumes/go_app/_data/
-ls 
-cd _data 
-ls 
-cd _data 
-ls 
-cd _data 
-ls
-pwd
-ls
-cd ..
-vi server.go.bk 
-vi Dockerfile
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-pwd
-docker-compose down --rmi all
-vi nginx/Dockerfile 
-vi echo/Dockerfile
-vi docker-compose.yml
-vi echo/Dockerfile
-docker exec -i -t tuna_nginx_1 /bin/ash
-vi /var/lib/docker/volumes/go_app/_data/server.go
-vi docker-compose.yml
-vi /var/lib/docker/volumes/go_app/_data/server.go
-vi nginx/Dockerfile 
-cd mysql/
-ls
-vi nginx/Dockerfile 
-vi Dockerfile
-cd ..
-vi docker-compose.yml
-ls -a
-vi .bashrc 
-exit
-exit
-sudo su
-ps -al
-sudo su
-usermod -u 1000 tuna
-sudo usermod -u 1000 tuna
-exit
-sudo usermod -u 1000 tuna
-ps -al
-sudo su
-exit
-sudo systemctl restart sshd
-exit
-sudo su 
-exit
-sudo su
-exit
-ls
-cd mysql/
-ls
-cd ..
-vi docker-compose.yml
-cd mysql/
-cd ..
-vi mysql/Dockerfile
-ls mysql/
-mkdir mysql/init
-ls mysql/
 vi mysql/Dockerfile
 vi echo/_data/server.go
 cd echo/_data/
@@ -998,3 +871,130 @@ git status
 vi volumes/go_app/views/header.html
 vi volumes/go_app/server_template.go 
 git commit -am 'echoのDockerfileでわざわざ別にmiddlewareをインストールする部分を削除'
+cd volumes/go_app/
+ls
+cp server_template.go.cm template.go
+ls
+vi template.go 
+docker-compose logs
+vi template.go 
+docker-compose logs
+vi template.go 
+vi server
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+git commit -am 'goのファイルを分割'
+gitpush 
+:q
+vi server.go 
+vi template.go
+vi template.go 
+docker-compose logs
+vi template.go 
+docker-compose logs
+vi template.go 
+docker-compose logs
+vi template.go 
+docker-compose logs
+vi template.go 
+docker-compose logs
+vi template.go 
+ls
+git status
+ls volumes/go_app/
+mv volumes/go_app/server_template.go volumes/go_app/server_template.go.cm
+ls
+ls volumes/go_app/
+xs volumes/go_app/
+cd\ volumes/go_app/
+cd volumes/go_app/
+cp server_template.go.cm server.go
+ls
+vi server.go 
+vi template.go 
+vi server.go 
+ls
+cp server_std.go.cm
+cp server.go server_std.go.cm
+cp template.go template_std.go.cm
+vi server.go 
+docker-compose logs
+cp template.go template_std.go.cm
+docker-compose logs
+git log
+docker-compose logs
+vi server.go 
+vi views/toppage.ace
+vi server.go 
+docker-compose logs
+vi server.go 
+:q
+docker-compose logs
+ls
+ls views/
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+git status
+vi server_std.go.cm 
+vi template_std.go.cm 
+ls
+cp server_template.go.cm template_std.go.cm 
+vi template_std.go.cm 
+git status
+git add .
+git status
+git commit -am 'aceを使ったページ生成テスト'
+gitpush
+git status
+ls
+cd bin
+ls
+cd ~
+ls
+ls volumes/
+ls
+ls volumes/web-vol/
+ls
+ls volumes/go_app/
+ls
+cd volumes/go_app/
+ls
+cat server.go 
+ls
+ls views/
+cd views/
+vi header.html 
+vi page1.html 
+vi toppage.ace 
+cd ..
+vi server.go 
+cd views/
+mv toppage.ace search_top.ace
+ls
+cp search_top.ace test.ace
+cd ..
+vi server.go 
+cd views/
+vi search_top.ace 
+docker-compose logs
+vi search_top.ace 
+cd volumes/go_app/
+cat template.go 
+mv template.go template
+mv template template_no_proxy.go
+ls
+vi views/toppage.ace 
+vi template_no_proxy.go 
+docker-compose logs
+vi template_no_proxy.go 

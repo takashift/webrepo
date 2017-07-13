@@ -10,20 +10,19 @@ import (
 var e = echo.New()
 
 func main() {
-    e.GET("/", func(c echo.Context) error {
-      // テンプレートに渡す値
-      data := struct {
-        ServiceInfo
-        Content string
-      } {
-        ServiceInfo: serviceInfo,
-        Content: "おっぱい",
-      }
+
+    e.GET("/test", func(c echo.Context) error {
     
       // この Render は Echo のメソッドであり、テンプレートエンジンのメソッドではない！
-      return c.Render(http.StatusOK, "toppage", data)
+      // この関数の第３引数がテンプレート{{.}}になる
+      return c.Render(http.StatusOK, "test", data)
     })
 
+    // "/" の時に返すhtml
+    e.GET("/", func(c echo.Context) error {
+
+      return c.Render(http.StatusOK, "search_top", searchForm)
+    })
 
     // ソケット生成
     os.Remove("/usock/domain.sock");
