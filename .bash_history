@@ -1,66 +1,3 @@
-vi mysql/Dockerfile
-vi echo/_data/server.go
-cd echo/_data/
-vi echo/_data/server.go 
-vi echo/_data/server.go
-
-rm echo/_data/
-rm -r echo/_data/
-ls
-unlink echo/_data/
-sudo unlink echo/_data/
-ls echo/
-ls -l
-ls -l echo/
-cd echo/
-unlink _data/
-sudo unlink _data
-ls -l
-ls -la
-ln -s /var/lib/docker/volumes/go_app/_data vol
-ls -la
-cd vol/
-ls
-ln -nfs /var/lib/docker/volumes/go_app/_data/ vol
-cd ..
-ln -nfs /var/lib/docker/volumes/go_app/_data/ vol
-ls -la
-cd vol
-s
-ls
-vi server.go
-vi echo/_data/server.go
-vi server.go
-docker exec -i -t tuna_nginx_1 /bin/ash
-docker exec -i -t tuna_echo_1 /bin/ash
-docker exec -i -t tuna_mysql_1 /bin/bash
-vi server.go
-sudo su
-ls
-docker-compose up -d
-docker-compose logs
-vi echo/Dockerfile 
-vi nginx/Dockerfile
-vi docker-compose.yml
-vi mysql/Dockerfile
-docker-compose down --rmi all
-docker-compose up -d
-docker volume create --name=db_data
-docker-compose up -d
-vi nginx/Dockerfile
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi docker-compose.yml
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d
 docker-compose logs
 docker-compose down --rmi all
 docker-compose up -d
@@ -998,3 +935,66 @@ vi views/toppage.ace
 vi template_no_proxy.go 
 docker-compose logs
 vi template_no_proxy.go 
+git status
+git commit -am '7/6修正分'
+git push
+gitpush
+vi template_no_proxy.go
+ls
+cd volumes/
+ls
+cd web-vol/
+ls
+cd ..
+cd go_app/
+ls
+vi template_no_proxy.go
+vi server.go 
+vi template_no_proxy.go 
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+vi template_no_proxy.go 
+vi server.go 
+docker-compose logs
+vi template_no_proxy.go 
+docker-compose logs
+vi template_no_proxy.go 
+docker-compose logs
+vi template_no_proxy.go 
+cd volumes/go_app/
+ls
+vi search.go
+docker-compose logs
+mv search.go search.go.cm
+docker-compose logs
+ls
+cd views/
+ls
+cp search_top.ace search_result.ace
+ls
+vi search_result.ace 
+vi search_top.ace
+cd ..
+vi search.go.cm
+vi template_no_proxy.go 
+cd views/
+vi search_result.ace 
+vi search_top.ace
+vi template_no_proxy.go 
+docker-compose logs
+vi template_no_proxy.go 
+docker-compose logs
+ls
+docker-compose logs
+vi search_top.ace
+docker-compose logs
+ls
+vi search_result.ace 
+cp search_top.ace search_result.ace
+vi search_result.ace 
+vi template_no_proxy.go 
+vi ../template_no_proxy.go 
+vi search_result.ace 

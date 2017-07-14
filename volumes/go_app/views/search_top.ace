@@ -1,0 +1,71 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title WebRepo
+    = css
+      #search {
+        text-align: center;
+      }
+      #search h1 {
+        font-family: 'Product Sans', 'Catull BQ', sans-serif;
+        font-size: 5rem;
+        margin-bottom: 1rem;
+      }
+      #space{
+        margin: 10% 0 0 0;
+      }
+      .blue {
+        color: #4183FF; 
+      }
+      .red {
+        color: #EC452C;
+      }
+      .yellow {
+        color: #FFCF42;
+      }
+      .green {
+        color: #00A508;
+      }
+      p.shadow {
+        margin: auto;
+        padding: 0;
+        width: 500px;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
+      }
+      input.search {
+        height: 1.5rem;
+        width:  480px;
+        border-width: 1px;
+        border-color: rgba(0,0,0,0.08);
+        font-size: 16px;
+        padding: 9px 15px;
+        margin: 0;
+      }
+      .button {
+        font-size: 1rem;
+        color: #555; 
+        border-style: none;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+        background-color: #EEE;
+      }
+
+  body
+    #search
+      #space
+      h1
+         s
+           span.blue G
+           span.red o
+           span.yellow o
+           span.blue g
+           span.green l
+           span.red e
+      form action="/search" method="get"
+        p.shadow
+           input.search name="q"
+        p
+          input.button type="submit" value="検索"
+      

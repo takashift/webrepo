@@ -20,8 +20,15 @@ func main() {
 
     // "/" の時に返すhtml
     e.GET("/", func(c echo.Context) error {
-
       return c.Render(http.StatusOK, "search_top", searchForm)
+    })
+
+    // 検索時に呼び出される
+    e.GET("/search", func(c echo.Context) error {
+      // URLクエリパラメータを受け取る
+      q := c.QueryParam("q")
+      searchForm.Query = q
+      return c.Render(http.StatusOK, "search_result", searchForm)
     })
 
     // ソケット生成
