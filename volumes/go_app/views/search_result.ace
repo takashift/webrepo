@@ -4,15 +4,22 @@ html lang=ja
     meta charset=utf-8
     title 検索結果(1ページ目)
     = css
+      #search_form {
+        display: flex;
+      }
       h1 {
         font-family: 'Product Sans', 'Catull BQ', sans-serif;
         margin-bottom: 1rem;
+        margin-right: 1rem;
       }
-      #space{
+      form {
+        display: flex;
+      }
+      #space {
         margin: 10% 0 0 0;
       }
       .blue {
-        color: #4183FF; 
+        color: #4183FF;
       }
       .red {
         color: #EC452C;
@@ -23,12 +30,12 @@ html lang=ja
       .green {
         color: #00A508;
       }
-      p.shadow {
-      /*  margin: auto;*/
+      /*p.shadow {
+        margin: auto;
         padding: 0;
         width: 500px;
-        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
-      }
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3);
+      }*/
       input.search {
         height: 1.5rem;
         width:  480px;
@@ -36,30 +43,44 @@ html lang=ja
         border-color: rgba(0,0,0,0.08);
         font-size: 16px;
         padding: 9px 15px;
-        margin: 0;
+        margin: 9px;
+        display: block;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3);
       }
       .button {
         font-size: 1rem;
-        color: #555; 
+        color: #555;
         border-style: none;
         padding: 10px;
         margin: 10px;
         cursor: pointer;
         background-color: #EEE;
+        display: block;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3);
       }
 
   body
-    h1
-      s
-         span.blue G
-         span.red o
-         span.yellow o
-         span.blue g
-         span.green l
-         span.red e
-    form action="/search" method="get"
-      p.shadow
-        input.search name="q" value={{.Query}}
-      p
-        input.button type="submit" value="検索"
-      
+    #search_form
+      h1
+        s
+          a href="/" style="text-decoration: none;"
+            span.blue W
+            span.red e
+            span.yellow b
+            span.blue R
+            span.green e
+            span.red p
+            span.green o
+            span.yellow ★彡
+      form action="/search" method="get"
+        p.shadow
+          input.search name="q" value={{.Query}}
+        p
+          input.button type="submit" value="検索"
+   ul
+     li ブログ
+     li 掲示板
+     li 動画
+     li 画像
+     li 他の媒体
+     

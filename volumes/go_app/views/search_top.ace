@@ -27,12 +27,12 @@ html lang=ja
       .green {
         color: #00A508;
       }
-      p.shadow {
+      /*p.shadow {
         margin: auto;
         padding: 0;
         width: 500px;
         box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
-      }
+      }*/
       input.search {
         height: 1.5rem;
         width:  480px;
@@ -40,7 +40,9 @@ html lang=ja
         border-color: rgba(0,0,0,0.08);
         font-size: 16px;
         padding: 9px 15px;
-        margin: 0;
+        margin: auto;
+        display: block;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
       }
       .button {
         font-size: 1rem;

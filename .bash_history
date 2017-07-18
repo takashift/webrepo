@@ -1,16 +1,3 @@
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose down --rmi all
-sudo docker-compose up -d
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-sudo docker-compose up -d
-docker-compose logs
 docker-compose down --rmi all
 docker ps
 docker ps -a
@@ -998,3 +985,16 @@ vi search_result.ace
 vi template_no_proxy.go 
 vi ../template_no_proxy.go 
 vi search_result.ace 
+git sutatus
+git status
+git status
+git add volumes/go_app/search.go.cm volumes/go_app/search.go.cm volumes/go_app/template_no_proxy.go volumes/go_app/views/search_result.ace volumes/go_app/views/search_top.ace volumes/go_app/views/test.ace
+git status
+git commit -am 'Formリクエスト'
+gitpush
+ls
+vlock 
+cd volumes/go_app/
+ls
+vi search.go.cm 
+vi server.go 
