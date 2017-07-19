@@ -1,27 +1,3 @@
-docker-compose down --rmi all
-docker ps
-docker ps -a
-docker-compose logs
-docker-compose down --rmi all
-sudo docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-ls
-mkdir volume
-ls
-mkdir volume/test
-docker volume create --opt device=./volume/test test
-cd volume/
-ls
-test
-cd test/
-ls
-docker volume ls
-docker volume ls -l
-docker volume ls -h
-docker volume inspect
-docker volume inspect test
 pwd
 docker volume create --opt mount=/home/tuna/volume/test2 test2
 docker volume create --opt mountpoint=/home/tuna/volume/test2 test2
@@ -998,3 +974,27 @@ cd volumes/go_app/
 ls
 vi search.go.cm 
 vi server.go 
+cd volumes/
+cd 
+cd volumes/go_app/
+ls
+cd views/
+ls
+vi search_result.ace
+vi search_top.ace 
+vi search_result.ace
+git commit -am 'リストが何故か表示できない'
+gitpush
+cd volumes/
+ls
+cd go_app/
+;s
+la
+sl
+ls
+vi server.go 
+docker-compose logs
+git status
+git commit -am '検索結果のフォーム部分を横並びに設定。inputをblockにして、影をそのまま投影。'
+gitpush
+docker-compose logs

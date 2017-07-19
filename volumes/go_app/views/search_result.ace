@@ -6,10 +6,11 @@ html lang=ja
     = css
       #search_form {
         display: flex;
+        margin-bottom: 1rem;
+        margin-left: 1rem;
       }
       h1 {
         font-family: 'Product Sans', 'Catull BQ', sans-serif;
-        margin-bottom: 1rem;
         margin-right: 1rem;
       }
       form {
@@ -64,6 +65,7 @@ html lang=ja
       #cate {
         display: flex;
         margin: 1rem 0 1rem 0;
+        padding: 0;
         list-style-type: none;
       }
       #cate li {
@@ -74,14 +76,14 @@ html lang=ja
     #search_form
       h1
         a href="/" style="text-decoration: none;"
-          span.blue W
+          span.blue G
+          span.red o
+          span.yellow o
+          span.blue g
+          span.green l
           span.red e
-          span.yellow b
-          span.blue R
-          span.green e
-          span.red p
-          span.green o
-          span.yellow ★彡
+          / span.green o
+          / span.yellow ★彡
       form action="/search" method="get"
         p.shadow
           input.search name="q" value={{.Query}}
@@ -89,7 +91,7 @@ html lang=ja
           input.button type="submit" value="検索"
    #result
      ul#cate
-/ 取り敢えず、リクエストに応じて現在のボタンを目立つようにする
+       / 取り敢えず、リクエストに応じて現在のボタンを目立つようにする
        li ブログ 
        li 掲示板
        li 動画
