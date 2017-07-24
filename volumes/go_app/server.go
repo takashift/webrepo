@@ -31,9 +31,14 @@ func main() {
       return c.Render(http.StatusOK, "search_result", searchForm)
     })
 
-    // "/" の時に返すhtml
+    // ログイン方法選択画面
     e.GET("/login_select", func(c echo.Context) error {
       return c.Render(http.StatusOK, "login_select", searchForm)
+    })
+
+    // パスワードログインフォーム
+    e.GET("/pass_login", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "pass_login", searchForm)
     })
 
     // ソケット生成

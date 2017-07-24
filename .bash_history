@@ -1,39 +1,3 @@
-sudo su
-ls /var/lib/docker/volumes/
-ls -a /var/lib/docker/volumes/
-id tuna
-ls
-cd volume/
-ls
-ls test/
-cd ..
-cd echo/
-ls
-cd vol/
-ls
-ls -l
-cd /var/lib/docker/volumes/db_data/_data/
-cd ..
-ls
-cd ..
-cd volume
-cd volumes
-ls
-cd ..
-cd ,,
-cd ..
-cd ~
-ls
-rm -r volume/
-ls
-cd echo/
-ls
-cd ..
-cd mysql/
-ls
-ln -nfs /var/lib/docker/volumes/db_data/_data/ vol
-cd ../nginx/
-ln -nfs /var/lib/docker/volumes/web-vol/_data/ vol
 cd ..
 cd echo/
 ls
@@ -997,4 +961,40 @@ cd volumes/go_app/
 ls
 vi server.go 
 vi server.go
+git status
+cd volumes/go_app/
+ls
+vi server.go 
+git log
+ls
+cd volumes/
+cd go_app/
+ls
+cd views/
+ls
+vi search_result.ace
+vi login_select.ace
+cp search_top.ace login_select.ace
+ls
+vi login_select.ace 
+vi search_result.ace
+vi login_select.ace 
+vi search_result.ace
+vi login_select.ace 
+git status
+git add login_select.ace 
+git status
+git commit -am "ログイン方法選択画面の作成"
+git add login_select.ace 
+vi login_select.ace 
+git commit -am "ログイン方法選択画面から不要なCSS設定削除"
+vim pass_login.ace
+cp login_select.ace pass_login.ace
+ls
+vi pass_login.ace 
+git commit -am ""
+gitpush
+git status
+git commit -am "フッターのレイアウトを設定"
+docker-compose logs
 git status

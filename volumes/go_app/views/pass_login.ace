@@ -1,0 +1,41 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title login - WebRepo
+    = css
+      #OAuth_menu {
+        margin: 3rem 0 0 0;
+      }
+      .button {
+        font-size: 1rem;
+        color: #555;
+        border-style: none;
+        border-radius: 0.5rem;
+        font-size: large;
+        text-align: center;
+        width: 25rem;
+        padding: 1.5rem;
+        margin: 1rem auto auto auto;
+        cursor: pointer;
+      }
+      #twitter {
+        color: rgba(255,255,255,1);
+        background-color: #5AABF3;
+      }
+      #google {
+        color: rgba(255,255,255,1);
+        background-color: #db4a39;
+      }
+      #facebook {
+        color: rgba(255,255,255,1);
+        background-color: #39569C;
+      }
+      #button_pass {
+        background-color: #EEE;
+        margin: 2rem auto 0 auto;
+        font-size: medium;
+      }
+
+  body
+    
