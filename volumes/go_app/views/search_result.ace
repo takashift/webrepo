@@ -2,16 +2,24 @@
 html lang=ja
   head
     meta charset=utf-8
-    title 検索結果(1ページ目)
+    title 検索結果(1ページ目) :従来方式 - WebRepo★彡
     = css
+      body {
+        margin: 0;
+      }
       #search_form {
         display: flex;
-        margin-bottom: 1rem;
-        margin-left: 1rem;
+        background-color: #fafafa;
+        /*margin-bottom: 1rem;*/
+        margin: 0;
+      }
+      #search_form p{
+        margin-bottom: 0.5rem;
       }
       h1 {
         font-family: 'Product Sans', 'Catull BQ', sans-serif;
         margin-right: 1rem;
+        margin-left: 13px;
       }
       form {
         display: flex;
@@ -59,17 +67,48 @@ html lang=ja
         display: block;
         box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3);
       }
+      #media {
+        display: flex;
+        padding: 1rem 0 1rem 150px;
+        margin: 0;
+        list-style-type: none;
+        border-bottom:1px solid #ebebeb;
+        background-color: #fafafa;
+      }
+      #media li {
+        margin: 0 1rem 0 0;
+        padding: 0 0.5rem 0 0.5rem;
+      }
       #result {
         margin: 0 0 0 150px;
+        padding: 0 0 0 0.5rem;
       }
-      #cate {
-        display: flex;
-        margin: 1rem 0 1rem 0;
-        padding: 0;
-        list-style-type: none;
+      #result_status {
+        font-size: 14px;
+        font-family: arial,sans-serif;
+        color: #707070;
       }
-      #cate li {
-        margin: 0 1rem 0 1rem;
+      #result h3 {
+        margin-bottom: 0;
+      }
+      #result h4 {
+        margin: 0;
+      }
+      .description {
+        font-size: 14px;
+      }
+      .cate {
+        font-size: 14px;
+      }
+      .tag {
+        font-size: 14px;
+      }
+      #nav {
+        margin: 2rem 0 0 0;
+      }
+      #footer {
+        margin: 0 0 0 150px;
+        background-color: #fafafa;
       }
 
   body
@@ -89,12 +128,78 @@ html lang=ja
           input.search name="q" value={{.Query}}
         p
           input.button type="submit" value="検索"
-   #result
-     ul#cate
-       / 取り敢えず、リクエストに応じて現在のボタンを目立つようにする
-       li ブログ 
-       li 掲示板
-       li 動画
-       li 画像
-       li 他の媒体
-     
+    ul#media
+      / 取り敢えず、リクエストに応じて現在のボタンを目立つようにする
+      li 
+        a href="" ブログ 
+      li 掲示板
+      li 動画
+      li 画像
+      li 他の媒体
+    #result
+      p#result_status 114,514件（8.10 秒）
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★　評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      h3 ページタイトル http://example.com/
+      h4 評価を見る 星5.0 ★★★★★ 評価する
+      .description どういう目的で見られているか例を示す。
+      .cate ジャンル
+      .tag タグ 例 テスト 適当
+
+      p#nav 1 2 3 4 5 6 7 8 9 10
+
+    #footer
+      p Copyright &copy 2017 Tsunashima@NALlab. All rights reserved.

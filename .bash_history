@@ -1,22 +1,3 @@
-pwd
-docker volume create --opt mount=/home/tuna/volume/test2 test2
-docker volume create --opt mountpoint=/home/tuna/volume/test2 test2
-docker volume create --mountpoint=/home/tuna/volume/test2 test2
-docker volume rm test
-docker volume inspect test
-docker volume inspect echo
-docker volume inspect usock
-cd /var/lib/docker/volumes
-sudo su
-cd /var/lib/docker/volumes
-ls 
-ls
-pwd
-sudu su
-sudo su
-exit
-ls /var/lib/docker/volumes/
-cd /var/lib/docker/volumes/
 sudo su
 ls /var/lib/docker/volumes/
 ls -a /var/lib/docker/volumes/
@@ -998,3 +979,22 @@ git status
 git commit -am '検索結果のフォーム部分を横並びに設定。inputをblockにして、影をそのまま投影。'
 gitpush
 docker-compose logs
+git sutatus
+git sutats
+git status
+cd volumes/
+cd go_app/views/
+ls
+vi search_result.ace
+git status
+git commti -am "コメントはインデントを揃えて！！"
+git commit -am "コメントはインデントを揃えて！！"
+git psuh
+gitpshs
+gitpush
+vi search_result.ace
+cd volumes/go_app/
+ls
+vi server.go 
+vi server.go
+git status
