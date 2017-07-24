@@ -32,10 +32,12 @@ html lang=ja
         background-color: #39569C;
       }
       #button_pass {
+        display: block;
         background-color: #EEE;
         margin: 2rem auto 0 auto;
         font-size: medium;
-      }
+        text-decoration: none;
+        color: #555;
 
   body
     #OAuth_menu
@@ -48,4 +50,4 @@ html lang=ja
       .button#facebook
         b facebook
         {{HTML " アカウントでログイン・登録"}}
-      .button#button_pass パスワードでログイン・登録
+      a.button#button_pass href="https://webrepo.nal.ie.u-ryukyu.ac.jp/pass_login" パスワードでログイン・登録
