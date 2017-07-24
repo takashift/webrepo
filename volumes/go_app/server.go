@@ -31,6 +31,11 @@ func main() {
       return c.Render(http.StatusOK, "search_result", searchForm)
     })
 
+    // "/" の時に返すhtml
+    e.GET("/login_select", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "login_select", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     uni, err := net.Listen("unix", "/usock/domain.sock")

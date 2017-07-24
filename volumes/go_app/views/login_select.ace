@@ -1,0 +1,92 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title login - WebRepo
+    = css
+      #search {
+        text-align: center;
+      }
+      #search h1 {
+        font-family: 'Product Sans', 'Catull BQ', sans-serif;
+        font-size: 5rem;
+        margin-bottom: 1rem;
+      }
+      #space{
+        margin: 10% 0 0 0;
+      }
+      .blue {
+        color: #4183FF; 
+      }
+      .red {
+        color: #EC452C;
+      }
+      .yellow {
+        color: #FFCF42;
+      }
+      .green {
+        color: #00A508;
+      }
+      /*p.shadow {
+        margin: auto;
+        padding: 0;
+        width: 500px;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
+      }*/
+      input.search {
+        height: 1.5rem;
+        width:  480px;
+        border-width: 1px;
+        border-color: rgba(0,0,0,0.08);
+        font-size: 16px;
+        padding: 9px 15px;
+        margin: auto;
+        display: block;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
+      }
+
+      #OAuth_menu {
+        margin: 3rem 0 0 0;
+      }
+      .button {
+        font-size: 1rem;
+        color: #555;
+        border-style: none;
+        border-radius: 0.5rem;
+        font-size: large;
+        text-align: center;
+        width: 25rem;
+        padding: 1.5rem;
+        margin: 1rem auto auto auto;
+        cursor: pointer;
+      }
+      #twitter {
+        color: rgba(255,255,255,1);
+        background-color: #5AABF3;
+      }
+      #google {
+        color: rgba(255,255,255,1);
+        background-color: #db4a39;
+      }
+      #facebook {
+        color: rgba(255,255,255,1);
+        background-color: #39569C;
+      }
+      #button_pass {
+        background-color: #EEE;
+        margin: 2rem auto 0 auto;
+        font-size: medium;
+      }
+
+  body
+    #OAuth_menu
+      .button#twitter
+        b twitter
+        {{HTML " アカウントでログイン・登録"}}
+      .button#google
+        b google
+        {{HTML " アカウントでログイン・登録"}}
+      .button#facebook
+        b facebook
+        {{HTML " アカウントでログイン・登録"}}
+      .button#button_pass パスワードでログイン・登録
