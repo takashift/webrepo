@@ -13,7 +13,7 @@ html lang=ja
         margin: 1rem;
         display: flex;
       }
-      .label {
+      .subject {
         width: 9rem;
       }
       .input {
@@ -35,6 +35,9 @@ html lang=ja
         background-color: rgba(255,255,255,1);
       }
 
+      label.star_rating {
+        margin-bottom: 2px;
+      }
       /* 目的適合度 */
       input[name="rating"] {
         display: none;
@@ -92,7 +95,7 @@ html lang=ja
   body
     form action="/search" method="post"
       .form_block
-        .label
+        .subject
           h2 閲覧目的
         .input
           p 複数に分けられる場合は改行して下さい。
@@ -100,27 +103,27 @@ html lang=ja
           p （例：○○初心者向けの〜、若者向けの〜など）
           textarea name="purpose" cals="500" clos="2"
        .form_block
-        .label
+        .subject
           h2 目的適合度
         .input
           p 閲覧目的に対するページの適合度を入力して下さい。
-          label.star-rating 極めて不適合　
+          label.star_rating 極めて不適合　
             input type="radio" name="rating" value="1"
             span.star
-          label.star-rating 大体不適合　　
+          label.star_rating 大体不適合　　
             input type="radio" name="rating" value="2"
             span.star
-          label.star-rating 半分くらい適合
+          label.star_rating 半分くらい適合
             input type="radio" name="rating" value="3"
             span.star
-          label.star-rating 大体適合　　　
+          label.star_rating 大体適合　　　
             input type="radio" name="rating" value="4"
             span.star
-          label.star-rating 極めて適合　　
+          label.star_rating 極めて適合　　
             input type="radio" name="rating" value="5"
             span.star
        .form_block
-        .label
+        .subject
           h2 記述評価
         .input
           p 
