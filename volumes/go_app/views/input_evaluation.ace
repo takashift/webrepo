@@ -23,6 +23,8 @@ html lang=ja
       textarea {
         width: 90%;
         max-width: 90%;
+      }
+      textarea[name="purpose"] {
         height: 3rem;
       }
       label {
@@ -32,6 +34,8 @@ html lang=ja
         padding-left: 1rem;
         background-color: rgba(255,255,255,1);
       }
+
+      /* 目的適合度 */
       input[name="rating"] {
         display: none;
       }
@@ -81,6 +85,9 @@ html lang=ja
       input[value="5"]:checked + .star:before {
         content: "★★★★★";
       }
+      textarea[name="freedom"] {
+        height: 10rem;
+      }
 
   body
     form action="/search" method="post"
@@ -112,5 +119,10 @@ html lang=ja
           label.star-rating 極めて適合　　
             input type="radio" name="rating" value="5"
             span.star
-
+       .form_block
+        .label
+          h2 記述評価
+        .input
+          p 
+          textarea name="freedom" cals="500" clos="4"
 
