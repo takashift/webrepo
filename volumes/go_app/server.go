@@ -41,6 +41,11 @@ func main() {
       return c.Render(http.StatusOK, "pass_signin", searchForm)
     })
 
+    // 評価入力画面
+    e.GET("/input_evaluation", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "input_evaluation", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     uni, err := net.Listen("unix", "/usock/domain.sock")
