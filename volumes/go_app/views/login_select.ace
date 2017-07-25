@@ -6,6 +6,7 @@ html lang=ja
     = css
       #OAuth_menu {
         margin: 3rem 0 0 0;
+        text-align: center;
       }
       .button {
         font-size: 1rem;
@@ -34,7 +35,7 @@ html lang=ja
       #button_pass {
         display: block;
         background-color: #EEE;
-        margin: 2rem auto 0 auto;
+        margin: 2rem auto 3rem auto;
         font-size: medium;
         text-decoration: none;
         color: #555;
@@ -43,11 +44,12 @@ html lang=ja
     #OAuth_menu
       .button#twitter
         b twitter
-        {{HTML " アカウントでログイン・登録"}}
+        {{HTML " アカウントで登録 / サインイン"}}
       .button#google
         b google
-        {{HTML " アカウントでログイン・登録"}}
+        {{HTML " アカウントで登録 / サインイン"}}
       .button#facebook
         b facebook
-        {{HTML " アカウントでログイン・登録"}}
-      a.button#button_pass href="https://webrepo.nal.ie.u-ryukyu.ac.jp/pass_login" パスワードでログイン・登録
+        {{HTML " アカウントで登録 / サインイン"}}
+      a.button#button_pass href="https://webrepo.nal.ie.u-ryukyu.ac.jp/pass_login" パスワードで登録 / サインイン
+      p 登録に必要な情報はメールアドレスと、連携アカウントのいずれかまたはパスワードのみです。

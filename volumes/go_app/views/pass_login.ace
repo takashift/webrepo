@@ -41,10 +41,37 @@ html lang=ja
         font-size: large;
         width: auto;
         padding: 1rem;
-        margin: 1rem auto 1rem auto;
+        margin: 2rem auto 1rem auto;
         cursor: pointer;
       }
-      
+      input[name="mod_pass"] {
+        margin-bottom: 2rem;
+      }
+      #consent_form {
+        margin: 2rem auto 0 auto;
+        padding: 1rem;
+        max-width: 600px;
+        border: 1px solid rgba(0,0,0,0.9);
+        text-align: left;
+      }
+      #consent_form h1 {
+        text-align: center;
+      }
+      #binary {
+        display: flex;
+        width: 650px;
+        margin: auto;
+      }
+      input[value="同意する"] {
+        width: 8rem;
+        background-color: rgba(235,0,0,0.8);
+        color: rgba(255,255,255,0.9);
+      }
+      input[value="同意しない"] {
+        width: 8rem;
+        background-color: rgba(0,0,220,0.8);
+        color: rgba(255,255,255,0.9);
+      }
 
   body
     #main
@@ -52,7 +79,6 @@ html lang=ja
         h2 登録済みの方
         label メールアドレス　　　
           input name="mail" size="60"
-          p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         label パスワード　　　　　
           input name="password" size="60"
         input.button type="submit" value="ログイン"
@@ -64,6 +90,14 @@ html lang=ja
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         label パスワード　　　　　
           input name="password" size="60"
+          p.note ※8文字以上、英数字両方を含むものを設定して下さい
+          p.note ※記号は()が使用可能です
         label パスワード（再確認）
           input name="mod_pass" size="60"
-　　　　　
+        p 以下の同意を以て登録となります。
+        #consent_form
+          p この中身はOAuth認証のときと共通化する必要が有る。
+        p 上記の内容に、
+        #binary
+          input.button type="submit" value="同意する"
+          input.button type="submit" value="同意しない"

@@ -1,25 +1,3 @@
-cd ..
-cd echo/
-ls
-ln -nfs /var/lib/docker/volumes/usock/_data/ vol_sock
-ls
-cd vol_
-cd vol_sock/
-ls
-ls -l
-exit
-sudo sud
-sudo su
-exit
-git
-sudo yum install git
-git
-git -V
-git -v
-git -version
-git --version
-ls
-git init
 ls -a
 rm -r .git
 ls -a
@@ -998,3 +976,25 @@ git status
 git commit -am "フッターのレイアウトを設定"
 docker-compose logs
 git status
+cd volumes/go_app/
+ls
+vi server.go 
+git add volumes/go_app/views/pass_login.ace
+git commit -am "パスワードログイン画面のファイルを作成"
+docker-compose logs
+cd volumes/go_app/views/
+vi search_top.ace 
+cat search_top.ace
+ls
+cat search_result.ace 
+vim pass_login.ace
+cd volumes/go_app/
+cd views/
+vim pass_login.ace
+git add login_select.ace 
+vim pass_login.ace
+vim login_select.ace 
+vim pass_login.ace
+git status
+git commit -am 'ログイン・会員登録画面の利用規約以外完成'
+gitpush 
