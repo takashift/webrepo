@@ -107,20 +107,20 @@ html lang=ja
           h2 目的適合度
         .input
           p 閲覧目的に対するページの適合度を入力して下さい。
-          label.star_rating 極めて不適合　
-            input type="radio" name="rating" value="1"
-            span.star
-          label.star_rating 大体不適合　　
-            input type="radio" name="rating" value="2"
-            span.star
-          label.star_rating 半分くらい適合
-            input type="radio" name="rating" value="3"
+          label.star_rating 極めて適合　　
+            input type="radio" name="rating" value="5"
             span.star
           label.star_rating 大体適合　　　
             input type="radio" name="rating" value="4"
             span.star
-          label.star_rating 極めて適合　　
-            input type="radio" name="rating" value="5"
+          label.star_rating 半分くらい適合
+            input type="radio" name="rating" value="3"
+            span.star
+          label.star_rating 大体不適合　　
+            input type="radio" name="rating" value="2"
+            span.star
+          label.star_rating 極めて不適合　
+            input type="radio" name="rating" value="1"
             span.star
        .form_block
         .subject
