@@ -51,5 +51,5 @@ html lang=ja
       .button#facebook
         b facebook
         {{HTML " アカウントで登録 / サインイン"}}
-      a.button#button_pass href="https://webrepo.nal.ie.u-ryukyu.ac.jp/pass_login" パスワードで登録 / サインイン
+      a.button#button_pass href="https://webrepo.nal.ie.u-ryukyu.ac.jp/pass_signin" パスワードで登録 / サインイン
       p 登録に必要な情報はメールアドレスと、連携アカウントのいずれかまたはパスワードのみです。

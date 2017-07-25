@@ -81,7 +81,7 @@ html lang=ja
           input name="mail" size="60"
         label パスワード　　　　　
           input name="password" size="60"
-        input.button type="submit" value="ログイン"
+        input.button type="submit" value="サインイン"
       hr width="80%"
       form name="sign_up" action="" method="post" 
         h2 新規登録

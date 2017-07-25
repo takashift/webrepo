@@ -31,14 +31,14 @@ func main() {
       return c.Render(http.StatusOK, "search_result", searchForm)
     })
 
-    // ログイン方法選択画面
-    e.GET("/login_select", func(c echo.Context) error {
-      return c.Render(http.StatusOK, "login_select", searchForm)
+    // サインイン方法選択画面
+    e.GET("/signin_select", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "signin_select", searchForm)
     })
 
-    // パスワードログインフォーム
-    e.GET("/pass_login", func(c echo.Context) error {
-      return c.Render(http.StatusOK, "pass_login", searchForm)
+    // パスワードサインインフォーム
+    e.GET("/pass_signin", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "pass_signin", searchForm)
     })
 
     // ソケット生成
