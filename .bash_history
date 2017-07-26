@@ -1,65 +1,3 @@
-ls -a
-rm -r .git
-ls -a
-cat .bashrc
-cat .bash_history 
-ls -a
-cat .bash_logout 
-cat .bash_profile 
-git init
-ls
-git add docker-compose.yml  docker-compose.yml.bk  echo  mysql  nginx
-git status
-ls -a
-git add .bash_logout
-git reset HEAD .bash_logout
-git reset HEAD
-git reset HEAD -- .bash_logout
-git status
-git add .bash_history 
-git status
-cat .rnd 
-1;2c
-git commit -m 'first commit'
-vi .git/config 
-git git config --global user.email "e145771@ie.u-ryukyu.ac.jp"
-git config --global user.email "e145771@ie.u-ryukyu.ac.jp"
-git config --global user.name "takashift"
-git commit -m 'first commit'
-git remote add origin https://github.com/takashift/webrepo.git
-git push
-git credential-osxkeychain
-exit
-sudo su
-cat .bash_history | grep ln
-pwd
-mkdir mounttest
-cat .bash_history | grep -it
-cat .bash_history | grep it
-cat .bash_history | grep ti
-cat .bash_history | grep docker
-cat .bash_history | grep exec
-docker ps
-docker exec -it tuna_echo_1 /bin/ash
-touch mounttest/test.txt
-ls mounttest/
-docker exec -it tuna_echo_1 /bin/ash
-cat .bash_history | grep ln
-
-docker exec -it tuna_echo_1 /bin/ash
-vi docker-compose.yml
-cat nginx/Dockerfile 
-vi docker-compose.yml
-cat nginx/Dockerfile
-vi echo/vol/server.go 
-vi docker-compose.yml
-git status
-vi docker-compose.yml
-ls
-mkdir volumes
-ls
-mv db_data/_data/ volumes/db_data/
-ls db_data/
 ls -l db_data/
 ls -l go_app/
 ls -l web-vol/
@@ -997,4 +935,66 @@ vim login_select.ace
 vim pass_login.ace
 git status
 git commit -am 'ログイン・会員登録画面の利用規約以外完成'
+gitpush 
+cd volumes/go_app/
+vi server.go 
+cd volumes/go_app/views/
+ls
+vi pass_login.ace 
+vi login_select.ace 
+vi pass_login.ace 
+git status
+git commit -am 'パスワード登録画面雛形完成'
+gitpush 
+cp search_result.ace evalution_input.ace
+ls
+mv evalution_input.ace input_evalution.ace
+ls
+vi input_evalution.ace
+mv login_select.ace signin_select.ace
+mv pass_login.ace pass_signin.ace
+vi signin_select.ace 
+vi pass_signin.ace 
+vi input_evalution.ace
+git status
+git add pass_signin.ace input_evalution.ace signin_select.ace
+git commit -am '評価入力画面用ファイル作成'
+vi input_evalution.ace
+vi pass_signin.ace 
+vi signin_select.ace 
+git commit -am 'ログインをサインインに変更'
+vi signin_select.ace 
+vi input_evalution.ace
+mv input_evalution.ace input_evaluation.ace 
+vi input_evaluation.ace
+ls
+vi search_to
+vi search_top.ace 
+vi search_result.ace 
+vi search_top.ace 
+vi input_evaluation.ace
+vi search_result.ace 
+vi input_evaluation.ace
+git status
+git add input_evaluation.ace 
+git commit -am "目的適合度のラジオボタン完成"
+gitpush
+git log
+vi input_evaluation.ace
+git status
+git commit -am "記述評価の枠を作成"
+vi input_evaluation.ace
+git commit -am "目的適合度に行間を追加"
+vi input_evaluation.ace
+git commit -am "上から目的適合度が高い順から低い順に変更"
+gitpush 
+vi input_evaluation.ace
+cat search_result.ace 
+cd volumes/go_app/
+cat search_result.ace 
+cd views/
+cat search_result.ace 
+git log
+git push
+gitp
 gitpush 
