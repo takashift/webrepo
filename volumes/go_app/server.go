@@ -46,6 +46,11 @@ func main() {
       return c.Render(http.StatusOK, "OAuth_signin", searchForm)
     })
 
+    // 同意後のアドレス確認促進画面
+    e.GET("/agree_signup", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "agree_signup", searchForm)
+    })
+
     // 評価入力画面
     e.GET("/input_evaluation", func(c echo.Context) error {
       return c.Render(http.StatusOK, "input_evaluation", searchForm)

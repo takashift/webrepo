@@ -80,7 +80,6 @@ html lang=ja
         label メールアドレス　　　
           input name="mail" size="60"
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
-        p アドレス確認メールを送信しますので、リンクを踏んで以下に進んで下さい。
         p 以下の同意を以て登録となります。
         #consent_form
           p この中身は共通化する必要が有る。
