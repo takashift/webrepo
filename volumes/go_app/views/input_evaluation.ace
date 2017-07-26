@@ -28,18 +28,18 @@ html lang=ja
         height: 3rem;
       }
       label {
-        display: block;
-        cursor: pointer;
-        font-size: large;
-        padding-left: 1rem;
-        background-color: rgba(255,255,255,1);
       }
 
-      label.star_rating {
-        margin-bottom: 2px;
-        width: 88%;
-      }
       /* 目的適合度 */
+      label.star_rating {
+        display: block;
+        cursor: pointer;
+        margin-bottom: 2px;
+        padding-left: 1rem;
+        width: 88%;
+        font-size: large;
+        background-color: rgba(255,255,255,1);
+      }
       input[name="rating"] {
         display: none;
       }
@@ -89,6 +89,7 @@ html lang=ja
       input[value="5"]:checked + .star:before {
         content: "★★★★★";
       }
+
       textarea[name="freedom"] {
         height: 10rem;
       }
