@@ -9,10 +9,11 @@ html lang=ja
         margin: auto;
       }
       .glay {
+        /*padding-top: 0.1rem;*/
         background-color: rgba(0,0,0,0.05);
       }
       .form_block {
-        margin: 1rem;
+        margin: 2rem;
         display: flex;
       }
       .subject {
@@ -23,8 +24,9 @@ html lang=ja
         margin: 0.5rem 1rem 1rem 1rem;
       }
       textarea {
-        width: 90%;
-        max-width: 90%;
+        width: 100%;
+        /*max-width: 100%;*/
+        resize: vertical;
       }
       textarea[name="purpose"] {
         height: 3rem;
@@ -92,6 +94,18 @@ html lang=ja
         content: "★★★★★";
       }
 
+      #typo {
+        display: flex;
+        justify-content: space-between;
+      }
+      #typo label {
+        width: 45%;
+      }
+      #typo textarea {
+        width: 100%;
+        height: 3rem;
+      }
+
       textarea[name="freedom"] {
         height: 10rem;
       }
@@ -144,6 +158,22 @@ html lang=ja
             label.star_rating 極めて不適合　
               input type="radio" name="rating" value="1"
               span.star
+        .form_block
+          .subject
+            h2 誤字脱字
+          .input
+            p 誤植単語及び本来の単語を1対1で記入して下さい。
+              br また、複数ある場合は改行して下さい。
+            p ※1 文字単位ではなく、単語単位で記入して下さい。
+              br ※2 対象は主体となるコンテンツのみでコメント等は含めません。
+              br ※3 意図的と思われるものやスラング化しているものは含めないで下さい。ただし、判断出来ないものについては入力して頂いて構いません。
+            #typo
+              label 誤植単語
+                br
+                textarea name="typo" cals="500" clos="2"
+              label 正答
+                br
+                textarea name="typo_answer" cals="500" clos="2"
         .form_block
           .subject
             h2 記述評価
