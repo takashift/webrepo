@@ -42,8 +42,8 @@ func main() {
     })
 
     // OAuth認証サインアップフォーム
-    e.GET("/OAuth_signin", func(c echo.Context) error {
-      return c.Render(http.StatusOK, "OAuth_signin", searchForm)
+    e.GET("/OAuth_signup", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "OAuth_signup", searchForm)
     })
 
     // 同意後のアドレス確認促進画面
