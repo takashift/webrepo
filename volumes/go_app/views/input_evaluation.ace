@@ -31,8 +31,6 @@ html lang=ja
       textarea[name="purpose"] {
         height: 3rem;
       }
-      label {
-      }
 
       /* 目的適合度 */
       label.star_rating {
@@ -101,6 +99,9 @@ html lang=ja
       #typo label {
         width: 45%;
       }
+      #typo h3 {
+        margin: 0 0 0.5rem 0.5rem;
+      }
       #typo textarea {
         width: 100%;
         height: 3rem;
@@ -164,21 +165,21 @@ html lang=ja
           .input
             p 誤植単語及び本来の単語を1対1で記入して下さい。
               br また、複数ある場合は改行して下さい。
-            p ※1 文字単位ではなく、単語単位で記入して下さい。
+            p ※1 文字単位ではなく、単語単位（場合により特別な用法のある連語など）で記入して下さい。
               br ※2 対象は主体となるコンテンツのみでコメント等は含めません。
               br ※3 意図的と思われるものやスラング化しているものは含めないで下さい。ただし、判断出来ないものについては入力して頂いて構いません。
             #typo
-              label 誤植単語
-                br
+              label 
+                h3 誤植単語
                 textarea name="typo" cals="500" clos="2"
-              label 正答
-                br
+              label
+                h3 本来の単語
                 textarea name="typo_answer" cals="500" clos="2"
         .form_block
           .subject
             h2 記述評価
           .input
-            p その他のページに対する評価を入力して下さい。
+            p その他、ページに対する評価を入力して下さい。
             p ヒント：コンテンツのどこが良く、どこが駄目なのか、を明確に書いていただけるとより正確な判断ができる検索エンジンが完成します。
             textarea name="freedom" cals="500" clos="4"
             p#note ※飽くまで評価を行う対象はウェブページであるため、ページ作成者に対する意見は当該ページのコメント欄、SNS等で直接お問い合わせ願います。

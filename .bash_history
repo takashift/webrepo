@@ -1,62 +1,3 @@
-ls -l db_data/
-ls -l go_app/
-ls -l web-vol/
-ls -l usock/
-rm -r db_data/ go_app/ usock/ web-vol/
-sudo rm -r db_data/ go_app/ usock/ web-vol/
-ls -l
-ls 
-git status
-cd mounttest/
-ls
-cd ..
-rm -r mounttest/
-ls
-volumes/
-cd volumes/
-ls
-mkdir db_data go_app web-vol
-ls
-ls db_data/
-ls go_app/
-ls -l
-ls -l go_app/
-ls -l go_app/_data/
-ls -al go_app/_data/
-mv go_app/_data/* go_app/
-sudo rm -r go_app/_data/
-ls -l go_app/
-ls -al go_app/
-ls -al db_data/
-cd ..
-cd volumes/
-cd go_app/
-cd ..
-cd ~
-cat .bash_history | grep chown
-cd volumes/
-cd go_app/
-pwd
-cd ..
-git add volumes/
-ls -al volumes/db_data/
-git add volumes/
-git status
-ls -al
-ls -a
-ls .pki/
-ls .pki/nssdb/
-cat .git
-cat .gitconfig 
-git commit -m 'copy 3 volume dir'
-vi docker-compose.yml
-git commit -am 'modification volume directory on host docker-compose.yml'
-git ls
-git ls-files
-vi docker-compose.yml
-cat .bash_history | grep docker-compose
-docker-compose down --rmi all
-docker-compose up -d
 docker-compose logs
 vi volumes/go_app/server.go 
 docker-compose logs
@@ -998,3 +939,62 @@ git log
 git push
 gitp
 gitpush 
+ls
+cd volumes/go_app/
+ls
+cd views/
+ls
+cat pass_signin.ace 
+git commit -am '送信ボタンの作成'
+gitpush 
+git commit -am 'OAuth認証の新規登録画面の作成'
+git status
+git add OAuth_signin.ace 
+git commit -am 'OAuth認証の新規登録画面の作成'
+vi OAuth_signin.ace 
+git commit -am '同意後のメールアドレスの確認促進メーセージページの作成'
+git commit -am 'OAuth認証サインアップのファイル名をsignin.aceからsignup.aceへ変更'
+gitpush 
+docker-compose logs
+git status
+git commit -am '誤字脱字の入力フォームを作成'
+gitpush 
+git log
+cd volumes/go_app/views/
+ls
+vi input_evaluation.ace 
+git sattus
+git status
+git commit -am '記述評価の説明を記述'
+vi input_evaluation.ace 
+git commit -am '目的適合度のコメントの位置を変更'
+vi input_evaluation.ace 
+cp pass_signin.ace OAuth_signin.ace
+vi OAuth_signin.ace 
+vi pass_signin.ace
+vi OAuth_signin.ace 
+vi agree.ace
+cp OAuth_signin.ace agree.ace
+vi agree.ace
+mv agree.ace agree_signup.ace 
+ls
+vi agree.ace
+ls
+rm agree.ace
+vi agree_signup.ace 
+ls
+vm OAuth_signin.ace OAuth_signup.ace 
+mv OAuth_signin.ace OAuth_signup.ace 
+ls
+git status
+git add agree_signup.ace OAuth_signup.ace 
+vi agree_signup.ace 
+git commit -am '無駄なCSSの設定を削除'
+git status'=
+
+;
+
+git status
+vi input_evaluation.ace 
+cd volumes/go_app/
+vi server.go 
