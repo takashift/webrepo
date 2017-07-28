@@ -1,26 +1,3 @@
-docker-compose logs
-vi volumes/go_app/server.go 
-docker-compose logs
-vi volumes/go_app/Gododir/main.go 
-git log
-git pull
-exit
-git pull origin master
-ls -a
-git status
-git commit -m 'merge remote repository'
-git log
-git commit -am 'merge remote repository'
-ls -l volumes/db_data/
-git rm --cached volumes/db_data/
-git rm -r --cached volumes/db_data/
-ls -l volumes/db_data/
-git status
-git commit -am 'merge remote repository & rm --cached db_data'
-git log
-git push
-ls -a
-ls -a .pki/
 ls -a .pki/nssdb/
 ls -al
 rm -r .pki/
@@ -998,3 +975,26 @@ git status
 vi input_evaluation.ace 
 cd volumes/go_app/
 vi server.go 
+git status
+cd volumes/go_app/views/
+ls
+git add preview_evaluation.ace 
+git commit -am '評価閲覧画面用Aceファイル追加'
+gitpush
+cd volumes/go_app/
+ls
+vi server.go 
+cd volumes/go_app/views/
+ls
+vi input_evaluation.ace 
+git status
+git commit -am ''
+gitpush
+ls
+cp input_evaluation.ace preview_evaluation.ace
+ls
+vi p
+vi preview_evaluation.ace 
+git log
+cd volumes/go_app/views/
+ls

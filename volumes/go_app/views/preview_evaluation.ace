@@ -113,6 +113,16 @@ html lang=ja
       #note {
         font-size: 0.9rem;
       }
+
+      #content {
+        width: 90%;
+        margin: auto;
+      }
+      #head {
+        margin: 2rem;
+      }
+      #popu_pp{
+      }
       .button {
         display: block;
         font-size: large;
@@ -122,15 +132,53 @@ html lang=ja
         border-radius: 0.5rem;
         font-size: larger;
         width: auto;
+        margin-left: 1rem;
         padding: 1rem;
-        margin: 2rem auto 2rem auto;
         text-align: center;
         cursor: pointer;        
       }
-      .status {
+      .button#input_eval {
+        display: inline-block;
+        background-color: rgba(0,50,255,0.8);
+        
+      }
+      #status {
         display: flex;
+        
+      }
+      .left {
+        width: 400px;
+      }
+      .right {
+        flex: 1;
+      }
+      .ScrPr {
+        text-align: center;
+      }
+      .ScrPr img {
+        width: 350px;
+        height: 350px;
       }
 
   body
-   .status
-     
+    #content
+      #head
+        .button#input_eval 以下のページを評価する
+      #status
+        .left
+          .ScrPr
+            img 
+          #eval
+            h3 最も高評価な目的名
+            p#popu_pp 安くてまずい料理
+            h4 評価平均
+            p 総合　　　 ★★★★★ 4.5
+            p 目的達成度 ★★★★★ 4.5
+            p 見やすさ　 ★★★★★ 4.5
+            hr width="100%"
+          p 誤字脱字　6箇所
+        .right
+          h2 はなくその食レポ
+          h3 http://mazuidesuyo.unk/op.pai
+          p aaaaaaaaa
+          
