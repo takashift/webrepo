@@ -1,20 +1,3 @@
-ls -a .pki/nssdb/
-ls -al
-rm -r .pki/
-ls -al .ssh
-ssh-keygen -t ed25519
-pdcopy < .ssh/id_ed25519
-cat .ssh/id_ed25519
-cat .ssh/id_ed25519.pub 
-git push
-vi .git/config 
-git push
-vi .ssh/config 
-ls
-ls -a .ssh/
-vi .ssh/known_hosts 
-vi .bashrc
-ssh-add
 eval `ssh-agent`
 ssh-add
 git push
@@ -998,3 +981,20 @@ vi preview_evaluation.ace
 git log
 cd volumes/go_app/views/
 ls
+cd volumes/go_app/
+ls
+vi server.go 
+vi preview_evaluation.ace
+cd volumes/go_app/views/
+lds
+ld
+ls
+vi preview_evaluation.ace
+cd volumes/go_app/
+cd vd
+cd views/
+ls
+git status
+git commit -am '評価閲覧画面を原案に近い形に変更'
+gitpush 
+vi search_result.ace 

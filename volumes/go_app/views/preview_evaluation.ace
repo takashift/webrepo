@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title 評価入力 - WebRepo★彡
+    title はなくその食レポ の評価 | WebRepo★彡
     = css
       form {
         width: 80%;
@@ -121,7 +121,23 @@ html lang=ja
       #head {
         margin: 2rem;
       }
+      #head h1 {
+        display: inline;
+      }
+      .blue {
+        color: #4183FF;
+      }
+      .red {
+        color: #EC452C;
+      }
+      .yellow {
+        color: #FFCF42;
+      }
+      .green {
+        color: #00A508;
+      }
       #popu_pp{
+        margin-left: 1rem;
       }
       .button {
         display: block;
@@ -148,9 +164,7 @@ html lang=ja
       }
       .left {
         width: 400px;
-      }
-      .right {
-        flex: 1;
+        margin-right: 2rem;
       }
       .ScrPr {
         text-align: center;
@@ -159,10 +173,28 @@ html lang=ja
         width: 350px;
         height: 350px;
       }
+      .right {
+        flex: 1;
+      }
+      #cate #value {
+        margin-left: 2rem;
+      }
+      #review_list {
+      }
 
   body
     #content
       #head
+        h1
+          a href="/" style="text-decoration: none;"
+            span.blue G
+            span.red o
+            span.yellow o
+            span.blue g
+            span.green l
+            span.red e
+            / span.green o
+            / span.yellow ★彡
         .button#input_eval 以下のページを評価する
       #status
         .left
@@ -178,7 +210,13 @@ html lang=ja
             hr width="100%"
           p 誤字脱字　6箇所
         .right
-          h2 はなくその食レポ
+          h2 はなくその食レポ - Ahoo!
           h3 http://mazuidesuyo.unk/op.pai
-          p aaaaaaaaa
-          
+          #cate
+            h4 ジャンル
+            p#value ニュース　編集する
+            h4 媒体
+            p#value 文章（マスコミ）　編集する
+            h4 タグ
+            p#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料　編集する
+      #review_list
