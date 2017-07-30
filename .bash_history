@@ -1,14 +1,3 @@
-eval `ssh-agent`
-ssh-add
-git push
-cat .bashrc
-vi .bashrc
-vi gitpush
-git push
-vi gitpush
-echo $PATH
-ls
-pwd
 mkdir bin
 ls
 mv gitpush bin/
@@ -998,3 +987,14 @@ git status
 git commit -am '評価閲覧画面を原案に近い形に変更'
 gitpush 
 vi search_result.ace 
+cd volumes/go_app/
+ls
+git commit -am 'レビューリスト表示領域を用意'
+gitp`
+gitpush 
+exit
+cd volumes/go_app/views/
+l
+lw
+ls
+vi preview_evaluation.ace 
