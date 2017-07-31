@@ -185,6 +185,8 @@ html lang=ja
         padding: 2rem;
         background-color: rgba(0,0,0,0.05);
       }
+      .review {
+      }
 
   body
     #content
@@ -224,3 +226,4 @@ html lang=ja
             h4 タグ
             p#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料　編集する
       #review_list
+        .review  

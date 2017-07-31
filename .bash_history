@@ -1,12 +1,3 @@
-mkdir bin
-ls
-mv gitpush bin/
-ls bin
-mv bin/gitpush ./
-ls bin
-ls
-mv gitpush bin/
-ls bin
 mv gitpush pushgit
 cd bin/
 mv gitpush pushgit
@@ -996,5 +987,14 @@ exit
 cd volumes/go_app/views/
 l
 lw
+ls
+vi preview_evaluation.ace 
+git commit -am 'レビューリスト表示領域にflex、背景色を指定'
+gitpush 
+exit
+cd volumes/go_app/
+ls
+vi server.go 
+cd volumes/go_app/views/
 ls
 vi preview_evaluation.ace 
