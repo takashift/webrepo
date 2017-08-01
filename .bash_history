@@ -1,10 +1,3 @@
-mv gitpush pushgit
-cd bin/
-mv gitpush pushgit
-mv pushgit gitpush
-ls
-ls -l
-chmod 700 gitpush 
 ls
 ls -l
 cd ..
@@ -998,3 +991,10 @@ vi server.go
 cd volumes/go_app/views/
 ls
 vi preview_evaluation.ace 
+cd volumes/go_app/views/
+ls
+vi preview_evaluation.ace 
+cd volumes/go_app/
+ls
+git commit -am '個別レビュー格納用の要素を追加'
+gitpush 
