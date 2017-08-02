@@ -159,6 +159,7 @@ html lang=ja
         
       }
       #title {
+        margin-top: 2rem;
         text-align: center;
       }
       #status {
