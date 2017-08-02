@@ -158,6 +158,9 @@ html lang=ja
         background-color: rgba(0,50,255,0.8);
         
       }
+      #title {
+        text-align: center;
+      }
       #status {
         display: flex;
         
@@ -168,6 +171,7 @@ html lang=ja
       }
       .ScrPr {
         text-align: center;
+        /height: 150px;
       }
       .ScrPr img {
         width: 350px;
@@ -202,10 +206,12 @@ html lang=ja
             / span.green o
             / span.yellow ★彡
         .button#input_eval 以下のページを評価する
+        #title
+          h2 はなくその食レポ - Ahoo!
+          h3 http://mazuidesuyo.unk/op.pai
       #status
         .left
           .ScrPr
-            img 
           #eval
             h3 最も高評価な目的名
             p#popu_pp 安くてまずい料理
@@ -216,8 +222,6 @@ html lang=ja
             hr width="100%"
           p 誤字脱字　6箇所
         .right
-          h2 はなくその食レポ - Ahoo!
-          h3 http://mazuidesuyo.unk/op.pai
           #cate
             h4 ジャンル
             p#value ニュース　編集する

@@ -1,11 +1,3 @@
-ls
-ls -l
-cd ..
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-cat .bash_history | grep docker ash
-cat .bash_history | grep ash
 docker exec -it tuna_mysql_1 /bin/bash
 docker-compose down --rmi all
 docker-compose up -d
@@ -997,4 +989,12 @@ vi preview_evaluation.ace
 cd volumes/go_app/
 ls
 git commit -am '個別レビュー格納用の要素を追加'
+gitpush 
+cd volumes/go_app/views/
+ls
+vi 
+vi preview_evaluation.ace 
+cd volumes/go_app/
+ls
+git commit -am 'レビューの枠を6つ用意'
 gitpush 
