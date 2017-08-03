@@ -114,6 +114,9 @@ html lang=ja
         font-size: 0.9rem;
       }
 
+      body {
+        margin-bottom: 0;
+      }
       #content {
         width: 90%;
         margin: auto;
@@ -164,7 +167,6 @@ html lang=ja
       }
       #status {
         display: flex;
-        
       }
       .left {
         width: 400px;
@@ -186,11 +188,19 @@ html lang=ja
       }
       #review_list {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-content: space-around;
         margin: 2rem 0 0 0;
         padding: 2rem;
         background-color: rgba(0,0,0,0.05);
       }
       .review {
+        flex-shrink: 0;
+        flex-basis: 350px;
+        margin: 1.5rem auto;
+        padding: 1rem;
+        background-color: rgba(255,255,255,1);
       }
 
   body
@@ -237,12 +247,33 @@ html lang=ja
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
         .review
-          
+          p 目的　はなくその味ってみんな同じなのか知りたかった
+          p 目的達成度　★★★★★ 4.5
+          p 見やすさ　　★★★★★ 4.5
+          p 誤字脱字数　6箇所
+          p 記述評価　はなくその...
         .review
-          
+          p 目的　はなくその味ってみんな同じなのか知りたかった
+          p 目的達成度　★★★★★ 4.5
+          p 見やすさ　　★★★★★ 4.5
+          p 誤字脱字数　6箇所
+          p 記述評価　はなくその...
         .review
-          
+          p 目的　はなくその味ってみんな同じなのか知りたかった
+          p 目的達成度　★★★★★ 4.5
+          p 見やすさ　　★★★★★ 4.5
+          p 誤字脱字数　6箇所
+          p 記述評価　はなくその...
         .review
-          
+          p 目的　はなくその味ってみんな同じなのか知りたかった
+          p 目的達成度　★★★★★ 4.5
+          p 見やすさ　　★★★★★ 4.5
+          p 誤字脱字数　6箇所
+          p 記述評価　はなくその...
         .review
+          p 目的　はなくその味ってみんな同じなのか知りたかった
+          p 目的達成度　★★★★★ 4.5
+          p 見やすさ　　★★★★★ 4.5
+          p 誤字脱字数　6箇所
+          p 記述評価　はなくその...
           
