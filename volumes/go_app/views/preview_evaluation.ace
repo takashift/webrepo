@@ -169,6 +169,7 @@ html lang=ja
       .left {
         width: 400px;
         margin-right: 2rem;
+        flex-shrink: 0; /* サイズ固定 */
       }
       .ScrPr {
         text-align: center;
@@ -179,7 +180,6 @@ html lang=ja
         height: 350px;
       }
       .right {
-        flex: 1;
       }
       #cate #value {
         margin-left: 2rem;

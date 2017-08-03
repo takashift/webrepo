@@ -1,14 +1,3 @@
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-vi volumes/go_app/server.go_ 
-vi docker-compose.yml
-docker-compose down --rmi all
 docker-compose up -d
 docker-compose logs
 docker-compose down --rmi all
@@ -997,4 +986,15 @@ vi preview_evaluation.ace
 cd volumes/go_app/
 ls
 git commit -am 'レビューの枠を6つ用意'
+gitpush 
+git commit -am 'imgタグを削除'
+gitpush 
+git commit -am 'タイトルの位置を中央へ変更＋上の余白を設定'
+gitpush 
+cd volumes/go_app/
+vi server.go 
+cd volumes/go_app/views/
+ls
+vi preview_evaluation.ace 
+git commit -am '評価の例を記述'
 gitpush 
