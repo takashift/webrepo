@@ -1,23 +1,3 @@
-vi echo/Dockerfile
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-vi volumes/go_app/server.go.cm 
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/server.go.cm 
-docker-compose down --rmi all
-vi echo/Dockerfile
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/server.go.cm 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-cat volumes/go_app/db.go
-vi volumes/go_app/db.go
 docker-compose down --rmi all
 docker-compose up -d
 docker-compose logs
@@ -998,3 +978,23 @@ git log
 git commit -am 'flexで複数のレビューをフレキシブルに横に表示できるように設定'
 gitpush 
 exit
+cd volumes/go_app/views/
+ls
+ls -l
+ls -a
+vi pass_signin.ace 
+vi search_result.ace 
+vi search_top.ace.ace 
+vi search_top.ace
+
+gitpush 
+git commit -am '文字サイズを大きめに調整'
+gitpush 
+git commit -am 'tagu '
+git commit --amed
+git commit --amend
+git log
+cd volumes/go_app/
+vi server.go 
+cd volumes/go_app/views/
+vi preview_evaluation.ace 

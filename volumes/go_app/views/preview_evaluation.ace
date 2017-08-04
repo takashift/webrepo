@@ -88,13 +88,25 @@ html lang=ja
         font-weight: normal;
       }
       #review_list {
+        margin: 2rem 0 0 0;
+        padding: 2rem;
+        background-color: rgba(0,0,0,0.05);
+      }
+      form#opt {
+        text-align: right;
+        margin-right: 3.5rem;
+      }
+      label {
+        margin-left: 2rem;
+      }
+      select {
+        margin-left: 0.5rem;
+      }
+      #review_flex {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
         align-content: space-around;
-        margin: 2rem 0 0 0;
-        padding: 2rem;
-        background-color: rgba(0,0,0,0.05);
       }
       .review {
         flex-shrink: 0;
@@ -102,6 +114,14 @@ html lang=ja
         margin: 1.5rem auto;
         padding: 1rem;
         background-color: rgba(255,255,255,1);
+      }
+      p.date {
+        text-align: right;
+        margin: 0;
+        font-size: small;
+      }
+      h4.first {
+        margin-top: 0;
       }
       .res {
         text-align: right;
@@ -154,47 +174,103 @@ html lang=ja
             h4#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料
             #cate_edit 
               .button ジャンル、媒体、タグを編集する
-      #review_list name="recommend_button" action="" method="get"
-        .review
-          h3 はなくその味ってみんな同じなのか知りたかった
-          h4 目的達成度　★★★★★ 4.5
-          h4 見やすさ　　★★★★★ 4.5
-          h4 誤字脱字数　6箇所
-          h4 記述評価　　はなくその...
-          .res
-            h4.comm_stus コメント？件
-            span 参考に...
-            form.recommend name="レビュー１" method="get" action=""
-              input type="submit" value="なった" name="recommend" 1?
-              input type="submit" value="ならなかった" name="recommend" 1?
-        .review
-          h3 はなくその味ってみんな同じなのか知りたかった
-          h4 目的達成度　★★★★★ 4.5
-          h4 見やすさ　　★★★★★ 4.5
-          h4 誤字脱字数　6箇所
-          h4 記述評価　　はなくその...
-        .review
-          p 目的　はなくその味ってみんな同じなのか知りたかった
-          p 目的達成度　★★★★★ 4.5
-          p 見やすさ　　★★★★★ 4.5
-          p 誤字脱字数　6箇所
-          p 記述評価　はなくその...
-        .review
-          p 目的　はなくその味ってみんな同じなのか知りたかった
-          p 目的達成度　★★★★★ 4.5
-          p 見やすさ　　★★★★★ 4.5
-          p 誤字脱字数　6箇所
-          p 記述評価　はなくその...
-        .review
-          p 目的　はなくその味ってみんな同じなのか知りたかった
-          p 目的達成度　★★★★★ 4.5
-          p 見やすさ　　★★★★★ 4.5
-          p 誤字脱字数　6箇所
-          p 記述評価　はなくその...
-        .review
-          p 目的　はなくその味ってみんな同じなのか知りたかった
-          p 目的達成度　★★★★★ 4.5
-          p 見やすさ　　★★★★★ 4.5
-          p 誤字脱字数　6箇所
-          p 記述評価　はなくその...
+      #review_list
+        form#opt method="get" action=""
+          label 表示数
+            select name="view_total"
+              option value="10" 10
+              option value="20" 20
+              option value="30" 30
+              option value="40" 40
+              option value="50" 50
+          label 並び替え（左の並び替えを先に適用）
+            select name="sort1"
+              optgroup label="評価項目（高評価順）"
+                option value="ev_pp_des" 目的達成度
+                option value="ev_vw_des" 見やすさ
+                option value="ev_tp_ord" 誤字脱字
+                option value="ev_tl_des" 総合評価
+              optgroup label="評価項目（低評価順）"
+                option value="ev_pp_ord" 目的達成度
+                option value="ev_vw_ord" 見やすさ
+                option value="ev_tp_des" 誤字脱字
+                option value="ev_tl_ord" 総合評価
+              optgroup label="その他（降順）"
+                option value="date_des" 閲覧日
+                option value="value_des" 評価数
+                option value="recb_des" 参考になった
+                option value="recp_des" 参考にならなかった
+              optgroup label="その他（昇順）"
+                option value="date_ord" 閲覧日
+                option value="value_ord" 評価数
+                option value="recb_des" 参考になった
+                option value="recp_des" 参考にならなかった
+            select name="sort2"
+              option value="none" 無し
+              optgroup label="評価項目（高評価順）"
+                option value="ev_pp_des" 目的達成度
+                option value="ev_vw_des" 見やすさ
+                option value="ev_tp_ord" 誤字脱字
+                option value="ev_tl_des" 総合評価
+              optgroup label="評価項目（低評価順）"
+                option value="ev_pp_ord" 目的達成度
+                option value="ev_vw_ord" 見やすさ
+                option value="ev_tp_des" 誤字脱字
+                option value="ev_tl_ord" 総合評価
+              optgroup label="その他（降順）"
+                option value="date_des" 閲覧日
+                option value="value_des" 評価数
+                option value="recb_des" 参考になった
+                option value="recp_des" 参考にならなかった
+              optgroup label="その他（昇順）"
+                option value="date_ord" 閲覧日
+                option value="value_ord" 評価数
+                option value="recb_des" 参考になった
+                option value="recp_des" 参考にならなかった
+          p 検索
+          label 絞込
+        #review_flex
+          .review
+            h3 はなくその味ってみんな同じなのか知りたかった
+            p.date 閲覧日　2017/08/04
+            h4.first 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
+            h4 誤字脱字数　6箇所
+            h4 記述評価　　はなくその...
+            .res
+              h4.comm_stus コメント？件
+              span 参考に...
+                form.recommend name="レビュー１" method="post" action=""
+                input type="submit" value="なった👍" name="recommend" 1?
+                input type="submit" value="ならなかった👎" name="recommend" 1?
+          .review
+            h3 はなくその味ってみんな同じなのか知りたかった
+            h4 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
+            h4 誤字脱字数　6箇所
+            h4 記述評価　　はなくその...
+          .review
+            p 目的　はなくその味ってみんな同じなのか知りたかった
+            p 目的達成度　★★★★★ 4.5
+            p 見やすさ　　★★★★★ 4.5
+            p 誤字脱字数　6箇所
+            p 記述評価　はなくその...
+          .review
+            p 目的　はなくその味ってみんな同じなのか知りたかった
+            p 目的達成度　★★★★★ 4.5
+            p 見やすさ　　★★★★★ 4.5
+            p 誤字脱字数　6箇所
+            p 記述評価　はなくその...
+          .review
+            p 目的　はなくその味ってみんな同じなのか知りたかった
+            p 目的達成度　★★★★★ 4.5
+            p 見やすさ　　★★★★★ 4.5
+            p 誤字脱字数　6箇所
+            p 記述評価　はなくその...
+          .review
+            p 目的　はなくその味ってみんな同じなのか知りたかった
+            p 目的達成度　★★★★★ 4.5
+            p 見やすさ　　★★★★★ 4.5
+            p 誤字脱字数　6箇所
+            p 記述評価　はなくその...
           
