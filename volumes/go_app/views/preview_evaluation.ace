@@ -76,6 +76,9 @@ html lang=ja
       #cate #value {
         margin-left: 2rem;
       }
+      span.edit {
+        font-weight: normal;
+      }
       #review_list {
         display: flex;
         flex-wrap: wrap;
@@ -98,9 +101,10 @@ html lang=ja
       .comm_stus {
       }
       .recommend {
+        display: inline;
         margin-left: 2%;
       }
-      input[name="recommend"] {
+      input {
         margin-left: 3%;
       }
 
@@ -119,105 +123,68 @@ html lang=ja
             / span.yellow ★彡
         .button#input_eval 以下のページを評価する
         #title
-          h2 はなくその食レポ - Ahoo!
-          h3 http://mazuidesuyo.unk/op.pai
+          h1 はなくその食レポ - Ahoo!
+          h2 http://mazuidesuyo.unk/op.pai
       #status
         .left
           #eval
             h3 最も高評価な目的名
-            p#popu_pp 安くてまずい料理
-            h4 評価平均
-            p 総合　　　　★★★★★ 4.5
-            p 目的達成度　★★★★★ 4.5
-            p 見やすさ　　★★★★★ 4.5
+            h2#popu_pp 安くてまずい料理
+            h3 評価平均
+            h4 総合　　　　★★★★★ 4.5
+            h4 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
             hr size="1.5" width="100%" color="#AAAAAA"
-          p 誤字脱字　　6箇所
+          h4 誤字脱字　　6箇所
         .right
           #cate
-            h4 ジャンル
-            p#value ニュース　編集する
-            h4 媒体
-            p#value 文章（マスコミ）　編集する
-            h4 タグ
-            p#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料　編集する
-      form#review_list name="recommend_button" action="" method="get"
+            h3 ジャンル
+            h4#value ニュース
+            h3 媒体
+            h4#value 文章（マスコミ）
+            h3 タグ
+            h4#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料
+      #review_list name="recommend_button" action="" method="get"
+        .review
+          h3 はなくその味ってみんな同じなのか知りたかった
+          h4 目的達成度　★★★★★ 4.5
+          h4 見やすさ　　★★★★★ 4.5
+          h4 誤字脱字数　6箇所
+          h4 記述評価　　はなくその...
+          .res
+            h4.comm_stus コメント？件
+            span 参考に...
+            form.recommend name="レビュー１" method="get" action=""
+              input type="submit" value="なった" name="recommend" 1?
+              input type="submit" value="ならなかった" name="recommend" 1?
+        .review
+          h3 はなくその味ってみんな同じなのか知りたかった
+          h4 目的達成度　★★★★★ 4.5
+          h4 見やすさ　　★★★★★ 4.5
+          h4 誤字脱字数　6箇所
+          h4 記述評価　　はなくその...
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
-          .res
-            p.comm_stus コメント？件
-            p
-              span 参考に...
-              span.recommend
-                input type="submit" value="なった" name="recommend"
-                input type="submit" value="ならなかった" name="recommend"
-            
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
-          .res
-            p.comm_stus コメント？件
-            p
-              span 参考に...
-              span.recommend
-                input type="submit" value="なった" name="recommend"
-                input type="submit" value="ならなかった" name="recommend"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
-          .res
-            p.comm_stus コメント？件
-            p
-              span 参考に...
-              span.recommend
-                input type="submit" value="なった" name="recommend"
-                input type="submit" value="ならなかった" name="recommend"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
-          .res
-            p.comm_stus コメント？件
-            p
-              span 参考に...
-              span.recommend
-                input type="submit" value="なった" name="recommend"
-                input type="submit" value="ならなかった" name="recommend"
-        .review
-          p 目的　はなくその味ってみんな同じなのか知りたかった
-          p 目的達成度　★★★★★ 4.5
-          p 見やすさ　　★★★★★ 4.5
-          p 誤字脱字数　6箇所
-          p 記述評価　はなくその...
-          .res
-            p.comm_stus コメント？件
-            p
-              span 参考に...
-              span.recommend
-                input type="submit" value="なった" name="recommend"
-                input type="submit" value="ならなかった" name="recommend"
-        .review
-          p 目的　はなくその味ってみんな同じなのか知りたかった
-          p 目的達成度　★★★★★ 4.5
-          p 見やすさ　　★★★★★ 4.5
-          p 誤字脱字数　6箇所
-          p 記述評価　はなくその...
-          .res
-            p.comm_stus コメント？件
-            p
-              span 参考に...
-              span.recommend
-                input type="submit" value="なった" name="recommend"
-                input type="submit" value="ならなかった" name="recommend"
           
