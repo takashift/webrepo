@@ -34,12 +34,11 @@ html lang=ja
       }
       .button {
         display: block;
-        font-size: large;
+        font-size: larger;
         color: rgba(255,255,255,0.9);
         border-style: none;
         background-color: rgba(0,50,255,0.8);
         border-radius: 0.5rem;
-        font-size: larger;
         width: auto;
         margin-left: 1rem;
         padding: 1rem;
@@ -75,6 +74,15 @@ html lang=ja
       }
       #cate #value {
         margin-left: 2rem;
+      }
+      #cate_edit {
+        text-align: center;
+      }
+      #cate_edit .button {
+        display: inline-block;
+        margin: auto;
+        padding: 0.5rem 1rem;
+        background-color: rgba(255,50,0,0.8);
       }
       span.edit {
         font-weight: normal;
@@ -144,6 +152,8 @@ html lang=ja
             h4#value 文章（マスコミ）
             h3 タグ
             h4#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料
+            #cate_edit 
+              .button ジャンル、媒体、タグを編集する
       #review_list name="recommend_button" action="" method="get"
         .review
           h3 はなくその味ってみんな同じなのか知りたかった
