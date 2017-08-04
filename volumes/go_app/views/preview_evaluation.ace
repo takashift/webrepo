@@ -4,116 +4,6 @@ html lang=ja
     meta charset=utf-8
     title はなくその食レポ の評価 | WebRepo★彡
     = css
-      form {
-        width: 80%;
-        margin: auto;
-      }
-      .glay {
-        /*padding-top: 0.1rem;*/
-        background-color: rgba(0,0,0,0.05);
-      }
-      .form_block {
-        margin: 2rem;
-        display: flex;
-      }
-      .subject {
-        width: 9rem;
-      }
-      .input {
-        flex: 1;
-        margin: 0.5rem 1rem 1rem 1rem;
-      }
-      textarea {
-        width: 100%;
-        /*max-width: 100%;*/
-        resize: vertical;
-      }
-      textarea[name="purpose"] {
-        height: 3rem;
-      }
-
-      /* 目的適合度 */
-      label.star_rating {
-        display: block;
-        cursor: pointer;
-        margin-bottom: 2px;
-        padding-left: 1rem;
-        width: 88%;
-        font-size: large;
-        background-color: rgba(255,255,255,1);
-      }
-      input[name="rating"] {
-        display: none;
-      }
-      input[name="rating"] + .star:before {
-        font-family: "iIonIcons";
-        font-size: 1.5rem;
-        color: rgba(255,255,255,1);
-        letter-spacing: 0.5rem;
-        -webkit-text-stroke: 2px rgba(0,0,0,0.5);
-        text-stroke: 2px rgba(0,0,0,0.5);
-        text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
-        margin-left: 1.5rem;
-      }
-      input[value="1"] + .star:before {
-        content: "★";
-      }
-      input[value="2"] + .star:before {
-        content: "★★";
-      }
-      input[value="3"] + .star:before {
-        content: "★★★";
-      }
-      input[value="4"] + .star:before {
-        content: "★★★★";
-      }
-      input[value="5"] + .star:before {
-        content: "★★★★★";
-      }
-      input[name="rating"]:checked + .star:before {
-        font-family: "IonIcons";
-        color: rgba(255,230,0,1);
-        -webkit-text-stroke: 1px rgba(0,0,0,0.5);
-        text-stroke: 1px rgba(0,0,0,0.5);
-      }
-      input[value="1"]:checked + .star:before {
-        content: "★";
-      }
-      input[value="2"]:checked + .star:before {
-        content: "★★";
-      }
-      input[value="3"]:checked + .star:before {
-        content: "★★★";
-      }
-      input[value="4"]:checked + .star:before {
-        content: "★★★★";
-      }
-      input[value="5"]:checked + .star:before {
-        content: "★★★★★";
-      }
-
-      #typo {
-        display: flex;
-        justify-content: space-between;
-      }
-      #typo label {
-        width: 45%;
-      }
-      #typo h3 {
-        margin: 0 0 0.5rem 0.5rem;
-      }
-      #typo textarea {
-        width: 100%;
-        height: 3rem;
-      }
-
-      textarea[name="freedom"] {
-        height: 10rem;
-      }
-      #note {
-        font-size: 0.9rem;
-      }
-
       body {
         margin-bottom: 0;
       }
@@ -202,6 +92,17 @@ html lang=ja
         padding: 1rem;
         background-color: rgba(255,255,255,1);
       }
+      .res {
+        text-align: right;
+      }
+      .comm_stus {
+      }
+      .recommend {
+        margin-left: 2%;
+      }
+      input[name="recommend"] {
+        margin-left: 3%;
+      }
 
   body
     #content
@@ -239,41 +140,84 @@ html lang=ja
             p#value 文章（マスコミ）　編集する
             h4 タグ
             p#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料　編集する
-      #review_list
+      form#review_list name="recommend_button" action="" method="get"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
+          .res
+            p.comm_stus コメント？件
+            p
+              span 参考に...
+              span.recommend
+                input type="submit" value="なった" name="recommend"
+                input type="submit" value="ならなかった" name="recommend"
+            
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
+          .res
+            p.comm_stus コメント？件
+            p
+              span 参考に...
+              span.recommend
+                input type="submit" value="なった" name="recommend"
+                input type="submit" value="ならなかった" name="recommend"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
+          .res
+            p.comm_stus コメント？件
+            p
+              span 参考に...
+              span.recommend
+                input type="submit" value="なった" name="recommend"
+                input type="submit" value="ならなかった" name="recommend"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
+          .res
+            p.comm_stus コメント？件
+            p
+              span 参考に...
+              span.recommend
+                input type="submit" value="なった" name="recommend"
+                input type="submit" value="ならなかった" name="recommend"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
+          .res
+            p.comm_stus コメント？件
+            p
+              span 参考に...
+              span.recommend
+                input type="submit" value="なった" name="recommend"
+                input type="submit" value="ならなかった" name="recommend"
         .review
           p 目的　はなくその味ってみんな同じなのか知りたかった
           p 目的達成度　★★★★★ 4.5
           p 見やすさ　　★★★★★ 4.5
           p 誤字脱字数　6箇所
           p 記述評価　はなくその...
+          .res
+            p.comm_stus コメント？件
+            p
+              span 参考に...
+              span.recommend
+                input type="submit" value="なった" name="recommend"
+                input type="submit" value="ならなかった" name="recommend"
           

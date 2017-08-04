@@ -1,18 +1,3 @@
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-vi volumes/go_app/server.go.cm 
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
 vi echo/Dockerfile
 docker-compose down --rmi all
 docker-compose up -d
@@ -998,3 +983,18 @@ ls
 vi preview_evaluation.ace 
 git commit -am '評価の例を記述'
 gitpush 
+git commit -am 'flex の設定をMDNの推奨する書き方に変更'
+gitpush 
+git commit -am 'パラメータ表示の余白のサイズを変更'
+gitpush 
+cd volumes/go_app/
+vi server.go 
+cd volumes/go_app/views/
+vi preview_evaluation.ace 
+ls
+gitpush 
+vi preview_evaluation.ace 
+git log
+git commit -am 'flexで複数のレビューをフレキシブルに横に表示できるように設定'
+gitpush 
+exit
