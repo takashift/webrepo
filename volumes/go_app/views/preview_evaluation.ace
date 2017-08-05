@@ -6,6 +6,7 @@ html lang=ja
     = css
       body {
         margin-bottom: 0;
+        color: rgba(0,0,0,0.8);
       }
       #content {
         width: 90%;
@@ -99,8 +100,22 @@ html lang=ja
       label {
         margin-left: 2rem;
       }
+      #sort {
+        display: inline-block;
+      }
       select {
         margin-left: 0.5rem;
+      }
+      #sort select {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      #sort select.order {
+        float: right;
+      }
+      #number {
+        margin-left: 2rem;
+        color: rgba(0,0,0,0.9);
       }
       #review_flex {
         display: flex;
@@ -156,8 +171,10 @@ html lang=ja
       #status
         .left
           #eval
-            h3 最も高評価な目的名
-            h2#popu_pp 安くてまずい料理
+            s
+              h3 最も高評価な閲覧目的
+            s
+            h2#popu_pp 安くてまずい料理を調べたい
             h3 評価平均
             h4 総合　　　　★★★★★ 4.5
             h4 目的達成度　★★★★★ 4.5
@@ -176,59 +193,55 @@ html lang=ja
               .button ジャンル、媒体、タグを編集する
       #review_list
         form#opt method="get" action=""
-          label 表示数
-            select name="view_total"
-              option value="10" 10
-              option value="20" 20
-              option value="30" 30
-              option value="40" 40
-              option value="50" 50
+          /
+            label 表示数
+              select name="view_total"
+                option value="12" 12
+                option value="24" 24
+                option value="36" 36
+                option value="48" 48
+                option value="60" 60
+                option value="72" 72
+                option value="84" 84
+                option value="96" 96
+                option value="108" 108
+                option value="120" 120
+
           label 並び替え（左の並び替えを先に適用）
-            select name="sort1"
-              optgroup label="評価項目（高評価順）"
-                option value="ev_pp_des" 目的達成度
-                option value="ev_vw_des" 見やすさ
-                option value="ev_tp_ord" 誤字脱字
-                option value="ev_tl_des" 総合評価
-              optgroup label="評価項目（低評価順）"
-                option value="ev_pp_ord" 目的達成度
-                option value="ev_vw_ord" 見やすさ
-                option value="ev_tp_des" 誤字脱字
-                option value="ev_tl_ord" 総合評価
-              optgroup label="その他（降順）"
-                option value="date_des" 閲覧日
-                option value="value_des" 評価数
-                option value="recb_des" 参考になった
-                option value="recp_des" 参考にならなかった
-              optgroup label="その他（昇順）"
-                option value="date_ord" 閲覧日
-                option value="value_ord" 評価数
-                option value="recb_des" 参考になった
-                option value="recp_des" 参考にならなかった
-            select name="sort2"
-              option value="none" 無し
-              optgroup label="評価項目（高評価順）"
-                option value="ev_pp_des" 目的達成度
-                option value="ev_vw_des" 見やすさ
-                option value="ev_tp_ord" 誤字脱字
-                option value="ev_tl_des" 総合評価
-              optgroup label="評価項目（低評価順）"
-                option value="ev_pp_ord" 目的達成度
-                option value="ev_vw_ord" 見やすさ
-                option value="ev_tp_des" 誤字脱字
-                option value="ev_tl_ord" 総合評価
-              optgroup label="その他（降順）"
-                option value="date_des" 閲覧日
-                option value="value_des" 評価数
-                option value="recb_des" 参考になった
-                option value="recp_des" 参考にならなかった
-              optgroup label="その他（昇順）"
-                option value="date_ord" 閲覧日
-                option value="value_ord" 評価数
-                option value="recb_des" 参考になった
-                option value="recp_des" 参考にならなかった
-          p 検索
-          label 絞込
+            #sort
+              select name="sort1"
+                optgroup label="評価項目"
+                  option value="ev_pp" 目的達成度
+                  option value="ev_vw" 見やすさ
+                  option value="ev_typo" 誤字脱字
+                  option value="ev_total" 総合評価
+                optgroup label="その他"
+                  option value="date" 閲覧日
+                  / option value="value" 各目的での評価数
+                  option value="rec_b" 参考になった
+                  option value="rec_p" 参考にならなかった
+              select.order name="sort1_order"
+                option value="descending" 降順
+                option value="ascending" 昇順
+            #sort
+              select name="sort2"
+                option value="none" 無し
+                optgroup label="評価項目"
+                  option value="ev_pp" 目的達成度
+                  option value="ev_vw" 見やすさ
+                  option value="ev_typo" 誤字脱字
+                  option value="ev_total" 総合評価
+                optgroup label="その他"
+                  option value="date" 閲覧日
+                  / option value="value" 各目的での評価数
+                  option value="rec_b" 参考になった
+                  option value="rec_p" 参考にならなかった
+              select.order name="sort2_order"
+                option value="descending" 降順
+                option value="ascending" 昇順
+          / p 検索
+          / label 絞込
+        #number 評価総数 6件
         #review_flex
           .review
             h3 はなくその味ってみんな同じなのか知りたかった

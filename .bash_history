@@ -1,13 +1,3 @@
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go
-docker-compose logs
-vi volumes/go_app/db.go
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
 vi volumes/go_app/db.go
 docker-compose up -d
 docker-compose logs
@@ -998,3 +988,13 @@ cd volumes/go_app/
 vi server.go 
 cd volumes/go_app/views/
 vi preview_evaluation.ace 
+cd volumes/go_app/views/
+ls
+vi search_top.ace.ace 
+vi preview_evaluation.ace 
+cd volumes/go_app/
+ls
+vi server.go 
+git commit -am '表示数、並び替え用selectタグを設置'
+gitpush 
+git log
