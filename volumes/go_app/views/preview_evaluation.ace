@@ -85,9 +85,6 @@ html lang=ja
         padding: 0.5rem 1rem;
         background-color: rgba(255,50,0,0.8);
       }
-      span.edit {
-        font-weight: normal;
-      }
       #review_list {
         margin: 2rem 0 0 0;
         padding: 2rem;

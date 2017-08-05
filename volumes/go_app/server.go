@@ -1,4 +1,4 @@
-	package main
+package main
 
 import (
     "os"
@@ -62,7 +62,7 @@ func main() {
     })
 
     // 個別評価閲覧画面
-    e.GET("/individual_review", func(c echo.Context) error {
+    e.GET("/individual_reviews", func(c echo.Context) error {
       return c.Render(http.StatusOK, "individual_review", searchForm)
     })
 
