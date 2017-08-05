@@ -258,32 +258,66 @@ html lang=ja
                 input type="submit" value="ならなかった👎" name="recommend" 1?
           .review
             h3 はなくその味ってみんな同じなのか知りたかった
-            h4 目的達成度　★★★★★ 4.5
+            p.date 閲覧日　2017/08/04
+            h4.first 目的達成度　★★★★★ 4.5
             h4 見やすさ　　★★★★★ 4.5
             h4 誤字脱字数　6箇所
             h4 記述評価　　はなくその...
+            .res
+              h4.comm_stus コメント？件
+              span 参考に...
+                form.recommend name="レビュー１" method="post" action=""
+                input type="submit" value="なった👍" name="recommend" 1?
+                input type="submit" value="ならなかった👎" name="recommend" 1?
           .review
-            p 目的　はなくその味ってみんな同じなのか知りたかった
-            p 目的達成度　★★★★★ 4.5
-            p 見やすさ　　★★★★★ 4.5
-            p 誤字脱字数　6箇所
-            p 記述評価　はなくその...
+            h3 はなくその味ってみんな同じなのか知りたかった
+            p.date 閲覧日　2017/08/04
+            h4.first 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
+            h4 誤字脱字数　6箇所
+            h4 記述評価　　はなくその...
+            .res
+              h4.comm_stus コメント？件
+              span 参考に...
+                form.recommend name="レビュー１" method="post" action=""
+                input type="submit" value="なった👍" name="recommend" 1?
+                input type="submit" value="ならなかった👎" name="recommend" 1?
           .review
-            p 目的　はなくその味ってみんな同じなのか知りたかった
-            p 目的達成度　★★★★★ 4.5
-            p 見やすさ　　★★★★★ 4.5
-            p 誤字脱字数　6箇所
-            p 記述評価　はなくその...
+            h3 はなくその味ってみんな同じなのか知りたかった
+            p.date 閲覧日　2017/08/04
+            h4.first 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
+            h4 誤字脱字数　6箇所
+            h4 記述評価　　はなくその...
+            .res
+              h4.comm_stus コメント？件
+              span 参考に...
+                form.recommend name="レビュー１" method="post" action=""
+                input type="submit" value="なった👍" name="recommend" 1?
+                input type="submit" value="ならなかった👎" name="recommend" 1?
           .review
-            p 目的　はなくその味ってみんな同じなのか知りたかった
-            p 目的達成度　★★★★★ 4.5
-            p 見やすさ　　★★★★★ 4.5
-            p 誤字脱字数　6箇所
-            p 記述評価　はなくその...
+            h3 はなくその味ってみんな同じなのか知りたかった
+            p.date 閲覧日　2017/08/04
+            h4.first 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
+            h4 誤字脱字数　6箇所
+            h4 記述評価　　はなくその...
+            .res
+              h4.comm_stus コメント？件
+              span 参考に...
+                form.recommend name="レビュー１" method="post" action=""
+                input type="submit" value="なった👍" name="recommend" 1?
+                input type="submit" value="ならなかった👎" name="recommend" 1?
           .review
-            p 目的　はなくその味ってみんな同じなのか知りたかった
-            p 目的達成度　★★★★★ 4.5
-            p 見やすさ　　★★★★★ 4.5
-            p 誤字脱字数　6箇所
-            p 記述評価　はなくその...
-          
+            h3 はなくその味ってみんな同じなのか知りたかった
+            p.date 閲覧日　2017/08/04
+            h4.first 目的達成度　★★★★★ 4.5
+            h4 見やすさ　　★★★★★ 4.5
+            h4 誤字脱字数　6箇所
+            h4 記述評価　　はなくその...
+            .res
+              h4.comm_stus コメント？件
+              span 参考に...
+                form.recommend name="レビュー１" method="post" action=""
+                input type="submit" value="なった👍" name="recommend" 1?
+                input type="submit" value="ならなかった👎" name="recommend" 1?
