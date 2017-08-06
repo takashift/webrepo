@@ -107,7 +107,7 @@ html lang=ja
         height: 3rem;
       }
 
-      textarea[name="freedom"] {
+      textarea[name="comment"] {
         height: 10rem;
       }
       #note {
