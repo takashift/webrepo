@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title はなくその食レポ の評価 | WebRepo★彡
+    title はなくその食レポ の評価(詳細) | WebRepo★彡
     = css
       body {
         margin-bottom: 0;
@@ -38,7 +38,7 @@ html lang=ja
         font-size: larger;
         color: rgba(255,255,255,0.9);
         border-style: none;
-        background-color: rgba(0,50,255,0.8);
+        background-color: rgba(0,0,0,0.6);
         border-radius: 0.5rem;
         width: auto;
         margin-left: 1rem;
@@ -49,7 +49,10 @@ html lang=ja
       .button#input_eval {
         display: inline-block;
         background-color: rgba(0,50,255,0.8);
-        
+      }
+      .button#top {
+        display: inline-block;
+        color: rgba(255,255,255,1);
       }
       #title {
         margin-top: 2rem;
@@ -176,6 +179,7 @@ html lang=ja
             / span.green o
             / span.yellow ★彡
         .button#input_eval 以下のページを評価する
+        .button#top その他の評価を表示
         #title
           h1 はなくその食レポ - Ahoo!
           h2 http://mazuidesuyo.unk/op.pai
