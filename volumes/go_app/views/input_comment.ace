@@ -138,4 +138,4 @@ html lang=ja
             p 評価や評価についているコメントに返信してみましょう。
             textarea name="comment" cals="500" clos="4"
             p#note ※酷い評価・コメントには返信ではなく通報をして下さい。
-    input.button type="submit" value="送信する"
+      input.button type="submit" value="送信する"
