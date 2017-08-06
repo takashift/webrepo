@@ -76,9 +76,14 @@ func main() {
       return c.Render(http.StatusOK, "input_comment", searchForm)
     })
 
-    // コメント入力画面
+    // 新規ページ登録画面
     e.GET("/register_page", func(c echo.Context) error {
       return c.Render(http.StatusOK, "register_page", searchForm)
+    })
+
+    // 新規ページ登録画面
+    e.GET("/edit_page_cate", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "edit_page_cate", searchForm)
     })
 
     // ソケット生成

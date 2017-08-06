@@ -1,0 +1,79 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title ページ属性編集 | WebRepo★彡
+    = css
+      form {
+        width: 80%;
+        margin: auto;
+      }
+      .glay {
+        /*padding-top: 0.1rem;*/
+        background-color: rgba(0,0,0,0.05);
+      }
+      .form_block {
+        margin: 2rem;
+        display: flex;
+      }
+      .subject {
+        width: 9rem;
+      }
+      .input {
+        flex: 1;
+        margin: 1.5rem 1rem 1rem 1rem;
+      }
+      select {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+      }
+      option {
+        font-size: 1rem;
+      }
+      textarea {
+        height: 15rem;
+        font-size: 16px;
+        resize: horizontal;
+      }
+      #note {
+        font-size: 0.9rem;
+      }
+      .button {
+        display: block;
+        font-size: large;
+        color: rgba(255,255,255,0.9);
+        border-style: none;
+        background-color: rgba(0,50,255,0.8);
+        border-radius: 0.5rem;
+        font-size: larger;
+        width: auto;
+        padding: 1rem;
+        margin: 2rem auto 2rem auto;
+        text-align: center;
+        cursor: pointer;        
+      }
+
+  body
+    form action="" method="post"
+      .glay
+        .form_block
+          .subject
+            h2 ジャンル
+          .input
+            select name="genre"
+              option value="" ここは DB から引っ張ってくる！！
+        .form_block
+          .subject
+            h2 媒体
+          .input
+            select name="media"
+              option value="" ここは DB から引っ張ってくる！！
+        .form_block
+          .subject
+            h2 タグ
+          .input
+            p タグは10個付けられます。一つずつ改行して下さい。
+            p ヒント：媒体やジャンルの項目に無い属性をここで設定して下さい。
+            textarea name="tag" cols="20" rows="10"
+            p#note ※上から順番に並べられます。もし並び替えたい場合はそのままコピペして順番を変えて下さい。
+      input.button type="submit" value="送信する"
