@@ -78,7 +78,7 @@ func main() {
 
     // ソケット生成
     os.Remove("/usock/domain.sock");
-    uni, err := net.Listen("unix", "/usock/domain.sock")
+    unix, err := net.Listen("unix", "/usock/domain.sock")
     if err != nil {
       e.Logger.Fatal(err)
     }
@@ -88,6 +88,6 @@ func main() {
     if err := os.Chown("/usock/domain.sock", 1000, 1000); err != nil {
       e.Logger.Fatal(err)
     }
-    e.Listener = uni
+    e.Listener = unix
     e.Logger.Fatal(e.Start(""))
 }
