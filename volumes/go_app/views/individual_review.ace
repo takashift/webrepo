@@ -238,7 +238,7 @@ html lang=ja
               form.recommend name="レビュー１" method="post" action=""
               input type="submit" value="なった👍" name="recommend" 1?
               input type="submit" value="ならなかった👎" name="recommend" 1?
-          form#res_button action="" method="post"
+          form#res_button action="" method="get" target="_blank"
             .input_dengerous
               input type="submit" value="通報する" name="dengerous"
             .input_comment
@@ -254,7 +254,7 @@ html lang=ja
                 form.recommend name="レビュー１のコメント１" method="post" action=""
                 input type="submit" value="なった👍" name="recommend" 1?
                 input type="submit" value="ならなかった👎" name="recommend" 1?
-            form#res_button action="" method="post"
+            form#res_button action="" method="get" target="_blank"
               .input_dengerous
                 input type="submit" value="通報する" name="dengerous"
               .input_comment

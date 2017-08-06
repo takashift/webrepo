@@ -66,6 +66,16 @@ func main() {
       return c.Render(http.StatusOK, "individual_review", searchForm)
     })
 
+    // 通報完了画面
+    e.GET("/dengerous_complete", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "dengerous_complete", searchForm)
+    })
+
+    // コメント入力画面
+    e.GET("/input_comment", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "input_comment", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     uni, err := net.Listen("unix", "/usock/domain.sock")
