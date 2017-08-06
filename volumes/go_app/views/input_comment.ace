@@ -129,13 +129,13 @@ html lang=ja
       }
 
   body
-    form action="/search" method="post"
+    form action="" method="post"
       .glay
         .form_block
           .subject
             h2 コメント
           .input
             p 評価や評価についているコメントに返信してみましょう。
-            textarea name="freedom" cals="500" clos="4"
+            textarea name="comment" cals="500" clos="4"
             p#note ※酷い評価・コメントには返信ではなく通報をして下さい。
     input.button type="submit" value="送信する"
