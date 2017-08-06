@@ -1,36 +1,3 @@
-vi volumes/go_app/db.go
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-vi volumes/go_app/db.go
-docker-compose logs
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go
-docker-compose logs
-vi volumes/go_app/db.go
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
 docker-compose logs
 docker-compose down --rmi all
 docker-compose up -d
@@ -998,3 +965,36 @@ vi server.go
 git commit -am '表示数、並び替え用selectタグを設置'
 gitpush 
 git log
+git commit -am '評価の総数を表示するようにして、文字の色も少し薄く変更'
+gitpush 
+git commit -am 'レビューの例を全て完成形に変更'
+gitpush 
+git commit -am 'レビューの表示幅を350->400pxに変更'
+gitpush 
+git commit -am '個別評価閲覧画面用Aceファイル作成'
+cd volumes/go_app/views/
+ls
+vi preview_evaluation.ace 
+git commit -am '個別評価閲覧画面あらかた完成'
+git commit -am '個別評価閲覧画面に投稿者を表示'
+git status
+git add individual_review.ace
+git commit --amend
+git status
+gitpush 
+cd volumes/go_app/
+cd volumes/go_app/views/
+cd views/
+vi preview_evaluation.ace 
+cd ..
+vi server.go 
+cd volumes/go_app/
+vi server.go 
+cd ~
+cd volumes/go_app/views/
+vi preview_evaluation.ace 
+vi individual_review.ace
+cp input_evaluation.ace individual_review.ace
+vi individual_review.ace
+cp preview_evaluation.ace individual_review.ace
+vi individual_review.ace

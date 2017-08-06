@@ -144,8 +144,19 @@ html lang=ja
         display: inline;
         margin-left: 2%;
       }
-      input {
+      .recommend input {
         margin-left: 3%;
+      }
+      form#res_button {
+        margin-top: 1rem;
+        display: flex;
+      }
+      .input_dangerous {
+        flex-grow: 1;
+      }
+      .input_comment {
+        text-align: right;
+        flex-grow: 1;
       }
       .comment {
         margin-left: 1.5rem;
@@ -227,6 +238,11 @@ html lang=ja
               form.recommend name="レビュー１" method="post" action=""
               input type="submit" value="なった👍" name="recommend" 1?
               input type="submit" value="ならなかった👎" name="recommend" 1?
+          form#res_button action="" method="post"
+            .input_dengerous
+              input type="submit" value="通報する" name="dengerous"
+            .input_comment
+              input type="submit" value="コメントする" name="comment"
         h3 コメント
         .comment
           .review
@@ -238,3 +254,8 @@ html lang=ja
                 form.recommend name="レビュー１のコメント１" method="post" action=""
                 input type="submit" value="なった👍" name="recommend" 1?
                 input type="submit" value="ならなかった👎" name="recommend" 1?
+            form#res_button action="" method="post"
+              .input_dengerous
+                input type="submit" value="通報する" name="dengerous"
+              .input_comment
+                input type="submit" value="コメントする" name="comment"
