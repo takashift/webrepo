@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title 評価入力 - WebRepo★彡
+    title 評価入力 | WebRepo★彡
     = css
       form {
         width: 80%;
@@ -129,7 +129,7 @@ html lang=ja
       }
 
   body
-    form action="/search" method="post"
+    form action="" method="post"
       .glay
         .form_block
           .subject
@@ -183,4 +183,4 @@ html lang=ja
             p ヒント：コンテンツのどこが良く、どこが駄目なのか、を明確に書いていただけるとより正確な判断ができる検索エンジンが完成します。
             textarea name="freedom" cals="500" clos="4"
             p#note ※飽くまで評価を行う対象はウェブページであるため、ページ作成者に対する意見は当該ページのコメント欄、SNS等で直接お問い合わせ願います。
-    input.button type="submit" value="送信する"
+      input.button type="submit" value="送信する"
