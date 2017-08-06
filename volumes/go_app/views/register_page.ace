@@ -138,7 +138,7 @@ html lang=ja
             p 複数に分けられる場合は改行して下さい。
             p ヒント：ページを閲覧した動機だけでなく、どんな内容（誰向けに書かれた情報かなど）を探していたのかも書いていただけるとより細かい目的を判定できる検索エンジンが完成します。
             p （例：○○初心者向けの〜、若者向けの〜など）
-            textarea name="purpose" cals="500" clos="2"
+            textarea name="purpose" cols="500"
         .form_block
           .subject
             h2 目的適合度
@@ -171,7 +171,7 @@ html lang=ja
             #typo
               label 
                 h3 誤植単語
-                textarea name="typo" cals="500" clos="2"
+                textarea name="typo" cols="500"
               label
                 h3 本来の単語
                 textarea name="typo_answer" cals="500" clos="2"
