@@ -76,6 +76,11 @@ func main() {
       return c.Render(http.StatusOK, "input_comment", searchForm)
     })
 
+    // コメント入力画面
+    e.GET("/register_page", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "register_page", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     unix, err := net.Listen("unix", "/usock/domain.sock")
