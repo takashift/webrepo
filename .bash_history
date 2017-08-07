@@ -1,12 +1,3 @@
-ls
-vi db.go
-ls
-vi db.go
-vi server.go_ 
-vi db.go
-vi Gododir/main.go 
-cd ..
-ls
 cd go_app/
 ls
 mv server.go_ server.go.cm
@@ -998,3 +989,12 @@ vi server.go
 eist
 eixt
 exit
+vi server.go 
+cd volumes/go_app
+vi server.go 
+cd volumes/go_app/views/
+ls
+ls -a
+
+vi search_top.ace 
+vi header_menu.ace 

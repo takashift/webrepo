@@ -86,6 +86,11 @@ func main() {
       return c.Render(http.StatusOK, "edit_page_cate", searchForm)
     })
 
+    // テスト（ヘッダーメニュー）
+    e.GET("/header_menu", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "header_menu", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     unix, err := net.Listen("unix", "/usock/domain.sock")
