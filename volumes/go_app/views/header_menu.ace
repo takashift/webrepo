@@ -34,7 +34,7 @@ body
       span#elem
         a href="signin_select"  ログイン
       span#elem
-        a href="register_page" 対象ページ登録
+        a href="register_page" ページ評価登録
     .right
       span#elem
         a href="https://www.google.co.jp/" Google
