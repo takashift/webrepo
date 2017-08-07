@@ -161,6 +161,26 @@ html lang=ja
               span.star
         .form_block
           .subject
+            h2 見やすさ
+          .input
+            p 閲覧目的に対するページの適合度を入力して下さい。
+            label.star_rating 極めて見やすい　
+              input type="radio" name="rating" value="5"
+              span.star
+            label.star_rating そこそこ見やすい
+              input type="radio" name="rating" value="4"
+              span.star
+            label.star_rating 見づらくはない　
+              input type="radio" name="rating" value="3"
+              span.star
+            label.star_rating そこそこ見づらい
+              input type="radio" name="rating" value="2"
+              span.star
+            label.star_rating 極めて見づらい　
+              input type="radio" name="rating" value="1"
+              span.star
+        .form_block
+          .subject
             h2 誤字脱字
           .input
             p 誤植単語及び本来の単語を1対1で記入して下さい。
