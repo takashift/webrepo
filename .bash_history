@@ -1,53 +1,3 @@
-ls -l
-./gitpush 
-time ./gitpush
-gitpush
-vi .git
-vi .gitconfig 
-git push
-vi .gitconfig 
-git push
-vi .gitconfig 
-gitpush
-vi mysql/Dockerfile 
-ls -l mysql/
-vi mysql/Dockerfile 
-chmod 700 mysql/Dockerfile 
-cd mysql/
-ls init/
-ls -a in
-cd ../volumes/
-ls db_data/
-ls db_data/Webrepo/
-sudo ls db_data/Webrepo/
-vi mysql/Dockerfile 
-vi ../mysql/Dockerfile 
-cd ..
-cd echo/
-ls
-rm vol
-ls
-cd ..
-ls nginx/
-rm nginx/vol/
-rm nginx/vol
-ls mysql/
-rm mysql/vol/
-rm mysql/vol
-ls
-ls echo/
-ls mysql/
-ls nginx/
-cd volumes/
-ls
-cd go_app/
-ls
-mv server.go server.go_
-vi db.go
-ls
-mv server.go_ server.go
-ls
-mv server.go server.go_
 ls
 vi db.go
 ls
@@ -998,3 +948,53 @@ gitpush
 git commit -am '個別評価から全体の評価に戻るためのボタンを設置'
 gitp
 gitpush 
+cd volumes/go_app/views/
+vi individual_review.ace
+cp agree_signup.ace dengerous_complete.ace
+vi dengerous_complete.ace 
+cp input_evaluation.ace input_comment.ace
+vi input_
+vi input_comment.ace 
+vi input_evaluation.ace 
+vi input_comment.ace 
+cp input_evaluation.ace page_registration.ace
+vi page_registration.ace 
+mv page_registration.ace register_page
+mv register_page register_page .ace
+mv register_page register_page.ace
+ls
+vi register_page.ace 
+vi input_comment.ace 
+vi register_page.ace 
+vi input_comment.ace 
+vi input_evaluation.ace 
+vi input_comment.ace 
+vi register_page.ace 
+vi individual_review.ace
+vi register_page.ace 
+vi preview_evaluation.ace 
+cp register_page.ace edit_page_cate.ace
+vi edit_page_cate.ace 
+vi preview_evaluation.ace 
+vi register_page.ace 
+vi individual_review.ace
+vi input_
+vi input_evaluation.ace 
+ls
+vi pass_signin.ace
+vi search_top.ace 
+vi search_result.ace 
+vi pass_signin.ace.ace 
+vi pass_signin.ace
+vi OAuth_signup.ace 
+vi input_evaluation.ace 
+vi input_comment.ace 
+vi register_page.ace q
+vi register_page.ace
+vi edit_page_cate.ace 
+vi preview_evaluation.ace 
+cd volumes/go_app/
+vi server.go 
+eist
+eixt
+exit
