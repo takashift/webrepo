@@ -78,7 +78,7 @@ html lang=ja
       form name="sign_in" action="" method="post"
         h2 登録済みの方
         label メールアドレス　　　
-          input name="mail" size="60"
+          input name="mail" size="60" required=""
         label パスワード　　　　　
           input type="password" name="password" size="60" required=""
         input.button type="submit" value="サインイン"
@@ -86,7 +86,7 @@ html lang=ja
       form name="sign_up" action="" method="post" 
         h2 新規登録
         label メールアドレス　　　
-          input name="mail" size="60"
+          input name="mail" size="60" required=""
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         label パスワード　　　　　
           input type="password" name="password" size="60" required=""
@@ -100,4 +100,3 @@ html lang=ja
         p 上記の内容に、
         #binary
           input.button type="submit" value="同意する"
-          input.button type="submit" value="同意しない"

@@ -68,18 +68,18 @@ html lang=ja
           .subject
             h2 URL
           .input
-            input.url name="url" cols="500"
+            input.url name="url" cols="500" required=""
         .form_block
           .subject
             h2 ジャンル
           .input
-            select name="genre"
+            select name="genre" required=""
               option value="" ここは DB から引っ張ってくる！！
         .form_block
           .subject
             h2 媒体
           .input
-            select name="media"
+            select name="media" required=""
               option value="" ここは DB から引っ張ってくる！！
         .form_block
           .subject
@@ -87,6 +87,6 @@ html lang=ja
           .input
             p タグは10個付けられます。一つずつ改行して下さい。
             p ヒント：媒体やジャンルの項目に無い属性をここで設定して下さい。
-            textarea name="tag" cols="20" rows="10"
+            textarea name="tag" cols="20" rows="10" value=""
             p#note ※上から順番に並べられます。もし並び替えたい場合はそのままコピペして順番を変えて下さい。
       input.button type="submit" value="送信する"

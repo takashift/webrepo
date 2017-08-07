@@ -60,13 +60,13 @@ html lang=ja
           .subject
             h2 ジャンル
           .input
-            select name="genre"
+            select name="genre" required=""
               option value="" ここは DB から引っ張ってくる！！
         .form_block
           .subject
             h2 媒体
           .input
-            select name="media"
+            select name="media" required=""
               option value="" ここは DB から引っ張ってくる！！
         .form_block
           .subject

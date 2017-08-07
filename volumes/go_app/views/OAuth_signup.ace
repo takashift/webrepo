@@ -78,7 +78,7 @@ html lang=ja
       form name="sign_up" action="" method="post" 
         h2 新規登録
         label メールアドレス　　　
-          input name="mail" size="60"
+          input name="mail" size="60" required=""
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         p 以下の同意を以て登録となります。
         #consent_form
@@ -86,4 +86,3 @@ html lang=ja
         p 上記の内容に、
         #binary
           input.button type="submit" value="同意する"
-          input.button type="submit" value="同意しない"

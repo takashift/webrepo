@@ -67,7 +67,7 @@ html lang=ja
            span.red e
       form action="/search" method="get"
         p.shadow
-           input.search name="q"
+           input.search name="q" required=""
         p
           input.button type="submit" value="検索"
       
