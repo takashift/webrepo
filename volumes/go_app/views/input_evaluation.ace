@@ -42,10 +42,10 @@ html lang=ja
         font-size: large;
         background-color: rgba(255,255,255,1);
       }
-      input[name="rating"] {
+      input.rating {
         display: none;
       }
-      input[name="rating"] + .star:before {
+      input.rating + .star:before {
         font-family: "iIonIcons";
         font-size: 1.5rem;
         color: rgba(255,255,255,1);
@@ -70,7 +70,7 @@ html lang=ja
       input[value="5"] + .star:before {
         content: "★★★★★";
       }
-      input[name="rating"]:checked + .star:before {
+      input.rating:checked + .star:before {
         font-family: "IonIcons";
         color: rgba(255,230,0,1);
         -webkit-text-stroke: 1px rgba(0,0,0,0.5);
@@ -91,7 +91,6 @@ html lang=ja
       input[value="5"]:checked + .star:before {
         content: "★★★★★";
       }
-
       #typo {
         display: flex;
         justify-content: space-between;
@@ -145,39 +144,40 @@ html lang=ja
           .input
             p 閲覧目的に対するページの適合度を入力して下さい。
             label.star_rating 極めて適合　　
-              input type="radio" name="rating" value="5"
+              input.rating type="radio" name="rating_pp" value="5"
               span.star
             label.star_rating 大体適合　　　
-              input type="radio" name="rating" value="4"
+              input.rating type="radio" name="rating_pp" value="4"
               span.star
             label.star_rating 半分くらい適合
-              input type="radio" name="rating" value="3"
+              input.rating type="radio" name="rating_pp" value="3"
               span.star
             label.star_rating 大体不適合　　
-              input type="radio" name="rating" value="2"
+              input.rating type="radio" name="rating_pp" value="2"
               span.star
             label.star_rating 極めて不適合　
-              input type="radio" name="rating" value="1"
+              input.rating type="radio" name="rating_pp" value="1"
               span.star
         .form_block
           .subject
             h2 見やすさ
           .input
-            p 閲覧目的に対するページの適合度を入力して下さい。
+            p ページの見やすさを評価して下さい。
+            p ヒント：広告の数が多くて目障りな場合なども含めてください。
             label.star_rating 極めて見やすい　
-              input type="radio" name="rating" value="5"
+              input.rating type="radio" name="rating_vw" value="5"
               span.star
             label.star_rating そこそこ見やすい
-              input type="radio" name="rating" value="4"
+              input.rating type="radio" name="rating_vw" value="4"
               span.star
             label.star_rating 見づらくはない　
-              input type="radio" name="rating" value="3"
+              input.rating type="radio" name="rating_vw" value="3"
               span.star
             label.star_rating そこそこ見づらい
-              input type="radio" name="rating" value="2"
+              input.rating type="radio" name="rating_vw" value="2"
               span.star
             label.star_rating 極めて見づらい　
-              input type="radio" name="rating" value="1"
+              input.rating type="radio" name="rating_vw" value="1"
               span.star
         .form_block
           .subject
@@ -203,4 +203,11 @@ html lang=ja
             p ヒント：コンテンツのどこが良く、どこが駄目なのか、を明確に書いていただけるとより正確な判断ができる検索エンジンが完成します。
             textarea name="freedom" cols="500" rows="4"
             p#note ※飽くまで評価を行う対象はウェブページであるため、ページ作成者に対する意見は当該ページのコメント欄、SNS等で直接お問い合わせ願います。
+        .form_block
+          .subject
+            h2 閲覧日時
+          .input
+            p フォーム右端をクリックすることで、マウスで日付を選択できます。
+            input type="datetime-local" name="browse"
+        .form_block
       input.button type="submit" value="送信する"
