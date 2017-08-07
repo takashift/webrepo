@@ -104,18 +104,22 @@ html lang=ja
       option {
         font-size: 1rem;
       }
-      #sort {
+      .sort {
         display: inline-block;
       }
       select {
         margin-left: 0.5rem;
       }
-      #sort select {
+      .sort select {
         display: block;
         margin-bottom: 0.5rem;
       }
-      #sort select.order {
+      .sort select.order {
         float: right;
+      }
+      .sort input {
+        margin: 0 0 0.5rem 0.5rem;
+        font-size: 1rem;
       }
       #number {
         margin-left: 2rem;
@@ -212,7 +216,7 @@ html lang=ja
                 option value="120" 120
 
           label 並び替え（左の並び替えを先に適用）
-            #sort
+            .sort
               select name="sort1"
                 optgroup label="評価項目"
                   option value="ev_pp" 目的達成度
@@ -227,7 +231,7 @@ html lang=ja
               select.order name="sort1_order"
                 option value="descending" 降順
                 option value="ascending" 昇順
-            #sort
+            .sort
               select name="sort2"
                 option value="none" 無し
                 optgroup label="評価項目"
@@ -243,6 +247,8 @@ html lang=ja
               select.order name="sort2_order"
                 option value="descending" 降順
                 option value="ascending" 昇順
+            .sort
+              input type="submit" value="適用"
           / p 検索
           / label 絞込
         #number 評価総数 6件
