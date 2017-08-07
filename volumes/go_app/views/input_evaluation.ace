@@ -207,7 +207,8 @@ html lang=ja
           .subject
             h2 閲覧日時
           .input
-            p フォーム右端をクリックすることで、マウスで日付を選択できます。
+            p Chorme ではフォーム右端をクリックすることで、マウスで日付を選択できます。
+            p それ以外のブラウザでは「2017/08/01 00:01」のように入力してください。
             input type="datetime-local" name="browse"
         .form_block
       input.button type="submit" value="送信する"

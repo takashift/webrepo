@@ -81,7 +81,7 @@ func main() {
       return c.Render(http.StatusOK, "register_page", searchForm)
     })
 
-    // 新規ページ登録画面
+    // ページ属性編集画面
     e.GET("/edit_page_cate", func(c echo.Context) error {
       return c.Render(http.StatusOK, "edit_page_cate", searchForm)
     })

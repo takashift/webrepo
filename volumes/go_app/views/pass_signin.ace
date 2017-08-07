@@ -80,7 +80,7 @@ html lang=ja
         label メールアドレス　　　
           input name="mail" size="60"
         label パスワード　　　　　
-          input name="password" size="60"
+          input type="password" name="password" size="60" required=""
         input.button type="submit" value="サインイン"
       hr width="80%"
       form name="sign_up" action="" method="post" 
@@ -89,11 +89,11 @@ html lang=ja
           input name="mail" size="60"
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         label パスワード　　　　　
-          input name="password" size="60"
+          input type="password" name="password" size="60" required=""
           p.note ※8文字以上、英数字両方を含むものを設定して下さい
           p.note ※記号は()が使用可能です
         label パスワード（再確認）
-          input name="mod_pass" size="60"
+          input type="password" name="mod_pass" size="60" required="" autocomplete="off"
         p 以下の同意を以て登録となります。
         #consent_form
           p この中身はOAuth認証のときと共通化する必要が有る。
