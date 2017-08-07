@@ -54,6 +54,7 @@ html lang=ja
       }
 
   body
+    = include header_menu
     form action="" method="post"
       .glay
         .form_block

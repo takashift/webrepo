@@ -160,6 +160,7 @@ html lang=ja
       }
 
   body
+    = include header_menu
     #content
       #head
         h1

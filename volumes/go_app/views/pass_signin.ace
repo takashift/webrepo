@@ -74,6 +74,7 @@ html lang=ja
       }
 
   body
+    = include header_menu
     #main
       form name="sign_in" action="" method="post"
         h2 登録済みの方

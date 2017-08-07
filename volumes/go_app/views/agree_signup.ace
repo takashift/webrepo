@@ -11,6 +11,7 @@ html lang=ja
       }
 
   body
+    = include header_menu
     #main
       p メールアドレス確認用メールを送信しますので、メール本文のリンクを踏んで下さい。
       p 確認を行わないと本実験に参加できません。

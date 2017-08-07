@@ -118,6 +118,7 @@ html lang=ja
       }
 
   body
+    = include header_menu
     #search_form
       h1
         a href="/" style="text-decoration: none;"

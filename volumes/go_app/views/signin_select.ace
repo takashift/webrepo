@@ -41,6 +41,7 @@ html lang=ja
         color: #555;
 
   body
+    = include header_menu
     #OAuth_menu
       .button#twitter
         b twitter

@@ -11,5 +11,6 @@ html lang=ja
       }
 
   body
+    = include header_menu
     #main
       p 通報が完了しました。
