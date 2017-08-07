@@ -55,6 +55,7 @@ html lang=ja
       }
 
   body
+    = include header_menu
     #search
       #space
       h1

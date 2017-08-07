@@ -1,51 +1,48 @@
-= doctype html
-html lang=ja
-  head
-    meta charset=utf-8
-    = css
-      body {
-        margin: 0 0 auto 0;
-      }
-      #header_menu {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 1rem;
-        background-color: rgba(0,0,0,1);
-        color: rgba(255,255,255,1);
-      }
-      #header_menu .left {
-      }
-      #header_menu .center {
-      }
-      #header_menu #elem {
-        margin: 1rem;
-      }
-      #header_menu a {
-        color: rgba(255,255,255,1);
-        padding: 0.5rem 0;
-        text-decoration: none;
-      }
+= css
+  body {
+    margin: 0 0 auto 0;
+  }
+  #header_menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: rgba(0,0,0,1);
+    color: rgba(255,255,255,1);
+  }
+  #header_menu .left {
+  }
+  #header_menu .center {
+  }
+  #header_menu #elem {
+    margin: 1rem;
+  }
+  #header_menu a {
+    display: inline-block;
+    padding: 0.5rem 0;
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+  }
 
-  body
-    #header_menu
-      .left
-        span#elem
-          a href="/"  TOP
-        span#elem
-          a href="https://twitter.com/web_repo"  更新・障害情報
-      .center
-        span#elem
-          a href="signin_select"  ログイン
-        span#elem
-          a href="register_page" 対象ページ登録
-      .right
-        span#elem
-          a href="https://www.google.co.jp/" Google
-        span#elem
-          a href="https://www.yahoo.co.jp/" Yahoo!
-        span#elem
-          a href="https://www.bing.com/" Bing
-        span#elem
-          a href="http://b.hatena.ne.jp/" はてブ
-        span#elem
-          a 設定
+body
+  #header_menu
+    .left
+      span#elem
+        a href="/"  TOP
+      span#elem
+        a href="https://twitter.com/web_repo"  更新・障害情報
+    .center
+      span#elem
+        a href="signin_select"  ログイン
+      span#elem
+        a href="register_page" 対象ページ登録
+    .right
+      span#elem
+        a href="https://www.google.co.jp/" Google
+      span#elem
+        a href="https://www.yahoo.co.jp/" Yahoo!
+      span#elem
+        a href="https://www.bing.com/" Bing
+      span#elem
+        a href="http://b.hatena.ne.jp/" はてブ
+      span#elem
+        a 設定
