@@ -1,62 +1,3 @@
-cd go_app/
-ls
-mv server.go_ server.go.cm
-vi db.go 
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-curl - -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-curl  -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-sudo mkdir /usr/share/curl/
-curl http://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
-sudo curl http://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
-sudo touch /usr/share/curl/curl-ca-bundle.crt
-sudo curl http://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
-cat /usr/share/curl/curl-ca-bundle.crt
-sudo curl -k https://curl.haxx.se/ca/cacert.pem -o /usr/share/curl/curl-ca-bundle.crt
-cat /usr/share/curl/curl-ca-bundle.crt
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-cp /usr/share/curl/curl-ca-bundle.crt /etc/ssl/certs/
-sudo cp /usr/share/curl/curl-ca-bundle.crt /etc/ssl/certs/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-vi db.go 
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhostusers/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:users/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost:users/
-curl -X -k POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost:users/
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost:users/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost:users/
-cp /usr/share/curl/curl-ca-bundle.crt /etc/ssl/certs/
-rm /etc/ssl/certs/curl-ca-bundle.crt 
-sudo rm /etc/ssl/certs/curl-ca-bundle.crt 
-ls /etc/ssl/certs/
-sudo ls /usr/share
-sudo ls -l /usr/share
-sudo rm /usr/share/curl/
-sudo rm -r /usr/share/curl/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost:users/
-cat ~/echo/Dockerfile
-cat ~/mysql/Dockerfile
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-cd ..
-vi docker-compose.yml
-vi volumes/go_app/db.go 
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-docker exec -it tuna_echo_1 /bin/ash
-docker exec -it tuna_mysql_1 /bin/bash
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-vi volumes/go_app/db.go 
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-vi docker-compose.yml
-docker ps
-docker ps -a
-docker ps
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 1 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-mysql localhost:3306
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "first_name" : "poyoc" , "last_name" : "negi" }' -k https://localhost/users/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' -k https://localhost/users/
-curl -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:443/users/
 curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:443/users/
 curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
 vi volumes/go_app/db.go 
@@ -998,3 +939,62 @@ ls -a
 
 vi search_top.ace 
 vi header_menu.ace 
+git status
+git commit -am '評価入力画面に見やすさの項目を追加'
+gitpush 
+git commit -am '評価入力画面に閲覧日時を追加'
+git commit -am 'パスワードサインインの画面でパスワードを隠すよう設定'
+gitpush 
+git commit -am '入力フォームの有る全てのページで必須項目を設定'
+git commit -am "評価閲覧画面に並び替え適用ボタンを追加"
+gitpush 
+cd volumes/go_app/views/
+cp search_top.ace header_menu.ace
+git add header_menu.ace 
+git commit -am "ヘッダーメニュー用テンプレートを作成"
+gitpush 
+ls
+vi preview_evaluation.ace
+git commit -am "メニューの項目を作成"
+git status
+gitpush 
+ls
+vi page1.html
+vi header_menu.ace 
+git commit -am "メニューのテンプレートを検索トップに適用"
+gitpush 
+git commit -am "メニューの名称を評価対象:wページへ"
+git commit --amend
+gitp
+gitpush 
+git commit -am "全てのページにヘッダーメニューを設置"
+gitpush 
+cd volumes/go_app
+cd views/
+cd ~
+cd volumes/go_app/views/
+vi header_menu.ace 
+vi search_top.ace 
+vi header_menu.ace 
+vi search_result.ace 
+vi search_top.ace 
+vi search_result.ace 
+vi signin_select.ace 
+vi pass_signin.ace 
+vi OAuth_signup.ace 
+vi agree_signup.ace 
+vi input_evaluation.ace 
+vi preview_evaluation.ace 
+vi preview_evaluation.ace
+vi individual_review.ace 
+vi dengerous_complete.ace 
+vi input_
+vi input_comment.ace 
+vi register_page.ace 
+vi edit_page_cate.ace 
+vi header_menu.ace 
+cd volumes/go_app
+vi server.go 
+ls
+vi template_no_proxy.go 
+vi server.go 
