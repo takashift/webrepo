@@ -91,6 +91,21 @@ func main() {
       return c.Render(http.StatusOK, "header_menu", searchForm)
     })
 
+    // テスト（フッター）
+    e.GET("/footer", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "footer", searchForm)
+    })
+
+    // テスト（同意書本文）
+    e.GET("/consent_form", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "consent_form", searchForm)
+    })
+
+    // 利用規約
+    e.GET("/term_of_service", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "term_of_service", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     unix, err := net.Listen("unix", "/usock/domain.sock")

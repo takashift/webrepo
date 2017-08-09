@@ -106,16 +106,6 @@ html lang=ja
       #nav {
         margin-bottom: 2rem;
       }
-      #footer {
-        padding: 1rem 0  1rem 150px;
-        background-color: #fafafa;
-      }
-      #footer p {
-        padding-left: 0.5rem;
-      }
-      #copy { 
-        text-align: center;
-      }
 
   body
     = include header_menu
@@ -208,8 +198,4 @@ html lang=ja
 
       h2#nav 1 2 3 4 5 6 7 8 9 10
 
-    #footer
-      p 利用規約
-      #copy Copyright &copy 2017 Tsunashima@
-        a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
-        {{HTML ". All rights reserved."}}
+    = include footer
