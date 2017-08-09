@@ -1,46 +1,3 @@
-systemctl enable chronyd
-sudo systemctl enable chronyd
-sudo systemctl start chronyd
-sudo systemctl status chronyd
-date
-sudo vi /etc/chrony.conf 
-sudo systemctl restart chronyd
-chronyc sources
-sudo systemctl status chronyd
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-cat docker-compose.yml
-vi mysql/Dockerfile
-curl -k -X GET https://127.0.0.1/users/
-curl -k -X GET https://127.0.0.1
-yum -y remove mysql
-sudo yum -y install mysql
-mysql -h localhost -u rtuna -p Webrepo
-mysql -h 127.0.0.1 -u rtuna -p Webrepo
-docker-compose logs
-vi mysql/Dockerfile
-vi e/Dockerfile
-vi echo/Dockerfile
-vi docker-compose.yml
-curl -k -X GET https://127.0.0.1/users/
-vi mysql/Dockerfile
-vi echo/Dockerfile
-vi docker-compose.yml
-vi echo/Dockerfile
-vi docker-compose.yml
-vi mysql/Dockerfile
-vi echo/Dockerfile
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-date
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go 
 docker-compose logs
 vi volumes/go_app/db.go 
 docker-compose logs
@@ -986,6 +943,7 @@ vi server.go
 ls
 vi template_no_proxy.go 
 vi server.go 
+<<<<<<< HEAD
 git commit -am 'フッター用テンプレートファイルを追加'
 gitpush 
 git commit -amend
@@ -998,3 +956,45 @@ ls
 vi footer.ace
 cd volumes/go_app/views/
 cp header_menu.ace footer.ace
+=======
+>>>>>>> origin/master
+cd volumes/go_app/views/
+git status
+git add consent_form.ace term_of_servise.ace 
+git commit -am '同意書用テンプレートと単体で表示する時のための画面のファイルを追加'
+gitpush 
+git log
+ls
+vi search_result.ace 
+docker-compose log
+docker-compose logs
+vi header_menu.ace 
+git commit -am "フッター作成"
+git status
+git add about.ace term_of_service.ace 
+git commit -am "このサイトについて用のテンプレを作成"
+gitp
+gitpush 
+git fetch
+cd ~
+sl
+ls
+cd .ssh
+ls
+cat known_hosts 
+:q
+cd ..
+ls
+cd bin
+ls
+cat gitpush 
+cd ..
+cd volumes/go_app/views/
+git fetch
+git marge origin/master
+git merge origin/master
+git push -f
+vi inndividual_reviews
+vi individual_review.ace 
+exir
+exit

@@ -4,16 +4,50 @@ html lang=ja
     meta charset=utf-8
     title WebRepo
     = css
+      body {
+        height: 100%;
+        min-height: 100%;
+      }
       #search {
+        height: 100%;
+        min-height: 100%;
         text-align: center;
+      }
+      #space_h {
+        min-height: 100%;
+        margin: 4rem 0 0 0;
+      }
+      button.new_eval {
+        padding: 4rem 3rem;
+        border-radius: 1rem;
+        background-color: rgba(0,0,0,0.2);
+        color: rgba(255,255,255,1);
+        text-align: center;
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.8);        
+        font-size: 3rem;
+        cursor: pointer;
+      }
+      button.new_eval:hover {
+        background-color: rgba(255,50,0,0.755555);
+      }
+      a.new_eval {
+        text-decoration: none;
+      }
+      .new_eval span {
+        font-family: "IonIcons";
+        color: rgba(255,230,0,1);
+        -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+        letter-spacing: 0.5rem;
+        text-stroke: 1px rgba(0,0,0,0.5);
       }
       #search h1 {
         font-family: 'Product Sans', 'Catull BQ', sans-serif;
         font-size: 5rem;
+        margin-top: 5rem;
         margin-bottom: 1rem;
       }
-      #space{
-        margin: 10% 0 0 0;
+      #space_f {
+        margin: 8% 0 0 0;
       }
       .blue {
         color: #4183FF; 
@@ -35,7 +69,7 @@ html lang=ja
       }*/
       input.search {
         height: 1.5rem;
-        width: 480px;
+        width: 550px;
         border-width: 1px;
         border-color: rgba(0,0,0,0.08);
         font-size: 16px;
@@ -57,18 +91,23 @@ html lang=ja
   body
     = include header_menu
     #search
-      #space
+      #space_h
+      a.new_eval href="register_page"
+        button.new_eval 未登録ページを評価する
+          br
+            span ★★★★★
       h1
-         s
-           span.blue G
-           span.red o
-           span.yellow o
-           span.blue g
-           span.green l
-           span.red e
+        s
+          span.blue G
+          span.red o
+          span.yellow o
+          span.blue g
+          span.green l
+          span.red e
       form action="/search" method="get"
         p.shadow
-           input.search name="q" required=""
+          input.search name="q" required=""
         p
-          input.button type="submit" value="検索"
-      
+          input.button type="submit" value="評価・ページを検索"
+      #space_f
+    = include footer
