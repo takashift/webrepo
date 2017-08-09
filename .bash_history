@@ -1,15 +1,3 @@
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' localhost:443/users/
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
-vi volumes/go_app/db.go 
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 10 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://localhost/users/
-vi volumes/go_app/db.go 
-exit
-yum
-yum list chrony
-yum install -y chrony
-sudo yum install -y chrony
-vi /etc/chrony.conf 
-sudo vi /etc/chrony.conf 
 systemctl enable chronyd
 sudo systemctl enable chronyd
 sudo systemctl start chronyd
@@ -998,3 +986,15 @@ vi server.go
 ls
 vi template_no_proxy.go 
 vi server.go 
+git commit -am 'フッター用テンプレートファイルを追加'
+gitpush 
+git commit -amend
+git commit --amend
+cd volumes/go_app/views/
+git add footer.ace 
+git commit --amend
+git log
+ls
+vi footer.ace
+cd volumes/go_app/views/
+cp header_menu.ace footer.ace

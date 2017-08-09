@@ -1,0 +1,50 @@
+= css
+  body {
+    margin: 0 0 auto 0;
+  }
+  #header_menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: rgba(0,0,0,1);
+    color: rgba(255,255,255,1);
+  }
+  #header_menu_left {
+  }
+  #header_menu_center {
+  }
+  #header_menu_right {
+  }
+  .hd_m_elem {
+    margin: 1rem;
+  }
+  #header_menu a {
+    display: inline-block;
+    padding: 0.5rem 0;
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+  }
+
+body
+  #header_menu
+    #header_menu_left
+      span.hd_m_elem
+        a href="/"  TOP
+      span.hd_m_elem
+        a href="https://twitter.com/web_repo"  更新・障害情報
+    #header_menu_center
+      span.hd_m_elem
+        a href="signin_select"  ログイン
+      span.hd_m_elem
+        a href="register_page" 新規ページ登録
+    #header_menu_right
+      span.hd_m_elem
+        a href="https://www.google.co.jp/" Google
+      span.hd_m_elem
+        a href="https://www.yahoo.co.jp/" Yahoo!
+      span.hd_m_elem
+        a href="https://www.bing.com/" Bing
+      span.hd_m_elem
+        a href="http://b.hatena.ne.jp/" はてブ
+      span.hd_m_elem
+        a 設定
