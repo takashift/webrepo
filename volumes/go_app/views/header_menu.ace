@@ -34,9 +34,7 @@ body
         a href="https://twitter.com/web_repo" 更新・障害情報
     #header_menu_center
       span.hd_m_elem
-        a href="signin_select" ログイン
-      span.hd_m_elem
-        a href="register_page" 新規ページ登録
+        a href="register_page" 新規ページ登録・評価
     #header_menu_right
       span.hd_m_elem
         a href="https://www.google.co.jp/" Google
@@ -47,4 +45,4 @@ body
       span.hd_m_elem
         a href="http://b.hatena.ne.jp/" はてブ
       span.hd_m_elem
-        a 設定
+        a href="signin_select" ログイン
