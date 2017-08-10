@@ -2,16 +2,45 @@
 html lang=ja
   head
     meta charset=utf-8
-    title sign in - WebRepo
+    title このサイトについて | WebRepo
     = css
       #main {
-        /*width: 50rem;*/
-        margin: 2rem auto auto auto;
+        margin: 5rem 15% 7rem 15%;
+      }
+      #main h1,h2,h3 {
+        margin-top: 5rem;
         text-align: center;
+      }
+      #main p {
+        font-size: 1.2rem;
+      }
+      .star {
+        color: rgba(255,230,0,1);
+        -webkit-text-stroke: 1px rgba(0,0,0,0.8);
+        text-stroke: 1px rgba(0,0,0,0.8);
       }
 
   body
     = include header_menu
     #main
-      p メールアドレス確認用メールを送信しますので、メール本文のリンクを踏んで下さい。
-      p 確認を行わないと本実験に参加できません。
+      h1 このサイトについて
+      p 本サイトは、
+        a href="http://www.u-ryukyu.ac.jp/" 国立大学法人琉球大学
+        {{" "}}
+        a href="https://ie.u-ryukyu.ac.jp/" 工学部情報工学科
+        {{" "}}
+        a href="https://ie.u-ryukyu.ac.jp/~tnal" 當間研究室
+        {{"に於ける学術研究の一貫として実験のため運用されているものです。"}}
+      h1 本実験について
+      p 本実験では無数に存在するウェブページについて、利用者の目的（利用者が何を以てそのページを閲覧したか）とその目的を満たすに当たり閲覧したページがどの程度マッチしていたかについて情報を集めております。また、その情報に基づいて目的に最も適合するページを見つけ出したいと考えています。
+      p  実験に参加される謝礼としましては、評価の情報について原則公開致します。
+      h1 プライバシーについて
+      p 本実験では個人を特定できる情報は現時点において利用する予定はありません。本サイトの利用に当たっては実験協力者本人を含め個人を特定できる情報の入力を行わないことに同意して頂いております。ご協力をお願い致します。
+      h1 質問
+      p 本サイト、本実験について質問等がある場合は下記までご連絡下さい（
+        span.star ★
+        {{"は@に直して下さい）。"}}
+      p 　　　　　e145771
+        span.star ★
+        {{"ie.u-ryukyu.ac.jp （Tsunashima 宛）"}}
+    = include footer

@@ -106,6 +106,11 @@ func main() {
       return c.Render(http.StatusOK, "term_of_service", searchForm)
     })
 
+    // このサイトについて
+    e.GET("/about", func(c echo.Context) error {
+      return c.Render(http.StatusOK, "about", searchForm)
+    })
+
     // ソケット生成
     os.Remove("/usock/domain.sock");
     unix, err := net.Listen("unix", "/usock/domain.sock")
