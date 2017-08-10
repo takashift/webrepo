@@ -7,7 +7,7 @@ html lang=ja
       #main {
         margin: 5rem 15% 7rem 15%;
       }
-      #main h1,h2,h3 {
+      #main h1,#main h2,#main h3 {
         margin-top: 5rem;
         text-align: center;
       }

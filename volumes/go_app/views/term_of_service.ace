@@ -2,73 +2,31 @@
 html lang=ja
   head
     meta charset=utf-8
-    title WebRepo
+    title 利用規約
     = css
-      #search {
+      #main {
+        margin: 5rem 15% 2rem 15%;
+      }
+      #main h1 {
+        margin-top: 5rem;
         text-align: center;
       }
-      #search h1 {
-        font-family: 'Product Sans', 'Catull BQ', sans-serif;
-        font-size: 5rem;
-        margin-bottom: 1rem;
-      }
-      #space{
-        margin: 10% 0 0 0;
-      }
-      .blue {
-        color: #4183FF; 
-      }
-      .red {
-        color: #EC452C;
-      }
-      .yellow {
-        color: #FFCF42;
-      }
-      .green {
-        color: #00A508;
-      }
-      /*p.shadow {
-        margin: auto;
-        padding: 0;
-        width: 500px;
-        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
-      }*/
-      input.search {
-        height: 1.5rem;
-        width: 480px;
-        border-width: 1px;
-        border-color: rgba(0,0,0,0.08);
-        font-size: 16px;
-        padding: 9px 15px;
-        margin: auto;
-        display: block;
-        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
-      }
-      .button {
-        font-size: 1rem;
-        color: #555; 
-        border-style: none;
-        padding: 10px;
-        margin: 10px;
-        cursor: pointer;
-        background-color: #EEE;
+      #consent_form {
+        margin: 2rem auto 7rem auto;
+        padding: 1rem;
+        max-width: 600px;
+        border: 1px solid rgba(0,0,0,0.9);
+        text-align: left;
       }
 
   body
     = include header_menu
-    #search
-      #space
-      h1
-         s
-           span.blue G
-           span.red o
-           span.yellow o
-           span.blue g
-           span.green l
-           span.red e
-      form action="/search" method="get"
-        p.shadow
-           input.search name="q" required=""
-        p
-          input.button type="submit" value="検索"
-      
+    #main
+      h1 利用規約
+      p 本サイトの情報を利用することによって生じたいかなる事象についても本サイト運営者は一切責任を負いません。予めご了承下さい。また、各評価の著作権等は各評価を入力した実験参加者に帰属します。
+      br
+      br
+      p 以下は実験参加者として本サイトへ登録済みの方に同意して頂いている内容です。
+    #consent_form
+      = include consent_form
+    = include footer
