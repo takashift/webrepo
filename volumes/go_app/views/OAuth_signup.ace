@@ -83,7 +83,7 @@ html lang=ja
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         p 以下の同意を以て登録となります。
         #consent_form
-          p この中身は共通化する必要が有る。
+          = include consent_form
         p 上記の内容に、
         #binary
           input.button type="submit" value="同意する"
