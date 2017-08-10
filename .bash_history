@@ -1,38 +1,6 @@
 docker-compose logs
 vi volumes/go_app/db.go 
 docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
 docker-compose down --rmi all
 docker-compose up -d
 docker-compose logs
@@ -998,3 +966,35 @@ vi inndividual_reviews
 vi individual_review.ace 
 exir
 exit
+ls
+git log
+cd volumes/go_app/views/
+ls
+cp search_top.ace term_of_servise.ace
+cp header_menu.ace consent_form.ace
+ls
+vi footer.ace 
+mv term_of_servise.ace term_of_service.ace 
+vi footer.ace 
+cp agree_signup.ace about.ace
+vi footer.ace 
+vi search_result.ace 
+vi footer.ace 
+git push
+gitpush
+vi search_top.ace 
+vi header_menu.ace 
+vi search_top.ace 
+cd volumes/go_app/
+ls
+vi server.go
+cd volumes/go_app/views/
+vi individual_review.ace 
+ls
+vi input_evaluation.ace 
+git status
+git commit -am 'トップページに「未登録ページを評価する」ボタンを追加w'
+git commit --amend
+gitpush 
+git commit -am 'ヘッダーメニューの新規ページ登録を~・評価に、設定をログインに変更'
+gitpush 

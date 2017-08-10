@@ -196,6 +196,6 @@ html lang=ja
       .cate ジャンル
       .tag タグ 例 テスト 適当
 
-      h2#nav 1 2 3 4 5 6 7 8 9 10
+      h2#nav PREV 1 2 3 4 5 6 7 8 9 10 NEXT
 
     = include footer

@@ -101,3 +101,4 @@ html lang=ja
         p 上記の内容に、
         #binary
           input.button type="submit" value="同意する"
+    = include footer
