@@ -1,54 +1,3 @@
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-git status
-ls bin
-cat bin/gitpush 
-git commit -am 'MySQLへのTCP接続不能問題が解決！'
-gitpush 
-vi volumes/go_app/db.go 
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-docker exec -it tuna_mysql_1 /bin/bash
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-docker exec -it tuna_mysql_1 /bin/bash
-cat docker-compose.yml
-docker exec -it tuna_mysql_1 /bin/bash
-cd /var/lib/docker/volum
-ls /home/tuna/volumes/
-sudo su
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 0 , "email" : "test@gmail.com" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-docker exec -it tuna_mysql_1 /bin/bash
-sudo su
-vi echo/Dockerfile
-docker exec -it tuna_mysql_1 /bin/bash
-exit
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 2 , "email" : "test@koumon.unk" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-vi volumes/go_app/db.go 
-ls volumes/db_data/
 ls -l volumes/db_data/mysql/
 sudo ls -l volumes/db_data/mysql/
 cd ..
@@ -998,3 +947,54 @@ git commit --amend
 gitpush 
 git commit -am 'ヘッダーメニューの新規ページ登録を~・評価に、設定をログインに変更'
 gitpush 
+cd volumes/go_app/views/
+vi search_result.ace 
+vi signin_select.ace 
+vi pass_signin.ace 
+vi signin_select.ace 
+vi pass_signin.ace 
+vi about.ace 
+vi footer.ace 
+vi about.ace 
+vi consent_form.ace 
+ls
+vi term_of_service.ace 
+vi consent_form.ace 
+vi pass_signin.ace 
+vi OAuth_signup.ace 
+vi consent_form.ace 
+vi footer.ace 
+vi consent_form.ace 
+cd volumes/go_app/
+vi server.go 
+cd volumes/go_app/views/
+ls
+git status
+git commit -am 'フッターを適用すべき画面に挿入'
+gitpush 
+git status
+git commit -am 'このサイトについての文面を取り敢えず作成'
+gitp
+gitpush 
+git commit -am '同意書作成'
+gitpush 
+vi consent_form.ace 
+vi about.ace 
+vi consent_form.ace 
+ls
+vi OAuth_signup.ace 
+vi consent_form.ace 
+vi about.ace 
+git commit -am '同意書をこのサイトについてに挿入'
+gitpush 
+git commit -am '同意書の内容を少し修正'
+gitpush 
+git commit -am '登録画面に適用'
+gitpush 
+git commit -am '同意書の内容を少し修正'
+git status
+git commit -am '権利の侵害に関する項目を追加'
+gitpush 
+git commit -am 'フッターのこのサイトについてのリンクが空だったので酒精'
+git commit --amend
+git log

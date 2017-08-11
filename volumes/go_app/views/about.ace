@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title このサイトについて | WebRepo
+    title このサイトについて | WebRepo☆彡
     = css
       #main {
         margin: 5rem 15% 7rem 15%;
@@ -23,7 +23,7 @@ html lang=ja
   body
     = include header_menu
     #main
-      h1 このサイトについて
+      h1 WebRepo☆彡について
       p 本サイトは、
         a href="http://www.u-ryukyu.ac.jp/" 国立大学法人琉球大学
         {{" "}}
