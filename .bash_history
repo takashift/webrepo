@@ -1,26 +1,3 @@
-ls -l volumes/db_data/mysql/
-sudo ls -l volumes/db_data/mysql/
-cd ..
-cd ~\
-sudo ls -l volumes/db_data
-sudo ls -al volumes/db_data
-vi docker-compose.yml
-docker-compose down --rmi all
-vi docker-compose.yml
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-curl -k -X POST -H 'Content-Type: application/json' -d '{"id" : 3 , "email" : "test@koumon.unk" , "firstName" : "poyoc" , "lastName" : "negi" }' https://127.0.0.1/users/
-vi volumes/go_app/db.go 
-docker-compose logs
-vi volumes/go_app/db.go 
-docker-compose logs
-curl -k -X POST -H 'Content-Type: application/json' -d '{ "email" : "test@koumon.unk" , "firstName" : "mitsukuni" , "lastName" : "mito" }' https://127.0.0.1/users/
-docker-compose logs
-vi echo/Dockerfile
-vi mysql/
-vi mysql/Dockerfile 
 vi nginx/Dockerfile 
 docker-compose down --rmi all
 docker-compose up -d
@@ -998,3 +975,26 @@ gitpush
 git commit -am 'フッターのこのサイトについてのリンクが空だったので酒精'
 git commit --amend
 git log
+gitpush 
+cd volumes/go_app/views/
+ls
+vi search_
+cd ..
+vi search.go.cm 
+vi ser
+vi server
+vi server.go 
+cd volumes/go_app/
+cd views/
+ls
+vi a
+vi ab
+vi about.ace 
+vi term_of_service.ace 
+vi about.ace 
+vi input_evaluation.ace 
+vi consent_form.ace 
+vi input_evaluation.ace 
+cd volumes/go_app/views/
+git commit -am '同意書の実験者を実験実施者に変更。このサイトについての一行目をWebRepo☆彡に変更'
+gitpush 
