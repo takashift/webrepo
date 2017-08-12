@@ -1,8 +1,3 @@
-vi nginx/Dockerfile 
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
 docker-compose up -d
 docker-compose down --rmi all
 docker-compose up -d
@@ -998,3 +993,8 @@ vi input_evaluation.ace
 cd volumes/go_app/views/
 git commit -am '同意書の実験者を実験実施者に変更。このサイトについての一行目をWebRepo☆彡に変更'
 gitpush 
+git status
+git log
+git commit -am '評価入力画面の目的の説明をよりこちらのいといたものとなるように変更'
+gitpush 
+exit
