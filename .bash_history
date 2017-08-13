@@ -1,48 +1,4 @@
 docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose up -d
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker exec -it tuna_echo_1 /bin/bash
-docker exec -it tuna_echo_1 /bin/ash
-vi echo/Dockerfile
-vi mysql/Dockerfile
-vi echo/Dockerfile
-vi nginx/Dockerfile
-docker exec -it tuna_echo_1 /bin/ash
-vi echo/Dockerfile
-vi nginx/Dockerfile
-vi mysql/Dockerfile
-vi docker-compose.yml
-docker exec -it tuna_echo_1 /bin/ash
-docker exec -it tuna_mysql_1 /bin/bash
-docker exec -it tuna_nginx_1 /bin/ash
-date
-vi docker-compose.yml
-docker exec -it tuna_nginx_1 /bin/ash
-docker exec -it tuna_echo_1 /bin/ash
-docker exec -it tuna_mysql_1 /bin/bash
-git status
-git commit -am "UNIX domain socket で Echoコンテナ と接続するように変更"
-gitpush
-vi volumes/go_app/db.go
-vi docker-compose.yml
-vi volumes/go_app/server_text.go.cm 
-
-docker-compose logs
-vi volumes/go_app/views/page1.html 
-vi echo/Dockerfile
-docker-compose down --rmi all
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d
 docker-compose logs
 docker-compose down --rmi all
 vi echo/Dockerfile
@@ -998,3 +954,47 @@ git log
 git commit -am '評価入力画面の目的の説明をよりこちらのいといたものとなるように変更'
 gitpush 
 exit
+cd volumes/go_app/views/
+vi signin_select.ace 
+git commit -am "サインイン方法選択画面のリンクが絶対ぱすだったので相対パスに変更"
+gitpush 
+exit
+ls
+cd volumes/go_app/
+vi server.go 
+cd ,,
+cd ..
+cd ~
+ls
+vi docker-compose.yml
+cd mysql/
+ls
+vi Dockerfile 
+ls
+cd init
+ls
+cd ..
+la
+ls
+vi Dockerfile 
+ls
+vi Dockerfile 
+docker-compose -h
+ls
+cd init/
+touch userinfo.sql
+git status
+git add .
+ls
+git status
+git status
+cd volumes/go_app/views/
+ls
+cd..
+cd ..
+cd ..\
+
+mysql -uroot
+vi docker-compose.yml
+docker ps
+docker exec -it tuna_mysql_1 /bin/bash
