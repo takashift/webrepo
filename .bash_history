@@ -1,67 +1,3 @@
-docker-compose up -d
-docker-compose logs
-docker-compose down --rmi all
-vi echo/Dockerfile
-docker-compose up -d
-docker-compose logs
-vi volumes/go_app/db.go
-cd volumes/go_app/
-ls
-mv db.go db.go.cm
-ls
-mv server.go.cm server_text.go.cm
-ls
-vi server_template.go
-cp server_text.go.cm server_template.go
-ls
-vi server_template.go
-mkdir views
-ls
-cd views/
-vi header.html
-vi page1.html
-cd ..
-vi server_template.go
-git status
-git add server_text.go.cm server_template.go db.go.cm views/
-git status
-git commit -am 'HTMLテンプレート使用テスト'
-gitpush 
-git pull
-git pull origin master
-git log
-gitpush 
-vi server_template.go
-vi header.html
-vi views/header.html
-cd ~
-vi echo/Dockerfile
-git status
-vi volumes/go_app/server_template.go 
-git status
-vi volumes/go_app/views/header.html
-vi volumes/go_app/server_template.go 
-git commit -am 'echoのDockerfileでわざわざ別にmiddlewareをインストールする部分を削除'
-cd volumes/go_app/
-ls
-cp server_template.go.cm template.go
-ls
-vi template.go 
-docker-compose logs
-vi template.go 
-docker-compose logs
-vi template.go 
-vi server
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-git commit -am 'goのファイルを分割'
-gitpush 
-:q
-vi server.go 
-vi template.go
-vi template.go 
 docker-compose logs
 vi template.go 
 docker-compose logs
@@ -998,3 +934,67 @@ mysql -uroot
 vi docker-compose.yml
 docker ps
 docker exec -it tuna_mysql_1 /bin/bash
+git status
+git commit -am "
+データベース初期作成用の空のSQLファイルを作成"
+gitpush 
+ls
+cd volumes/
+ls
+cd db_data/
+git status
+ls
+rm ./
+rm *
+cd volumes/
+cd db_data/
+sudo rm *
+sudo rm * -r
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+ls
+cd bin
+ks
+ls
+cd ..
+ls -a
+cat .bash_histry
+cat .bash_history
+cat .bash_history | grep rmi
+docker-compose down --rmi all
+cat .bash_history | grep docker-compose
+cat .bash_history | grep up
+docker-compose up -d --build
+docker-compose log
+docker-compose logs
+cat .bash_history | grep it
+ls
+cd mysql/
+ls
+vi Dockerfile 
+free
+df
+pvdisplay'
+
+;
+'
+pvdisplay
+vmstat
+df
+vmstat
+vmstat 
+df -h
+exit
+docker-compose logs
+exit
+fdisk -l
+sudo fdisk -l
+df
+df -h
+fdisk -l
+sudo fdisk -l
+sudo fdisk -lh
+sudo fdisk -l
+fdisk /dev/vda
+sudo fdisk /dev/vda
+sudo reboot
