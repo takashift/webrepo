@@ -1,70 +1,3 @@
-docker-compose logs
-vi template.go 
-docker-compose logs
-vi template.go 
-docker-compose logs
-vi template.go 
-docker-compose logs
-vi template.go 
-docker-compose logs
-vi template.go 
-ls
-git status
-ls volumes/go_app/
-mv volumes/go_app/server_template.go volumes/go_app/server_template.go.cm
-ls
-ls volumes/go_app/
-xs volumes/go_app/
-cd\ volumes/go_app/
-cd volumes/go_app/
-cp server_template.go.cm server.go
-ls
-vi server.go 
-vi template.go 
-vi server.go 
-ls
-cp server_std.go.cm
-cp server.go server_std.go.cm
-cp template.go template_std.go.cm
-vi server.go 
-docker-compose logs
-cp template.go template_std.go.cm
-docker-compose logs
-git log
-docker-compose logs
-vi server.go 
-vi views/toppage.ace
-vi server.go 
-docker-compose logs
-vi server.go 
-:q
-docker-compose logs
-ls
-ls views/
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-git status
-vi server_std.go.cm 
-vi template_std.go.cm 
-ls
-cp server_template.go.cm template_std.go.cm 
-vi template_std.go.cm 
-git status
-git add .
-git status
-git commit -am 'aceを使ったページ生成テスト'
-gitpush
-git status
-ls
 cd bin
 ls
 cd ~
@@ -998,3 +931,70 @@ sudo fdisk -l
 fdisk /dev/vda
 sudo fdisk /dev/vda
 sudo reboot
+git log
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+git commit -am 'ユーザー情報用のテーブルを作成する文を追記'
+git status
+git reset HEAD mysql/init/.webrepo.sql.swp
+git status
+git commit --amend
+gitpush 
+sudo fdisk -l
+df -h
+pvcreate
+sudo pvcreate /dev/vda3
+pvdisplay
+duso pvdisplay
+sudo pvdisplay
+vgdisplay
+sudo vgdisplay
+
+vgdisplay
+sudo vgdisplay
+lvdisplay
+sudo lvdisplay
+sudo su
+ls
+cd mysql/
+ls
+cd init/
+ls
+mv userinfo.sql webrepo.sql
+ls
+vi 
+vi webrepo.sql 
+wq
+free
+vmstat
+vmstat 5
+ls
+git add ./
+ls -a
+cd volumes/db_data/
+ls
+cd ..\
+cd ..
+ls
+cd mysql/
+ls
+cd init/
+ls
+vi webrepo.sql 
+cd mysql/
+cd init/
+ls
+vi webrepo.sql 
+docker exec -it tuna_mysql_1 /bin/bash
+cd mysql/
+ls
+vi Dockerfile 
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose down --rmi all
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
