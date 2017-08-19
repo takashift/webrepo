@@ -1,23 +1,3 @@
-vi template_no_proxy.go
-ls
-cd volumes/
-ls
-cd web-vol/
-ls
-cd ..
-cd go_app/
-ls
-vi template_no_proxy.go
-vi server.go 
-vi template_no_proxy.go 
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-vi template_no_proxy.go 
-vi server.go 
-docker-compose logs
 vi template_no_proxy.go 
 docker-compose logs
 vi template_no_proxy.go 
@@ -998,3 +978,23 @@ vi webrepo.sql
 cd mysql/init/
 vi 
 vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+ls -a
+rm .webrepo.sql.sw .webrepo.sql.sw
+rm -r .webrepo.sql.sw .webrepo.sql.sw
+rm .webrepo.sql.swo .webrepo.sql.swp
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+rm .webrepo.sql.swp 
+vi webrepo.sql 
+cd volumes/go_app/
+ls
+cd views/
+ls
+vi preview_evaluation.ace 
+vi register_page.ace 
