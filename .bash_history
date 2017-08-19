@@ -1,5 +1,3 @@
-cd views/
-vi search_top.ace 
 docker-compose logs
 vi search_top.ace 
 cd volumes/go_app/
@@ -997,4 +995,6 @@ docker exec -it tuna_mysql_1 /bin/bash
 exit
 cd mysql/init/
 vi webrepo.sql 
+exit
+cd mysql/init/
 exit

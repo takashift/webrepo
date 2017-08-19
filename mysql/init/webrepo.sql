@@ -1,2 +1,3 @@
 CREATE TABLE userinfo(id int unique not null auto_increment primary key, OAuth varchar(255), email varchar(255) unique, password varchar(255), name varchar(255), safe_search int not null);
 CREATE TABLE page_status(id int unique not null auto_increment primary key, title varchar(255), URL varchar(8190), last_update varchar(255), admin int, media varchar(1000), genre varchar(255), alive_flag int, tag1 varchar(30), tag2 varchar(30), tag3 varchar(30), tag4 varchar(30), tag5 varchar(30), tag6 varchar(30), tag7 varchar(30), tag8 varchar(30), tag9 varchar(30), tag10 varchar(30));
+CREATE TABLE individual_eval(num int, posted varchar(255), evaluator int, browse_time varchar(255), browse_purpose varchar(65535), deliberate int, goodness_of_fit float);
