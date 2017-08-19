@@ -1,30 +1,3 @@
-cd bin
-ls
-cd ~
-ls
-ls volumes/
-ls
-ls volumes/web-vol/
-ls
-ls volumes/go_app/
-ls
-cd volumes/go_app/
-ls
-cat server.go 
-ls
-ls views/
-cd views/
-vi header.html 
-vi page1.html 
-vi toppage.ace 
-cd ..
-vi server.go 
-cd views/
-mv toppage.ace search_top.ace
-ls
-cp search_top.ace test.ace
-cd ..
-vi server.go 
 cd views/
 vi search_top.ace 
 docker-compose logs
@@ -998,3 +971,30 @@ docker exec -it tuna_mysql_1 /bin/bash
 docker-compose down --rmi all
 docker-compose up -d --build
 docker exec -it tuna_mysql_1 /bin/bash
+ls
+git log
+ls
+cd mysql/
+ls
+cd init/
+ls
+vi webrepo.sql 
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose down --rmi all
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+vi webrepo.sql 
+git commit -am "文字コードは.sqlで指定するものではなかったので修正。"
+gitpush 
+docker-compose down --rmi all
+cd ~/volumes/db_data/
+ls
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+exit
+cd mysql/init/
+vi webrepo.sql 
+exit
