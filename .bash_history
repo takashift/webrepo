@@ -1,15 +1,3 @@
-vi template_no_proxy.go 
-docker-compose logs
-vi template_no_proxy.go 
-docker-compose logs
-vi template_no_proxy.go 
-cd volumes/go_app/
-ls
-vi search.go
-docker-compose logs
-mv search.go search.go.cm
-docker-compose logs
-ls
 cd views/
 ls
 cp search_top.ace search_result.ace
@@ -998,3 +986,15 @@ cd views/
 ls
 vi preview_evaluation.ace 
 vi register_page.ace 
+cd mysql/init/
+vi webrepo.sql 
+git commit -am 'ページ情報のカラムを記述'
+git status
+gitpush 
+git commit --amend
+cd volumes/go_app/views/
+ls
+cd mysql/init/
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
