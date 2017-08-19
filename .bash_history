@@ -1,18 +1,3 @@
-docker-compose logs
-vi search_top.ace 
-cd volumes/go_app/
-cat template.go 
-mv template.go template
-mv template template_no_proxy.go
-ls
-vi views/toppage.ace 
-vi template_no_proxy.go 
-docker-compose logs
-vi template_no_proxy.go 
-git status
-git commit -am '7/6修正分'
-git push
-gitpush
 vi template_no_proxy.go
 ls
 cd volumes/
@@ -998,3 +983,18 @@ vi webrepo.sql
 exit
 cd mysql/init/
 exit
+cd mysql/init/
+vi webrepo.sql 
+rm .webrepo.sql.swp 
+vi webrepo.sql 
+git commit -am '審議のカラムまで記述'
+gitpush
+exit
+cd ~/volumes/db_data/
+cd ~
+cd mysql/init/
+ls
+vi webrepo.sql
+cd mysql/init/
+vi 
+vi webrepo.sql 
