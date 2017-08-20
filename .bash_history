@@ -1,9 +1,3 @@
-cd volumes/go_app/
-ls
-cd views/
-ls
-vi search_result.ace
-vi search_top.ace 
 vi search_result.ace
 git commit -am 'リストが何故か表示できない'
 gitpush
@@ -998,3 +992,9 @@ rm .webrepo.sql.swp
 git commit -am "誤字脱字のカラムを記述"
 gitpush 
 exit
+cd volumes/go_app/
+cd views/
+ls
+vi input_evaluation.ace 
+cd mysql/init/
+vi webrepo.sql 
