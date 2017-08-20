@@ -3,3 +3,5 @@ CREATE TABLE page_status(id int unique not null auto_increment primary key, titl
 CREATE TABLE individual_eval_template(num int unique not null auto_increment primary key, posted varchar(255), evaluator_id int, browse_time varchar(255), browse_purpose varchar(65535), deliberate int, describe varchar(65535), recommend_good int, recommend_bad int, goodness_of_fit int, num_typo int, opt1 int, opt2 int, opt3 int, opt4 int, opt5 int, opt6 int, opt7 int, opt8 int, opt9 int, opt10 int);
 CREATE TABLE individual_eval_comment_template(num int unique not null auto_increment primary key, posted varchar(255), commenter_id int, reply_eval_num int, reply_comment_num int, deliberate int, comment varchar(65535), recommend_good int, recommend_bad int);
 CREATE TABLE typo_template(num int unique not null auto_increment primary key, individual_eval_num int, incorrect varchar(255), correct varchar(255));
+CREATE TABLE rating_item(genre varchar(255), media varchar(30), opt1 int, opt2 int, opt3 int, opt4 int, opt5 int, opt6 int, opt7 int, opt8 int, opt9 int, opt10 int);
+CREATE TABLE page_status_item(genre varchar(255), media varchar(30));

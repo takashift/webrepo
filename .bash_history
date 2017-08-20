@@ -1,45 +1,3 @@
-cd views/
-ls
-cp search_top.ace search_result.ace
-ls
-vi search_result.ace 
-vi search_top.ace
-cd ..
-vi search.go.cm
-vi template_no_proxy.go 
-cd views/
-vi search_result.ace 
-vi search_top.ace
-vi template_no_proxy.go 
-docker-compose logs
-vi template_no_proxy.go 
-docker-compose logs
-ls
-docker-compose logs
-vi search_top.ace
-docker-compose logs
-ls
-vi search_result.ace 
-cp search_top.ace search_result.ace
-vi search_result.ace 
-vi template_no_proxy.go 
-vi ../template_no_proxy.go 
-vi search_result.ace 
-git sutatus
-git status
-git status
-git add volumes/go_app/search.go.cm volumes/go_app/search.go.cm volumes/go_app/template_no_proxy.go volumes/go_app/views/search_result.ace volumes/go_app/views/search_top.ace volumes/go_app/views/test.ace
-git status
-git commit -am 'Formリクエスト'
-gitpush
-ls
-vlock 
-cd volumes/go_app/
-ls
-vi search.go.cm 
-vi server.go 
-cd volumes/
-cd 
 cd volumes/go_app/
 ls
 cd views/
@@ -998,3 +956,45 @@ cd mysql/init/
 vi webrepo.sql 
 cd mysql/init/
 vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+exit
+cd mysql/init/
+vi webrepo.sql 
+ls
+rm .webrepo.sql.swp 
+ls -a
+vi webrepo.sql 
+ls
+cd mysql/init/
+cd volumes/go_app/views/
+ls
+cd volumes/go_app/views/
+cat preview_evaluation.ace 
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+git commit -am '個別評価用テンプレートテーブル完成（ジャンルごとの段階評価用にオプションカラムを10個用意）'
+gitpush 
+vi webrepo.sql 
+rm .webrepo.sql.swp 
+vi webrepo.sql 
+git commit -am '個別評価に対するコメント用テーブルのカラムを記述'
+git commit --amend
+git log
+gitpush 
+gitpush -f
+git push -f
+cd volumes/go_app/
+cd ~
+cd mysql/init/
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+rm .w
+rm .webrepo.sql.swp 
+git commit -am "誤字脱字のカラムを記述"
+gitpush 
+exit
