@@ -1,125 +1,3 @@
-vi search_result.ace
-git commit -am 'リストが何故か表示できない'
-gitpush
-cd volumes/
-ls
-cd go_app/
-;s
-la
-sl
-ls
-vi server.go 
-docker-compose logs
-git status
-git commit -am '検索結果のフォーム部分を横並びに設定。inputをblockにして、影をそのまま投影。'
-gitpush
-docker-compose logs
-git sutatus
-git sutats
-git status
-cd volumes/
-cd go_app/views/
-ls
-vi search_result.ace
-git status
-git commti -am "コメントはインデントを揃えて！！"
-git commit -am "コメントはインデントを揃えて！！"
-git psuh
-gitpshs
-gitpush
-vi search_result.ace
-cd volumes/go_app/
-ls
-vi server.go 
-vi server.go
-git status
-cd volumes/go_app/
-ls
-vi server.go 
-git log
-ls
-cd volumes/
-cd go_app/
-ls
-cd views/
-ls
-vi search_result.ace
-vi login_select.ace
-cp search_top.ace login_select.ace
-ls
-vi login_select.ace 
-vi search_result.ace
-vi login_select.ace 
-vi search_result.ace
-vi login_select.ace 
-git status
-git add login_select.ace 
-git status
-git commit -am "ログイン方法選択画面の作成"
-git add login_select.ace 
-vi login_select.ace 
-git commit -am "ログイン方法選択画面から不要なCSS設定削除"
-vim pass_login.ace
-cp login_select.ace pass_login.ace
-ls
-vi pass_login.ace 
-git commit -am ""
-gitpush
-git status
-git commit -am "フッターのレイアウトを設定"
-docker-compose logs
-git status
-cd volumes/go_app/
-ls
-vi server.go 
-git add volumes/go_app/views/pass_login.ace
-git commit -am "パスワードログイン画面のファイルを作成"
-docker-compose logs
-cd volumes/go_app/views/
-vi search_top.ace 
-cat search_top.ace
-ls
-cat search_result.ace 
-vim pass_login.ace
-cd volumes/go_app/
-cd views/
-vim pass_login.ace
-git add login_select.ace 
-vim pass_login.ace
-vim login_select.ace 
-vim pass_login.ace
-git status
-git commit -am 'ログイン・会員登録画面の利用規約以外完成'
-gitpush 
-cd volumes/go_app/
-vi server.go 
-cd volumes/go_app/views/
-ls
-vi pass_login.ace 
-vi login_select.ace 
-vi pass_login.ace 
-git status
-git commit -am 'パスワード登録画面雛形完成'
-gitpush 
-cp search_result.ace evalution_input.ace
-ls
-mv evalution_input.ace input_evalution.ace
-ls
-vi input_evalution.ace
-mv login_select.ace signin_select.ace
-mv pass_login.ace pass_signin.ace
-vi signin_select.ace 
-vi pass_signin.ace 
-vi input_evalution.ace
-git status
-git add pass_signin.ace input_evalution.ace signin_select.ace
-git commit -am '評価入力画面用ファイル作成'
-vi input_evalution.ace
-vi pass_signin.ace 
-vi signin_select.ace 
-git commit -am 'ログインをサインインに変更'
-vi signin_select.ace 
-vi input_evalution.ace
 mv input_evalution.ace input_evaluation.ace 
 vi input_evaluation.ace
 ls
@@ -998,3 +876,125 @@ ls
 vi input_evaluation.ace 
 cd mysql/init/
 vi webrepo.sql 
+cd mysql/init/
+rm .webrepo.sql.swp 
+vi webrepo.sql 
+cd ~
+cd volumes/db_data/
+ls
+docker-compose down --rmi all
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose up -d --build
+docker-compose down --rmi all
+ls
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose up -d --build
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+sudo cd var/lib/docker/volumes
+cd /var/lib/docker/volumes
+sudo cd /var/lib/docker/volumes
+ls
+sudo su
+--socket=/tmp/mysqld.sock /var/lib/docker/volumes/tuna_usock/_data/mysqld.sock
+mysql -u rtuna -p --socket=/tmp/mysqld.sock /var/lib/docker/volumes/tuna_usock/_data/mysqld.sock
+mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+ls
+pwd
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose logs
+docker-compose down --rmi all
+ls
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose logs | indi
+docker-compose logs | grep indi
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down --rmi all
+ls
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+sudo rm -r *
+docker-compose down --rmi all
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+ls
+docker-compose down --rmi all
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+;s
+ls
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+exit
+cd mysql/init/
+vi webrepo.sql 
+rm .webrepo.sql.swp 
+git commit -am '段階評価項目、ページ属性項目のテーブルのカラムを記述'
+vi webrepo.sql
+git commit -am 'NGワード用テーブルを追記'
+gitpush 
+git status
+cd ..
+git commit -am 'ユーザー情報のカラムにNGワードを投稿した数のカウントを追加'
+gitpush 
+cd mysql/init/
+vi webrepo.sql 
+cd mysql/init/
+vi webrepo.sql 
+git commit -am 'varchar(65535)ha'
+git commit --amend
+gitp
+gitpush 
+vi webrepo.sql 
+git commti -am '日時を入力する欄を日付・時刻型に変更'
+git commit -am '日時を入力する欄を日付・時刻型に変更'
+gitpush 
+vi webrepo.sql 
+git commit -am 'describeが予約語だったのでdescribe_evalに変更'
+gitpush 
