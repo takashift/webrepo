@@ -164,7 +164,7 @@ html lang=ja
             label.star_rating 極めて不適合　
               input.rating type="radio" name="rating_pp" value="1" required=""
               span.star
-            p#note.red ※エラーは出ませんが必須項目です。
+            p#note ※エラーは出ませんが必須項目です。
         .form_block
           .subject
             h2 見やすさ
@@ -186,7 +186,7 @@ html lang=ja
             label.star_rating 極めて見づらい　
               input.rating type="radio" name="rating_vw" value="1" required=""
               span.star
-            p#note.red ※エラーは出ませんが必須項目です。
+            p#note ※エラーは出ませんが必須項目です。
         .form_block
           .subject
             h2 誤字脱字
