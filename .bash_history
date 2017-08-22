@@ -1,65 +1,3 @@
-mv input_evalution.ace input_evaluation.ace 
-vi input_evaluation.ace
-ls
-vi search_to
-vi search_top.ace 
-vi search_result.ace 
-vi search_top.ace 
-vi input_evaluation.ace
-vi search_result.ace 
-vi input_evaluation.ace
-git status
-git add input_evaluation.ace 
-git commit -am "目的適合度のラジオボタン完成"
-gitpush
-git log
-vi input_evaluation.ace
-git status
-git commit -am "記述評価の枠を作成"
-vi input_evaluation.ace
-git commit -am "目的適合度に行間を追加"
-vi input_evaluation.ace
-git commit -am "上から目的適合度が高い順から低い順に変更"
-gitpush 
-vi input_evaluation.ace
-cat search_result.ace 
-cd volumes/go_app/
-cat search_result.ace 
-cd views/
-cat search_result.ace 
-git log
-git push
-gitp
-gitpush 
-ls
-cd volumes/go_app/
-ls
-cd views/
-ls
-cat pass_signin.ace 
-git commit -am '送信ボタンの作成'
-gitpush 
-git commit -am 'OAuth認証の新規登録画面の作成'
-git status
-git add OAuth_signin.ace 
-git commit -am 'OAuth認証の新規登録画面の作成'
-vi OAuth_signin.ace 
-git commit -am '同意後のメールアドレスの確認促進メーセージページの作成'
-git commit -am 'OAuth認証サインアップのファイル名をsignin.aceからsignup.aceへ変更'
-gitpush 
-docker-compose logs
-git status
-git commit -am '誤字脱字の入力フォームを作成'
-gitpush 
-git log
-cd volumes/go_app/views/
-ls
-vi input_evaluation.ace 
-git sattus
-git status
-git commit -am '記述評価の説明を記述'
-vi input_evaluation.ace 
-git commit -am '目的適合度のコメントの位置を変更'
 vi input_evaluation.ace 
 cp pass_signin.ace OAuth_signin.ace
 vi OAuth_signin.ace 
@@ -998,3 +936,65 @@ gitpush
 vi webrepo.sql 
 git commit -am 'describeが予約語だったのでdescribe_evalに変更'
 gitpush 
+cd mysql/init/
+vi webrepo.sql 
+git commit -am 'アカウントとページのテーブルにNULLを許容しないカラムを設定'
+gitpush 
+vi webrepo.sql 
+git commit -am '全てのテーブルのNULLを許容しないカラムを設定'
+gitpush 
+exit
+ls
+cd volumes/go_app/
+ls
+mkdir archive
+ls
+mv db.go.cm archive/
+cd archive/
+ls
+cd ..
+mv search.go.cm archive/
+mv server_std.go.cm archive/
+mv server_template.go.cm archive/
+mv server_text.go.cmarchive/
+mv  archive/
+ls
+cd template_std.go.cm archive/
+mv template_std.go.cm archive/
+ls
+viwes
+cd viwes
+cd views
+;s
+ls
+mkdir archive
+ks
+ls
+mv header.html archive/
+mv page1.html archive/
+cd ..
+ls
+cd views/
+ls
+cd ..
+vi server.go 
+cd archive/
+ls
+vi db.go.cm 
+cd ..
+vi server.go 
+exit
+cd volumes/go_app/
+ls
+vi tq
+vi template_no_proxy.go 
+cd ..
+cd
+ls
+cd echo/
+cat Dockerfile
+exir
+exit
+ls
+cd mysql/init/
+vi webrepo.sql 
