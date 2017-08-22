@@ -5,8 +5,8 @@ import (
     "net"
     "net/http"
     "github.com/labstack/echo"
-    _ "github.com/go-sql-driver/mysql"
-    "github.com/gocraft/dbr"
+    //_ "github.com/go-sql-driver/mysql"
+    //"github.com/gocraft/dbr"
 )
 
 var e = echo.New()
