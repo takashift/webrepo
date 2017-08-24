@@ -1,326 +1,3 @@
-vi input_evaluation.ace 
-cp pass_signin.ace OAuth_signin.ace
-vi OAuth_signin.ace 
-vi pass_signin.ace
-vi OAuth_signin.ace 
-vi agree.ace
-cp OAuth_signin.ace agree.ace
-vi agree.ace
-mv agree.ace agree_signup.ace 
-ls
-vi agree.ace
-ls
-rm agree.ace
-vi agree_signup.ace 
-ls
-vm OAuth_signin.ace OAuth_signup.ace 
-mv OAuth_signin.ace OAuth_signup.ace 
-ls
-git status
-git add agree_signup.ace OAuth_signup.ace 
-vi agree_signup.ace 
-git commit -am '無駄なCSSの設定を削除'
-git status'=
-
-;
-
-git status
-vi input_evaluation.ace 
-cd volumes/go_app/
-vi server.go 
-git status
-cd volumes/go_app/views/
-ls
-git add preview_evaluation.ace 
-git commit -am '評価閲覧画面用Aceファイル追加'
-gitpush
-cd volumes/go_app/
-ls
-vi server.go 
-cd volumes/go_app/views/
-ls
-vi input_evaluation.ace 
-git status
-git commit -am ''
-gitpush
-ls
-cp input_evaluation.ace preview_evaluation.ace
-ls
-vi p
-vi preview_evaluation.ace 
-git log
-cd volumes/go_app/views/
-ls
-cd volumes/go_app/
-ls
-vi server.go 
-vi preview_evaluation.ace
-cd volumes/go_app/views/
-lds
-ld
-ls
-vi preview_evaluation.ace
-cd volumes/go_app/
-cd vd
-cd views/
-ls
-git status
-git commit -am '評価閲覧画面を原案に近い形に変更'
-gitpush 
-vi search_result.ace 
-cd volumes/go_app/
-ls
-git commit -am 'レビューリスト表示領域を用意'
-gitp`
-gitpush 
-exit
-cd volumes/go_app/views/
-l
-lw
-ls
-vi preview_evaluation.ace 
-git commit -am 'レビューリスト表示領域にflex、背景色を指定'
-gitpush 
-exit
-cd volumes/go_app/
-ls
-vi server.go 
-cd volumes/go_app/views/
-ls
-vi preview_evaluation.ace 
-cd volumes/go_app/views/
-ls
-vi preview_evaluation.ace 
-cd volumes/go_app/
-ls
-git commit -am '個別レビュー格納用の要素を追加'
-gitpush 
-cd volumes/go_app/views/
-ls
-vi 
-vi preview_evaluation.ace 
-cd volumes/go_app/
-ls
-git commit -am 'レビューの枠を6つ用意'
-gitpush 
-git commit -am 'imgタグを削除'
-gitpush 
-git commit -am 'タイトルの位置を中央へ変更＋上の余白を設定'
-gitpush 
-cd volumes/go_app/
-vi server.go 
-cd volumes/go_app/views/
-ls
-vi preview_evaluation.ace 
-git commit -am '評価の例を記述'
-gitpush 
-git commit -am 'flex の設定をMDNの推奨する書き方に変更'
-gitpush 
-git commit -am 'パラメータ表示の余白のサイズを変更'
-gitpush 
-cd volumes/go_app/
-vi server.go 
-cd volumes/go_app/views/
-vi preview_evaluation.ace 
-ls
-gitpush 
-vi preview_evaluation.ace 
-git log
-git commit -am 'flexで複数のレビューをフレキシブルに横に表示できるように設定'
-gitpush 
-exit
-cd volumes/go_app/views/
-ls
-ls -l
-ls -a
-vi pass_signin.ace 
-vi search_result.ace 
-vi search_top.ace.ace 
-vi search_top.ace
-
-gitpush 
-git commit -am '文字サイズを大きめに調整'
-gitpush 
-git commit -am 'tagu '
-git commit --amed
-git commit --amend
-git log
-cd volumes/go_app/
-vi server.go 
-cd volumes/go_app/views/
-vi preview_evaluation.ace 
-cd volumes/go_app/views/
-ls
-vi search_top.ace.ace 
-vi preview_evaluation.ace 
-cd volumes/go_app/
-ls
-vi server.go 
-git commit -am '表示数、並び替え用selectタグを設置'
-gitpush 
-git log
-git commit -am '評価の総数を表示するようにして、文字の色も少し薄く変更'
-gitpush 
-git commit -am 'レビューの例を全て完成形に変更'
-gitpush 
-git commit -am 'レビューの表示幅を350->400pxに変更'
-gitpush 
-git commit -am '個別評価閲覧画面用Aceファイル作成'
-cd volumes/go_app/views/
-ls
-vi preview_evaluation.ace 
-git commit -am '個別評価閲覧画面あらかた完成'
-git commit -am '個別評価閲覧画面に投稿者を表示'
-git status
-git add individual_review.ace
-git commit --amend
-git status
-gitpush 
-cd volumes/go_app/
-cd volumes/go_app/views/
-cd views/
-vi preview_evaluation.ace 
-cd ..
-vi server.go 
-cd volumes/go_app/
-vi server.go 
-cd ~
-cd volumes/go_app/views/
-vi preview_evaluation.ace 
-vi individual_review.ace
-cp input_evaluation.ace individual_review.ace
-vi individual_review.ace
-cp preview_evaluation.ace individual_review.ace
-vi individual_review.ace
-git commit -am '個別評価閲覧画面にコメントボタンと通報ボタンを追加'
-gitpush 
-git commit -am '通報完了の確認画面を作成'
-gitpush 
-git commit -am 'server.go の uni -> unix に変更。通報完了画面のページタイトルも修正'
-git status
-cd volumes/go_app/views/
-git status
-git add dengerous_complete.ace 
-git commit --amend
-git status
-git add input_
-git add input_comment.ace 
-git commit -am 'コメント入力画面を追加しました'
-git commit -am 'action と textarea の値がコピペそのままだったので修正'
-git commit -am '評価入力画面の送信ボタンのタグの位置と action の指す先がコピペそのままだったので修正'
-git commit -am 'コメント入力画面の送信ボタンのタグのインデントもずれていたので修正'
-git statis
-git status
-git add register_page.ace 
-git commit -am '
-git commit -am 'ページ登録画面を作成'
-gitpush 
-git commit -am '各入力画面の textarea のサイズ指定属性名がおかしかったので修正'
-gitpush 
-vi search_top.ace 
-vi preview_evaluation.ace 
-git status
-git log
-git commit -am 'ジャンル、媒体を選択肢に変更して取り敢えず完成'
-vi register_page.ace 
-git commit -am '評価閲覧画面の select の大きさを変更'
-gitpush 
-git add edit_page_cate.ace 
-git commit -am 'ページ属性編集画面完成'
-gitpush 
-git commit -am '個別評価から全体の評価に戻るためのボタンを設置'
-gitp
-gitpush 
-cd volumes/go_app/views/
-vi individual_review.ace
-cp agree_signup.ace dengerous_complete.ace
-vi dengerous_complete.ace 
-cp input_evaluation.ace input_comment.ace
-vi input_
-vi input_comment.ace 
-vi input_evaluation.ace 
-vi input_comment.ace 
-cp input_evaluation.ace page_registration.ace
-vi page_registration.ace 
-mv page_registration.ace register_page
-mv register_page register_page .ace
-mv register_page register_page.ace
-ls
-vi register_page.ace 
-vi input_comment.ace 
-vi register_page.ace 
-vi input_comment.ace 
-vi input_evaluation.ace 
-vi input_comment.ace 
-vi register_page.ace 
-vi individual_review.ace
-vi register_page.ace 
-vi preview_evaluation.ace 
-cp register_page.ace edit_page_cate.ace
-vi edit_page_cate.ace 
-vi preview_evaluation.ace 
-vi register_page.ace 
-vi individual_review.ace
-vi input_
-vi input_evaluation.ace 
-ls
-vi pass_signin.ace
-vi search_top.ace 
-vi search_result.ace 
-vi pass_signin.ace.ace 
-vi pass_signin.ace
-vi OAuth_signup.ace 
-vi input_evaluation.ace 
-vi input_comment.ace 
-vi register_page.ace q
-vi register_page.ace
-vi edit_page_cate.ace 
-vi preview_evaluation.ace 
-cd volumes/go_app/
-vi server.go 
-eist
-eixt
-exit
-vi server.go 
-cd volumes/go_app
-vi server.go 
-cd volumes/go_app/views/
-ls
-ls -a
-
-vi search_top.ace 
-vi header_menu.ace 
-git status
-git commit -am '評価入力画面に見やすさの項目を追加'
-gitpush 
-git commit -am '評価入力画面に閲覧日時を追加'
-git commit -am 'パスワードサインインの画面でパスワードを隠すよう設定'
-gitpush 
-git commit -am '入力フォームの有る全てのページで必須項目を設定'
-git commit -am "評価閲覧画面に並び替え適用ボタンを追加"
-gitpush 
-cd volumes/go_app/views/
-cp search_top.ace header_menu.ace
-git add header_menu.ace 
-git commit -am "ヘッダーメニュー用テンプレートを作成"
-gitpush 
-ls
-vi preview_evaluation.ace
-git commit -am "メニューの項目を作成"
-git status
-gitpush 
-ls
-vi page1.html
-vi header_menu.ace 
-git commit -am "メニューのテンプレートを検索トップに適用"
-gitpush 
-git commit -am "メニューの名称を評価対象:wページへ"
-git commit --amend
-gitp
-gitpush 
-git commit -am "全てのページにヘッダーメニューを設置"
-gitpush 
-cd volumes/go_app
 cd views/
 cd ~
 cd volumes/go_app/views/
@@ -998,3 +675,326 @@ exit
 ls
 cd mysql/init/
 vi webrepo.sql 
+cd volumes/db_data/ls
+cd volumes/db_data/
+ls
+sudo rm -r *
+ls
+exit
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd mysql/init/
+ls
+vi webrepo.sql 
+git commit -am 'テーブル作成用SQLの個別評価テーブルに見やすさのカラムが無かったので追加'
+git commit --amend
+git status
+ls ../../volumes/go_app/archive/
+ls -a ../../volumes/go_app/archive/
+ls -a ../../volumes/go_app/views/archive/
+git add ../../volumes/go_app/archive/ ../../volumes/go_app/views/archive/
+git status
+git commit --amend
+gitpush 
+cd ..
+ls
+vi webrepo.sql 
+cd mysql/init/
+ls
+cd mysql/init/
+vi webrepo.sql 
+git commit -am 'テーブル作成用SQLの段階評価に理由格納用カラムを追加'
+gitpush 
+vi webrepo.sql 
+cd ..
+cd volumes/go_app/views/
+ls
+vi input_evaluation.ace 
+cd ..
+vi server.go 
+vi input_evaluation.ace 
+cd views/
+vi server.go 
+vi input_evaluation.ace 
+cd ..
+docker-compose log
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+ls
+vi template_no_proxy.go 
+vi server.go 
+docker-compose logs
+docker-compose logs | grep echo
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+cd views/
+vi template_no_proxy.go 
+vi input_evaluation.ace 
+docker-compose down --rmi all
+cd ..
+vi server.go 
+docker-compose up -d --build
+docker-compose logs
+git commit -am '評価入力の閲覧日時の欄に初期表示する内容を設定'
+gitpush 
+cd views/
+vi in
+vi input_
+vi input_evaluation.ace 
+git commit -am '段階評価が必須項目で有る旨の注意書きを追加'
+gitpush 
+cd ..
+vi server.go 
+git log
+cd ..
+ cd go_app/views/
+vi input_evaluation.ace 
+cd ..
+vi server.go 
+git commit -am '注意書きでも赤字だと視覚的に邪魔なので修正'
+gitpush 
+exit]
+exit
+cd mysql/
+vi Dockerfile 
+docker-compose down --rmi all
+cd ..
+cd volumes/db_data/
+sudo rm -r *
+ls
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd mysql/init/
+vi webrepo.sql 
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+vi webrepo.sql 
+file -i webrepo.sql 
+show variables like "chara%";
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd mysql/
+vi Dockerfile 
+docker exec -it tuna_mysql_1 /bin/bash
+vi Dockerfile 
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+cd mysql/
+vi Dockerfile 
+docker-compose down --rmi all
+cd 
+cd volumes/db_data/
+ls
+lls
+docker-compose up -d --build
+exit
+cd mysql/
+vi Dockerfile
+cd i
+cd init/
+ls
+vi webrepo.sql 
+cd volumes/db_data/
+cd
+cd volumes/go_app/
+docker exec -it tuna_mysql_1 /bin/bash
+docker ps
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose down --rmi all
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker-compose down --rmi all
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker-compose down --rmi all
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/db_data/
+ks
+ls
+ls -a
+ls
+cd ..
+cd mysql/init/
+ls
+vi webrepo.sql 
+cd volumes/db_data/
+cd 
+cd volumes/db_data/
+ls
+sudo rm -r *
+ls
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+cd volumes/db_data/
+ls
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd volumes/db_data/
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *∂
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose down --rmi all
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker ps
+docker images
+docker-compose down --rmi tuna_mysql_1
+docker-compose down  tuna_mysql_1
+docker-compose down
+docker rmi tuna_mysql_1
+docker rmi 2bd457f9f152
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+sudo rm -r *
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd mysql/init/
+vi webrepo.sql 
+cd ..
+vi Dockerfile 
+cd init/
+vi webrepo.sql 
+vi Dockerfile 
+vi webrepo.sql 
+vi Dockerfile 
+vi webrepo.sql 
+cd ..
+vi webrepo.sql 
+cd mys
+cd mysql
+cd init/
+ls
+vi webrepo.sql 
+cd ..
+vi Dockerfile 
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker exec -it tuna_mysql_1 /bin/bash
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+\q
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker ps
+sl
+ls
+cd volumes/db_data/
+ls
+docker-compose down
+docker rmi tuna_mysql_1
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+cd ..
+ls
+cd mysql/
+ls
+vi Dockerfile 
+cd ..
+vi Dockerfile 
+cd mysql/
+cd init/
+vi webrepo.sql 
+docker-compose down
+vi webrepo.sql 
+cd ..
+vi Dockerfile 
+vi webrepo.sql 
+vi Dockerfile 
+vi webrepo.sql 
+vi Dockerfile 
+cd volumes/db_data/
+ls
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+sudo rm -r *
+docker rmi tuna_mysql_1
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose logs
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+docker-compose down
+sudo rm -r *
+docker rmi tuna_mysql
+docker-compose up -d --build
