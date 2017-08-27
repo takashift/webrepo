@@ -1,67 +1,3 @@
-cd views/
-cd ~
-cd volumes/go_app/views/
-vi header_menu.ace 
-vi search_top.ace 
-vi header_menu.ace 
-vi search_result.ace 
-vi search_top.ace 
-vi search_result.ace 
-vi signin_select.ace 
-vi pass_signin.ace 
-vi OAuth_signup.ace 
-vi agree_signup.ace 
-vi input_evaluation.ace 
-vi preview_evaluation.ace 
-vi preview_evaluation.ace
-vi individual_review.ace 
-vi dengerous_complete.ace 
-vi input_
-vi input_comment.ace 
-vi register_page.ace 
-vi edit_page_cate.ace 
-vi header_menu.ace 
-cd volumes/go_app
-vi server.go 
-ls
-vi template_no_proxy.go 
-vi server.go 
-<<<<<<< HEAD
-git commit -am 'フッター用テンプレートファイルを追加'
-gitpush 
-git commit -amend
-git commit --amend
-cd volumes/go_app/views/
-git add footer.ace 
-git commit --amend
-git log
-ls
-vi footer.ace
-cd volumes/go_app/views/
-cp header_menu.ace footer.ace
-=======
->>>>>>> origin/master
-cd volumes/go_app/views/
-git status
-git add consent_form.ace term_of_servise.ace 
-git commit -am '同意書用テンプレートと単体で表示する時のための画面のファイルを追加'
-gitpush 
-git log
-ls
-vi search_result.ace 
-docker-compose log
-docker-compose logs
-vi header_menu.ace 
-git commit -am "フッター作成"
-git status
-git add about.ace term_of_service.ace 
-git commit -am "このサイトについて用のテンプレを作成"
-gitp
-gitpush 
-git fetch
-cd ~
-sl
-ls
 cd .ssh
 ls
 cat known_hosts 
@@ -998,3 +934,67 @@ docker-compose down
 sudo rm -r *
 docker rmi tuna_mysql
 docker-compose up -d --build
+cd mysql/init/
+vi webrepo.sql 
+cd ..
+vi Dockerfile 
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd init/
+vi webrepo.sql 
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+vi webrepo.sql 
+cd ..
+vi webrepo.sql 
+vi 
+vi w
+vi Dockerfile 
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+vi webrepo.sql 
+vi Dockerfile
+cd init/
+vi webrepo.sql 
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+git statu
+git status
+git commit -am '文字列型にuniqueを設定すると制限がかかるのでURLのunique設定を解除'
+gitpush 
+esit
+exit
+cd volumes/db_data/
+ls
+docker-compose down
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+docker rmi tuna_mysql
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+sudo rm -r *
+docker-compose up -d --build
+:q
+docker-compose down
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose down
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+docker rmi tuna_mysql
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose down
+docker rmi tuna_mysql
+sudo rm -r *
+docker-compose up -d --build
+eit
+exit

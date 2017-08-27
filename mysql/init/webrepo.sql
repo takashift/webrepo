@@ -1,11 +1,13 @@
 CREATE TABLE userinfo(
 	id int unique not null auto_increment primary key,
-	OAuth varchar(255),
+	OAuth_google tinyint DEFAULT 0,
+	OAuth_twitter tinyint DEFAULT 0,
+	OAuth_facebook tinyint DEFAULT 0,
 	email varchar(255) unique not null,
 	password varchar(255) not null,
 	name varchar(255) DEFAULT '名無し',
 	signup_date datetime not null,
-	safe_search int not null DEFAULT 0,
+	safe_search tinyint not null DEFAULT 0,
 	NG_count int DEFAULT 0
 );
 
@@ -34,15 +36,15 @@ CREATE TABLE individual_eval_template(
 	evaluator_id int unique not null,
 	browse_time datetime not null,
 	browse_purpose text not null,
-	deliberate int DEFAULT 0,
+	deliberate tinyint DEFAULT 0,
 	description_eval text,
 	recommend_good int,
 	recommend_bad int,
-	goodness_of_fit int not null,
+	goodness_of_fit tinyint not null,
 	because_goodness_of_fit text,
-	visibility int not null,
+	visibility tinyint not null,
 	because_visibility text,
-	num_typo int not null,
+	num_typo tinyint not null,
 	because_num_typo text,
 	opt1 int,
 	because_opt1 text,
@@ -72,7 +74,7 @@ CREATE TABLE individual_eval_comment_template(
 	commenter_id int not null,
 	reply_eval_num int,
 	reply_comment_num int,
-	deliberate int DEFAULT 0,
+	deliberate tinyint DEFAULT 0,
 	comment text not null,
 	recommend_good int,
 	recommend_bad int
@@ -89,16 +91,16 @@ CREATE TABLE rating_item(
 	num int unique not null auto_increment primary key,
 	genre varchar(255) not null,
 	media varchar(30) not null,
-	opt1 int,
-	opt2 int,
-	opt3 int,
-	opt4 int,
-	opt5 int,
-	opt6 int,
-	opt7 int,
-	opt8 int,
-	opt9 int,
-	opt10 int
+	opt1 text,
+	opt2 text,
+	opt3 text,
+	opt4 text,
+	opt5 text,
+	opt6 text,
+	opt7 text,
+	opt8 text,
+	opt9 text,
+	opt10 text
 );
 
 CREATE TABLE page_status_item(
