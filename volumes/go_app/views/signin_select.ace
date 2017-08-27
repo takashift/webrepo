@@ -47,11 +47,11 @@ html lang=ja
   body
     = include header_menu
     #OAuth_menu
-      .button#twitter
-        b twitter
-        {{HTML " アカウントで登録 / サインイン"}}
       .button#google
         b google
+        {{HTML " アカウントで登録 / サインイン"}}
+      .button#twitter
+        b twitter
         {{HTML " アカウントで登録 / サインイン"}}
       .button#facebook
         b facebook
