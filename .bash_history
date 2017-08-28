@@ -1,69 +1,3 @@
-cd .ssh
-ls
-cat known_hosts 
-:q
-cd ..
-ls
-cd bin
-ls
-cat gitpush 
-cd ..
-cd volumes/go_app/views/
-git fetch
-git marge origin/master
-git merge origin/master
-git push -f
-vi inndividual_reviews
-vi individual_review.ace 
-exir
-exit
-ls
-git log
-cd volumes/go_app/views/
-ls
-cp search_top.ace term_of_servise.ace
-cp header_menu.ace consent_form.ace
-ls
-vi footer.ace 
-mv term_of_servise.ace term_of_service.ace 
-vi footer.ace 
-cp agree_signup.ace about.ace
-vi footer.ace 
-vi search_result.ace 
-vi footer.ace 
-git push
-gitpush
-vi search_top.ace 
-vi header_menu.ace 
-vi search_top.ace 
-cd volumes/go_app/
-ls
-vi server.go
-cd volumes/go_app/views/
-vi individual_review.ace 
-ls
-vi input_evaluation.ace 
-git status
-git commit -am 'トップページに「未登録ページを評価する」ボタンを追加w'
-git commit --amend
-gitpush 
-git commit -am 'ヘッダーメニューの新規ページ登録を~・評価に、設定をログインに変更'
-gitpush 
-cd volumes/go_app/views/
-vi search_result.ace 
-vi signin_select.ace 
-vi pass_signin.ace 
-vi signin_select.ace 
-vi pass_signin.ace 
-vi about.ace 
-vi footer.ace 
-vi about.ace 
-vi consent_form.ace 
-ls
-vi term_of_service.ace 
-vi consent_form.ace 
-vi pass_signin.ace 
-vi OAuth_signup.ace 
 vi consent_form.ace 
 vi footer.ace 
 vi consent_form.ace 
@@ -998,3 +932,69 @@ sudo rm -r *
 docker-compose up -d --build
 eit
 exit
+docker-compose down
+docker rmi tuna_mysql
+cd volumes/db_data/
+ls
+sudo rm -r *
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+cd volumes/go_app/
+vi server.go 
+vi
+vi server.go 
+cd volumes/go_app/
+vi template_no_proxy.go 
+cd mysql/init/
+ls
+vi webrepo.sql 
+git status
+git commit -am 'intまで使わないカラムをtinyintに変更'
+gitpush 
+vi webrepo.sql cd
+cd
+cd volumes/go_app/views/
+ls
+vi signin_select.ace 
+git commit -am 'サインイン方法選択画面の順番をGoogleを最初に変更'
+gitpush 
+git log
+ls
+cd volumes/go_app/
+sl
+ls
+
+vi server.go 
+go fmt test.go
+unexpand -t 4 server.go 
+vi server.go 
+unexpand -t 4 server.go 
+vi server.go 
+unexpand -t 4 server.go > server.go 
+vi server.go 
+exit
+ls
+exit
+exit
+ls -a
+vi .vimrc
+exit
+vi .vimrc
+cd volumes/go_app/
+ls
+vi 
+vi server.go 
+cd ..
+cd D
+cd e
+cd echo/
+vi D
+vi Dockerfile
+cd volumes/go_app/
+cd 
+cd volumes/go_app/
+vi server.go 
+docker-compose down
+docker rmi tuna_mysql
+docker rmi tuna_echo
+docker-compose up -d --build

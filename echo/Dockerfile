@@ -16,6 +16,12 @@ RUN go get -u github.com/go-sql-driver/mysql
 RUN go get -u github.com/gocraft/dbr
 RUN go get -u github.com/yosssi/ace
 
+# OAuth2
+RUN go get -u github.com/satori/go.uuid
+RUN go get -u golang.org/x/oauth2
+RUN go get -u google.golang.org/api/oauth2/v2
+RUN go get -u google.golang.org/appengine/log
+
 WORKDIR /go/src/app
 
 CMD ["/go/bin/godo", "server", "--watch"]
