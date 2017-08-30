@@ -1,22 +1,3 @@
-vi consent_form.ace 
-vi footer.ace 
-vi consent_form.ace 
-cd volumes/go_app/
-vi server.go 
-cd volumes/go_app/views/
-ls
-git status
-git commit -am 'フッターを適用すべき画面に挿入'
-gitpush 
-git status
-git commit -am 'このサイトについての文面を取り敢えず作成'
-gitp
-gitpush 
-git commit -am '同意書作成'
-gitpush 
-vi consent_form.ace 
-vi about.ace 
-vi consent_form.ace 
 ls
 vi OAuth_signup.ace 
 vi consent_form.ace 
@@ -998,3 +979,22 @@ docker-compose down
 docker rmi tuna_mysql
 docker rmi tuna_echo
 docker-compose up -d --build
+git log
+git commit -am '取り敢えず、goでのOAuth認証のコードを追加'
+gitpush 
+exit
+git log
+git status
+exit
+git status
+ls
+cd echo/
+ls
+ls -l
+rm -r vol_sock
+ls
+cd ..
+ls
+cd volumes/go_app/
+ls
+cat server.go 
