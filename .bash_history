@@ -1,63 +1,4 @@
 ls
-vi OAuth_signup.ace 
-vi consent_form.ace 
-vi about.ace 
-git commit -am '同意書をこのサイトについてに挿入'
-gitpush 
-git commit -am '同意書の内容を少し修正'
-gitpush 
-git commit -am '登録画面に適用'
-gitpush 
-git commit -am '同意書の内容を少し修正'
-git status
-git commit -am '権利の侵害に関する項目を追加'
-gitpush 
-git commit -am 'フッターのこのサイトについてのリンクが空だったので酒精'
-git commit --amend
-git log
-gitpush 
-cd volumes/go_app/views/
-ls
-vi search_
-cd ..
-vi search.go.cm 
-vi ser
-vi server
-vi server.go 
-cd volumes/go_app/
-cd views/
-ls
-vi a
-vi ab
-vi about.ace 
-vi term_of_service.ace 
-vi about.ace 
-vi input_evaluation.ace 
-vi consent_form.ace 
-vi input_evaluation.ace 
-cd volumes/go_app/views/
-git commit -am '同意書の実験者を実験実施者に変更。このサイトについての一行目をWebRepo☆彡に変更'
-gitpush 
-git status
-git log
-git commit -am '評価入力画面の目的の説明をよりこちらのいといたものとなるように変更'
-gitpush 
-exit
-cd volumes/go_app/views/
-vi signin_select.ace 
-git commit -am "サインイン方法選択画面のリンクが絶対ぱすだったので相対パスに変更"
-gitpush 
-exit
-ls
-cd volumes/go_app/
-vi server.go 
-cd ,,
-cd ..
-cd ~
-ls
-vi docker-compose.yml
-cd mysql/
-ls
 vi Dockerfile 
 ls
 cd init
@@ -998,3 +939,62 @@ ls
 cd volumes/go_app/
 ls
 cat server.go 
+cd volumes/db_data/
+ls
+cd mysql/
+cd
+cd echo/
+l
+;la
+ls
+vi Dockerfile
+docker-compose down
+docker rmi tuna_echo
+docker-compose up -d --build
+docker-compose log
+docker-compose logs
+cd ..
+cd volumes/db_data/
+ls
+cd ..
+cd go_app/
+vi server.go 
+docker-compose logs
+vi server.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi server.go 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/
+ls
+vi server.go 
+docker-compose log
+docker-compose logs
+docker-compose down
+docker rmi tuna_echo
+docker-compose up -d --build
+docker-compose logs
+vi server.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi server.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi server.go 
+docker-compose logs
+vi server.go 
+git status
+git commit -am '取り敢えずエラーを減らすように修正'
+gitpush 
+cd volumes/go_app/
+vi server.go 
