@@ -1,40 +1,4 @@
 ls
-vi Dockerfile 
-ls
-cd init
-ls
-cd ..
-la
-ls
-vi Dockerfile 
-ls
-vi Dockerfile 
-docker-compose -h
-ls
-cd init/
-touch userinfo.sql
-git status
-git add .
-ls
-git status
-git status
-cd volumes/go_app/views/
-ls
-cd..
-cd ..
-cd ..\
-
-mysql -uroot
-vi docker-compose.yml
-docker ps
-docker exec -it tuna_mysql_1 /bin/bash
-git status
-git commit -am "
-データベース初期作成用の空のSQLファイルを作成"
-gitpush 
-ls
-cd volumes/
-ls
 cd db_data/
 git status
 ls
@@ -998,3 +962,39 @@ git commit -am '取り敢えずエラーを減らすように修正'
 gitpush 
 cd volumes/go_app/
 vi server.go 
+vi O
+cd volumes/go_app/
+vi server.go 
+vi OAuth_google_github.go 
+docker-compose logs
+git log
+cd volumes/go_app/
+ls
+vi server.go
+vi template_no_proxy.go 
+cp template_no_proxy.go OAuth_google.go
+ls
+vi OAuth_google.go 
+mv OAuth_google.go OAuth_google_github.go 
+vi OAuth_google.go 
+vi OAuth_google_github.go 
+vi OAuth_google.go 
+vi server.go
+git commit -am 'OAuth2公式の処理をコピペ'
+vi server.go
+git commit --amend
+git add OAuth_google_github.go 
+git commit --amend
+vi server.go
+cd volumes/go_app/
+ls
+vi server.go 
+vi O
+cd volumes/go_app/
+vi OAuth_google_github.go 
+docker-compose logs
+cd volumes/go_app/
+ls
+vi server.go 
+cd volumes/go_app/
+vi OAuth_google_github.go 
