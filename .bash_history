@@ -1,22 +1,3 @@
-ls
-cd db_data/
-git status
-ls
-rm ./
-rm *
-cd volumes/
-cd db_data/
-sudo rm *
-sudo rm * -r
-ls
-docker exec -it tuna_mysql_1 /bin/bash
-ls
-cd bin
-ks
-ls
-cd ..
-ls -a
-cat .bash_histry
 cat .bash_history
 cat .bash_history | grep rmi
 docker-compose down --rmi all
@@ -998,3 +979,22 @@ ls
 vi server.go 
 cd volumes/go_app/
 vi OAuth_google_github.go 
+cd volumes/go_app/
+ls
+vi server.go 
+vi OAuth_google_github.go 
+git status
+git commit -am 'server.go を Oauth 認証前のコード記述前に戻した。'
+gitpush 
+git status
+git log
+vi server.go 
+vi OAuth_google_github.go 
+:q
+exit
+vi server.go 
+cd volumes/go_app/
+vi server.go 
+unexpand server.go -t 4
+vi server.go 
+exit
