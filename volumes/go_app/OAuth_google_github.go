@@ -28,9 +28,9 @@ func Example_webServer() {
 	// Your credentials should be obtained from the Google
 	// Developer Console (https://console.developers.google.com).
 	conf := &oauth2.Config{
-		ClientID:     "YOUR_CLIENT_ID",
-		ClientSecret: "YOUR_CLIENT_SECRET",
-		RedirectURL:  "YOUR_REDIRECT_URL",
+		ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+		ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
+		RedirectURL:  "/",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/bigquery",
 			"https://www.googleapis.com/auth/blogger",

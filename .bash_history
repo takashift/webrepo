@@ -1,29 +1,3 @@
-cat .bash_history
-cat .bash_history | grep rmi
-docker-compose down --rmi all
-cat .bash_history | grep docker-compose
-cat .bash_history | grep up
-docker-compose up -d --build
-docker-compose log
-docker-compose logs
-cat .bash_history | grep it
-ls
-cd mysql/
-ls
-vi Dockerfile 
-free
-df
-pvdisplay'
-
-;
-'
-pvdisplay
-vmstat
-df
-vmstat
-vmstat 
-df -h
-exit
 docker-compose logs
 exit
 fdisk -l
@@ -998,3 +972,29 @@ vi server.go
 unexpand server.go -t 4
 vi server.go 
 exit
+unexpand server.go -t 4
+vi server.go 
+cd volumes/go_app/
+ls
+cd volumes/go_app/
+vi OAuth_google_github.go 
+cd volumes/go_app/
+ls
+vi server.go 
+git commit -am 'server.go のインデントのスペース2つだったところをタブに変更
+'
+git status
+gitpush 
+vi server.go 
+cd volumes/go_app/
+vi OAuth_google_github.go 
+ls -a
+rm .OAuth_google_github.go.swp 
+vi OAuth_google_github.go 
+vi server.go 
+cd volumes/go_app/
+vi server.go 
+cd volumes/go_app/
+ls
+ls -a
+vi OAuth_google_github.go 
