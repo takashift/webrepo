@@ -1,13 +1,3 @@
-docker-compose logs
-exit
-fdisk -l
-sudo fdisk -l
-df
-df -h
-fdisk -l
-sudo fdisk -l
-sudo fdisk -lh
-sudo fdisk -l
 fdisk /dev/vda
 sudo fdisk /dev/vda
 sudo reboot
@@ -998,3 +988,13 @@ cd volumes/go_app/
 ls
 ls -a
 vi OAuth_google_github.go 
+/Users/Cokoten 
+cd volumes/go_app/
+ls -a
+vi server.go 
+exit
+cd volumes/go_app/
+vi OAuth_google_github.go 
+git commit -am 'GoogleのクライアントIDとシークレッドIDを追加'
+gitpush 
+exit

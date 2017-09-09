@@ -32,8 +32,7 @@ func Example_webServer() {
 		ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
 		RedirectURL:  "/",
 		Scopes: []string{
-			"https://www.googleapis.com/auth/bigquery",
-			"https://www.googleapis.com/auth/blogger",
+			"openid",
 		},
 		Endpoint: google.Endpoint,
 	}
