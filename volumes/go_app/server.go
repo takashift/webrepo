@@ -52,7 +52,7 @@ func main() {
 	e.GET("/google_OAuth", func(c echo.Context) error {
 		oauthStateString := uniuri.New()
 		url := googleOauthConfig.AuthCodeURL(oauthStateString)
-		c.Redirect(http.StatusTemporaryRedirect, url)
+		return c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
 	// 同意後のアドレス確認促進画面
