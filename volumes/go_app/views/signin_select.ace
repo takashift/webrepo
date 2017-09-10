@@ -47,13 +47,13 @@ html lang=ja
   body
     = include header_menu
     #OAuth_menu
-      .button#google
+      a.button#google href="google_OAuth"
         b google
         {{HTML " アカウントで登録 / サインイン"}}
-      .button#twitter
+      a.button#twitter href="twitter_OAuth"
         b twitter
         {{HTML " アカウントで登録 / サインイン"}}
-      .button#facebook
+      a.button#facebook href="facebook_OAuth"
         b facebook
         {{HTML " アカウントで登録 / サインイン"}}
       a.button#button_pass href="pass_signin" パスワードで登録 / サインイン

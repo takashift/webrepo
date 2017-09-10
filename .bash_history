@@ -1,15 +1,3 @@
-fdisk /dev/vda
-sudo fdisk /dev/vda
-sudo reboot
-git log
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-git commit -am 'ユーザー情報用のテーブルを作成する文を追記'
-git status
-git reset HEAD mysql/init/.webrepo.sql.swp
-git status
 git commit --amend
 gitpush 
 sudo fdisk -l
@@ -997,4 +985,16 @@ cd volumes/go_app/
 vi OAuth_google_github.go 
 git commit -am 'GoogleのクライアントIDとシークレッドIDを追加'
 gitpush 
+exit
+ls -a
+cd volumes/go_app/
+vi server.go 
+exot
+exit
+cd volumes/go_app/
+vi OAuth_google_github.go 
+git status
+git commit -am 'OAuthのスコープを設定'
+gitpush 
+vi OAuth_google_github.go 
 exit

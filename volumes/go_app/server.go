@@ -12,7 +12,6 @@ import (
 var e = echo.New()
 
 func main() {
-
 	e.GET("/test", func(c echo.Context) error {
 	
 		// この Render は Echo のメソッドであり、テンプレートエンジンのメソッドではない！
@@ -45,6 +44,9 @@ func main() {
 
 	// OAuth認証サインアップフォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
+		oauthStateString := uniuri.New()
+		url := googleOauthConfig.AuthCodeURL(oauthStateString)
+		http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
@@ -128,4 +130,3 @@ func main() {
 	e.Listener = unix
 	e.Logger.Fatal(e.Start(""))
 }
-
