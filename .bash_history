@@ -1,17 +1,3 @@
-git commit --amend
-gitpush 
-sudo fdisk -l
-df -h
-pvcreate
-sudo pvcreate /dev/vda3
-pvdisplay
-duso pvdisplay
-sudo pvdisplay
-vgdisplay
-sudo vgdisplay
-
-vgdisplay
-sudo vgdisplay
 lvdisplay
 sudo lvdisplay
 sudo su
@@ -998,3 +984,17 @@ git commit -am 'OAuthのスコープを設定'
 gitpush 
 vi OAuth_google_github.go 
 exit
+vi server.go 
+cd volumes/go_app/
+vi server.go 
+vi OAuth_google_github.go 
+vi OAuth_google_github.go_
+vi server.go 
+vi OAuth_google_github.go 
+cd volumes/go_app/
+vi OAuth_google_github.go 
+mv OAuth_google_github.go OAuth_google_github.go_ 
+ls
+vi OAuth_google_dedium.go
+vi OAuth_google_github.go_
+vi OAuth_google_dedium.go

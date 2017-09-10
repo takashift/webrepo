@@ -5,6 +5,7 @@ import (
 	"net"
 	"net/http"
 	"github.com/labstack/echo"
+	"github.com/dchest/uniuri"
 	//_ "github.com/go-sql-driver/mysql"
 	//"github.com/gocraft/dbr"
 )
@@ -44,10 +45,14 @@ func main() {
 
 	// OAuth認証サインアップフォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+	})
+
+	// Google の認証画面にリダイレクト 
+	e.GET("/google_OAuth", func(c echo.Context) error {
 		oauthStateString := uniuri.New()
 		url := googleOauthConfig.AuthCodeURL(oauthStateString)
-		http.Redirect(w, r, url, http.StatusTemporaryRedirect)
-		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
 	// 同意後のアドレス確認促進画面
