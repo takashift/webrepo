@@ -9,6 +9,7 @@ html lang=ja
         text-align: center;
       }
       .button {
+        display: block;
         font-size: 1rem;
         color: #555;
         border-style: none;
@@ -19,6 +20,7 @@ html lang=ja
         padding: 1.5rem;
         margin: 1rem auto auto auto;
         cursor: pointer;
+        text-decoration: none;
       }
       #twitter {
         color: rgba(255,255,255,1);
