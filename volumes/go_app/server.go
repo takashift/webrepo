@@ -55,6 +55,11 @@ func main() {
 		return c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
+	// コールバック
+	e.GET("/agree_signup", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "agree_signup", searchForm)
+	})
+
 	// 同意後のアドレス確認促進画面
 	e.GET("/agree_signup", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "agree_signup", searchForm)

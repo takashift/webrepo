@@ -1,118 +1,3 @@
-lvdisplay
-sudo lvdisplay
-sudo su
-ls
-cd mysql/
-ls
-cd init/
-ls
-mv userinfo.sql webrepo.sql
-ls
-vi 
-vi webrepo.sql 
-wq
-free
-vmstat
-vmstat 5
-ls
-git add ./
-ls -a
-cd volumes/db_data/
-ls
-cd ..\
-cd ..
-ls
-cd mysql/
-ls
-cd init/
-ls
-vi webrepo.sql 
-cd mysql/
-cd init/
-ls
-vi webrepo.sql 
-docker exec -it tuna_mysql_1 /bin/bash
-cd mysql/
-ls
-vi Dockerfile 
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose down --rmi all
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-ls
-git log
-ls
-cd mysql/
-ls
-cd init/
-ls
-vi webrepo.sql 
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose down --rmi all
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-vi webrepo.sql 
-git commit -am "文字コードは.sqlで指定するものではなかったので修正。"
-gitpush 
-docker-compose down --rmi all
-cd ~/volumes/db_data/
-ls
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-exit
-cd mysql/init/
-vi webrepo.sql 
-exit
-cd mysql/init/
-exit
-cd mysql/init/
-vi webrepo.sql 
-rm .webrepo.sql.swp 
-vi webrepo.sql 
-git commit -am '審議のカラムまで記述'
-gitpush
-exit
-cd ~/volumes/db_data/
-cd ~
-cd mysql/init/
-ls
-vi webrepo.sql
-cd mysql/init/
-vi 
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-ls -a
-rm .webrepo.sql.sw .webrepo.sql.sw
-rm -r .webrepo.sql.sw .webrepo.sql.sw
-rm .webrepo.sql.swo .webrepo.sql.swp
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-rm .webrepo.sql.swp 
-vi webrepo.sql 
-cd volumes/go_app/
-ls
-cd views/
-ls
-vi preview_evaluation.ace 
-vi register_page.ace 
-cd mysql/init/
-vi webrepo.sql 
-git commit -am 'ページ情報のカラムを記述'
-git status
-gitpush 
-git commit --amend
-cd volumes/go_app/views/
 ls
 cd mysql/init/
 vi webrepo.sql 
@@ -998,3 +883,118 @@ ls
 vi OAuth_google_dedium.go
 vi OAuth_google_github.go_
 vi OAuth_google_dedium.go
+cd volumes/go_app/
+vi OAuth_google_github.go 
+ls -a
+vi OAuth_google_dedium.go 
+rm .OAuth_google_dedium.go.swp 
+mv OAuth_google_dedium.go OAuth_google_medium.go
+ls
+vi OAuth_google_medium.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker rmi tuna_echo
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker rmi tuna_echo
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+vi OAuth_google_medium.go 
+docker-compose logs
+exit
+cd volumes/go_app/
+vi server.go 
+rm .server.go.swp 
+vi server.go 
+exit
+cd volumes/go_app/views/
+ls
+cat OAuth_signup.ace 
+cd ..
+vi OAuth_google_github.go 
+ls
+cd views/
+ls
+vi signin_select.ace 
+git status
+git add ../OAuth_google_github.go_
+git status
+git commit -am 'サインイン方法選択画面のボタンのリンク先を設定'
+git add ../OAuth_google_medium.go 
+git commit -am '取り敢えず簡単なOAuth2の実装を試すためのファイルを用意'
+gitpush 
+vi signin_select.ace 
+cd ..
+cd..
+cd 
+cd echo/
+ls
+vi Dockerfile
+git status
+git commit -am 'エラーの修正とEchoのリダイレクトを仕様'
+git commit --amend
+gitpush 
+git commit -am 'リダイレクト先を修正'
+git commit --amend
+gitpush 
+vi signin_select.ace 
+cd ..
+cd volumes/go_app/views/
+vi signin_select.ace 
+git commit -am 'サインイン方法選択画面の表示崩れと下線が表示されるのを週背'
+git commit --amend
+gitpush 
+git sutatus
+git sutats
+git sutatus
+git status
+exit
