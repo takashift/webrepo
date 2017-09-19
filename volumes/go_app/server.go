@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
 	"net"
 	"net/http"
-	"github.com/labstack/echo"
+	"os"
+
 	"github.com/dchest/uniuri"
+	"github.com/labstack/echo"
 	//_ "github.com/go-sql-driver/mysql"
 	//"github.com/gocraft/dbr"
 )
@@ -14,7 +15,7 @@ var e = echo.New()
 
 func main() {
 	e.GET("/test", func(c echo.Context) error {
-	
+
 		// この Render は Echo のメソッドであり、テンプレートエンジンのメソッドではない！
 		// この関数の第３引数がテンプレート{{.}}になる
 		return c.Render(http.StatusOK, "test", data)
@@ -48,7 +49,7 @@ func main() {
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
-	// Google の認証画面にリダイレクト 
+	// Google の認証画面にリダイレクト
 	e.GET("/google_OAuth", func(c echo.Context) error {
 		oauthStateString := uniuri.New()
 		url := googleOauthConfig.AuthCodeURL(oauthStateString)
@@ -56,8 +57,20 @@ func main() {
 	})
 
 	// コールバック
-	e.GET("/agree_signup", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "agree_signup", searchForm)
+	e.GET("/oauth2callback", func(c echo.Context) error {
+		// code := c.FormValue("code")
+		// token, _ := googleOauthConfig.Exchange(oauth2.NoContext, code)
+
+		// response, _ := c.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
+
+		// defer response.Body.Close()
+
+		// json.NewDecoder(response.Body).Decode(&user)
+		// /*contents, _ := ioutil.ReadAll(response.Body)
+		// var user *GoogleUser
+		// _ = json.Unmarshal(contents, &user)
+		// */
+		return c.Redirect(http.StatusTemporaryRedirect, "/")
 	})
 
 	// 同意後のアドレス確認促進画面
@@ -126,7 +139,7 @@ func main() {
 	})
 
 	// ソケット生成
-	os.Remove("/usock/domain.sock");
+	os.Remove("/usock/domain.sock")
 	unix, err := net.Listen("unix", "/usock/domain.sock")
 	if err != nil {
 		e.Logger.Fatal(err)

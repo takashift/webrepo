@@ -1,128 +1,4 @@
 ls
-cd mysql/init/
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-exit
-cd mysql/init/
-vi webrepo.sql 
-ls
-rm .webrepo.sql.swp 
-ls -a
-vi webrepo.sql 
-ls
-cd mysql/init/
-cd volumes/go_app/views/
-ls
-cd volumes/go_app/views/
-cat preview_evaluation.ace 
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-git commit -am '個別評価用テンプレートテーブル完成（ジャンルごとの段階評価用にオプションカラムを10個用意）'
-gitpush 
-vi webrepo.sql 
-rm .webrepo.sql.swp 
-vi webrepo.sql 
-git commit -am '個別評価に対するコメント用テーブルのカラムを記述'
-git commit --amend
-git log
-gitpush 
-gitpush -f
-git push -f
-cd volumes/go_app/
-cd ~
-cd mysql/init/
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-rm .w
-rm .webrepo.sql.swp 
-git commit -am "誤字脱字のカラムを記述"
-gitpush 
-exit
-cd volumes/go_app/
-cd views/
-ls
-vi input_evaluation.ace 
-cd mysql/init/
-vi webrepo.sql 
-cd mysql/init/
-rm .webrepo.sql.swp 
-vi webrepo.sql 
-cd ~
-cd volumes/db_data/
-ls
-docker-compose down --rmi all
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose up -d --build
-docker-compose down --rmi all
-ls
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose up -d --build
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-sudo cd var/lib/docker/volumes
-cd /var/lib/docker/volumes
-sudo cd /var/lib/docker/volumes
-ls
-sudo su
---socket=/tmp/mysqld.sock /var/lib/docker/volumes/tuna_usock/_data/mysqld.sock
-mysql -u rtuna -p --socket=/tmp/mysqld.sock /var/lib/docker/volumes/tuna_usock/_data/mysqld.sock
-mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-ls
-pwd
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose logs
-docker-compose down --rmi all
-ls
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose logs | indi
-docker-compose logs | grep indi
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-sudo rm -r *
-docker-compose up -d --build
-docker-compose down --rmi all
-ls
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-ls
 docker-compose up -d --build
 docker-compose logs
 sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
@@ -998,3 +874,127 @@ git sutats
 git sutatus
 git status
 exit
+cd volumes/go_app/
+ls
+ls -a
+cd volumes/go_app/views/
+ls
+cd ..
+cd volumes/go_app/views/
+git status
+git commit -am 'コールバックの処理の枠組みだけ作成'
+gitpush 
+cd volumes/go_app/v
+cd volumes/go_app/
+ls -a
+vi server.go 
+cd volumes/go_app/
+ls
+vi signin_select.ace 
+vi OAuth_google_medium.go 
+cd volumes/go_app/
+vi server.go 
+vi OAuth_google_medium.go 
+cd volumes/go_app/
+vi signin_select.ace 
+vi server.go 
+cd volumes/go_app/
+vi server.go
+exit
+cd volumes/go_app/
+vi OAuth_google_medium.go 
+exit
+exit
+cd volumes/go_app/
+dnf
+yum install rmate
+yum update
+sudo yum makecache fast
+yum install rmate
+sudo yum install rmate
+go
+gem install rmate
+yum install go
+sudo yum install go
+go get gomate
+go get github.com/mattn/gomate
+ssh -R 52698:localhost:52698 user@example.com
+exit
+ls
+cd go/
+ls
+cd ..
+cd echo/
+;s
+ld
+ls
+cd ..
+cd volumes/go_app/
+ls
+rmate -p 52698 file
+rmate -p 52698 server.go 
+gomate -p 52698 server.go 
+exit
+gomate -p 52698 server.go 
+go get github.com/mattn/gomate
+rmate -p 52698 volumes/go_app/server.go 
+sudo go get github.com/mattn/gomate
+rmate -p 52698 volumes/go_app/server.go 
+gomate -p 52698 volumes/go_app/server.go 
+go -h
+sudo go get -tgithub.com/mattn/gomate
+sudo go get -t github.com/mattn/gomate
+go get
+sudo go get -t github.com/mattn/gomate
+go lost
+go list
+echo $GOPATH
+ls
+ls -a
+vi .bash_profile 
+sudo yum install rmate
+go get github.com/mattn/gomate
+vi .bash_profile 
+go get github.com/mattn/gomate
+echo $GOPATH
+source ~/.bash_profile 
+echo $GOPATH
+go get github.com/mattn/gomate
+sudo go get github.com/mattn/gomate
+go list
+sudo go get github.com/mattn/gomate
+go get github.com/mattn/gomate
+rmate
+gomate
+gomate -p 52698 file
+gomate volumes/go_app/server.go 
+exit
+vi .bash_profile 
+exit
+gomate
+exit
+cd volumes/go_app/server.go 
+cd volumes/go_app/ 
+pwd
+exit
+gomate
+exit
+gomate
+rcode
+yum install rcode
+gem rcode
+sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
+yum install wget
+sudo yum install wget
+sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
+chmod a+x /usr/local/bin/rcode
+sudo chmod a+x /usr/local/bin/rcode
+rcode
+rcode volumes/go_app/server.go 
+exit
+gomate /home/tuna/volume/go_app/server.go
+ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
+sudo ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
+ssh -R 52698:127.0.0.1:52698  gomate volume/go_app/server.go
+ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
+sudo ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
