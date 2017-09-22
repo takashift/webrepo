@@ -7,11 +7,23 @@ import (
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
+
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/google"
 	//_ "github.com/go-sql-driver/mysql"
 	//"github.com/gocraft/dbr"
 )
 
 var e = echo.New()
+
+var googleOauthConfig = &oauth2.Config{
+	ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+	ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
+	Endpoint:     google.Endpoint,
+	RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback",
+	Scopes: []string{
+		"openid"},
+}
 
 func main() {
 	e.GET("/test", func(c echo.Context) error {
@@ -58,8 +70,8 @@ func main() {
 
 	// コールバック
 	e.GET("/oauth2callback", func(c echo.Context) error {
-		// code := c.FormValue("code")
-		// token, _ := googleOauthConfig.Exchange(oauth2.NoContext, code)
+		code := c.FormValue("code")
+		token, _ := googleOauthConfig.Exchange(oauth2.NoContext, code)
 
 		return c.Redirect(http.StatusTemporaryRedirect, "/")
 	})
