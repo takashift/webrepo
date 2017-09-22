@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net"
 	"net/http"
 	"os"
@@ -35,6 +37,7 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
+		user := c.Get("user")
 		return c.Render(http.StatusOK, "search_top", searchForm)
 	})
 
@@ -73,17 +76,18 @@ func main() {
 		code := c.FormValue("code")
 		token, _ := googleOauthConfig.Exchange(oauth2.NoContext, code)
 
-		return c.Redirect(http.StatusTemporaryRedirect, "/")
+		response, _ := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
+
+		defer response.Body.Close()
+
+		var user *GoogleUser
+		json.NewDecoder(response.Body).Decode(&user)
+		contents, _ := ioutil.ReadAll(response.Body)
+		_ = json.Unmarshal(contents, &user)
+		c.Set("user", user)
+
+		return c.Redirect(http.StatusTemporaryRedirect, "OAuth_signup")
 	})
-
-	// response, _ := e.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
-
-	// defer response.Body.Close()
-
-	// json.NewDecoder(response.Body).Decode(&user)
-	// contents, _ := ioutil.ReadAll(response.Body)
-	// var user *GoogleUser
-	// _ = json.Unmarshal(contents, &user)
 
 	// 同意後のアドレス確認促進画面
 	e.GET("/agree_signup", func(c echo.Context) error {
