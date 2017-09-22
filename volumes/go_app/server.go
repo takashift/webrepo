@@ -61,17 +61,17 @@ func main() {
 		// code := c.FormValue("code")
 		// token, _ := googleOauthConfig.Exchange(oauth2.NoContext, code)
 
-		// response, _ := c.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
-
-		// defer response.Body.Close()
-
-		// json.NewDecoder(response.Body).Decode(&user)
-		// /*contents, _ := ioutil.ReadAll(response.Body)
-		// var user *GoogleUser
-		// _ = json.Unmarshal(contents, &user)
-		// */
 		return c.Redirect(http.StatusTemporaryRedirect, "/")
 	})
+
+	// response, _ := e.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
+
+	// defer response.Body.Close()
+
+	// json.NewDecoder(response.Body).Decode(&user)
+	// contents, _ := ioutil.ReadAll(response.Body)
+	// var user *GoogleUser
+	// _ = json.Unmarshal(contents, &user)
 
 	// 同意後のアドレス確認促進画面
 	e.GET("/agree_signup", func(c echo.Context) error {

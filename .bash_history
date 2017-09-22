@@ -1,35 +1,3 @@
-ls
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-sudo rm -r *
-docker-compose down --rmi all
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-ls
-docker-compose down --rmi all
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-;s
-ls
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-exit
-cd mysql/init/
-vi webrepo.sql 
-rm .webrepo.sql.swp 
-git commit -am '段階評価項目、ページ属性項目のテーブルのカラムを記述'
-vi webrepo.sql
-git commit -am 'NGワード用テーブルを追記'
-gitpush 
 git status
 cd ..
 git commit -am 'ユーザー情報のカラムにNGワードを投稿した数のカウントを追加'
@@ -998,3 +966,35 @@ sudo ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volu
 ssh -R 52698:127.0.0.1:52698  gomate volume/go_app/server.go
 ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
 sudo ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
+gomate /home/tuna/volume/go_app/server.go
+gomate volume/go_app/server.go
+rcode volumes/go_app/server.go 
+gomate volume/go_app/server.go
+rcode volumes/go_app/server.go 
+which gofmt
+gomate volume/go_app/server.go
+gomate -p  volume/go_app/server.go
+gomate -port 52698  volume/go_app/server.go
+gomate -port 52698 volume/go_app/server.go
+git status
+rcode volumes/go_app/OAuth_google_
+ls
+cd volumes/go_app/
+la
+ls
+rcode OAuth_google_medium.go 
+docker-compose 
+docker-compose logs
+git commit -am 'リダイレクトURLの設定を正常に変更。コールバックの関数のコードは適当なコピペで動かないので取り敢えずコメントアウト'
+gitp`
+
+
+
+
+
+'
+`
+gitpush 
+exit
+cd volumes/go_app/
+rcode server.go 
