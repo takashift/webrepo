@@ -1,118 +1,3 @@
-git status
-cd ..
-git commit -am 'ユーザー情報のカラムにNGワードを投稿した数のカウントを追加'
-gitpush 
-cd mysql/init/
-vi webrepo.sql 
-cd mysql/init/
-vi webrepo.sql 
-git commit -am 'varchar(65535)ha'
-git commit --amend
-gitp
-gitpush 
-vi webrepo.sql 
-git commti -am '日時を入力する欄を日付・時刻型に変更'
-git commit -am '日時を入力する欄を日付・時刻型に変更'
-gitpush 
-vi webrepo.sql 
-git commit -am 'describeが予約語だったのでdescribe_evalに変更'
-gitpush 
-cd mysql/init/
-vi webrepo.sql 
-git commit -am 'アカウントとページのテーブルにNULLを許容しないカラムを設定'
-gitpush 
-vi webrepo.sql 
-git commit -am '全てのテーブルのNULLを許容しないカラムを設定'
-gitpush 
-exit
-ls
-cd volumes/go_app/
-ls
-mkdir archive
-ls
-mv db.go.cm archive/
-cd archive/
-ls
-cd ..
-mv search.go.cm archive/
-mv server_std.go.cm archive/
-mv server_template.go.cm archive/
-mv server_text.go.cmarchive/
-mv  archive/
-ls
-cd template_std.go.cm archive/
-mv template_std.go.cm archive/
-ls
-viwes
-cd viwes
-cd views
-;s
-ls
-mkdir archive
-ks
-ls
-mv header.html archive/
-mv page1.html archive/
-cd ..
-ls
-cd views/
-ls
-cd ..
-vi server.go 
-cd archive/
-ls
-vi db.go.cm 
-cd ..
-vi server.go 
-exit
-cd volumes/go_app/
-ls
-vi tq
-vi template_no_proxy.go 
-cd ..
-cd
-ls
-cd echo/
-cat Dockerfile
-exir
-exit
-ls
-cd mysql/init/
-vi webrepo.sql 
-cd volumes/db_data/ls
-cd volumes/db_data/
-ls
-sudo rm -r *
-ls
-exit
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd mysql/init/
-ls
-vi webrepo.sql 
-git commit -am 'テーブル作成用SQLの個別評価テーブルに見やすさのカラムが無かったので追加'
-git commit --amend
-git status
-ls ../../volumes/go_app/archive/
-ls -a ../../volumes/go_app/archive/
-ls -a ../../volumes/go_app/views/archive/
-git add ../../volumes/go_app/archive/ ../../volumes/go_app/views/archive/
-git status
-git commit --amend
-gitpush 
-cd ..
-ls
-vi webrepo.sql 
-cd mysql/init/
-ls
-cd mysql/init/
-vi webrepo.sql 
-git commit -am 'テーブル作成用SQLの段階評価に理由格納用カラムを追加'
-gitpush 
-vi webrepo.sql 
-cd ..
-cd volumes/go_app/views/
-ls
-vi input_evaluation.ace 
 cd ..
 vi server.go 
 vi input_evaluation.ace 
@@ -998,3 +883,118 @@ gitpush
 exit
 cd volumes/go_app/
 rcode server.go 
+cd echo/
+ls
+vi D
+vi Dockerfile
+cd ~/volumes/go_app/views/
+ls
+cd volumes/go_app/
+rcode server.go 
+git commit -am 'server.go の無駄なコメントアウトを修正'
+gitpush 
+rcode OAuth_google_medium.go 
+mv OAuth_google_medium.go OAuth_google_medium.go_
+git commit -am 'ファイルを一つに統合'
+git status
+git add OAuth_google_medium.go_ 
+git commit --amend
+gitpush 
+docker-compose logs
+git commit -am "コールバックのリダイレクト先をメールアドレス入力フォームに変更"
+gitpush 
+docker-compose logs
+gitpush 
+docker-compose logs
+docker-conpose down
+docker-compose 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+rcode server.go 
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build --no-cache
+docker-compose down --rmi all
+yum update -y
+sudo yum update -y
+docker-compose up -d --build --no-cache
+docker-compose down --rmi all
+docker-compose down -h
+dockercompose down
+docker-compose down
+docker-compose down -h
+docker-compose up -d
+docker-compose do
+docker rmi tuna_echo
+docker-compose up -d --build --no-cache
+docker-compose up -d --build
+docker-compose down --rmi all
+docker-compose build --no-cache
+docker-compose up -d --build
+docker-compose logs
+docker images
+docker-compose down --rmi all
+docker rmi 
+docker rmi tuna_echo
+docker images
+docker ps
+docker ps -a
+docker rm all
+docker ps -a -q
+docker rm 'docker ps -a -q'
+docker rm `docker ps -a -q`
+docker images
+docker rmi 32efc118745e
+docker rmi 1de06cb54407
+docker images
+docker rmi 32efc118745e
+docker-compose up -d --build
+docker images
+docker-compose down --rmi all
+docker images
+docker rmi 5a35015d93e9 9e64176cd8a2
+docker rmi 'docker images -a -q'
+docker images -h
+docker rmi 'docker images -q'
+docker images -a
+docker rmi `docker images -a -q`
+docker images
+docker-compose up -d --build
+docker images
+docker-compose down --rmi all
+docker-compose up -d --build
+docker images
+docker-compose logs
+exit
+esit
+exit
+cd volumes/go_app/
+rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+git log
+cd volumes/go_app/
+rcode server.go 
+exit
+rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+exit
+cd volumes/go_app/
+exit
+docker-compose logs
+rcode server.go 
+docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+exit
+docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+exit

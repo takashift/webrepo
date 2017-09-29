@@ -2,10 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"os"
+	"runtime"
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
@@ -24,7 +26,12 @@ var googleOauthConfig = &oauth2.Config{
 	Endpoint:     google.Endpoint,
 	RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback",
 	Scopes: []string{
-		"openid"},
+		"email"},
+}
+
+type GoogleUser struct {
+	// 先頭が大文字でないと格納されない。
+	Email string `json:"email"`
 }
 
 func main() {
@@ -37,7 +44,6 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
-		user := c.Get("user")
 		return c.Render(http.StatusOK, "search_top", searchForm)
 	})
 
@@ -61,6 +67,13 @@ func main() {
 
 	// OAuth認証サインアップフォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
+		user := c.Get("email").(string)
+		if user != "" {
+			fmt.Fprintf(os.Stderr, "%v\n", user)
+		} else {
+			fmt.Fprintf(os.Stderr, "NO\n")
+		}
+
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
@@ -74,19 +87,34 @@ func main() {
 	// コールバック
 	e.GET("/oauth2callback", func(c echo.Context) error {
 		code := c.FormValue("code")
-		token, _ := googleOauthConfig.Exchange(oauth2.NoContext, code)
+		token, err := googleOauthConfig.Exchange(oauth2.NoContext, code)
+		if err != nil {
+			panic(err)
+		}
 
-		response, _ := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
+		fmt.Fprintf(os.Stderr, "%s\n", runtime.Version())
+
+		// JSON が返ってくる
+		response, err := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
+		if err != nil {
+			panic(err)
+		}
 
 		defer response.Body.Close()
 
 		var user *GoogleUser
-		json.NewDecoder(response.Body).Decode(&user)
-		contents, _ := ioutil.ReadAll(response.Body)
-		_ = json.Unmarshal(contents, &user)
-		c.Set("user", user)
+		// user := new(GoogleUser)
 
-		return c.Redirect(http.StatusTemporaryRedirect, "OAuth_signup")
+		// err = json.NewDecoder(response.Body).Decode(user)
+		contents, _ := ioutil.ReadAll(response.Body)
+		err = json.Unmarshal(contents, &user)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Fprintf(os.Stderr, "callback: %v\n", user)
+		c.Set("email", user.Email)
+
+		return c.Redirect(http.StatusTemporaryRedirect, "/OAuth_signup")
 	})
 
 	// 同意後のアドレス確認促進画面
