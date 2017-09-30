@@ -1,5 +1,3 @@
-cd ..
-vi server.go 
 vi input_evaluation.ace 
 cd views/
 vi server.go 
@@ -997,4 +995,6 @@ exit
 docker-compose logs
 cd volumes/go_app/
 rcode server.go 
+exit
+docker-compose logs
 exit

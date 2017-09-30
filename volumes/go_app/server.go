@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"net/http"
 	"os"
@@ -12,10 +11,10 @@ import (
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
 
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/gocraft/dbr"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
-	//_ "github.com/go-sql-driver/mysql"
-	//"github.com/gocraft/dbr"
 )
 
 var e = echo.New()
@@ -29,10 +28,28 @@ var googleOauthConfig = &oauth2.Config{
 		"email"},
 }
 
+var (
+	tablename   = "userinfo"
+	seq         = 1
+	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
+	sess        = conn.NewSession(nil)
+)
+
 type GoogleUser struct {
 	// 先頭が大文字でないと格納されない。
 	Email string `json:"email"`
 }
+
+type (
+	userinfo struct {
+		ID    int    `db:"id"`
+		Email string `db:"email"`
+	}
+
+	responseData struct {
+		Users []userinfo `json:"users"`
+	}
+)
 
 func main() {
 	e.GET("/test", func(c echo.Context) error {
@@ -67,12 +84,12 @@ func main() {
 
 	// OAuth認証サインアップフォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
-		user := c.Get("email").(string)
-		if user != "" {
-			fmt.Fprintf(os.Stderr, "%v\n", user)
-		} else {
-			fmt.Fprintf(os.Stderr, "NO\n")
-		}
+		// user := c.Get("email").(string)
+		// if user != "" {
+		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
+		// } else {
+		// 	fmt.Fprintf(os.Stderr, "NO\n")
+		// }
 
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
@@ -102,17 +119,17 @@ func main() {
 
 		defer response.Body.Close()
 
-		var user *GoogleUser
-		// user := new(GoogleUser)
+		// var user *GoogleUser
+		user := new(GoogleUser)
 
-		// err = json.NewDecoder(response.Body).Decode(user)
-		contents, _ := ioutil.ReadAll(response.Body)
-		err = json.Unmarshal(contents, &user)
+		err = json.NewDecoder(response.Body).Decode(user)
+		// contents, _ := ioutil.ReadAll(response.Body)
+		// err = json.Unmarshal(contents, &user)
 		if err != nil {
 			panic(err)
 		}
 		fmt.Fprintf(os.Stderr, "callback: %v\n", user)
-		c.Set("email", user.Email)
+		// c.Set("email", user.Email)
 
 		return c.Redirect(http.StatusTemporaryRedirect, "/OAuth_signup")
 	})
