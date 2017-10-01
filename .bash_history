@@ -1,61 +1,3 @@
-vi input_evaluation.ace 
-cd views/
-vi server.go 
-vi input_evaluation.ace 
-cd ..
-docker-compose log
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-ls
-vi template_no_proxy.go 
-vi server.go 
-docker-compose logs
-docker-compose logs | grep echo
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-cd views/
-vi template_no_proxy.go 
-vi input_evaluation.ace 
-docker-compose down --rmi all
-cd ..
-vi server.go 
-docker-compose up -d --build
-docker-compose logs
-git commit -am '評価入力の閲覧日時の欄に初期表示する内容を設定'
-gitpush 
-cd views/
-vi in
-vi input_
-vi input_evaluation.ace 
-git commit -am '段階評価が必須項目で有る旨の注意書きを追加'
-gitpush 
-cd ..
-vi server.go 
-git log
-cd ..
- cd go_app/views/
-vi input_evaluation.ace 
-cd ..
-vi server.go 
-git commit -am '注意書きでも赤字だと視覚的に邪魔なので修正'
-gitpush 
-exit]
-exit
-cd mysql/
-vi Dockerfile 
-docker-compose down --rmi all
-cd ..
-cd volumes/db_data/
-sudo rm -r *
-ls
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd mysql/init/
-vi webrepo.sql 
 sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
 vi webrepo.sql 
 file -i webrepo.sql 
@@ -997,4 +939,62 @@ cd volumes/go_app/
 rcode server.go 
 exit
 docker-compose logs
+exit
+docker exec -it tuna_mysql_1 /bin/bash
+rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+git log
+docker-compose logs
+git log
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+rcode server.go 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+git log
+git commit -am '取得するデータをemailに変更'
+git status
+git log
+git commit --amend
+gitp
+gitpush 
+git log
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+ls
+cd archive/
+ls
+rcode db.go.cm 
+cd ..
+git commit -am 'データベースに接続するための設定を記述'
+gitpush 
+rcode server.go
+cd volumes/go_app/
+rcode server.go
+cd volumes/go_app/
+rcode server.go
 exit

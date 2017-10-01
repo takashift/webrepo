@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"strconv"
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
@@ -29,8 +30,9 @@ var googleOauthConfig = &oauth2.Config{
 }
 
 var (
-	tablename   = "userinfo"
-	seq         = 1
+	tablename = "userinfo"
+	seq       = 1
+	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	sess        = conn.NewSession(nil)
 )
@@ -41,15 +43,33 @@ type GoogleUser struct {
 }
 
 type (
-	userinfo struct {
-		ID    int    `db:"id"`
-		Email string `db:"email"`
-	}
-
-	responseData struct {
-		Users []userinfo `json:"users"`
+	userinfoJSON struct {
+		ID    int    `json:"id"`
+		Email string `json:"email"`
 	}
 )
+
+// データベースのテスト
+func updateUser(c echo.Context) error {
+	u := new(userinfoJSON)
+	if err := c.Bind(u); err != nil {
+		return err
+	}
+
+	attrsMap := map[string]interface{}{"id": u.ID, "email": u.Email}
+	sess.Update(tablename).SetMap(attrsMap).Where("id = ?", u.ID).Exec()
+	return c.NoContent(http.StatusOK)
+}
+
+func deleteUser(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	sess.DeleteFrom(tablename).
+		Where("id = ?", id).
+		Exec()
+
+	return c.NoContent(http.StatusNoContent)
+}
 
 func main() {
 	e.GET("/test", func(c echo.Context) error {
@@ -198,6 +218,9 @@ func main() {
 	e.GET("/about", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "about", searchForm)
 	})
+
+	e.PUT("/users/", updateUser)
+	e.DELETE("/users/:id", deleteUser)
 
 	// ソケット生成
 	os.Remove("/usock/domain.sock")
