@@ -1,51 +1,3 @@
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-vi webrepo.sql 
-file -i webrepo.sql 
-show variables like "chara%";
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd mysql/
-vi Dockerfile 
-docker exec -it tuna_mysql_1 /bin/bash
-vi Dockerfile 
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
-cd mysql/
-vi Dockerfile 
-docker-compose down --rmi all
-cd 
-cd volumes/db_data/
-ls
-lls
-docker-compose up -d --build
-exit
-cd mysql/
-vi Dockerfile
-cd i
-cd init/
-ls
-vi webrepo.sql 
-cd volumes/db_data/
-cd
-cd volumes/go_app/
-docker exec -it tuna_mysql_1 /bin/bash
-docker ps
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose down --rmi all
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker-compose down --rmi all
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
 docker-compose down --rmi all
 docker-compose logs
 docker-compose up -d --build
@@ -998,3 +950,51 @@ rcode server.go
 cd volumes/go_app/
 rcode server.go
 exit
+docker-compose logs
+cd volumes/go_app/
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+docker exec -it tuna_nginx_1 /bin/bash
+docker exec -it tuna_nginx_1 /bin/ash
+docker exec -it tuna_nginx_1 /bin/bash
+docker exec -it tuna_mysql_1 /bin/bash
+cd ..
+cd db_data/
+ls
+rm -r *
+ls
+sudo rm -r *
+ls
+git commit -am "Go での DB の Update、Delete テスト用のコードを記述"
+gitpush 
+sudo rm -r *
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+rcode server.go
+cd volumes/go_app/
+rcode server.go
+curl -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
+curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' tuna_echo_1:3306/users/
+curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' tuna_nginx_1:3306/users/
+curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' tuna_nginx_1:443/users/
+docker-compose logs
+docker-compose dow
+docker-compose down
+docker-compose up -d
+docker-compose up -d --build
+docker-compose logs
+curl -X PUT -H 'Content-Type: application/json' -d '{"id":3, "email":"oppai@email.com"}' -k https://tuna_nginx_1/users/
+docker-compose down
+docker-compose up -d --build
+docker-compose down --rmi all
+docker-compose up -d --build
+cd echo/
+s
+ls
+cat Dockerfile
+cd
+cat docker-compose.yml
+cd volumes/go_app/
+rcode server.go
+docker-compose logs

@@ -1,8 +1,7 @@
 CREATE TABLE userinfo(
 	id int unique not null auto_increment primary key,
-	OAuth_google tinyint DEFAULT 0,
-	OAuth_twitter tinyint DEFAULT 0,
-	OAuth_facebook tinyint DEFAULT 0,
+	OAuth_service VARCHAR(255),
+	OAuth_userinfo VARCHAR(255),
 	email varchar(255) unique not null,
 	password varchar(255) not null,
 	name varchar(255) DEFAULT '名無し',

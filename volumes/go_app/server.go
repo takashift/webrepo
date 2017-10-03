@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -43,13 +44,27 @@ type GoogleUser struct {
 }
 
 type (
+	// データベースのテスト
 	userinfoJSON struct {
 		ID    int    `json:"id"`
 		Email string `json:"email"`
 	}
+
+	userinfo struct {
+		ID            int    `db:"id"`
+		OAuthService  string `db:"OAuth_service"`
+		OAuthUserinfo string `db:"OAuth_userinfo"`
+		Email         string `db:"email"`
+		Password      string `db:"password"`
+		Name          string `db:"name"`
+		SignupDate    string `db:"signup_date"`
+		SafeSearch    int    `db:"safe_search"`
+		NGCount       int    `db:"NG_count"`
+	}
 )
 
-// データベースのテスト
+var referer string
+
 func updateUser(c echo.Context) error {
 	u := new(userinfoJSON)
 	if err := c.Bind(u); err != nil {
@@ -104,6 +119,10 @@ func main() {
 
 	// OAuth認証サインアップフォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
+		req, err := http.ReadRequest(bufio.NewReader(conn))
+		referer = req.Referer
+		fmt.Fprintf(os.Stderr, "%s\n", referer)
+
 		// user := c.Get("email").(string)
 		// if user != "" {
 		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
@@ -148,10 +167,23 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Fprintf(os.Stderr, "callback: %v\n", user)
+
+		var userInfo userinfo
+		sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", user.Email).Load(&userInfo)
+
+		fmt.Fprintf(os.Stderr, "callback: %s\n", userInfo.Email)
+
+		var redirect string
+		if userInfo.Email != "" {
+		} else {
+			fmt.Fprintf(os.Stderr, "NO\n")
+			redirect = "/OAuth_signup"
+		}
+
+		// fmt.Fprintf(os.Stderr, "callback: %v\n", user)
 		// c.Set("email", user.Email)
 
-		return c.Redirect(http.StatusTemporaryRedirect, "/OAuth_signup")
+		return c.Redirect(http.StatusTemporaryRedirect, redirect)
 	})
 
 	// 同意後のアドレス確認促進画面
