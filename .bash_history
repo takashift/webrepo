@@ -1,8 +1,3 @@
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
 docker-compose up -d --build
 docker-compose down --rmi all
 sudo rm -r *
@@ -998,3 +993,8 @@ git status
 git commit -am "取り敢えずHTTPリファラーwo"
 git commit --amend
 gitpush 
+cd volumes/go_app/
+rcode server.go
+docker-compose logs
+git commit -am 'Google のユーザー情報リクエスト先をv2からv3へ変更'
+docker-compose logs

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -29,6 +28,8 @@ var googleOauthConfig = &oauth2.Config{
 	Scopes: []string{
 		"email"},
 }
+
+var refererURL string
 
 var (
 	tablename = "userinfo"
@@ -62,8 +63,6 @@ type (
 		NGCount       int    `db:"NG_count"`
 	}
 )
-
-var referer string
 
 func updateUser(c echo.Context) error {
 	u := new(userinfoJSON)
@@ -109,6 +108,12 @@ func main() {
 
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
+		// req, err := http.ReadRequest(bufio.NewReader())
+		// refererURL := req.Referer
+		// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
+		refererURL = c.Request().Referer()
+		fmt.Fprintf(os.Stderr, "%s\n", refererURL)
+
 		return c.Render(http.StatusOK, "signin_select", searchForm)
 	})
 
@@ -119,10 +124,6 @@ func main() {
 
 	// OAuth認証サインアップフォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
-		req, err := http.ReadRequest(bufio.NewReader(conn))
-		referer = req.Referer
-		fmt.Fprintf(os.Stderr, "%s\n", referer)
-
 		// user := c.Get("email").(string)
 		// if user != "" {
 		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
