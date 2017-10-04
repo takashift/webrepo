@@ -122,18 +122,6 @@ func main() {
 		return c.Render(http.StatusOK, "pass_signin", searchForm)
 	})
 
-	// OAuth認証サインアップフォーム
-	e.GET("/OAuth_signup", func(c echo.Context) error {
-		// user := c.Get("email").(string)
-		// if user != "" {
-		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
-		// } else {
-		// 	fmt.Fprintf(os.Stderr, "NO\n")
-		// }
-
-		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
-	})
-
 	// Google の認証画面にリダイレクト
 	e.GET("/google_OAuth", func(c echo.Context) error {
 		oauthStateString := uniuri.New()
@@ -176,8 +164,8 @@ func main() {
 
 		var redirect string
 		if userInfo.Email != "" {
+			redirect = refererURL
 		} else {
-			fmt.Fprintf(os.Stderr, "NO\n")
 			redirect = "/OAuth_signup"
 		}
 
@@ -185,6 +173,18 @@ func main() {
 		// c.Set("email", user.Email)
 
 		return c.Redirect(http.StatusTemporaryRedirect, redirect)
+	})
+
+	// OAuth認証サインアップ（同意）フォーム
+	e.GET("/OAuth_signup", func(c echo.Context) error {
+		// user := c.Get("email").(string)
+		// if user != "" {
+		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
+		// } else {
+		// 	fmt.Fprintf(os.Stderr, "NO\n")
+		// }
+
+		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
 	// 同意後のアドレス確認促進画面
