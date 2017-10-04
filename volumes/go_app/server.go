@@ -8,6 +8,7 @@ import (
 	"os"
 	"runtime"
 	"strconv"
+	"strings"
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
@@ -38,6 +39,22 @@ var (
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	sess        = conn.NewSession(nil)
 )
+
+// キャリアメールのドメイン
+var domain = [...]string{
+	"docomo.ne.jp",
+	"ezweb.ne.jp",
+	"au.com",
+	"willcom.com",
+	"y-mobile.ne.jp",
+	"emobile.ne.jp",
+	"ymobile1.ne.jp",
+	"ymobile.ne.jp",
+	"softbank.ne.jp",
+	"vodafone.ne.jp",
+	"i.softbank.jp",
+	"disney.ne.jp",
+}
 
 type GoogleUser struct {
 	// 先頭が大文字でないと格納されない。
@@ -112,6 +129,7 @@ func main() {
 		// refererURL := req.Referer
 		// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
 		refererURL = c.Request().Referer()
+
 		fmt.Fprintf(os.Stderr, "%s\n", refererURL)
 
 		return c.Render(http.StatusOK, "signin_select", searchForm)
@@ -164,7 +182,12 @@ func main() {
 
 		var redirect string
 		if userInfo.Email != "" {
-			redirect = refererURL
+			// リファラーURLがこのサイトのものか確認する処理を書く。
+			if strings.Contains(refererURL, "https://webrepo.nal.ie.u-ryukyu.ac.jp/") {
+				redirect = refererURL
+			} else {
+				redirect = "/"
+			}
 		} else {
 			redirect = "/OAuth_signup"
 		}
@@ -190,9 +213,17 @@ func main() {
 	e.POST("/agree_signup", func(c echo.Context) error {
 
 		email := c.FormValue("email")
-		fmt.Fprintf(os.Stderr, "%s\n", email)
+		// fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// メールアドレスがキャリアのドメインか確認する。
+		if email != "" {
+			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		}
+
+		// 良いドメインをリストに入れて for で比較
+		if !strings.Contains(email, "") {
+			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		}
 
 		// メールアドレスが登録されてない時はメールと関連付けたURLを発行
 		// hash := uniuri.New()
