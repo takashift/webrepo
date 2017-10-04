@@ -151,7 +151,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "%s\n", runtime.Version())
 
 		// JSON が返ってくる
-		response, err := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
+		response, err := http.Get("https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + token.AccessToken)
 		if err != nil {
 			panic(err)
 		}

@@ -1,60 +1,3 @@
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/db_data/
-ks
-ls
-ls -a
-ls
-cd ..
-cd mysql/init/
-ls
-vi webrepo.sql 
-cd volumes/db_data/
-cd 
-cd volumes/db_data/
-ls
-sudo rm -r *
-ls
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-cd volumes/db_data/
-ls
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd volumes/db_data/
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *∂
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-sudo rm -r *
-docker-compose up -d --build
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose down --rmi all
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
 sudo rm -r *
 docker-compose up -d --build
 sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
@@ -998,3 +941,60 @@ cat docker-compose.yml
 cd volumes/go_app/
 rcode server.go
 docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+ls
+cd mysql/
+ls
+cd init/
+ls
+cat webrepo.sql 
+rcode webrepo.sql 
+cd ..
+cd volumes/go_app/
+cd
+cd volumes/db_data/
+ls
+sudo rm -r *
+ls
+ks
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+cd 
+cd mysql/
+cd init/
+rcode webrepo.sql 
+ls
+cd
+cd volumes/go_app/
+ls
+cd volumes/go_app/
+ls
+cd ..
+cd db_data/
+ls
+sudo rm -r *
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+rcode server.go
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+rcode server.go
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+rcode server.go
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git status
+git commit -am "取り敢えずHTTPリファラーwo"
+git commit --amend
+gitpush 
