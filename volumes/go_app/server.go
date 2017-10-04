@@ -41,7 +41,7 @@ var (
 )
 
 // キャリアメールのドメイン
-var domain = [...]string{
+var domain = []string{
 	"docomo.ne.jp",
 	"ezweb.ne.jp",
 	"au.com",
@@ -216,13 +216,19 @@ func main() {
 		// fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// メールアドレスがキャリアのドメインか確認する。
-		if email != "" {
+		if email == "" {
 			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 		}
 
-		// 良いドメインをリストに入れて for で比較
-		if !strings.Contains(email, "") {
-			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		eDomainSlice := strings.SplitAfter(email, "@")
+		eDomain := strings.Join(eDomainSlice, "")
+
+		// キャリアドメインをリストに入れて for で比較
+		for i := 0; i < len(domain); i++ {
+			fmt.Fprintf(os.Stderr, "%s : %s\n", eDomain, domain[i])
+			if strings.Contains(eDomain, domain[i]) {
+				return c.Render(http.StatusOK, "agree_signup", searchForm)
+			}
 		}
 
 		// メールアドレスが登録されてない時はメールと関連付けたURLを発行
@@ -232,7 +238,7 @@ func main() {
 
 		// メールを送信する
 
-		return c.Render(http.StatusOK, "agree_signup", searchForm)
+		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
 	// 評価入力画面
