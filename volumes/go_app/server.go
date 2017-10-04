@@ -183,12 +183,24 @@ func main() {
 		// } else {
 		// 	fmt.Fprintf(os.Stderr, "NO\n")
 		// }
-
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
 	// 同意後のアドレス確認促進画面
-	e.GET("/agree_signup", func(c echo.Context) error {
+	e.POST("/agree_signup", func(c echo.Context) error {
+
+		email := c.FormValue("email")
+		fmt.Fprintf(os.Stderr, "%s\n", email)
+
+		// メールアドレスがキャリアのドメインか確認する。
+
+		// メールアドレスが登録されてない時はメールと関連付けたURLを発行
+		// hash := uniuri.New()
+
+		// データベースにアドレスと認証コード、リファラーURLを一緒に保存
+
+		// メールを送信する
+
 		return c.Render(http.StatusOK, "agree_signup", searchForm)
 	})
 

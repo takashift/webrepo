@@ -76,10 +76,10 @@ html lang=ja
   body
     = include header_menu
     #main
-      form name="sign_up" action="" method="post" 
+      form name="sign_up" action="/agree_signup" method="post" 
         h2 新規登録
         label メールアドレス　　　
-          input name="mail" size="60" required=""
+          input name="email" size="60" required=""
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
         p 以下の同意を以て登録となります。
         #consent_form
