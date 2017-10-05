@@ -26,6 +26,8 @@ RUN go get -u github.com/dchest/uniuri
 
 WORKDIR /go/src/app
 
+EXPOSE 25
+
 CMD ["/go/bin/godo", "server", "--watch"]
 
 #ENTRYPOINT ["go", "get", "github.com/labstack/echo"]

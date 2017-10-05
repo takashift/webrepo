@@ -255,8 +255,22 @@ func main() {
 		sess.InsertInto("tmp_user").Columns("act", "email", "referer").Values(act, email, redirect).Exec()
 
 		// メールを送信する
+		m := gomail.NewMessage()
+		m.SetHeader("From", "signup@nal.ie.u-ryukyu.ac.jp")
+		m.SetHeader("To", email)
+		m.SetHeader("Subject", "メールアドレスの確認")
+		m.SetBody("text/plain", "WebRepo☆彡に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/")
+
+		d := gomail.Dialer{Host: "localhost", Port: 587}
+		if err := d.DialAndSend(m); err != nil {
+			panic(err)
+		}
 
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+	})
+
+	e.GET("/email_check", func(c echo.Context) error {
+
 	})
 
 	// 評価入力画面
