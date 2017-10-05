@@ -23,6 +23,7 @@ RUN go get -u google.golang.org/api/oauth2/v2
 RUN go get -u google.golang.org/appengine
 RUN go get -u cloud.google.com/go/compute/metadata
 RUN go get -u github.com/dchest/uniuri
+RUN go get -u gopkg.in/gomail.v2
 
 WORKDIR /go/src/app
 

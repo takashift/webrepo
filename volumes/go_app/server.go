@@ -15,6 +15,7 @@ import (
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
+	gomail "gopkg.in/gomail.v2"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gocraft/dbr"
@@ -35,6 +36,7 @@ var googleOauthConfig = &oauth2.Config{
 
 var refererURL string
 var userInfoDB userinfo
+var tmpUser tmpuser
 
 var (
 	tablename = "userinfo"
@@ -82,6 +84,13 @@ type (
 		SignupDate    string `db:"signup_date"`
 		SafeSearch    int    `db:"safe_search"`
 		NGCount       int    `db:"NG_count"`
+	}
+
+	tmpuser struct {
+		ID      int    `db:"id"`
+		Act     string `db:"act"`
+		Email   string `db:"email"`
+		Referer string `db:"referer"`
 	}
 )
 
@@ -259,9 +268,9 @@ func main() {
 		m.SetHeader("From", "signup@nal.ie.u-ryukyu.ac.jp")
 		m.SetHeader("To", email)
 		m.SetHeader("Subject", "メールアドレスの確認")
-		m.SetBody("text/plain", "WebRepo☆彡に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/")
+		m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
 
-		d := gomail.Dialer{Host: "localhost", Port: 587}
+		d := gomail.Dialer{Host: "localhost", Port: 25}
 		if err := d.DialAndSend(m); err != nil {
 			panic(err)
 		}
@@ -269,8 +278,17 @@ func main() {
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 	})
 
+	// メール確認URLへのアクセス時の処理
 	e.GET("/email_check", func(c echo.Context) error {
+		act := c.QueryParam("act")
+		_, err := sess.Select("*").From("tmp_user").Where("act = ?", act).Load(&tmpUser)
+		if err != nil {
+			panic(err)
+		}
 
+		fmt.Fprintf(os.Stderr, "act: %s\n", tmpUser.Act)
+
+		return c.Redirect(http.StatusTemporaryRedirect, tmpUser.Referer)
 	})
 
 	// 評価入力画面

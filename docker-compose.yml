@@ -3,7 +3,7 @@ services:
         echo:
                 build: echo
                 ports:
-                        - "25:587"
+                        - "587:25"
                 restart: always
                 volumes:
                         - /etc/localtime:/etc/localtime:ro
