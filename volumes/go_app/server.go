@@ -235,7 +235,7 @@ func main() {
 		// fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// メールアドレスがキャリアのドメインか確認する。
-		if email == "" {
+		if !strings.Contains(email, "@") {
 			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 		}
 
@@ -247,32 +247,39 @@ func main() {
 		// キャリアドメインをリストに入れて for で比較
 		for i := 0; i < len(domain); i++ {
 			fmt.Fprintf(os.Stderr, "%s : %s\n", eDomain, domain[i])
+
 			if strings.Contains(eDomain, domain[i]) {
+
+				// メールアドレスが登録されてないのでメールと関連付けたURLを発行
+				mac := hmac.New(sha256.New, []byte(uniuri.New()))
+				mac.Write([]byte(email))
+				act := hex.EncodeToString(mac.Sum(nil))
+
+				// リファラーURLがこのサイトのものか確認する
+				redirect := refererCheck(refererURL)
+
+				// データベースにアドレスと認証コード、リファラーURLを一緒に保存
+				result, err := sess.InsertInto("tmp_user").Columns("act", "email", "referer").Values(act, email, redirect).Exec()
+				if err != nil {
+					panic(err)
+				} else {
+					fmt.Fprintf(os.Stderr, "insert:%s\n", result)
+				}
+
+				// メールを送信する
+				m := gomail.NewMessage()
+				m.SetHeader("From", "signup@nal.ie.u-ryukyu.ac.jp")
+				m.SetHeader("To", email)
+				m.SetHeader("Subject", "メールアドレスの確認")
+				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
+
+				d := gomail.Dialer{Host: "localhost", Port: 25}
+				if err := d.DialAndSend(m); err != nil {
+					panic(err)
+				}
+
 				return c.Render(http.StatusOK, "agree_signup", searchForm)
 			}
-		}
-
-		// メールアドレスが登録されてないのでメールと関連付けたURLを発行
-		mac := hmac.New(sha256.New, []byte(uniuri.New()))
-		mac.Write([]byte(email))
-		act := hex.EncodeToString(mac.Sum(nil))
-
-		// リファラーURLがこのサイトのものか確認する
-		redirect := refererCheck(refererURL)
-
-		// データベースにアドレスと認証コード、リファラーURLを一緒に保存
-		sess.InsertInto("tmp_user").Columns("act", "email", "referer").Values(act, email, redirect).Exec()
-
-		// メールを送信する
-		m := gomail.NewMessage()
-		m.SetHeader("From", "signup@nal.ie.u-ryukyu.ac.jp")
-		m.SetHeader("To", email)
-		m.SetHeader("Subject", "メールアドレスの確認")
-		m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
-
-		d := gomail.Dialer{Host: "localhost", Port: 25}
-		if err := d.DialAndSend(m); err != nil {
-			panic(err)
 		}
 
 		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
@@ -287,6 +294,10 @@ func main() {
 		}
 
 		fmt.Fprintf(os.Stderr, "act: %s\n", tmpUser.Act)
+
+		// 正規のユーザーテーブルに追加
+
+		// 一時ユーザーのテーブルから削除
 
 		return c.Redirect(http.StatusTemporaryRedirect, tmpUser.Referer)
 	})
