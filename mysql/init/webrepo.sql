@@ -10,6 +10,13 @@ CREATE TABLE userinfo(
 	NG_count int DEFAULT 0
 );
 
+CREATE TABLE tmp_user(
+	id int unique not null auto_increment primary key,
+	act varchar(255) unique not null,
+	email varchar(255) unique not null,
+	referer VARCHAR(255),
+);
+
 CREATE TABLE page_status(
 	id int unique not null auto_increment primary key,
 	title varchar(255) not null,

@@ -1,115 +1,3 @@
-docker-compose up -d --build
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker ps
-docker images
-docker-compose down --rmi tuna_mysql_1
-docker-compose down  tuna_mysql_1
-docker-compose down
-docker rmi tuna_mysql_1
-docker rmi 2bd457f9f152
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-sudo rm -r *
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd mysql/init/
-vi webrepo.sql 
-cd ..
-vi Dockerfile 
-cd init/
-vi webrepo.sql 
-vi Dockerfile 
-vi webrepo.sql 
-vi Dockerfile 
-vi webrepo.sql 
-cd ..
-vi webrepo.sql 
-cd mys
-cd mysql
-cd init/
-ls
-vi webrepo.sql 
-cd ..
-vi Dockerfile 
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker exec -it tuna_mysql_1 /bin/bash
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-\q
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker ps
-sl
-ls
-cd volumes/db_data/
-ls
-docker-compose down
-docker rmi tuna_mysql_1
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-cd ..
-ls
-cd mysql/
-ls
-vi Dockerfile 
-cd ..
-vi Dockerfile 
-cd mysql/
-cd init/
-vi webrepo.sql 
-docker-compose down
-vi webrepo.sql 
-cd ..
-vi Dockerfile 
-vi webrepo.sql 
-vi Dockerfile 
-vi webrepo.sql 
-vi Dockerfile 
-cd volumes/db_data/
-ls
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-sudo rm -r *
-docker rmi tuna_mysql_1
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose logs
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-docker-compose down
 docker rmi tuna_mysql
 sudo rm -r *
 docker-compose up -d --build
@@ -998,3 +886,115 @@ rcode server.go
 docker-compose logs
 git commit -am 'Google のユーザー情報リクエスト先をv2からv3へ変更'
 docker-compose logs
+git status
+git log
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git commit -am 'リファラーURLを出力するように変更'
+gitpush 
+git commit --amend
+gitpush 
+gitpush -f
+git push -f
+git commit -am 'コールバックの処理で、メールアドレスが登録されていたら元居たページにリダイレクトするように変更'
+gitpush 
+cd volumes/go_app/views/
+ls
+
+rcode OAuth_signup.ace 
+rcode search_
+rcode search_top.ace 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git commit -am 'メール確認画面で Post で送られた情報を取ってこれるように追記'
+gitpush 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+git commit -am 'キャリアメールのドメインを集めた配列を追加'
+gitpq
+gitpush 
+git lo
+git log
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git commit -am '登録されてるキャリアメールドメインのアドレス以外は弾くようにコードを記述'
+gitpush 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git log
+cd volumes/go_app/
+rcode server.go

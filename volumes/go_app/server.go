@@ -1,6 +1,9 @@
 package main
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -31,6 +34,7 @@ var googleOauthConfig = &oauth2.Config{
 }
 
 var refererURL string
+var userInfoDB userinfo
 
 var (
 	tablename = "userinfo"
@@ -100,6 +104,17 @@ func deleteUser(c echo.Context) error {
 		Exec()
 
 	return c.NoContent(http.StatusNoContent)
+}
+
+// リファラーURLがこのサイトのものか確認する関数
+func refererCheck(refererURL string) string {
+	var redirect string
+	if strings.Contains(refererURL, "https://webrepo.nal.ie.u-ryukyu.ac.jp/") {
+		redirect = refererURL
+	} else {
+		redirect = "/"
+	}
+	return redirect
 }
 
 func main() {
@@ -175,19 +190,14 @@ func main() {
 			panic(err)
 		}
 
-		var userInfo userinfo
-		sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", user.Email).Load(&userInfo)
+		sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", user.Email).Load(&userInfoDB)
 
-		fmt.Fprintf(os.Stderr, "callback: %s\n", userInfo.Email)
+		fmt.Fprintf(os.Stderr, "callback: %s\n", userInfoDB.Email)
 
 		var redirect string
-		if userInfo.Email != "" {
-			// リファラーURLがこのサイトのものか確認する処理を書く。
-			if strings.Contains(refererURL, "https://webrepo.nal.ie.u-ryukyu.ac.jp/") {
-				redirect = refererURL
-			} else {
-				redirect = "/"
-			}
+		if userInfoDB.Email != "" {
+			// リファラーURLがこのサイトのものか確認する
+			redirect = refererCheck(refererURL)
 		} else {
 			redirect = "/OAuth_signup"
 		}
@@ -221,6 +231,8 @@ func main() {
 		}
 
 		eDomainSlice := strings.SplitAfter(email, "@")
+
+		// スライスなので文字列型に結合
 		eDomain := strings.Join(eDomainSlice, "")
 
 		// キャリアドメインをリストに入れて for で比較
@@ -231,10 +243,16 @@ func main() {
 			}
 		}
 
-		// メールアドレスが登録されてない時はメールと関連付けたURLを発行
-		// hash := uniuri.New()
+		// メールアドレスが登録されてないのでメールと関連付けたURLを発行
+		mac := hmac.New(sha256.New, []byte(uniuri.New()))
+		mac.Write([]byte(email))
+		act := hex.EncodeToString(mac.Sum(nil))
+
+		// リファラーURLがこのサイトのものか確認する
+		redirect := refererCheck(refererURL)
 
 		// データベースにアドレスと認証コード、リファラーURLを一緒に保存
+		sess.InsertInto("tmp_user").Columns("act", "email", "referer").Values(act, email, redirect).Exec()
 
 		// メールを送信する
 
