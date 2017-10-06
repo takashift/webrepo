@@ -1,197 +1,3 @@
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-docker-compose down
-sudo rm -r *
-docker rmi tuna_mysql
-docker-compose up -d --build
-cd mysql/init/
-vi webrepo.sql 
-cd ..
-vi Dockerfile 
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd init/
-vi webrepo.sql 
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-vi webrepo.sql 
-cd ..
-vi webrepo.sql 
-vi 
-vi w
-vi Dockerfile 
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-vi webrepo.sql 
-vi Dockerfile
-cd init/
-vi webrepo.sql 
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-git statu
-git status
-git commit -am '文字列型にuniqueを設定すると制限がかかるのでURLのunique設定を解除'
-gitpush 
-esit
-exit
-cd volumes/db_data/
-ls
-docker-compose down
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-docker rmi tuna_mysql
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-sudo rm -r *
-docker-compose up -d --build
-:q
-docker-compose down
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose down
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-docker rmi tuna_mysql
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose down
-docker rmi tuna_mysql
-sudo rm -r *
-docker-compose up -d --build
-eit
-exit
-docker-compose down
-docker rmi tuna_mysql
-cd volumes/db_data/
-ls
-sudo rm -r *
-docker-compose up -d --build
-sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
-cd volumes/go_app/
-vi server.go 
-vi
-vi server.go 
-cd volumes/go_app/
-vi template_no_proxy.go 
-cd mysql/init/
-ls
-vi webrepo.sql 
-git status
-git commit -am 'intまで使わないカラムをtinyintに変更'
-gitpush 
-vi webrepo.sql cd
-cd
-cd volumes/go_app/views/
-ls
-vi signin_select.ace 
-git commit -am 'サインイン方法選択画面の順番をGoogleを最初に変更'
-gitpush 
-git log
-ls
-cd volumes/go_app/
-sl
-ls
-
-vi server.go 
-go fmt test.go
-unexpand -t 4 server.go 
-vi server.go 
-unexpand -t 4 server.go 
-vi server.go 
-unexpand -t 4 server.go > server.go 
-vi server.go 
-exit
-ls
-exit
-exit
-ls -a
-vi .vimrc
-exit
-vi .vimrc
-cd volumes/go_app/
-ls
-vi 
-vi server.go 
-cd ..
-cd D
-cd e
-cd echo/
-vi D
-vi Dockerfile
-cd volumes/go_app/
-cd 
-cd volumes/go_app/
-vi server.go 
-docker-compose down
-docker rmi tuna_mysql
-docker rmi tuna_echo
-docker-compose up -d --build
-git log
-git commit -am '取り敢えず、goでのOAuth認証のコードを追加'
-gitpush 
-exit
-git log
-git status
-exit
-git status
-ls
-cd echo/
-ls
-ls -l
-rm -r vol_sock
-ls
-cd ..
-ls
-cd volumes/go_app/
-ls
-cat server.go 
-cd volumes/db_data/
-ls
-cd mysql/
-cd
-cd echo/
-l
-;la
-ls
-vi Dockerfile
-docker-compose down
-docker rmi tuna_echo
-docker-compose up -d --build
-docker-compose log
-docker-compose logs
-cd ..
-cd volumes/db_data/
-ls
-cd ..
-cd go_app/
-vi server.go 
-docker-compose logs
-vi server.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi server.go 
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-cd volumes/go_app/
-ls
-vi server.go 
-docker-compose log
-docker-compose logs
-docker-compose down
-docker rmi tuna_echo
-docker-compose up -d --build
 docker-compose logs
 vi server.go 
 docker-compose logs
@@ -998,3 +804,197 @@ docker-compose logs
 git log
 cd volumes/go_app/
 rcode server.go
+cd volumes/go_app/
+rcode server.go
+cd volumes/go_app/
+rcode server.go
+docker-compose logs
+cd ..
+rcode docker-compose.yml
+cd echo/
+rcode Dockerfile
+cd ..
+cd nginx/
+rcode Dockerfile
+cd ..
+cd echo/
+rcode Dockerfile
+git commit -am "メール送信のためのポートを開放する設定を docker-compose と Echo の Dockerfile に追加"
+git status
+git commit --amend
+cd ..
+
+git commit --amend
+git status
+git commit --amend
+git status
+git add
+git add docker-compose.yml
+git commit --amend
+cd echo/
+rcode Dockerfile
+git commit --amend
+git add Dockerfile
+git commit --amend
+cd ..
+ls
+cd volumes/go_app/
+rcode server.go 
+docker-compose logs
+cd ..
+cd
+cd echo/
+rcode Dockerfile
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose down --rmi all
+cd
+rcode docker-compose.yml
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+cd volumes/db_data/
+sudo rm -r *
+ls
+sudo rm -r *
+ls
+docker-compose down
+docker-compose down --rmi all
+sudo rm -r *
+docker-compose up -d --build
+sudo rm -r *
+ls
+docker-compose logs
+cd ..
+cd volumes/go_app/archive/
+ls
+rcode db.go.cm 
+docker-compose logs
+docker-compose down
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_nginx_1 /bin/bash
+docker exec -it tuna_mysql_1 /bin/bash
+cd mysql/
+cd init/
+ls
+rcode webrepo.sql 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git commit -am 'メールに関連付けた認証コードをデータベースに保存するように変更'
+git commit --amend
+gitpush 
+rcode webrepo.sql 
+git commit -am 'docker-compose のポートの設定が間違っていたので修正。'
+gitpush 
+docker exec -it tuna_nginx_1 /bin/bash
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker-compose down mysql
+docker-compose down
+docker rmi mysql
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+cd ..
+cd volumes/db_data/
+ls
+sudo rm -r *
+git log
+git status
+git commit -am "ドメイン検証のif文内に書かれていなければならない処理を外に書いていたので修正。メール内の確認URLにアクセスした時に認証コードがDBに存在するか確認する処理を追加"
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker rmi echo
+docker rmi tuna_echo_1
+docker rmi tuna_echo
+cd echo/
+rcode Dockerfile
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git commit sutatus
+git commit status
+git status
+docker-compose down --rmi all
+docker-compose logs
+docker-compose up -d --build
+git log
+docker-compose lodg
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+esit
+exit
+cd volumes/db_data/
+sudo rm -r *
+exit
+cd volumes/db_data/
+ls
+cd ..
+cd go_app/
+rcode server.go 
+docker exec -it tuna_mysql_1 /bin/bash
+cd
+ls
+cd volumes/
+ks
+ls
+cd web-vol/
+ls
+cd ..
+cd
+cd volumes/db_data/
+sudo rm -r *
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+cd 
+rcode docker-compose.yml
+cd volumes/db_data/
+sudo rm -r *

@@ -27,8 +27,6 @@ RUN go get -u gopkg.in/gomail.v2
 
 WORKDIR /go/src/app
 
-EXPOSE 25
-
 CMD ["/go/bin/godo", "server", "--watch"]
 
 #ENTRYPOINT ["go", "get", "github.com/labstack/echo"]

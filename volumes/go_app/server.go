@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net"
 	"net/http"
@@ -257,6 +258,7 @@ func main() {
 
 				// リファラーURLがこのサイトのものか確認する
 				redirect := refererCheck(refererURL)
+				fmt.Fprintf(os.Stderr, "act:%s\n", act)
 
 				// データベースにアドレスと認証コード、リファラーURLを一緒に保存
 				result, err := sess.InsertInto("tmp_user").Columns("act", "email", "referer").Values(act, email, redirect).Exec()
@@ -271,9 +273,9 @@ func main() {
 				m.SetHeader("From", "signup@nal.ie.u-ryukyu.ac.jp")
 				m.SetHeader("To", email)
 				m.SetHeader("Subject", "メールアドレスの確認")
-				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
+				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合はこのURLは無効となるので、再度メールアドレスの登録をお願いします。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
 
-				d := gomail.Dialer{Host: "localhost", Port: 25}
+				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: "USER_PASSWORD"}
 				if err := d.DialAndSend(m); err != nil {
 					panic(err)
 				}
@@ -293,6 +295,9 @@ func main() {
 			panic(err)
 		}
 
+		if tmpUser.Act == "" {
+			return errors.New("認証コードが違う！")
+		}
 		fmt.Fprintf(os.Stderr, "act: %s\n", tmpUser.Act)
 
 		// 正規のユーザーテーブルに追加
