@@ -236,11 +236,12 @@ func main() {
 		// fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// 既に本登録されているユーザーとアドレスが被ってないか確認
-		emailDB, err := sess.Select("email").From("userinfo").Where("OAuth_userinfo = ?", email).ReturnString()
+		emailDB, err := sess.Select("email").From("userinfo").Where("email = ?", email).ReturnString()
 		if err != nil {
 			panic(err)
 		}
 		if emailDB != "" {
+			fmt.Fprintf(os.Stderr, "既に登録済みのメールアドレス\n")
 			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 		}
 

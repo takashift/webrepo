@@ -1,55 +1,3 @@
-docker-compose logs
-vi server.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi server.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi server.go 
-docker-compose logs
-vi server.go 
-git status
-git commit -am '取り敢えずエラーを減らすように修正'
-gitpush 
-cd volumes/go_app/
-vi server.go 
-vi O
-cd volumes/go_app/
-vi server.go 
-vi OAuth_google_github.go 
-docker-compose logs
-git log
-cd volumes/go_app/
-ls
-vi server.go
-vi template_no_proxy.go 
-cp template_no_proxy.go OAuth_google.go
-ls
-vi OAuth_google.go 
-mv OAuth_google.go OAuth_google_github.go 
-vi OAuth_google.go 
-vi OAuth_google_github.go 
-vi OAuth_google.go 
-vi server.go
-git commit -am 'OAuth2公式の処理をコピペ'
-vi server.go
-git commit --amend
-git add OAuth_google_github.go 
-git commit --amend
-vi server.go
-cd volumes/go_app/
-ls
-vi server.go 
-vi O
-cd volumes/go_app/
-vi OAuth_google_github.go 
-docker-compose logs
 cd volumes/go_app/
 ls
 vi server.go 
@@ -998,3 +946,55 @@ cd
 rcode docker-compose.yml
 cd volumes/db_data/
 sudo rm -r *
+rcode volumes/go_app/
+devolumes/go_app/
+cd volumes/go_app/
+rcode server.go 
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/db_data/
+sudo rm -r *
+cd
+rcode dock
+cd echo/
+rcode Dockerfile
+git commit -am "大学総情センターのメールを使って、アドレス確認メールの送信に成功"
+gitpush 
