@@ -26,7 +26,8 @@ import (
 )
 
 const (
-	timeLayout = "2017-10-06 17:20:00"
+	// 2017-10-06 17:20:00 では何故か出来なかった。。
+	timeLayout = "2006-01-02 15:04:05"
 )
 
 var (
@@ -45,7 +46,6 @@ var (
 	userInfoDB   userinfo
 	tmpUser      tmpuser
 	oauthService string
-	userGoogle   *GoogleUser
 
 	tablename = "userinfo"
 	seq       = 1
@@ -136,6 +136,8 @@ func refererCheck(refererURL string) string {
 }
 
 func main() {
+	userGoogle := new(GoogleUser)
+
 	e.GET("/test", func(c echo.Context) error {
 
 		// この Render は Echo のメソッドであり、テンプレートエンジンのメソッドではない！
@@ -145,6 +147,7 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
+		fmt.Fprintf(os.Stderr, "time: %s\n", time.Now())
 		return c.Render(http.StatusOK, "search_top", searchForm)
 	})
 
@@ -207,9 +210,12 @@ func main() {
 			panic(err)
 		}
 
-		sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", userGoogle.Email).Load(&userInfoDB)
+		_, err = sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", userGoogle.Email).Load(&userInfoDB)
+		if err != nil {
+			panic(err)
+		}
 
-		fmt.Fprintf(os.Stderr, "callback: %s\n", userInfoDB.Email)
+		fmt.Fprintf(os.Stderr, "登録済みの Email: %s\n", userInfoDB.Email)
 
 		var redirect string
 		if userInfoDB.Email != "" {
@@ -228,6 +234,7 @@ func main() {
 
 	// OAuth認証サインアップ（同意）フォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
+		fmt.Fprintf(os.Stderr, "OAuthService: %s\n", oauthService)
 		// user := c.Get("email").(string)
 		// if user != "" {
 		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
@@ -239,16 +246,15 @@ func main() {
 
 	// 同意後のアドレス確認促進画面
 	e.POST("/agree_signup", func(c echo.Context) error {
+		fmt.Fprintf(os.Stderr, "OAuthService: %s\n", oauthService)
 
 		email := c.FormValue("email")
-		// fmt.Fprintf(os.Stderr, "%s\n", email)
+		fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// 既に本登録されているユーザーとアドレスが被ってないか確認
 		emailDB, err := sess.Select("email").From("userinfo").Where("email = ?", email).ReturnString()
-		if err != nil {
-			panic(err)
-		}
-		if emailDB != "" {
+		if err == nil {
+			fmt.Fprintf(os.Stderr, "userinfo.email:%s\n", emailDB)
 			fmt.Fprintf(os.Stderr, "既に登録済みのメールアドレス\n")
 			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
 		}
@@ -320,9 +326,10 @@ func main() {
 
 		t := time.Now()
 		tF := t.Format(timeLayout)
+		fmt.Fprintf(os.Stderr, "time: %s\n", tF)
 
 		// 正規のユーザーテーブルに追加
-		result, err := sess.InsertInto("userinfo").Columns("OAuth_service", "OAuth_userinfo", "email", "singup_date").Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).Exec()
+		result, err := sess.InsertInto("userinfo").Columns("OAuth_service", "OAuth_userinfo", "email", "signup_date").Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).Exec()
 		if err != nil {
 			panic(err)
 		} else {
