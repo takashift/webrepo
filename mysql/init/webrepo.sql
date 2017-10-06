@@ -3,7 +3,7 @@ CREATE TABLE userinfo(
 	OAuth_service VARCHAR(255),
 	OAuth_userinfo VARCHAR(255),
 	email varchar(255) unique not null,
-	password varchar(255) not null,
+	password varchar(255),
 	name varchar(255) DEFAULT '名無し',
 	signup_date datetime not null,
 	safe_search tinyint not null DEFAULT 0,
@@ -12,6 +12,7 @@ CREATE TABLE userinfo(
 
 CREATE TABLE tmp_user(
 	id int unique not null auto_increment primary key,
+	OAuth_service VARCHAR(255),
 	act varchar(255) unique not null,
 	email varchar(255) unique not null,
 	referer VARCHAR(255)

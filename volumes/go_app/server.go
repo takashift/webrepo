@@ -13,6 +13,7 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo"
@@ -24,44 +25,50 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
-var e = echo.New()
-
-var googleOauthConfig = &oauth2.Config{
-	ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
-	ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
-	Endpoint:     google.Endpoint,
-	RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback",
-	Scopes: []string{
-		"email"},
-}
-
-var refererURL string
-var userInfoDB userinfo
-var tmpUser tmpuser
+const (
+	timeLayout = "2017-10-06 17:20:00"
+)
 
 var (
+	e = echo.New()
+
+	googleOauthConfig = &oauth2.Config{
+		ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+		ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
+		Endpoint:     google.Endpoint,
+		RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback_google",
+		Scopes: []string{
+			"email"},
+	}
+
+	refererURL   string
+	userInfoDB   userinfo
+	tmpUser      tmpuser
+	oauthService string
+	userGoogle   *GoogleUser
+
 	tablename = "userinfo"
 	seq       = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	sess        = conn.NewSession(nil)
-)
 
-// キャリアメールのドメイン
-var domain = []string{
-	"docomo.ne.jp",
-	"ezweb.ne.jp",
-	"au.com",
-	"willcom.com",
-	"y-mobile.ne.jp",
-	"emobile.ne.jp",
-	"ymobile1.ne.jp",
-	"ymobile.ne.jp",
-	"softbank.ne.jp",
-	"vodafone.ne.jp",
-	"i.softbank.jp",
-	"disney.ne.jp",
-}
+	// キャリアメールのドメイン
+	domain = []string{
+		"docomo.ne.jp",
+		"ezweb.ne.jp",
+		"au.com",
+		"willcom.com",
+		"y-mobile.ne.jp",
+		"emobile.ne.jp",
+		"ymobile1.ne.jp",
+		"ymobile.ne.jp",
+		"softbank.ne.jp",
+		"vodafone.ne.jp",
+		"i.softbank.jp",
+		"disney.ne.jp",
+	}
+)
 
 type GoogleUser struct {
 	// 先頭が大文字でないと格納されない。
@@ -88,10 +95,11 @@ type (
 	}
 
 	tmpuser struct {
-		ID      int    `db:"id"`
-		Act     string `db:"act"`
-		Email   string `db:"email"`
-		Referer string `db:"referer"`
+		ID           int    `db:"id"`
+		OAuthService string `db:"OAuth_service"`
+		Act          string `db:"act"`
+		Email        string `db:"email"`
+		Referer      string `db:"referer"`
 	}
 )
 
@@ -172,8 +180,8 @@ func main() {
 		return c.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
-	// コールバック
-	e.GET("/oauth2callback", func(c echo.Context) error {
+	// Google からのコールバック
+	e.GET("/oauth2callback_google", func(c echo.Context) error {
 		code := c.FormValue("code")
 		token, err := googleOauthConfig.Exchange(oauth2.NoContext, code)
 		if err != nil {
@@ -191,16 +199,15 @@ func main() {
 		defer response.Body.Close()
 
 		// var user *GoogleUser
-		user := new(GoogleUser)
 
-		err = json.NewDecoder(response.Body).Decode(user)
+		err = json.NewDecoder(response.Body).Decode(userGoogle)
 		// contents, _ := ioutil.ReadAll(response.Body)
 		// err = json.Unmarshal(contents, &user)
 		if err != nil {
 			panic(err)
 		}
 
-		sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", user.Email).Load(&userInfoDB)
+		sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", userGoogle.Email).Load(&userInfoDB)
 
 		fmt.Fprintf(os.Stderr, "callback: %s\n", userInfoDB.Email)
 
@@ -209,6 +216,7 @@ func main() {
 			// リファラーURLがこのサイトのものか確認する
 			redirect = refererCheck(refererURL)
 		} else {
+			oauthService = "Google"
 			redirect = "/OAuth_signup"
 		}
 
@@ -271,7 +279,7 @@ func main() {
 				fmt.Fprintf(os.Stderr, "act:%s\n", act)
 
 				// データベースにアドレスと認証コード、リファラーURLを一緒に保存
-				result, err := sess.InsertInto("tmp_user").Columns("act", "email", "referer").Values(act, email, redirect).Exec()
+				result, err := sess.InsertInto("tmp_user").Columns("OAuth_service", "act", "email", "referer").Values(oauthService, act, email, redirect).Exec()
 				if err != nil {
 					panic(err)
 				} else {
@@ -304,15 +312,30 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
 		if tmpUser.Act == "" {
 			return errors.New("認証コードが違う!\n")
 		}
+
 		fmt.Fprintf(os.Stderr, "act: %s\n", tmpUser.Act)
 
+		t := time.Now()
+		tF := t.Format(timeLayout)
+
 		// 正規のユーザーテーブルに追加
+		result, err := sess.InsertInto("userinfo").Columns("OAuth_service", "OAuth_userinfo", "email", "singup_date").Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).Exec()
+		if err != nil {
+			panic(err)
+		} else {
+			fmt.Fprintf(os.Stderr, "insert userinfo:%s\n", result)
+		}
 
 		// 一時ユーザーのテーブルから削除
+		result, err = sess.DeleteFrom("tmp_user").Where("email = ?", tmpUser.Email).Exec()
+		if err != nil {
+			panic(err)
+		} else {
+			fmt.Fprintf(os.Stderr, "delete tempuser:%s\n", result)
+		}
 
 		return c.Redirect(http.StatusTemporaryRedirect, tmpUser.Referer)
 	})
