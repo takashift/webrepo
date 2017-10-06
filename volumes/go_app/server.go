@@ -235,6 +235,15 @@ func main() {
 		email := c.FormValue("email")
 		// fmt.Fprintf(os.Stderr, "%s\n", email)
 
+		// 既に本登録されているユーザーとアドレスが被ってないか確認
+		emailDB, err := sess.Select("email").From("userinfo").Where("OAuth_userinfo = ?", email).ReturnString()
+		if err != nil {
+			panic(err)
+		}
+		if emailDB != "" {
+			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		}
+
 		// メールアドレスがキャリアのドメインか確認する。
 		if !strings.Contains(email, "@") {
 			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
@@ -296,7 +305,7 @@ func main() {
 		}
 
 		if tmpUser.Act == "" {
-			return errors.New("認証コードが違う！")
+			return errors.New("認証コードが違う!\n")
 		}
 		fmt.Fprintf(os.Stderr, "act: %s\n", tmpUser.Act)
 
