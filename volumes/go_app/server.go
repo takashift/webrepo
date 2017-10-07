@@ -53,6 +53,8 @@ var (
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	sess        = conn.NewSession(nil)
 
+	sendMailAdrr = "signup@webrepo.nal.ie.u-ryukyu.ac.jp"
+
 	// キャリアメールのドメイン
 	domain = []string{
 		"docomo.ne.jp",
@@ -147,7 +149,6 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
-		fmt.Fprintf(os.Stderr, "time: %s\n", time.Now())
 		return c.Render(http.StatusOK, "search_top", searchForm)
 	})
 
@@ -234,7 +235,6 @@ func main() {
 
 	// OAuth認証サインアップ（同意）フォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
-		fmt.Fprintf(os.Stderr, "OAuthService: %s\n", oauthService)
 		// user := c.Get("email").(string)
 		// if user != "" {
 		// 	fmt.Fprintf(os.Stderr, "%v\n", user)
@@ -246,8 +246,6 @@ func main() {
 
 	// 同意後のアドレス確認促進画面
 	e.POST("/agree_signup", func(c echo.Context) error {
-		fmt.Fprintf(os.Stderr, "OAuthService: %s\n", oauthService)
-
 		email := c.FormValue("email")
 		fmt.Fprintf(os.Stderr, "%s\n", email)
 
@@ -294,7 +292,7 @@ func main() {
 
 				// メールを送信する
 				m := gomail.NewMessage()
-				m.SetHeader("From", "signup@nal.ie.u-ryukyu.ac.jp")
+				m.SetHeader("From", sendMailAdrr)
 				m.SetHeader("To", email)
 				m.SetHeader("Subject", "メールアドレスの確認")
 				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合はこのURLは無効となるので、再度メールアドレスの登録をお願いします。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)

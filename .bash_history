@@ -1,94 +1,3 @@
-cd volumes/go_app/
-ls
-vi server.go 
-cd volumes/go_app/
-vi OAuth_google_github.go 
-cd volumes/go_app/
-ls
-vi server.go 
-vi OAuth_google_github.go 
-git status
-git commit -am 'server.go を Oauth 認証前のコード記述前に戻した。'
-gitpush 
-git status
-git log
-vi server.go 
-vi OAuth_google_github.go 
-:q
-exit
-vi server.go 
-cd volumes/go_app/
-vi server.go 
-unexpand server.go -t 4
-vi server.go 
-exit
-unexpand server.go -t 4
-vi server.go 
-cd volumes/go_app/
-ls
-cd volumes/go_app/
-vi OAuth_google_github.go 
-cd volumes/go_app/
-ls
-vi server.go 
-git commit -am 'server.go のインデントのスペース2つだったところをタブに変更
-'
-git status
-gitpush 
-vi server.go 
-cd volumes/go_app/
-vi OAuth_google_github.go 
-ls -a
-rm .OAuth_google_github.go.swp 
-vi OAuth_google_github.go 
-vi server.go 
-cd volumes/go_app/
-vi server.go 
-cd volumes/go_app/
-ls
-ls -a
-vi OAuth_google_github.go 
-/Users/Cokoten 
-cd volumes/go_app/
-ls -a
-vi server.go 
-exit
-cd volumes/go_app/
-vi OAuth_google_github.go 
-git commit -am 'GoogleのクライアントIDとシークレッドIDを追加'
-gitpush 
-exit
-ls -a
-cd volumes/go_app/
-vi server.go 
-exot
-exit
-cd volumes/go_app/
-vi OAuth_google_github.go 
-git status
-git commit -am 'OAuthのスコープを設定'
-gitpush 
-vi OAuth_google_github.go 
-exit
-vi server.go 
-cd volumes/go_app/
-vi server.go 
-vi OAuth_google_github.go 
-vi OAuth_google_github.go_
-vi server.go 
-vi OAuth_google_github.go 
-cd volumes/go_app/
-vi OAuth_google_github.go 
-mv OAuth_google_github.go OAuth_google_github.go_ 
-ls
-vi OAuth_google_dedium.go
-vi OAuth_google_github.go_
-vi OAuth_google_dedium.go
-cd volumes/go_app/
-vi OAuth_google_github.go 
-ls -a
-vi OAuth_google_dedium.go 
-rm .OAuth_google_dedium.go.swp 
 mv OAuth_google_dedium.go OAuth_google_medium.go
 ls
 vi OAuth_google_medium.go 
@@ -998,3 +907,94 @@ cd echo/
 rcode Dockerfile
 git commit -am "大学総情センターのメールを使って、アドレス確認メールの送信に成功"
 gitpush 
+docker exec -it tuna_mysql_1 /bin/bash
+cd mysql/
+cd init/
+rcode webrepo.sql 
+docker exec -it tuna_mysql_1 /bin/bash
+cd
+cd volumes/db_data/
+ls
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+git commit -am "本登録を行う処理を追加"
+gitpush 
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+ls
+sudo rm -r *
+ls
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/db_data/
+cd ..
+cd..
+cd ..
+cd volumes/go_app/
+;s
+ls
+vi server.go 
+rcode server.go 
+vi server.go 
+git commit -am "既に本登録されているアドレスが入力された時は前の画面に戻るように変更"
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+docker-compose logs
+git commit -am "既に本登録してあるメールアドレスを入力した時に弾く処理を追加"
+gitpush 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+cd ..
+git commit -am "認証コードURLにアクセス時に一時ユーザーから削除の上、本登録を行う処理を追加"
+gitpush 
+git log
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose down
+docker rmi tuna_mysql
+docker-compose up -d --build
+docker-compose logs
