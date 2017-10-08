@@ -1,14 +1,3 @@
-mv OAuth_google_dedium.go OAuth_google_medium.go
-ls
-vi OAuth_google_medium.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
 vi OAuth_google_medium.go 
 docker-compose logs
 vi OAuth_google_medium.go 
@@ -998,3 +987,14 @@ docker-compose down
 docker rmi tuna_mysql
 docker-compose up -d --build
 docker-compose logs
+cd volumes/db_data/
+cd ..
+cd go_app/
+rcode server.go 
+git commit -am "送信メールアドレスのドメインにwebrepo.を追加した。"
+gip
+gitp
+gitpush 
+git commit --amend
+git add server.go 
+git commit --amend
