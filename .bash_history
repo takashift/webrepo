@@ -1,103 +1,3 @@
-vi OAuth_google_medium.go 
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker rmi tuna_echo
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker rmi tuna_echo
-docker-compose up -d --build
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-vi OAuth_google_medium.go 
-docker-compose logs
-exit
-cd volumes/go_app/
-vi server.go 
-rm .server.go.swp 
-vi server.go 
-exit
-cd volumes/go_app/views/
-ls
-cat OAuth_signup.ace 
-cd ..
-vi OAuth_google_github.go 
-ls
-cd views/
-ls
-vi signin_select.ace 
-git status
-git add ../OAuth_google_github.go_
-git status
-git commit -am 'サインイン方法選択画面のボタンのリンク先を設定'
-git add ../OAuth_google_medium.go 
-git commit -am '取り敢えず簡単なOAuth2の実装を試すためのファイルを用意'
-gitpush 
-vi signin_select.ace 
-cd ..
-cd..
-cd 
-cd echo/
-ls
-vi Dockerfile
-git status
-git commit -am 'エラーの修正とEchoのリダイレクトを仕様'
-git commit --amend
-gitpush 
-git commit -am 'リダイレクト先を修正'
-git commit --amend
-gitpush 
-vi signin_select.ace 
-cd ..
-cd volumes/go_app/views/
-vi signin_select.ace 
-git commit -am 'サインイン方法選択画面の表示崩れと下線が表示されるのを週背'
-git commit --amend
-gitpush 
-git sutatus
-git sutats
-git sutatus
-git status
-exit
-cd volumes/go_app/
 ls
 ls -a
 cd volumes/go_app/views/
@@ -998,3 +898,103 @@ gitpush
 git commit --amend
 git add server.go 
 git commit --amend
+git log
+cd mysql/
+rcode Dockerfile 
+cd ../go/
+rcode Dockerfile 
+ls
+cd ../echo/
+ls
+rcode Dockerfile 
+git commit -am "Mysql の Dockerfile に apt-get update を追加"
+git commit --amend
+gitpush 
+cd
+rcode docker-compose.yml
+mkdir cron
+cd cron/
+rcode Dockerfile
+cd ../echo/
+rcode Dockerfile
+cd ../cron/
+rcode Dockerfile
+cd ../echo/
+rcode Dockerfile
+cd ../cron/
+docker build
+docker images
+docker build cron
+docker build -t cron .
+docker run cron
+docker ps
+docker run -d  --name cron cron
+docker ps
+docker ps -a
+docker rmi cron
+docker ps -a
+docker rmi 76da55c8019d
+docker rmi 804e826b61c4
+docker down cron
+docker stop cron
+docker stop fervent_cray
+docker images
+docker run -d  --name cron alpine
+docker images
+docker ps -a
+docker rmi 76da55c8019d
+docker rmi 75e637fcf723
+docker stop 75e637fcf723
+docker stop 
+docker stop cbe55a9b4d26
+docker images
+docker ps -a
+docker rm cbe55a9b4d26
+docker rm 75e637fcf723
+docker ps -a
+docker run -it  --name cron alpine
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/db_data/
+ls
+cd
+cd volumes/go_app/
+rcode server.go 
+exit
+docker run -it --name cron alpine
+docker rm corn
+docker stop corn
+docker ps -a
+docker stop cron
+docker rm cron
+docker ps -a
+docker run -it --name cron alpine
+docker rm cron
+docker ps -a
+cd cron/
+rcode Dockerfile 
+xit
+exit
+cd cron/
+rcode Dockerfile 
+rcode Dockerfile cd ..
+cd
+rcode docker-compose.yml
+cd cron/
+rcode Dockerfile 
+exit
+cd volumes/go_app/
+rcode server.go 
+cd
+cd exit
+exot
+exit
+cd volumes/go_app/
+rcode server.go 
+exit
+rcode docker-compose.yml
+exit
+rcode docker-compose.yml
+exit
+cd volumes/go_app/
+rcode docker-compose.yml
+exit

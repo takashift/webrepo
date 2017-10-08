@@ -39,11 +39,20 @@ services:
                 environment:
                         TZ: Asia/Tokyo
 
+        cron:
+                build: cron
+                restart: always
+                volumes:
+                        - /etc/localtime:/etc/localtime:ro
+                environment:
+                        TZ: Asia/Tokyo
+
+
 volumes:
-        usock: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
-#                external: true
-#        web-vol: # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
-#                external: true
+        usock:
+#                external: true # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
+#        web-vol:
+#                external: true # external が true なのでこの名前のボリュームが用意されてないと無いとエラー
 #        go_app:
 #                external: true
 #        db_data:
