@@ -282,8 +282,11 @@ func main() {
 				redirect := refererCheck(refererURL)
 				fmt.Fprintf(os.Stderr, "act:%s\n", act)
 
+				t := time.Now()
+				tF := t.Format(timeLayout)
+
 				// データベースにアドレスと認証コード、リファラーURLを一緒に保存
-				result, err := sess.InsertInto("tmp_user").Columns("OAuth_service", "act", "email", "referer").Values(oauthService, act, email, redirect).Exec()
+				result, err := sess.InsertInto("tmp_user").Columns("OAuth_service", "act", "email", "referer", "send_time").Values(oauthService, act, email, redirect, tF).Exec()
 				if err != nil {
 					panic(err)
 				} else {

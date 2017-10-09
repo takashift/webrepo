@@ -11,11 +11,11 @@ CREATE TABLE userinfo(
 );
 
 CREATE TABLE tmp_user(
-	id int unique not null auto_increment primary key,
 	OAuth_service VARCHAR(255),
 	act varchar(255) unique not null,
 	email varchar(255) unique not null,
-	referer VARCHAR(255)
+	referer VARCHAR(255),
+	send_time DATETIME not null
 );
 
 CREATE TABLE page_status(

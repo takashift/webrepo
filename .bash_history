@@ -1,210 +1,3 @@
-ls
-ls -a
-cd volumes/go_app/views/
-ls
-cd ..
-cd volumes/go_app/views/
-git status
-git commit -am 'コールバックの処理の枠組みだけ作成'
-gitpush 
-cd volumes/go_app/v
-cd volumes/go_app/
-ls -a
-vi server.go 
-cd volumes/go_app/
-ls
-vi signin_select.ace 
-vi OAuth_google_medium.go 
-cd volumes/go_app/
-vi server.go 
-vi OAuth_google_medium.go 
-cd volumes/go_app/
-vi signin_select.ace 
-vi server.go 
-cd volumes/go_app/
-vi server.go
-exit
-cd volumes/go_app/
-vi OAuth_google_medium.go 
-exit
-exit
-cd volumes/go_app/
-dnf
-yum install rmate
-yum update
-sudo yum makecache fast
-yum install rmate
-sudo yum install rmate
-go
-gem install rmate
-yum install go
-sudo yum install go
-go get gomate
-go get github.com/mattn/gomate
-ssh -R 52698:localhost:52698 user@example.com
-exit
-ls
-cd go/
-ls
-cd ..
-cd echo/
-;s
-ld
-ls
-cd ..
-cd volumes/go_app/
-ls
-rmate -p 52698 file
-rmate -p 52698 server.go 
-gomate -p 52698 server.go 
-exit
-gomate -p 52698 server.go 
-go get github.com/mattn/gomate
-rmate -p 52698 volumes/go_app/server.go 
-sudo go get github.com/mattn/gomate
-rmate -p 52698 volumes/go_app/server.go 
-gomate -p 52698 volumes/go_app/server.go 
-go -h
-sudo go get -tgithub.com/mattn/gomate
-sudo go get -t github.com/mattn/gomate
-go get
-sudo go get -t github.com/mattn/gomate
-go lost
-go list
-echo $GOPATH
-ls
-ls -a
-vi .bash_profile 
-sudo yum install rmate
-go get github.com/mattn/gomate
-vi .bash_profile 
-go get github.com/mattn/gomate
-echo $GOPATH
-source ~/.bash_profile 
-echo $GOPATH
-go get github.com/mattn/gomate
-sudo go get github.com/mattn/gomate
-go list
-sudo go get github.com/mattn/gomate
-go get github.com/mattn/gomate
-rmate
-gomate
-gomate -p 52698 file
-gomate volumes/go_app/server.go 
-exit
-vi .bash_profile 
-exit
-gomate
-exit
-cd volumes/go_app/server.go 
-cd volumes/go_app/ 
-pwd
-exit
-gomate
-exit
-gomate
-rcode
-yum install rcode
-gem rcode
-sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
-yum install wget
-sudo yum install wget
-sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
-chmod a+x /usr/local/bin/rcode
-sudo chmod a+x /usr/local/bin/rcode
-rcode
-rcode volumes/go_app/server.go 
-exit
-gomate /home/tuna/volume/go_app/server.go
-ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
-sudo ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
-ssh -R 52698:127.0.0.1:52698  gomate volume/go_app/server.go
-ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
-sudo ssh -R 52698:127.0.0.1:52698 tuna@webrepo.nal.ie.u-ryukyu.ac.jp gomate volume/go_app/server.go
-gomate /home/tuna/volume/go_app/server.go
-gomate volume/go_app/server.go
-rcode volumes/go_app/server.go 
-gomate volume/go_app/server.go
-rcode volumes/go_app/server.go 
-which gofmt
-gomate volume/go_app/server.go
-gomate -p  volume/go_app/server.go
-gomate -port 52698  volume/go_app/server.go
-gomate -port 52698 volume/go_app/server.go
-git status
-rcode volumes/go_app/OAuth_google_
-ls
-cd volumes/go_app/
-la
-ls
-rcode OAuth_google_medium.go 
-docker-compose 
-docker-compose logs
-git commit -am 'リダイレクトURLの設定を正常に変更。コールバックの関数のコードは適当なコピペで動かないので取り敢えずコメントアウト'
-gitp`
-
-
-
-
-
-'
-`
-gitpush 
-exit
-cd volumes/go_app/
-rcode server.go 
-cd echo/
-ls
-vi D
-vi Dockerfile
-cd ~/volumes/go_app/views/
-ls
-cd volumes/go_app/
-rcode server.go 
-git commit -am 'server.go の無駄なコメントアウトを修正'
-gitpush 
-rcode OAuth_google_medium.go 
-mv OAuth_google_medium.go OAuth_google_medium.go_
-git commit -am 'ファイルを一つに統合'
-git status
-git add OAuth_google_medium.go_ 
-git commit --amend
-gitpush 
-docker-compose logs
-git commit -am "コールバックのリダイレクト先をメールアドレス入力フォームに変更"
-gitpush 
-docker-compose logs
-gitpush 
-docker-compose logs
-docker-conpose down
-docker-compose 
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-rcode server.go 
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build --no-cache
-docker-compose down --rmi all
-yum update -y
-sudo yum update -y
-docker-compose up -d --build --no-cache
-docker-compose down --rmi all
-docker-compose down -h
-dockercompose down
-docker-compose down
-docker-compose down -h
-docker-compose up -d
-docker-compose do
-docker rmi tuna_echo
-docker-compose up -d --build --no-cache
-docker-compose up -d --build
-docker-compose down --rmi all
-docker-compose build --no-cache
-docker-compose up -d --build
 docker-compose logs
 docker images
 docker-compose down --rmi all
@@ -998,3 +791,210 @@ exit
 cd volumes/go_app/
 rcode docker-compose.yml
 exit
+rcode docker-compose.yml
+cd volumes/go_app/
+rcode server.go 
+git log
+cd
+cd mysql/
+rcode Dockerfile 
+rcode docker-compose.yml
+git status
+cd cron/
+ls
+git add Dockerfile 
+git status
+rcode Dockerfile 
+git commit -am "やっぱり Docker の使い方として1コンテナに1プロセスなので、apt-get update は消してcron用の Dockerfile を作成。"
+gitpush 
+gitpush -f
+git push -f
+docker log
+docker logs
+docker logs cron
+rcode docker-compose.yml
+ls -l /var/run/docker.sock
+cd volumes/go_app/
+ls
+cd views/
+ls
+cd ..
+rcode server.go 
+cd ../
+cd ..
+cd mysql/init/
+rcode webrepo.sql 
+docker-compose down
+cd ../../cron/
+cd ../volumes/db_data/
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+$ docker run -it alpine sh -c "echo '* * * * * echo foobar' > /var/spool/cron/crontabs/root && crond -l 2 -f"
+docker run -it alpine sh -c "echo '* * * * * echo foobar' > /var/spool/cron/crontabs/root && crond -l 2 -f"
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_cron_1 /bin/ash
