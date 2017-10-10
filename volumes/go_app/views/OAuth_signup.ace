@@ -31,6 +31,9 @@ html lang=ja
         font-size: small;
         margin-left: 2rem;
       }
+      .red {
+        color: red;
+      }
       .button {
         display: block;
         font-size: 1rem;
@@ -81,6 +84,7 @@ html lang=ja
         label メールアドレス　　　
           input name="email" size="60" required=""
           p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
+          p.red {{.Error}}
         p 以下の同意を以て登録となります。
         #consent_form
           = include consent_form

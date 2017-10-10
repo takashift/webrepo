@@ -53,7 +53,7 @@ var (
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	sess        = conn.NewSession(nil)
 
-	sendMailAdrr = "signup@webrepo.nal.ie.u-ryukyu.ac.jp"
+	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 
 	// キャリアメールのドメイン
 	domain = []string{
@@ -97,7 +97,6 @@ type (
 	}
 
 	tmpuser struct {
-		ID           int    `db:"id"`
 		OAuthService string `db:"OAuth_service"`
 		Act          string `db:"act"`
 		Email        string `db:"email"`
@@ -243,7 +242,7 @@ func main() {
 		// } else {
 		// 	fmt.Fprintf(os.Stderr, "NO\n")
 		// }
-		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		return c.Render(http.StatusOK, "OAuth_signup", mailForm)
 	})
 
 	// 同意後のアドレス確認促進画面
@@ -258,13 +257,14 @@ func main() {
 
 		if err == nil {
 			fmt.Fprintf(os.Stderr, "userinfo.email:%s\n", emailDB)
-			fmt.Fprintf(os.Stderr, "既に登録済みのメールアドレス\n")
-			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+			mailForm.Error = "既に登録済みのメールアドレスです。"
+			return c.Render(http.StatusOK, "OAuth_signup", mailForm)
 		}
 
 		// メールアドレスがキャリアのドメインか確認する。
 		if !strings.Contains(email, "@") {
-			return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+			mailForm.Error = "正しいアドレスを入力して下さい（全角ではメールが届きません。半角で入力して下さい）。"
+			return c.Render(http.StatusOK, "OAuth_signup", mailForm)
 		}
 
 		eDomainSlice := strings.SplitAfter(email, "@")
@@ -307,7 +307,7 @@ func main() {
 				m.SetHeader("From", sendMailAdrr)
 				m.SetHeader("To", email)
 				m.SetHeader("Subject", "メールアドレスの確認")
-				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合はこのURLは無効となるので、再度メールアドレスの登録をお願いします。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
+				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、このURLは無効となるので再度メールアドレスの登録をお願いします。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
 
 				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: "USER_PASSWORD"}
 				if err := d.DialAndSend(m); err != nil {
@@ -318,13 +318,14 @@ func main() {
 			}
 		}
 
-		return c.Render(http.StatusOK, "OAuth_signup", searchForm)
+		mailForm.Error = "ドメイン(@以降)が携帯キャリアのドメイン以外です。登録できません。"
+		return c.Render(http.StatusOK, "OAuth_signup", mailForm)
 	})
 
 	// メール確認URLへのアクセス時の処理
 	e.GET("/email_check", func(c echo.Context) error {
 		act := c.QueryParam("act")
-		_, err := sess.Select("act", "OAuthService", "email", "referer").From("tmp_user").
+		_, err := sess.Select("act", "OAuth_service", "email", "referer").From("tmp_user").
 			Where("act = ?", act).
 			Load(&tmpUser)
 
