@@ -2,6 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
+    meta name="robots" content="noindex"
     title 通報完了 | WebRepo☆彡
     = css
       #main {

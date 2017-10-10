@@ -2,7 +2,8 @@
 html lang=ja
   head
     meta charset=utf-8
-    title sign in - WebRepo
+    meta name="robots" content="noindex"
+    title sign in | WebRepo
     = css
       #main {
         /*width: 50rem;*/
