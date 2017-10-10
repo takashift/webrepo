@@ -212,19 +212,19 @@ func main() {
 			panic(err)
 		}
 
-		// メールアドレスが登録されてるか確認
-		_, err = sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", userGoogle.Email).Load(&userInfoDB)
-		if err != nil {
-			panic(err)
-		}
-
-		fmt.Fprintf(os.Stderr, "登録済みの Email: %s\n", userInfoDB.Email)
-
 		var redirect string
-		if userInfoDB.Email != "" {
+
+		// OAuth、キャリアメールが本登録されてるか確認
+		_, err = sess.Select("OAuth_userinfo").From("userinfo").
+			Where("OAuth_userinfo = ?", userGoogle.Email).
+			ReturnString()
+
+		if err == nil {
+			// エラーが無い == 登録済み場合
 			// リファラーURLがこのサイトのものか確認する
 			redirect = refererCheck(refererURL)
 		} else {
+			// エラーを吐いた == 中身が入ってない場合
 			oauthService = "Google"
 			redirect = "/OAuth_signup"
 		}
@@ -252,7 +252,10 @@ func main() {
 		fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// 既に本登録されているユーザーとアドレスが被ってないか確認
-		emailDB, err := sess.Select("email").From("userinfo").Where("email = ?", email).ReturnString()
+		emailDB, err := sess.Select("email").From("userinfo").
+			Where("email = ?", email).
+			ReturnString()
+
 		if err == nil {
 			fmt.Fprintf(os.Stderr, "userinfo.email:%s\n", emailDB)
 			fmt.Fprintf(os.Stderr, "既に登録済みのメールアドレス\n")
@@ -288,7 +291,11 @@ func main() {
 				tF := t.Format(timeLayout)
 
 				// 一時ユーザーのテーブルにアドレスと認証コード、リファラーURLを一緒に保存
-				result, err := sess.InsertInto("tmp_user").Columns("OAuth_service", "act", "email", "referer", "send_time").Values(oauthService, act, email, redirect, tF).Exec()
+				result, err := sess.InsertInto("tmp_user").
+					Columns("OAuth_service", "act", "email", "referer", "send_time").
+					Values(oauthService, act, email, redirect, tF).
+					Exec()
+
 				if err != nil {
 					panic(err)
 				} else {
@@ -317,7 +324,10 @@ func main() {
 	// メール確認URLへのアクセス時の処理
 	e.GET("/email_check", func(c echo.Context) error {
 		act := c.QueryParam("act")
-		_, err := sess.Select("*").From("tmp_user").Where("act = ?", act).Load(&tmpUser)
+		_, err := sess.Select("act", "OAuthService", "email", "referer").From("tmp_user").
+			Where("act = ?", act).
+			Load(&tmpUser)
+
 		if err != nil {
 			panic(err)
 		}
@@ -332,7 +342,10 @@ func main() {
 		fmt.Fprintf(os.Stderr, "time: %s\n", tF)
 
 		// 正規のユーザーテーブルに追加
-		result, err := sess.InsertInto("userinfo").Columns("OAuth_service", "OAuth_userinfo", "email", "signup_date").Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).Exec()
+		result, err := sess.InsertInto("userinfo").
+			Columns("OAuth_service", "OAuth_userinfo", "email", "signup_date").
+			Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).
+			Exec()
 		if err != nil {
 			panic(err)
 		} else {
