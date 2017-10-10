@@ -102,6 +102,7 @@ type (
 		Act          string `db:"act"`
 		Email        string `db:"email"`
 		Referer      string `db:"referer"`
+		SendTime     string `db:"send_time"`
 	}
 )
 
@@ -211,6 +212,7 @@ func main() {
 			panic(err)
 		}
 
+		// メールアドレスが登録されてるか確認
 		_, err = sess.Select("*").From("userinfo").Where("OAuth_userinfo = ?", userGoogle.Email).Load(&userInfoDB)
 		if err != nil {
 			panic(err)
@@ -285,7 +287,7 @@ func main() {
 				t := time.Now()
 				tF := t.Format(timeLayout)
 
-				// データベースにアドレスと認証コード、リファラーURLを一緒に保存
+				// 一時ユーザーのテーブルにアドレスと認証コード、リファラーURLを一緒に保存
 				result, err := sess.InsertInto("tmp_user").Columns("OAuth_service", "act", "email", "referer", "send_time").Values(oauthService, act, email, redirect, tF).Exec()
 				if err != nil {
 					panic(err)

@@ -1,57 +1,3 @@
-docker-compose logs
-docker images
-docker-compose down --rmi all
-docker rmi 
-docker rmi tuna_echo
-docker images
-docker ps
-docker ps -a
-docker rm all
-docker ps -a -q
-docker rm 'docker ps -a -q'
-docker rm `docker ps -a -q`
-docker images
-docker rmi 32efc118745e
-docker rmi 1de06cb54407
-docker images
-docker rmi 32efc118745e
-docker-compose up -d --build
-docker images
-docker-compose down --rmi all
-docker images
-docker rmi 5a35015d93e9 9e64176cd8a2
-docker rmi 'docker images -a -q'
-docker images -h
-docker rmi 'docker images -q'
-docker images -a
-docker rmi `docker images -a -q`
-docker images
-docker-compose up -d --build
-docker images
-docker-compose down --rmi all
-docker-compose up -d --build
-docker images
-docker-compose logs
-exit
-esit
-exit
-cd volumes/go_app/
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-git log
-cd volumes/go_app/
-rcode server.go 
-exit
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-exit
-cd volumes/go_app/
-exit
-docker-compose logs
 rcode server.go 
 docker-compose logs
 cd volumes/go_app/
@@ -997,4 +943,58 @@ docker-compose up -d --build
 docker-compose down
 docker-compose up -d --build
 docker-compose logs
+docker exec -it tuna_cron_1 /bin/ash
+git status
+cd cron/
+rcode Dockerfile 
+docker exec -it tuna_crom_1 /bin/ash
+docker exec -it tuna_cron_1 /bin/ash
+docker exec -it cron /bin/ash
+docker -ps
+docker ps -a
+docker exec -it tuna_cron_1 /bin/ash
+docker ps -a
+docker exec -it tuna_cron_1 /bin/ash
+docker ps -a
+docker exec -it tuna_cron_1 /bin/ash
+docker ps -a
+docker-compose logs
+cd ..
+cd go/
+rcode D
+cd
+cd echo/
+rcode Dockerfile
+docker ps -a
+echo `*/5 * * * * mysql -h mysql -u rtuna -pUSER_PASSWORD Webrepo -e 'DELETE FROM tmp_user WHERE send_time < CURRENT_TIMESTAMP - INTERVAL 12 HOUR'`
+docker ps -a
+rcode Dockerfile
+docker run -it alpine
+docker ps -a
+docker run -it alpine
+docker ps -a
+docker exec -it tuna_cron_1 /bin/ash
+docker ps -a
+docker exec -it tuna_cron_1 /bin/ash
+docker exec -it tuna_mysql_1 /bin/ash
+docker exec -it tuna_mysql_1 /bin/bash
+git commit -am "１２時間が経過した一時ユーザーを削除するコンテナを作成"
+git status
+git commit --amend
+gitpush 
+cd cron/
+rcode Dockerfile 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker exec -it tuna_cron_1 /bin/ash
+docker-compose down
+docker-compose up -d --build
+docker exec -it tuna_cron_1 /bin/ash
+cd
+rcode docker-compose.yml
+docker exec -it tuna_cron_1 /bin/ash
+docker-compose up -d --build
+docker exec -it tuna_cron_1 /bin/ash
+docker-compose up -d --build
 docker exec -it tuna_cron_1 /bin/ash
