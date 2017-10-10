@@ -169,7 +169,8 @@ func main() {
 
 		fmt.Fprintf(os.Stderr, "%s\n", refererURL)
 
-		return c.Render(http.StatusOK, "signin_select", searchForm)
+		// return c.Render(http.StatusOK, "signin_select", searchForm)
+		return c.Redirect(http.StatusTemporaryRedirect, "/google_OAuth")
 	})
 
 	// パスワードサインインフォーム
@@ -242,6 +243,7 @@ func main() {
 		// } else {
 		// 	fmt.Fprintf(os.Stderr, "NO\n")
 		// }
+		mailForm.Error = ""
 		return c.Render(http.StatusOK, "OAuth_signup", mailForm)
 	})
 
