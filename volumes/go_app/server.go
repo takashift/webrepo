@@ -174,9 +174,9 @@ func main() {
 	})
 
 	// パスワードサインインフォーム
-	e.GET("/pass_signin", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "pass_signin", searchForm)
-	})
+	// e.GET("/pass_signin", func(c echo.Context) error {
+	// 	return c.Render(http.StatusOK, "pass_signin", searchForm)
+	// })
 
 	// Google の認証画面にリダイレクト
 	e.GET("/google_OAuth", func(c echo.Context) error {
