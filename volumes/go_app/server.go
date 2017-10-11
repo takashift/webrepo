@@ -47,6 +47,8 @@ var (
 	tmpUser      tmpuser
 	oauthService string
 
+	client *http.Client
+
 	tablename = "userinfo"
 	seq       = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
@@ -137,6 +139,35 @@ func refererCheck(refererURL string) string {
 	return redirect
 }
 
+// Token によってサインイン状況をチェック
+func signinCheck(url string, c echo.Context) error {
+	if client != nil {
+		// // Token が既に保存されている時
+		// // Token が有効かチェック
+		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+		// if err == nil {
+		// 	// Token が合ったらリクエストされたページを返す。
+		return c.Render(http.StatusOK, url, searchForm)
+		// }
+	}
+	// Token が無ければサインインフォームにリダイレクト。
+	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+}
+
+func signinCheckStrong(url string, c echo.Context) error {
+	if client != nil {
+		// // Token が既に保存されている時
+		// // Token が有効かチェック
+		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+		// if err == nil {
+		// 	// Token が合ったらリクエストされたページを返す。
+		return c.Render(http.StatusOK, url, searchForm)
+		// }
+	}
+	// Token が無ければサインインフォームにリダイレクト。
+	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+}
+
 func main() {
 	userGoogle := new(GoogleUser)
 
@@ -149,7 +180,7 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "search_top", searchForm)
+		return signinCheck("search_top", c)
 	})
 
 	// 検索時に呼び出される
@@ -157,7 +188,7 @@ func main() {
 		// URLクエリパラメータを受け取る
 		q := c.QueryParam("q")
 		searchForm.Query = q
-		return c.Render(http.StatusOK, "search_result", searchForm)
+		return signinCheck("search_result", c)
 	})
 
 	// サインイン方法選択画面
@@ -195,8 +226,10 @@ func main() {
 
 		fmt.Fprintf(os.Stderr, "%s\n", runtime.Version())
 
+		client = googleOauthConfig.Client(oauth2.NoContext, token)
+
 		// JSON が返ってくる
-		response, err := http.Get("https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + token.AccessToken)
+		response, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 		if err != nil {
 			panic(err)
 		}
@@ -368,42 +401,42 @@ func main() {
 
 	// 評価入力画面
 	e.GET("/input_evaluation", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "input_evaluation", searchForm)
+		return signinCheckStrong("input_evaluation", c)
 	})
 
 	// 評価閲覧画面
 	e.GET("/preview_evaluation", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "preview_evaluation", searchForm)
+		return signinCheck("preview_evaluation", c)
 	})
 
 	// 個別評価閲覧画面
 	e.GET("/individual_reviews", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "individual_review", searchForm)
+		return signinCheck("individual_review", c)
 	})
 
 	// 通報完了画面
 	e.GET("/dengerous_complete", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "dengerous_complete", searchForm)
+		return signinCheck("dengerous_complete", c)
 	})
 
 	// コメント入力画面
 	e.GET("/input_comment", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "input_comment", searchForm)
+		return signinCheckStrong("input_comment", c)
 	})
 
 	// 新規ページ登録画面
 	e.GET("/register_page", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "register_page", searchForm)
+		return signinCheckStrong("register_page", c)
 	})
 
 	// ページ属性編集画面
 	e.GET("/edit_page_cate", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "edit_page_cate", searchForm)
+		return signinCheck("edit_page_cate", c)
 	})
 
 	// テスト（ヘッダーメニュー）
 	e.GET("/header_menu", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "header_menu", searchForm)
+		return signinCheck("header_menu", c)
 	})
 
 	// テスト（フッター）
@@ -418,12 +451,12 @@ func main() {
 
 	// 利用規約
 	e.GET("/term_of_service", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "term_of_service", searchForm)
+		return signinCheck("term_of_service", c)
 	})
 
 	// このサイトについて
 	e.GET("/about", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "about", searchForm)
+		return signinCheck("about", c)
 	})
 
 	e.PUT("/users/", updateUser)

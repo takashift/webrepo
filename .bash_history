@@ -1,71 +1,3 @@
-rcode server.go 
-docker-compose logs
-cd volumes/go_app/
-rcode server.go 
-exit
-docker-compose logs
-cd volumes/go_app/
-rcode server.go 
-exit
-docker-compose logs
-exit
-docker exec -it tuna_mysql_1 /bin/bash
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-git log
-docker-compose logs
-git log
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-rcode server.go 
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-git log
-git commit -am '取得するデータをemailに変更'
-git status
-git log
-git commit --amend
-gitp
-gitpush 
-git log
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-ls
-cd archive/
-ls
-rcode db.go.cm 
-cd ..
-git commit -am 'データベースに接続するための設定を記述'
-gitpush 
-rcode server.go
-cd volumes/go_app/
-rcode server.go
-cd volumes/go_app/
-rcode server.go
 exit
 docker-compose logs
 cd volumes/go_app/
@@ -998,3 +930,71 @@ docker-compose up -d --build
 docker exec -it tuna_cron_1 /bin/ash
 docker-compose up -d --build
 docker exec -it tuna_cron_1 /bin/ash
+cd volumes/go_app/
+ls
+cd views
+cd ..
+rcode server.go 
+git commit -am "一時ユーザーの構造体にもSQLに合わせてsend_timeを追加"
+gitpush 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+ls
+rcode template_no_proxy.go 
+cd views/
+rcode search_
+rcode search_result.ace 
+rcode search_top.ace 
+rcode OAuth_signup.ace 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+rcode docker-compose.yml
+xit
+exit
+exit
+rcode docker-compose.yml
+docker exec -it tuna_cron_1 /bin/ash
+git log
+git commit -am "トランザクションが最低限になるようにtmp_userで指定しているカラムを修正"
+gito
+gitpush 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+git commit -am "メールアドレス入力時にエラーの内容を表示するようにした。"
+gitpush 
+git status
+docker-compose logs
+git commit -am "Google以外の認証方法は一旦保留にするので、ログイン方法選択画面を Google の認証へリダイレクトするように変更"
+gitpush 
+git status
+git commit --amend
+gitpush 
+git push -f
+git commit -am "パスワードサインインのページは使わないので攻撃防止のためにコメントアウト。"
+gitpush 
+cd volumes/go_app/
+ls
+cd views/
+ls
+rcode signin_select.ace 
+rcode OAuth_signup.ace 
+rcode pass_signin.ace 
+rcode agree_signup.ace 
+rcode dengerous_complete.ace 
+git status
+rcode signin_select.ace 
+git status
+git commit -am "検索エンジンに引っ掛けたくないページに設定を追加"
+gitpush 
+rcode OAuth_signup.ace 
+git log
+rcode docker-compose.yml
+cd volumes/go_app/
+ls
+rcode server.go 
