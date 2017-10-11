@@ -28,6 +28,9 @@ import (
 const (
 	// 2017-10-06 17:20:00 では何故か出来なかった。。
 	timeLayout = "2006-01-02 15:04:05"
+
+	host         = "https://webrepo.nal.ie.u-ryukyu.ac.jp"
+	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 
 var (
@@ -54,8 +57,6 @@ var (
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	sess        = conn.NewSession(nil)
-
-	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 
 	// キャリアメールのドメイン
 	domain = []string{
@@ -105,6 +106,11 @@ type (
 		Referer      string `db:"referer"`
 		SendTime     string `db:"send_time"`
 	}
+
+	pagePath struct {
+		Page string
+		URL  string
+	}
 )
 
 func updateUser(c echo.Context) error {
@@ -131,7 +137,7 @@ func deleteUser(c echo.Context) error {
 // リファラーURLがこのサイトのものか確認する関数
 func refererCheck(refererURL string) string {
 	var redirect string
-	if strings.Contains(refererURL, "https://webrepo.nal.ie.u-ryukyu.ac.jp/") {
+	if strings.Contains(refererURL, host) {
 		redirect = refererURL
 	} else {
 		redirect = "/"
@@ -140,36 +146,42 @@ func refererCheck(refererURL string) string {
 }
 
 // Token によってサインイン状況をチェック
-func signinCheck(url string, c echo.Context) error {
-	if client != nil {
-		// // Token が既に保存されている時
-		// // Token が有効かチェック
-		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
-		// if err == nil {
-		// 	// Token が合ったらリクエストされたページを返す。
-		return c.Render(http.StatusOK, url, searchForm)
-		// }
-	}
-	// Token が無ければサインインフォームにリダイレクト。
-	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+func signinCheck(page string, c echo.Context) error {
+	// if client != nil {
+	// 	// もしログイン済みなら、
+	// 	// 上部メニューの"ログイン"のところを変更する
+	// 	searchForm.Login = ""
+	// }
+	return c.Render(http.StatusOK, page, searchForm)
 }
 
-func signinCheckStrong(url string, c echo.Context) error {
+func signinCheckStrong(p pagePath, c echo.Context) error {
 	if client != nil {
 		// // Token が既に保存されている時
 		// // Token が有効かチェック
 		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 		// if err == nil {
 		// 	// Token が合ったらリクエストされたページを返す。
-		return c.Render(http.StatusOK, url, searchForm)
+		return c.Render(http.StatusOK, p.Page, searchForm)
 		// }
 	}
+	// req, err := http.ReadRequest(bufio.NewReader())
+	// refererURL := req.Referer
+	// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
+	// refererURL = c.Request().Referer()
+	if p.URL == "" {
+		p.URL = "/" + p.Page
+	}
+
+	refererURL = host + p.URL
+
 	// Token が無ければサインインフォームにリダイレクト。
 	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
 }
 
 func main() {
 	userGoogle := new(GoogleUser)
+	client = nil
 
 	e.GET("/test", func(c echo.Context) error {
 
@@ -190,14 +202,13 @@ func main() {
 		searchForm.Query = q
 		return signinCheck("search_result", c)
 	})
+	// マイページ
+	e.GET("/mypage", func(c echo.Context) error {
+		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
+	})
 
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
-		// req, err := http.ReadRequest(bufio.NewReader())
-		// refererURL := req.Referer
-		// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
-		refererURL = c.Request().Referer()
-
 		fmt.Fprintf(os.Stderr, "%s\n", refererURL)
 
 		// return c.Render(http.StatusOK, "signin_select", searchForm)
@@ -401,7 +412,7 @@ func main() {
 
 	// 評価入力画面
 	e.GET("/input_evaluation", func(c echo.Context) error {
-		return signinCheckStrong("input_evaluation", c)
+		return signinCheckStrong(pagePath{Page: "input_evaluation"}, c)
 	})
 
 	// 評価閲覧画面
@@ -421,12 +432,12 @@ func main() {
 
 	// コメント入力画面
 	e.GET("/input_comment", func(c echo.Context) error {
-		return signinCheckStrong("input_comment", c)
+		return signinCheckStrong(pagePath{Page: "input_comment"}, c)
 	})
 
 	// 新規ページ登録画面
 	e.GET("/register_page", func(c echo.Context) error {
-		return signinCheckStrong("register_page", c)
+		return signinCheckStrong(pagePath{Page: "register_page"}, c)
 	})
 
 	// ページ属性編集画面
