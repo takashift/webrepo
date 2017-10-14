@@ -10,7 +10,6 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -148,6 +147,7 @@ func refererCheck(refererURL string) string {
 }
 
 // Token によってサインイン状況をチェック（ログインが必須でないページ）
+// サインインの状況に応じてページの一部を変更する
 func signinCheck(page string, c echo.Context) error {
 	// if client != nil {
 	// 	// もしログイン済みなら、
@@ -183,6 +183,35 @@ func signinCheckStrong(p pagePath, c echo.Context) error {
 	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
 }
 
+// Token によってサインイン状況をチェック（ログインが必須なページ）
+func signinCheckJWT(p pagePath, c echo.Context) error {
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	email := claims["email"].(string)
+	if email != "" {
+		// // Token が既に保存されている時
+		// // Token が有効かチェック
+		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+		// if err == nil {
+		// 	// Token が合ったらリクエストされたページを返す。
+		// return c.Render(http.StatusOK, p.Page, searchForm)
+		return nil
+		// }
+	}
+	// req, err := http.ReadRequest(bufio.NewReader())
+	// refererURL := req.Referer
+	// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
+	// refererURL = c.Request().Referer()
+	if p.URL == "" {
+		p.URL = "/" + p.Page
+	}
+
+	refererURL = host + p.URL
+
+	// Token が無ければサインインフォームにリダイレクト。
+	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+}
+
 func createJwt(c echo.Context, email string) error {
 
 	// // Set custom claims
@@ -198,7 +227,7 @@ func createJwt(c echo.Context, email string) error {
 	// token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// Create token
-	token := jwt.New(jwt.SigningMethodRS512)
+	token := jwt.New(jwt.SigningMethodHS256)
 
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
@@ -206,18 +235,52 @@ func createJwt(c echo.Context, email string) error {
 	claims["exp_time"] = time.Now().Add(time.Hour * 72).Unix()
 
 	// Generate encoded token and send it as response.
-	t, err := token.SignedString([]byte("secret"))
+	_, err := token.SignedString([]byte("secret"))
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, echo.Map{
-		"token": t,
-	})
+	return nil
 }
 
 func main() {
 	userGoogle := new(googleUser)
-	client = nil
+
+	e.GET("/login", func(c echo.Context) error {
+
+		// Create token
+		token := jwt.New(jwt.SigningMethodHS256)
+
+		// Set claims
+		claims := token.Claims.(jwt.MapClaims)
+		claims["email"] = "Jon Snow"
+		claims["admin"] = true
+		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+
+		// Generate encoded token and send it as response.
+		t, err := token.SignedString([]byte("secret"))
+		if err != nil {
+			return err
+		}
+		return c.JSON(http.StatusOK, map[string]string{
+			"token": t,
+		})
+	})
+
+	// Restricted group
+	r := e.Group("/r")
+	r.Use(middleware.JWT([]byte("secret")))
+	r.GET("", func(c echo.Context) error {
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		email := claims["email"].(string)
+		return c.String(http.StatusOK, "Welcome "+email+"!")
+		// return signinCheckJWT(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
+	})
+
+	// マイページ
+	r.GET("/mypage", func(c echo.Context) error {
+		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
+	})
 
 	e.GET("/test", func(c echo.Context) error {
 
@@ -265,8 +328,6 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
-		fmt.Fprintf(os.Stderr, "%s\n", runtime.Version())
 
 		client = googleOauthConfig.Client(oauth2.NoContext, token)
 
@@ -445,10 +506,6 @@ func main() {
 		return c.Redirect(http.StatusTemporaryRedirect, tmpUser.Referer)
 	})
 
-	// ログインチェックが必要なページ
-	e.GET("/restricted", func(c echo.Context) error {
-	})
-
 	// 評価入力画面
 	e.GET("/input_evaluation", func(c echo.Context) error {
 		return signinCheckStrong(pagePath{Page: "input_evaluation"}, c)
@@ -508,24 +565,6 @@ func main() {
 	e.GET("/about", func(c echo.Context) error {
 		return signinCheck("about", c)
 	})
-
-	// Restricted group
-	r := e.Group("/restricted")
-
-	// Configure middleware with the custom claims type
-	config := middleware.JWTConfig{
-		Claims:     &jwtCustomClaims{},
-		SigningKey: []byte("secret"),
-	}
-	r.Use(middleware.JWTWithConfig(config))
-
-	// マイページ
-	r.GET("/mypage", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
-	})
-
-	e.PUT("/users/", updateUser)
-	e.DELETE("/users/:id", deleteUser)
 
 	// ソケット生成
 	os.Remove("/usock/domain.sock")

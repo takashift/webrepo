@@ -15,12 +15,13 @@ RUN go get -u github.com/labstack/echo
 RUN go get -u github.com/go-sql-driver/mysql
 RUN go get -u github.com/gocraft/dbr
 RUN go get -u github.com/yosssi/ace
+RUN go get -u github.com/dgrijalva/jwt-go
 
 # OAuth2
 RUN go get -u github.com/satori/go.uuid
 RUN go get -u golang.org/x/oauth2
 RUN go get -u google.golang.org/api/oauth2/v2
-RUN go get -u google.golang.org/appengine
+# RUN go get -u google.golang.org/appengine
 RUN go get -u cloud.google.com/go/compute/metadata
 RUN go get -u github.com/dchest/uniuri
 RUN go get -u gopkg.in/gomail.v2
