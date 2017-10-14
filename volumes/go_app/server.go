@@ -16,7 +16,9 @@ import (
 	"time"
 
 	"github.com/dchest/uniuri"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	gomail "gopkg.in/gomail.v2"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -75,7 +77,7 @@ var (
 	}
 )
 
-type GoogleUser struct {
+type googleUser struct {
 	// 先頭が大文字でないと格納されない。
 	Email string `json:"email"`
 }
@@ -145,7 +147,7 @@ func refererCheck(refererURL string) string {
 	return redirect
 }
 
-// Token によってサインイン状況をチェック
+// Token によってサインイン状況をチェック（ログインが必須でないページ）
 func signinCheck(page string, c echo.Context) error {
 	// if client != nil {
 	// 	// もしログイン済みなら、
@@ -155,7 +157,9 @@ func signinCheck(page string, c echo.Context) error {
 	return c.Render(http.StatusOK, page, searchForm)
 }
 
+// Token によってサインイン状況をチェック（ログインが必須なページ）
 func signinCheckStrong(p pagePath, c echo.Context) error {
+	fmt.Fprintf(os.Stderr, "%v\n", client)
 	if client != nil {
 		// // Token が既に保存されている時
 		// // Token が有効かチェック
@@ -179,8 +183,40 @@ func signinCheckStrong(p pagePath, c echo.Context) error {
 	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
 }
 
+func createJwt(c echo.Context, email string) error {
+
+	// // Set custom claims
+	// claims := &jwtCustomClaims{
+	// 	"Jon Snow",
+	// 	true,
+	// 	jwt.StandardClaims{
+	// 		ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
+	// 	},
+	// }
+
+	// // Create token with claims
+	// token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	// Create token
+	token := jwt.New(jwt.SigningMethodRS512)
+
+	// Set claims
+	claims := token.Claims.(jwt.MapClaims)
+	claims["email"] = email
+	claims["exp_time"] = time.Now().Add(time.Hour * 72).Unix()
+
+	// Generate encoded token and send it as response.
+	t, err := token.SignedString([]byte("secret"))
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, echo.Map{
+		"token": t,
+	})
+}
+
 func main() {
-	userGoogle := new(GoogleUser)
+	userGoogle := new(googleUser)
 	client = nil
 
 	e.GET("/test", func(c echo.Context) error {
@@ -202,11 +238,6 @@ func main() {
 		searchForm.Query = q
 		return signinCheck("search_result", c)
 	})
-	// マイページ
-	e.GET("/mypage", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
-	})
-
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
 		fmt.Fprintf(os.Stderr, "%s\n", refererURL)
@@ -247,7 +278,7 @@ func main() {
 
 		defer response.Body.Close()
 
-		// var user *GoogleUser
+		// var user *googleUser
 
 		err = json.NewDecoder(response.Body).Decode(userGoogle)
 		// contents, _ := ioutil.ReadAll(response.Body)
@@ -256,16 +287,20 @@ func main() {
 			panic(err)
 		}
 
-		var redirect string
+		var (
+			redirect string
+			email    string
+		)
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		_, err = sess.Select("OAuth_userinfo").From("userinfo").
+		email, err = sess.Select("email").From("userinfo").
 			Where("OAuth_userinfo = ?", userGoogle.Email).
 			ReturnString()
 
 		if err == nil {
 			// エラーが無い == 登録済み場合
 			// リファラーURLがこのサイトのものか確認する
+			createJwt(c, email)
 			redirect = refererCheck(refererURL)
 		} else {
 			// エラーを吐いた == 中身が入ってない場合
@@ -410,6 +445,10 @@ func main() {
 		return c.Redirect(http.StatusTemporaryRedirect, tmpUser.Referer)
 	})
 
+	// ログインチェックが必要なページ
+	e.GET("/restricted", func(c echo.Context) error {
+	})
+
 	// 評価入力画面
 	e.GET("/input_evaluation", func(c echo.Context) error {
 		return signinCheckStrong(pagePath{Page: "input_evaluation"}, c)
@@ -468,6 +507,21 @@ func main() {
 	// このサイトについて
 	e.GET("/about", func(c echo.Context) error {
 		return signinCheck("about", c)
+	})
+
+	// Restricted group
+	r := e.Group("/restricted")
+
+	// Configure middleware with the custom claims type
+	config := middleware.JWTConfig{
+		Claims:     &jwtCustomClaims{},
+		SigningKey: []byte("secret"),
+	}
+	r.Use(middleware.JWTWithConfig(config))
+
+	// マイページ
+	r.GET("/mypage", func(c echo.Context) error {
+		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
 	})
 
 	e.PUT("/users/", updateUser)

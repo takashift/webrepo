@@ -1,103 +1,3 @@
-exit
-docker-compose logs
-cd volumes/go_app/
-ls
-docker exec -it tuna_mysql_1 /bin/bash
-docker exec -it tuna_nginx_1 /bin/bash
-docker exec -it tuna_nginx_1 /bin/ash
-docker exec -it tuna_nginx_1 /bin/bash
-docker exec -it tuna_mysql_1 /bin/bash
-cd ..
-cd db_data/
-ls
-rm -r *
-ls
-sudo rm -r *
-ls
-git commit -am "Go での DB の Update、Delete テスト用のコードを記述"
-gitpush 
-sudo rm -r *
-ls
-docker exec -it tuna_mysql_1 /bin/bash
-rcode server.go
-cd volumes/go_app/
-rcode server.go
-curl -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' https://webrepo.nal.ie.u-ryukyu.ac.jp/users/
-curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' tuna_echo_1:3306/users/
-curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' tuna_nginx_1:3306/users/
-curl --cacert -X PUT -H 'Content-Type: application/json' -d '{"id":2, "email": "unk@email.com"}' tuna_nginx_1:443/users/
-docker-compose logs
-docker-compose dow
-docker-compose down
-docker-compose up -d
-docker-compose up -d --build
-docker-compose logs
-curl -X PUT -H 'Content-Type: application/json' -d '{"id":3, "email":"oppai@email.com"}' -k https://tuna_nginx_1/users/
-docker-compose down
-docker-compose up -d --build
-docker-compose down --rmi all
-docker-compose up -d --build
-cd echo/
-s
-ls
-cat Dockerfile
-cd
-cat docker-compose.yml
-cd volumes/go_app/
-rcode server.go
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-ls
-cd mysql/
-ls
-cd init/
-ls
-cat webrepo.sql 
-rcode webrepo.sql 
-cd ..
-cd volumes/go_app/
-cd
-cd volumes/db_data/
-ls
-sudo rm -r *
-ls
-ks
-ls
-docker exec -it tuna_mysql_1 /bin/bash
-cd 
-cd mysql/
-cd init/
-rcode webrepo.sql 
-ls
-cd
-cd volumes/go_app/
-ls
-cd volumes/go_app/
-ls
-cd ..
-cd db_data/
-ls
-sudo rm -r *
-ls
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/go_app/
-rcode server.go
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-rcode server.go
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-rcode server.go
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
 docker-compose up -d --build
 docker-compose logs
 git status
@@ -998,3 +898,103 @@ rcode docker-compose.yml
 cd volumes/go_app/
 ls
 rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+cd
+docker-compose logs
+
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker down tuna_echo_1
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker rm tuna_echo_1
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+rcode docker-compose.yml
+cd volumes/go_app/
+rcode server.go 
+git status
+git commit -am 'サインインチェックを各ページに設定'
+gitpush 
+ls
+rcode template_no_proxy.go 
+cd views/
+ls
+rcode search_top.ace 
+rcode header_menu.ace 
+rcode 
+rcode search_result.ace 
+rcode header_menu.ace 
+rcode search_top.ace 
+cp about.ace 
+cp about.ace mypage_top.ace
+ls
+rcode mypage_top.ace 
+cd ..
+rcode server.go 
+cd views/
+rcode header_menu.ace 
+rcode about.ace 
+cd ..
+rcode template_no_proxy.go 
+rcode server.go 
+git log
+git commit -am "インクルードされたテンプレートには変数を適用できなかったので、ヘッダーのログインの部分は常時マイページになるようにした。"
+gitpush 
+git log
+rcode server.go 
+cd volumes/go_app/
+ls
+rcode server.go 
+git log
+docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+esit
+exit
