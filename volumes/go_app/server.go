@@ -158,15 +158,16 @@ func signinCheck(page string, c echo.Context) error {
 }
 
 // Token によってサインイン状況をチェック（ログインが必須なページ）
-func signinCheckStrong(p pagePath, c echo.Context) error {
-	fmt.Fprintf(os.Stderr, "%v\n", client)
-	if client != nil {
+func signinCheckStrong(p pagePath, c echo.Context, value PageValue) error {
+	fmt.Fprintf(os.Stderr, "%s\n", refererURL)
+	// if client != nil {
+	if refererURL == host+p.URL {
 		// // Token が既に保存されている時
 		// // Token が有効かチェック
 		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 		// if err == nil {
 		// 	// Token が合ったらリクエストされたページを返す。
-		return c.Render(http.StatusOK, p.Page, searchForm)
+		return c.Render(http.StatusOK, p.Page, value)
 		// }
 	}
 	// req, err := http.ReadRequest(bufio.NewReader())
@@ -278,8 +279,8 @@ func main() {
 	})
 
 	// マイページ
-	r.GET("/mypage", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
+	e.GET("/mypage", func(c echo.Context) error {
+		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c, searchForm)
 	})
 
 	e.GET("/test", func(c echo.Context) error {
@@ -291,6 +292,8 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
+		// fmt.Println(reflect.TypeOf(searchForm)) // string
+
 		return signinCheck("search_top", c)
 	})
 
@@ -508,7 +511,7 @@ func main() {
 
 	// 評価入力画面
 	e.GET("/input_evaluation", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "input_evaluation"}, c)
+		return signinCheckStrong(pagePath{Page: "input_evaluation"}, c, searchForm)
 	})
 
 	// 評価閲覧画面
@@ -528,12 +531,12 @@ func main() {
 
 	// コメント入力画面
 	e.GET("/input_comment", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "input_comment"}, c)
+		return signinCheckStrong(pagePath{Page: "input_comment"}, c, searchForm)
 	})
 
 	// 新規ページ登録画面
 	e.GET("/register_page", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "register_page"}, c)
+		return signinCheckStrong(pagePath{Page: "register_page"}, c, searchForm)
 	})
 
 	// ページ属性編集画面

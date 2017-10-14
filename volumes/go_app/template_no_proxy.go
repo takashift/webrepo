@@ -43,15 +43,16 @@ var data = struct {
 	Content:     "おっぱい",
 }
 
-var searchForm = struct {
+type PageValue struct {
 	Query string
-}{
+	Error string
+}
+
+var searchForm = PageValue{
 	Query: "",
 }
 
-var mailForm = struct {
-	Error string
-}{
+var mailForm = PageValue{
 	Error: "",
 }
 
