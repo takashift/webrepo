@@ -1,270 +1,3 @@
-docker-compose up -d --build
-docker-compose logs
-git status
-git commit -am "取り敢えずHTTPリファラーwo"
-git commit --amend
-gitpush 
-cd volumes/go_app/
-rcode server.go
-docker-compose logs
-git commit -am 'Google のユーザー情報リクエスト先をv2からv3へ変更'
-docker-compose logs
-git status
-git log
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git commit -am 'リファラーURLを出力するように変更'
-gitpush 
-git commit --amend
-gitpush 
-gitpush -f
-git push -f
-git commit -am 'コールバックの処理で、メールアドレスが登録されていたら元居たページにリダイレクトするように変更'
-gitpush 
-cd volumes/go_app/views/
-ls
-
-rcode OAuth_signup.ace 
-rcode search_
-rcode search_top.ace 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git commit -am 'メール確認画面で Post で送られた情報を取ってこれるように追記'
-gitpush 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-git commit -am 'キャリアメールのドメインを集めた配列を追加'
-gitpq
-gitpush 
-git lo
-git log
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git commit -am '登録されてるキャリアメールドメインのアドレス以外は弾くようにコードを記述'
-gitpush 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git log
-cd volumes/go_app/
-rcode server.go
-cd volumes/go_app/
-rcode server.go
-cd volumes/go_app/
-rcode server.go
-docker-compose logs
-cd ..
-rcode docker-compose.yml
-cd echo/
-rcode Dockerfile
-cd ..
-cd nginx/
-rcode Dockerfile
-cd ..
-cd echo/
-rcode Dockerfile
-git commit -am "メール送信のためのポートを開放する設定を docker-compose と Echo の Dockerfile に追加"
-git status
-git commit --amend
-cd ..
-
-git commit --amend
-git status
-git commit --amend
-git status
-git add
-git add docker-compose.yml
-git commit --amend
-cd echo/
-rcode Dockerfile
-git commit --amend
-git add Dockerfile
-git commit --amend
-cd ..
-ls
-cd volumes/go_app/
-rcode server.go 
-docker-compose logs
-cd ..
-cd
-cd echo/
-rcode Dockerfile
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose down --rmi all
-cd
-rcode docker-compose.yml
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-cd volumes/db_data/
-sudo rm -r *
-ls
-sudo rm -r *
-ls
-docker-compose down
-docker-compose down --rmi all
-sudo rm -r *
-docker-compose up -d --build
-sudo rm -r *
-ls
-docker-compose logs
-cd ..
-cd volumes/go_app/archive/
-ls
-rcode db.go.cm 
-docker-compose logs
-docker-compose down
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_nginx_1 /bin/bash
-docker exec -it tuna_mysql_1 /bin/bash
-cd mysql/
-cd init/
-ls
-rcode webrepo.sql 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git commit -am 'メールに関連付けた認証コードをデータベースに保存するように変更'
-git commit --amend
-gitpush 
-rcode webrepo.sql 
-git commit -am 'docker-compose のポートの設定が間違っていたので修正。'
-gitpush 
-docker exec -it tuna_nginx_1 /bin/bash
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
-docker-compose down mysql
-docker-compose down
-docker rmi mysql
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-cd ..
-cd volumes/db_data/
-ls
-sudo rm -r *
-git log
-git status
-git commit -am "ドメイン検証のif文内に書かれていなければならない処理を外に書いていたので修正。メール内の確認URLにアクセスした時に認証コードがDBに存在するか確認する処理を追加"
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
 docker rmi echo
 docker rmi tuna_echo_1
 docker rmi tuna_echo
@@ -998,3 +731,270 @@ cd volumes/go_app/
 rcode server.go 
 esit
 exit
+docker stop tuna_echo_1
+git commit -am "JWTのコードを追加"
+gitpush 
+docker-compose logs
+go get github.com/dgrijalva/jwt-go
+docker-compose logs
+go get github.com/dgrijalva/jwt-go
+go -h
+go list
+go list -h
+go list github.com
+go packages
+go list packages
+docker-compose logs
+go get jwt
+go list jwt
+go get -u github.com/dgrijalva/jwt-go
+docker-compose logs
+docker ps
+docker-compose up -d --build
+docker-compose logs
+go install github.com/dgrijalva/jwt-go
+go list echo
+go list
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "取り敢えずJWTを例のまま作ったが、Token が読み込めず…"
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git log
+git commit -am "毎回 Google の認証を通せるように signinCheckStrong() を少し修正"
+gitpush 
+git log
+cd volumes/go_app/
+rcode server.go 
+cd
+cd echo/
+rcode Dockerfile
+cd
+cd volumes/go_app/
+rcode template_no_proxy.go 
+rcode server.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+free
+docker exec -it tuna_echo_1 /bin/ash
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+rcode docker-compose.yml
+cd echo/
+rcode Dockerfile
+docker rm tuna_echo_1
+docker stop tuna_echo_1
+docker rm tuna_echo_1
+docker rmi tuna_echo
+docker-compose up -d --build
+docker rm tuna_echo_1
+docker stop tuna_echo_1
+docker rmi tuna_echo
+docker rmi alpine
+docker images
+docker golang
+docker rmi golang
+docker rmi golang:alpine
+docker rmi ed119d8f7db5
+docker ps
+ps -a
+dockerps -a
+docker ps -a
+docker rm hungry_beaver
+docker rm reverent_lalande
+docker rm 946a4b54b755
+docker rm d632a01b7c64
+docker ps -a
+docker rm 33272634e9c1
+docker rmcad9bf29046e
+docker rm cad9bf29046e
+docker rm fd5397b35d10
+docker rm 7f2a3024b359
+docker rm 9b5fc421646e
+docker ps -a
+docker rm 642ac43804eb
+docker ps -a
+docker rmi golang:alpine
+docker images
+docker-compose up -d --build
+docker ps -a
+docker-compose logs
+docker exec -it tuna_echo_1 /bin/bash
+docker exec -it tuna_echo_1 /bin/baash
+docker exec -it tuna_echo_1 /bin/ash
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+exit
+cd volumes/go_app/
+ls
+rcode server.go 
+ls
+rcode server.go 
+rcode template_no_proxy.go 
+mv template_no_proxy.go template_no_proxy.go_
+rm template_no_proxy.go
+mv template_no_proxy.go_ template_no_proxy.go
+ls
+touch ctx_test.go
+rcode ctx_test.go 
+mv server.go server.go_
+mv template_no_proxy.go template_no_proxy.go_
+mv ctx_test.go ctx.go 
+rcode ctx.go 
+rcode server.go_ 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_echo_1 /bin/ash
+docker-compose logs
+docker exec -it tuna_echo_1 /bin/ash
+docker exec -it tuna_echo_1 /bin/bash
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+cd nginx/
+ls
+rcode app.conf 
+cd
+rcode docker-compose.yml
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down --rmi all
+docker-compose up -d --build
+docker-compose logs
+cd echo/
+rcode Dockerfile
+cd ..
+cd nginx/
+rcode Dockerfile
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+docker-compose logs
+curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
+Copy
+curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY"
+curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
+curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY"
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
+curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY"
+curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
+curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNTA4MzI1ODIwLCJuYW1lIjoiSm9uIFNub3cifQ.BDj3InHyXlm7OwLt8r6YFhMXxkgqXCt4G-jHWJWT_hU"
+docker-compose logs

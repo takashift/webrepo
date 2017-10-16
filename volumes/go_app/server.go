@@ -146,73 +146,6 @@ func refererCheck(refererURL string) string {
 	return redirect
 }
 
-// Token によってサインイン状況をチェック（ログインが必須でないページ）
-// サインインの状況に応じてページの一部を変更する
-func signinCheck(page string, c echo.Context) error {
-	// if client != nil {
-	// 	// もしログイン済みなら、
-	// 	// 上部メニューの"ログイン"のところを変更する
-	// 	searchForm.Login = ""
-	// }
-	return c.Render(http.StatusOK, page, searchForm)
-}
-
-// Token によってサインイン状況をチェック（ログインが必須なページ）
-func signinCheckStrong(p pagePath, c echo.Context, value PageValue) error {
-	fmt.Fprintf(os.Stderr, "%s\n", refererURL)
-	// if client != nil {
-	if refererURL == host+p.URL {
-		// // Token が既に保存されている時
-		// // Token が有効かチェック
-		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
-		// if err == nil {
-		// 	// Token が合ったらリクエストされたページを返す。
-		return c.Render(http.StatusOK, p.Page, value)
-		// }
-	}
-	// req, err := http.ReadRequest(bufio.NewReader())
-	// refererURL := req.Referer
-	// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
-	// refererURL = c.Request().Referer()
-	if p.URL == "" {
-		p.URL = "/" + p.Page
-	}
-
-	refererURL = host + p.URL
-
-	// Token が無ければサインインフォームにリダイレクト。
-	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
-}
-
-// Token によってサインイン状況をチェック（ログインが必須なページ）
-func signinCheckJWT(p pagePath, c echo.Context) error {
-	user := c.Get("user").(*jwt.Token)
-	claims := user.Claims.(jwt.MapClaims)
-	email := claims["email"].(string)
-	if email != "" {
-		// // Token が既に保存されている時
-		// // Token が有効かチェック
-		// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
-		// if err == nil {
-		// 	// Token が合ったらリクエストされたページを返す。
-		// return c.Render(http.StatusOK, p.Page, searchForm)
-		return nil
-		// }
-	}
-	// req, err := http.ReadRequest(bufio.NewReader())
-	// refererURL := req.Referer
-	// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
-	// refererURL = c.Request().Referer()
-	if p.URL == "" {
-		p.URL = "/" + p.Page
-	}
-
-	refererURL = host + p.URL
-
-	// Token が無ければサインインフォームにリダイレクト。
-	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
-}
-
 func createJwt(c echo.Context, email string) error {
 
 	// // Set custom claims
@@ -236,15 +169,80 @@ func createJwt(c echo.Context, email string) error {
 	claims["exp_time"] = time.Now().Add(time.Hour * 72).Unix()
 
 	// Generate encoded token and send it as response.
-	_, err := token.SignedString([]byte("secret"))
+	t, err := token.SignedString([]byte("secret"))
 	if err != nil {
 		return err
 	}
+
+	c.Response().Header().Set(echo.HeaderAuthorization, "Bearer "+t)
+
 	return nil
 }
 
+// Token によってサインイン状況をチェック（ログインが必須でないページ）
+// サインインの状況に応じてページの一部を変更する
+func signinCheck(page string, c echo.Context) error {
+	// if client != nil {
+	// 	// もしログイン済みなら、
+	// 	// 上部メニューの"ログイン"のところを変更する
+	// 	searchForm.Login = ""
+	// }
+	return c.Render(http.StatusOK, page, searchForm)
+}
+
+// Token によってサインイン状況をチェック（ログインが必須なページ）
+func signinCheckStrong(p pagePath, c echo.Context, value PageValue) error {
+	if p.URL == "" {
+		p.URL = "/" + p.Page
+	}
+
+	// fmt.Fprintf(os.Stderr, "refererURL:%s\n", refererURL)
+	// fmt.Fprintf(os.Stderr, "host+p.URL:%s\n", host+p.URL)
+
+	// fmt.Fprintf(os.Stderr, "rURL:%s\n", c.Get("rURL"))
+
+	if c.Get("user") != nil {
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		email := claims["email"].(string)
+
+		// if refererURL == host+p.URL {
+		if email != "" {
+			// if c.Get("rURL") != nil {
+			// if c.Get("rURL").(string) == host+p.URL {
+			// // Token が既に保存されている時
+			// // Token が有効かチェック
+			// _, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+			// if err == nil {
+			// 	// Token が合ったらリクエストされたページを返す。
+			fmt.Fprintf(os.Stderr, "user:%v\n", user)
+
+			return c.Render(http.StatusOK, p.Page, value)
+			// }
+			// }
+		}
+	}
+	// req, err := http.ReadRequest(bufio.NewReader())
+	// refererURL := req.Referer
+	// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
+	// refererURL = c.Request().Referer()
+
+	refererURL = host + p.URL
+	// c.Set("rURL", refererURL)
+	// fmt.Fprintf(os.Stderr, "rURL:%s\n", c.Get("rURL"))
+
+	// Token が無ければサインインフォームにリダイレクト。
+	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+}
+
 func main() {
+	// Middleware
+	// e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
 	userGoogle := new(googleUser)
+
+	refererURL := ""
 
 	e.GET("/login", func(c echo.Context) error {
 
@@ -262,6 +260,10 @@ func main() {
 		if err != nil {
 			return err
 		}
+		user := c.Get("user").(*jwt.Token)
+		claims2 := user.Claims.(jwt.MapClaims)
+		email := claims2["email"].(string)
+		fmt.Fprintf(os.Stderr, "email:%s\n", email)
 		return c.JSON(http.StatusOK, map[string]string{
 			"token": t,
 		})
@@ -280,11 +282,17 @@ func main() {
 
 	// マイページ
 	e.GET("/mypage", func(c echo.Context) error {
-		return signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c, searchForm)
+		signinCheckStrong(pagePath{Page: "mypage_top", URL: "/mypage"}, c, searchForm)
+		return nil
 	})
 
 	e.GET("/test", func(c echo.Context) error {
+		// fmt.Fprintf(os.Stderr, "c.Get:%s\n", c.Get("get"))
+		// c.Set("get", "OK")
+		// g := c.Get("get").(string)
+		// fmt.Fprintf(os.Stderr, "c.Get:%s\n", g)
 
+		// return c.String(http.StatusOK, "Welcome "+g+"!")
 		// この Render は Echo のメソッドであり、テンプレートエンジンのメソッドではない！
 		// この関数の第３引数がテンプレート{{.}}になる
 		return c.Render(http.StatusOK, "test", data)
@@ -306,8 +314,7 @@ func main() {
 	})
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
-		fmt.Fprintf(os.Stderr, "%s\n", refererURL)
-
+		fmt.Println("signin_select")
 		// return c.Render(http.StatusOK, "signin_select", searchForm)
 		return c.Redirect(http.StatusTemporaryRedirect, "/google_OAuth")
 	})
@@ -365,6 +372,9 @@ func main() {
 			// エラーが無い == 登録済み場合
 			// リファラーURLがこのサイトのものか確認する
 			createJwt(c, email)
+			fmt.Println("登録済み")
+			fmt.Fprintf(os.Stderr, "%s\n", refererURL)
+
 			redirect = refererCheck(refererURL)
 		} else {
 			// エラーを吐いた == 中身が入ってない場合

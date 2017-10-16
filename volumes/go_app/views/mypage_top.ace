@@ -1,0 +1,29 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title このサイトについて | WebRepo☆彡
+    = css
+      #main {
+        margin: 5rem 15% 7rem 15%;
+      }
+      #main h1,#main h2,#main h3 {
+        margin-top: 5rem;
+        text-align: center;
+      }
+      #main p {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .star {
+        color: rgba(255,230,0,1);
+        -webkit-text-stroke: 1px rgba(0,0,0,0.8);
+        text-stroke: 1px rgba(0,0,0,0.8);
+      }
+
+  body
+    = include header_menu
+    #main
+      p ログイン済みです。
+      p 現在マイページで閲覧できる情報はありません。
+    = include footer

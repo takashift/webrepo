@@ -1,4 +1,5 @@
 FROM golang:alpine
+# FROM golang:latest
 
 MAINTAINER hgcr
 
@@ -30,6 +31,10 @@ WORKDIR /go/src/app
 
 CMD ["/go/bin/godo", "server", "--watch"]
 
-#ENTRYPOINT ["go", "get", "github.com/labstack/echo"]
+EXPOSE 1323
+
+# godo 不使用時のテスト
+# CMD ["go", "run", "server.go", "template_no_proxy.go"]
+
 #ENTRYPOINT ["", ""]
 #CMD ["go", "run", "/fcgi/server.go"]

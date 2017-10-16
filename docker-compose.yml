@@ -3,6 +3,8 @@ services:
         echo:
                 build: echo
                 restart: always
+                ports:
+                        - "1323:1323"
                 volumes:
                         - /etc/localtime:/etc/localtime:ro
                         - usock:/usock
