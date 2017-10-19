@@ -164,6 +164,7 @@ html lang=ja
       .comment {
         margin-left: 1.5rem;
       }
+    = include JWT
 
   body
     = include header_menu

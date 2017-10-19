@@ -10,6 +10,7 @@ html lang=ja
         margin: 2rem auto auto auto;
         text-align: center;
       }
+    = include JWT
 
   body
     = include header_menu

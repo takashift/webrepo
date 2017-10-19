@@ -1,0 +1,5 @@
+= javascript
+  use strict;
+  
+  var xhr = new XMLHttpRequest();
+  xhr.setRequestHeader("Authorization", localStorage.jwt)

@@ -20,6 +20,7 @@ html lang=ja
         -webkit-text-stroke: 1px rgba(0,0,0,0.8);
         text-stroke: 1px rgba(0,0,0,0.8);
       }
+    = include JWT
 
   body
     = include header_menu

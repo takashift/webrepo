@@ -18,6 +18,7 @@ html lang=ja
         border: 1px solid rgba(0,0,0,0.9);
         text-align: left;
       }
+    = include JWT
 
   body
     = include header_menu

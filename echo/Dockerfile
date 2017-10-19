@@ -27,6 +27,9 @@ RUN go get -u cloud.google.com/go/compute/metadata
 RUN go get -u github.com/dchest/uniuri
 RUN go get -u gopkg.in/gomail.v2
 
+RUN go get -u github.com/labstack/echo-contrib/session
+RUN go get -u github.com/gorilla/sessions
+
 WORKDIR /go/src/app
 
 CMD ["/go/bin/godo", "server", "--watch"]

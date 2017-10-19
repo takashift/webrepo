@@ -158,6 +158,7 @@ html lang=ja
       input {
         margin-left: 3%;
       }
+    = include JWT
 
   body
     = include header_menu

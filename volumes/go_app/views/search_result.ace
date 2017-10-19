@@ -106,6 +106,7 @@ html lang=ja
       #nav {
         margin-bottom: 2rem;
       }
+    = include JWT
 
   body
     = include header_menu

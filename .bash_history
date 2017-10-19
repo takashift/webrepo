@@ -1,143 +1,3 @@
-docker rmi echo
-docker rmi tuna_echo_1
-docker rmi tuna_echo
-cd echo/
-rcode Dockerfile
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git commit sutatus
-git commit status
-git status
-docker-compose down --rmi all
-docker-compose logs
-docker-compose up -d --build
-git log
-docker-compose lodg
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-esit
-exit
-cd volumes/db_data/
-sudo rm -r *
-exit
-cd volumes/db_data/
-ls
-cd ..
-cd go_app/
-rcode server.go 
-docker exec -it tuna_mysql_1 /bin/bash
-cd
-ls
-cd volumes/
-ks
-ls
-cd web-vol/
-ls
-cd ..
-cd
-cd volumes/db_data/
-sudo rm -r *
-ls
-docker exec -it tuna_mysql_1 /bin/bash
-cd 
-rcode docker-compose.yml
-cd volumes/db_data/
-sudo rm -r *
-rcode volumes/go_app/
-devolumes/go_app/
-cd volumes/go_app/
-rcode server.go 
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/db_data/
-sudo rm -r *
-cd
-rcode dock
-cd echo/
-rcode Dockerfile
-git commit -am "大学総情センターのメールを使って、アドレス確認メールの送信に成功"
-gitpush 
-docker exec -it tuna_mysql_1 /bin/bash
-cd mysql/
-cd init/
-rcode webrepo.sql 
-docker exec -it tuna_mysql_1 /bin/bash
-cd
-cd volumes/db_data/
-ls
-sudo rm -r *
-docker exec -it tuna_mysql_1 /bin/bash
-git commit -am "本登録を行う処理を追加"
-gitpush 
-docker exec -it tuna_mysql_1 /bin/bash
-sudo rm -r *
-ls
-sudo rm -r *
-ls
-sudo rm -r *
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/db_data/
-cd ..
-cd..
-cd ..
-cd volumes/go_app/
-;s
-ls
-vi server.go 
-rcode server.go 
-vi server.go 
-git commit -am "既に本登録されているアドレスが入力された時は前の画面に戻るように変更"
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-cd volumes/go_app/
-rcode server.go 
-docker-compose logs
-git commit -am "既に本登録してあるメールアドレスを入力した時に弾く処理を追加"
 gitpush 
 docker-compose logs
 docker-compose down
@@ -998,3 +858,143 @@ curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR
 curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
 curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNTA4MzI1ODIwLCJuYW1lIjoiSm9uIFNub3cifQ.BDj3InHyXlm7OwLt8r6YFhMXxkgqXCt4G-jHWJWT_hU"
 docker-compose logs
+cd volumes/go_app/
+rcode server.go_ 
+rcode ctx.go 
+mv ctx.go ctx.go_
+mv server.go_ server.go
+mv template_no_proxy.go_ template_no_proxy.go
+ls
+rcode server.go
+rcode template_no_proxy.go 
+git add ctx.go_ views/mypage_top.ace 
+git commit -am "JWTのTokenをヘッダーに書き込む処理を追加"
+gitpush 
+mv server.go server.go_
+mv template_no_proxy.go template_no_proxy.go_
+mv ctx.go_ ctx.go
+rcode ctx.go 
+rcode template_no_proxy.go_ 
+rcode server.go_ 
+rcode server.go
+ls
+rcode cron/
+cd volumes/go_app/
+rcode ctx.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/
+rcode ctx.go 
+cd views/
+ls
+rcode JWT.ace
+rcode JWT.JS
+mv JWT.JS JWT.js
+rcode JWT.js
+rcode about.ace consent_form.ace footer.ace input_comment.ace OAuth_signup.ace register_page.ace signin_select.ace 
+rcode consent_form.ace 
+rcode footer.ace 
+rcode input_comment.ace 
+rcode OAuth_signup.ace 
+rcode register_page.ace 
+rcode signin_select.ace 
+ls
+rcode agree_signup.ace 
+rcode edit_page_cate.ace 
+rcode input_comment.ace 
+rcode mypage_top.ace 
+rcode term_of_service.ace 
+rcode preview_evaluation.ace 
+rcode input_evaluation.ace 
+rcode search_result.ace 
+rcode search_top.ace 
+rcode dengerous_complete.ace 
+rcode individual_review.ace 
+rcode edit_page_cate.ace 
+cd volumes/go_app/
+rcode ctx.go 
+cd volumes/go_app/
+rcode ctx.go 
+exit
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/
+rcode ctx.go 
+cd
+cd echo/
+ls
+rcode Dockerfile
+cd
+cd volumes/go_app/
+rcode Dockerfile
+rcode ctx.go 
+ls
+cd views/
+ls
+rcode JWT.js 
+rcode JWT.ace 
+cd ...
+cd ..
+rcode ctx.go 

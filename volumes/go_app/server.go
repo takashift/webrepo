@@ -232,7 +232,7 @@ func signinCheckStrong(p pagePath, c echo.Context, value PageValue) error {
 	// fmt.Fprintf(os.Stderr, "rURL:%s\n", c.Get("rURL"))
 
 	// Token が無ければサインインフォームにリダイレクト。
-	return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+	return c.Redirect(http.StatusMovedPermanently, "/signin_select")
 }
 
 func main() {

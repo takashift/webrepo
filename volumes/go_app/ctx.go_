@@ -7,42 +7,78 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
 )
 
 func login(c echo.Context) error {
-	username := c.FormValue("username")
-	password := c.FormValue("password")
+	// username := c.FormValue("username")
+	// password := c.FormValue("password")
 
-	if username == "jon" && password == "shhh!" {
-		// Create token
-		token := jwt.New(jwt.SigningMethodHS256)
+	// if username == "jon" && password == "shhh!" {
+	// Create token
+	token := jwt.New(jwt.SigningMethodHS256)
 
-		// Set claims
-		claims := token.Claims.(jwt.MapClaims)
-		claims["name"] = "Jon Snow"
-		claims["admin"] = true
-		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+	// Set claims
+	claims := token.Claims.(jwt.MapClaims)
+	claims["name"] = "Jon Snow"
+	claims["admin"] = true
+	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
-		// Generate encoded token and send it as response.
-		t, err := token.SignedString([]byte("oppai"))
-		if err != nil {
-			return err
-		}
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
-		})
+	// Generate encoded token and send it as response.
+	t, err := token.SignedString([]byte("oppai"))
+	if err != nil {
+		return err
 	}
+	// c.Request().Header.Set(echo.HeaderCookie, "Bearer "+t)
+	// // Header.Set(echo.HeaderAuthorization, "Bearer "+t)
+	// // c.SetRequest(h)
 
-	return echo.ErrUnauthorized
+	c.Response().Header().Set(echo.HeaderAuthorization, fmt.Sprintf("Bearer "+t))
+	// fmt.Fprintf(os.Stderr, "header:%s\n", c.Request().Header.Get(echo.HeaderCookie))
+	// fmt.Fprintf(os.Stderr, "header:%s\n", c.Response().Header().Get(echo.HeaderAuthorization))
+
+	sess, err := session.Get("session", c)
+	if err != nil {
+		return err
+	}
+	sess.Options = &sessions.Options{
+		Path:     "/",
+		MaxAge:   86400 * 7,
+		HttpOnly: true,
+	}
+	sess.Values["token"] = t
+	sess.Save(c.Request(), c.Response())
+
+	// return c.HTML(http.StatusOK, "<script>var xhr = new XMLHttpRequest();xhr.onreadystatechange = function (){if(xhr.readyState == 2){localStorage.jwt = xhr.getResponseHeader('Authorization');console.log(xhr.getResponseHeader(\"Authorization\"));console.log(xhr.getResponseHeader(\"Content-Type\"))}};</script>")
+	return c.HTML(http.StatusOK, "<script>localStorage.jwt = 'Bearer "+t+"';console.log(localStorage.jwt);</script>")
+	// c.JSON(http.StatusOK, map[string]string{
+	// 	"token": t,
+	// })
+	// }
+
+	// return echo.ErrUnauthorized
 }
 
 func accessible(c echo.Context) error {
+	fmt.Fprintf(os.Stderr, "header:%s\n", c.Request().Header.Get(echo.HeaderAuthorization))
+	fmt.Fprintf(os.Stderr, "Cookie:%s\n", c.Request().Header.Get(echo.HeaderCookie))
+	sess, err := session.Get("session", c)
+	if err != nil {
+		return err
+	}
+	fmt.Fprintf(os.Stderr, "%s\n", sess.Values["token"])
+	t, err := jwt.Parse(sess.Values["token"].(string), func(token *jwt.Token) (interface{}, error) {
+		return []byte("oppai"), nil
+	})
+	fmt.Fprintf(os.Stderr, "token:%v\n", t)
 	return c.String(http.StatusOK, "Accessible")
 }
 
 func restricted(c echo.Context) error {
+	fmt.Fprintf(os.Stderr, "header:%s\n", c.Request().Header.Get(echo.HeaderAuthorization))
 	user := c.Get("user").(*jwt.Token)
 	fmt.Fprintf(os.Stderr, "unk:%v\n", user)
 	claims := user.Claims.(jwt.MapClaims)
@@ -57,26 +93,35 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
+
 	// Login route
-	e.POST("/login", login)
+	e.GET("/login", login)
 
 	// Unauthenticated route
 	e.GET("/", accessible)
 
-	e.POST("/a", func(c echo.Context) error {
+	e.GET("/s", func(c echo.Context) error {
+		return c.NoContent(http.StatusOK)
+	})
+
+	e.GET("/a", func(c echo.Context) error {
+		fmt.Fprintf(os.Stderr, "header:%s\n", c.Request().Header.Get(echo.HeaderAuthorization))
 		c.Set("unk", "kuso")
 		fmt.Fprintf(os.Stderr, "unk:%s\n", c.Get("unk"))
 		return c.String(http.StatusOK, "Accessible")
 	})
 
 	e.GET("/b", func(c echo.Context) error {
+		fmt.Fprintf(os.Stderr, "header:%s\n", c.Request().Header.Get(echo.HeaderAuthorization))
+		fmt.Fprintf(os.Stderr, "Cookie:%s\n", c.Request().Header.Get(echo.HeaderCookie))
 
 		fmt.Fprintf(os.Stderr, "unk:%s\n", c.Get("unk"))
-		return c.String(http.StatusOK, "Accessible")
+		return c.HTML(http.StatusOK, "<script>var xhr = new XMLHttpRequest();console.log(localStorage.jwt);xhr.open('GET', '/');xhr.setRequestHeader('Authorization', localStorage.jwt);xhr.send();</script>")
 	})
 
 	// Restricted group
-	r := e.Group("/restricted")
+	r := e.Group("/r")
 	r.Use(middleware.JWT([]byte("oppai")))
 	r.GET("", restricted)
 
