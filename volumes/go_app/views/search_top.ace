@@ -93,7 +93,7 @@ html lang=ja
     = include header_menu
     #search
       #space_h
-      a.new_eval href="register_page"
+      a.new_eval href="r/register_page"
         button.new_eval 未登録ページを評価する
           br
             span ★★★★★

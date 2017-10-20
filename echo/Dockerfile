@@ -34,7 +34,7 @@ WORKDIR /go/src/app
 
 CMD ["/go/bin/godo", "server", "--watch"]
 
-EXPOSE 1323
+# EXPOSE 1323
 
 # godo 不使用時のテスト
 # CMD ["go", "run", "server.go", "template_no_proxy.go"]
