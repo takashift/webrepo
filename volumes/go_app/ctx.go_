@@ -53,11 +53,10 @@ func login(c echo.Context) error {
 	sess.Save(c.Request(), c.Response())
 
 	// return c.HTML(http.StatusOK, "<script>var xhr = new XMLHttpRequest();xhr.onreadystatechange = function (){if(xhr.readyState == 2){localStorage.jwt = xhr.getResponseHeader('Authorization');console.log(xhr.getResponseHeader(\"Authorization\"));console.log(xhr.getResponseHeader(\"Content-Type\"))}};</script>")
-	return c.HTML(http.StatusOK, "<script>localStorage.jwt = 'Bearer "+t+"';console.log(localStorage.jwt);</script>")
-	// c.JSON(http.StatusOK, map[string]string{
-	// 	"token": t,
-	// })
-	// }
+	// return c.HTML(http.StatusOK, "<script>localStorage.jwt = 'Bearer "+t+"';console.log(localStorage.jwt);</script>")
+	return c.JSON(http.StatusOK, map[string]string{
+		"token": t,
+	})
 
 	// return echo.ErrUnauthorized
 }
@@ -69,7 +68,7 @@ func accessible(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Fprintf(os.Stderr, "%s\n", sess.Values["token"])
+	fmt.Fprintf(os.Stderr, "token:%s\n", sess.Values["token"])
 	t, err := jwt.Parse(sess.Values["token"].(string), func(token *jwt.Token) (interface{}, error) {
 		return []byte("oppai"), nil
 	})
@@ -84,6 +83,34 @@ func restricted(c echo.Context) error {
 	claims := user.Claims.(jwt.MapClaims)
 	name := claims["name"].(string)
 	return c.String(http.StatusOK, "Welcome "+name+"!")
+}
+
+func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+
+		sess, _ := session.Get("session", c)
+		if sess.Values["token"] != nil {
+			t := sess.Values["token"].(string)
+			c.Request().Header.Set(echo.HeaderAuthorization, "Bearer "+t)
+
+			fmt.Fprintf(os.Stderr, "token:%v\n", t)
+			return next(c)
+		}
+
+		// リクエストされたURLを記入
+		fmt.Fprintf(os.Stderr, "reqURL:%v\n", c.Request().URL)
+		sess.Options = &sessions.Options{
+			Path:     "/",
+			MaxAge:   86400 * 7,
+			HttpOnly: true,
+		}
+		sess.Values["refererURL"] = c.Request().URL
+		sess.Save(c.Request(), c.Response())
+
+		return next(c)
+		// サインイン画面へリダイレクト
+		// return c.Redirect(http.StatusMovedPermanently, "/s")
+	}
 }
 
 func main() {
@@ -102,7 +129,7 @@ func main() {
 	e.GET("/", accessible)
 
 	e.GET("/s", func(c echo.Context) error {
-		return c.NoContent(http.StatusOK)
+		return c.String(http.StatusOK, "OK")
 	})
 
 	e.GET("/a", func(c echo.Context) error {
@@ -122,8 +149,12 @@ func main() {
 
 	// Restricted group
 	r := e.Group("/r")
+	r.Use(cookieToAuthMiddleware)
 	r.Use(middleware.JWT([]byte("oppai")))
-	r.GET("", restricted)
+	r.GET("/e", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Accessible")
+	})
+	r.GET("/i", restricted)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

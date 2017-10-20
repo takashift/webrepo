@@ -1,84 +1,3 @@
-gitpush 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-cd ..
-git commit -am "認証コードURLにアクセス時に一時ユーザーから削除の上、本登録を行う処理を追加"
-gitpush 
-git log
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose down
-docker rmi tuna_mysql
-docker-compose up -d --build
-docker-compose logs
-cd volumes/db_data/
-cd ..
-cd go_app/
-rcode server.go 
-git commit -am "送信メールアドレスのドメインにwebrepo.を追加した。"
-gip
-gitp
-gitpush 
-git commit --amend
-git add server.go 
-git commit --amend
-git log
-cd mysql/
-rcode Dockerfile 
-cd ../go/
-rcode Dockerfile 
-ls
-cd ../echo/
-ls
-rcode Dockerfile 
-git commit -am "Mysql の Dockerfile に apt-get update を追加"
-git commit --amend
-gitpush 
-cd
-rcode docker-compose.yml
-mkdir cron
-cd cron/
-rcode Dockerfile
 cd ../echo/
 rcode Dockerfile
 cd ../cron/
@@ -998,3 +917,84 @@ rcode JWT.ace
 cd ...
 cd ..
 rcode ctx.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+ls
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/
+rcode ctx.go 
+mv ctx.go ctx.go_
+mv server.go_ server.go
+mv template_no_proxy.go_ template_no_proxy.go
+ls
+git status
+git add views/JWT.ace views/JWT.js
+ls
+git status
+git commit -am 'ctx.go_ でCookieを使ったJWTのやり取りに成功'
+gitpush 
+git status
+rcode server.go 
+rcode template_no_proxy.go 
+rcode ctx.go_ 
+rcode template_no_proxy.go 
+mv template_no_proxy.go template_no_proxy.go_
+rcode server.go 
+rcode template_no_proxy.go 
+rcode ctx.go_ 
+cd volumes/go_app/
+rcode server.go 
+rcode template_no_proxy.go 
+rcode ctx.go_ 
+git add template_no_proxy.go_ 
+git log
+git status
+cd volumes/go_app/
+rcode server.go 
+rcode ctx.go_ 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs

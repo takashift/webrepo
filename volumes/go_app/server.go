@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"os"
@@ -16,8 +17,11 @@ import (
 
 	"github.com/dchest/uniuri"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
+	"github.com/yosssi/ace"
 	gomail "gopkg.in/gomail.v2"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -30,55 +34,35 @@ const (
 	// 2017-10-06 17:20:00 では何故か出来なかった。。
 	timeLayout = "2006-01-02 15:04:05"
 
-	host         = "https://webrepo.nal.ie.u-ryukyu.ac.jp"
+	host         = "webrepo.nal.ie.u-ryukyu.ac.jp"
 	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 
 var (
-	e = echo.New()
-
-	googleOauthConfig = &oauth2.Config{
-		ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
-		ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
-		Endpoint:     google.Endpoint,
-		RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback_google",
-		Scopes: []string{
-			"email"},
-	}
-
-	refererURL   string
-	userInfoDB   userinfo
-	tmpUser      tmpuser
-	oauthService string
-
-	client *http.Client
-
 	tablename = "userinfo"
 	seq       = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
-	sess        = conn.NewSession(nil)
-
-	// キャリアメールのドメイン
-	domain = []string{
-		"docomo.ne.jp",
-		"ezweb.ne.jp",
-		"au.com",
-		"willcom.com",
-		"y-mobile.ne.jp",
-		"emobile.ne.jp",
-		"ymobile1.ne.jp",
-		"ymobile.ne.jp",
-		"softbank.ne.jp",
-		"vodafone.ne.jp",
-		"i.softbank.jp",
-		"disney.ne.jp",
-	}
+	dbSess      = conn.NewSession(nil)
 )
 
 type googleUser struct {
 	// 先頭が大文字でないと格納されない。
 	Email string `json:"email"`
+}
+
+// e.Renderer に代入するために必須っぽい
+type AceTemplate struct {
+}
+
+// サイトで共通情報
+type ServiceInfo struct {
+	Title string
+}
+
+type PageValue struct {
+	Query string
+	Error string
 }
 
 type (
@@ -114,6 +98,20 @@ type (
 	}
 )
 
+// ここでレシーバ変数を定義したことでAceTemplateに以下の関数がメソッドとして関連付けられる
+func (at *AceTemplate) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	// オプションを渡してディレクトリを指定
+	tpl, err := ace.Load(name, "", &ace.Options{
+		BaseDir: "views",
+	})
+
+	if err != nil {
+		return err
+	}
+
+	return tpl.Execute(w, data)
+}
+
 func updateUser(c echo.Context) error {
 	u := new(userinfoJSON)
 	if err := c.Bind(u); err != nil {
@@ -121,14 +119,14 @@ func updateUser(c echo.Context) error {
 	}
 
 	attrsMap := map[string]interface{}{"id": u.ID, "email": u.Email}
-	sess.Update(tablename).SetMap(attrsMap).Where("id = ?", u.ID).Exec()
+	dbSess.Update(tablename).SetMap(attrsMap).Where("id = ?", u.ID).Exec()
 	return c.NoContent(http.StatusOK)
 }
 
 func deleteUser(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	sess.DeleteFrom(tablename).
+	dbSess.DeleteFrom(tablename).
 		Where("id = ?", id).
 		Exec()
 
@@ -146,7 +144,7 @@ func refererCheck(refererURL string) string {
 	return redirect
 }
 
-func createJwt(c echo.Context, email string) error {
+func createJwt(c echo.Context, id int, email string) error {
 
 	// // Set custom claims
 	// claims := &jwtCustomClaims{
@@ -165,8 +163,9 @@ func createJwt(c echo.Context, email string) error {
 
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
+	claims["id"] = id
 	claims["email"] = email
-	claims["exp_time"] = time.Now().Add(time.Hour * 72).Unix()
+	// claims["exp_time"] = time.Now().Add(time.Hour * 72).Unix()
 
 	// Generate encoded token and send it as response.
 	t, err := token.SignedString([]byte("secret"))
@@ -174,20 +173,28 @@ func createJwt(c echo.Context, email string) error {
 		return err
 	}
 
-	c.Response().Header().Set(echo.HeaderAuthorization, "Bearer "+t)
+	sess, _ := session.Get("session", c)
+
+	sess.Options = &sessions.Options{
+		Path:     "/",
+		MaxAge:   86400 * 7,
+		HttpOnly: true,
+	}
+	sess.Values["token"] = t
+	sess.Save(c.Request(), c.Response())
 
 	return nil
 }
 
 // Token によってサインイン状況をチェック（ログインが必須でないページ）
 // サインインの状況に応じてページの一部を変更する
-func signinCheck(page string, c echo.Context) error {
+func signinCheck(page string, c echo.Context, value PageValue) error {
 	// if client != nil {
 	// 	// もしログイン済みなら、
 	// 	// 上部メニューの"ログイン"のところを変更する
 	// 	searchForm.Login = ""
 	// }
-	return c.Render(http.StatusOK, page, searchForm)
+	return c.Render(http.StatusOK, page, value)
 }
 
 // Token によってサインイン状況をチェック（ログインが必須なページ）
@@ -226,8 +233,11 @@ func signinCheckStrong(p pagePath, c echo.Context, value PageValue) error {
 	// refererURL := req.Referer
 	// Echo の Context.Request が *http.Request 型なので、この中にある Referer() で取ってこれる。
 	// refererURL = c.Request().Referer()
+	sess, _ := session.Get("session", c)
 
-	refererURL = host + p.URL
+	sess.Values["refererURL"] = host + p.URL
+	sess.Save(c.Request(), c.Response())
+
 	// c.Set("rURL", refererURL)
 	// fmt.Fprintf(os.Stderr, "rURL:%s\n", c.Get("rURL"))
 
@@ -235,44 +245,103 @@ func signinCheckStrong(p pagePath, c echo.Context, value PageValue) error {
 	return c.Redirect(http.StatusMovedPermanently, "/signin_select")
 }
 
+func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+
+		sess, err := session.Get("session", c)
+		fmt.Fprintf(os.Stderr, "reqURL:%s\n", c.Request().URL)
+		if err != nil || sess.Values["token"] == nil {
+			// リクエストされたURLを記入
+			sess.Options = &sessions.Options{
+				Path:     "/",
+				MaxAge:   86400 * 7,
+				HttpOnly: true,
+			}
+			sess.Values["refererURL"] = fmt.Sprintf("%s%s", host, c.Request().URL)
+			sess.Save(c.Request(), c.Response())
+
+			// サインイン画面へリダイレクト
+			return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+		}
+
+		t := sess.Values["token"].(string)
+		// リクエストヘッダーの Authorization に Token を格納
+		c.Request().Header.Set(echo.HeaderAuthorization, "Bearer "+t)
+
+		fmt.Fprintf(os.Stderr, "token:%v\n", sess)
+		return next(c)
+	}
+}
+
 func main() {
+	var serviceInfo = ServiceInfo{
+		"タイトルrrrrrrrrrrr",
+	}
+
+	// テンプレートに渡す値
+	var data = struct {
+		ServiceInfo
+		Content string
+	}{
+		ServiceInfo: serviceInfo,
+		Content:     "おっぱい",
+	}
+
+	var searchForm = PageValue{
+		Query: "",
+	}
+
+	var mailForm = PageValue{
+		Error: "",
+	}
+
+	var (
+		e = echo.New()
+
+		googleOauthConfig = &oauth2.Config{
+			ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+			ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
+			Endpoint:     google.Endpoint,
+			RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback_google",
+			Scopes: []string{
+				"email"},
+		}
+
+		oauthService string
+
+		client *http.Client
+
+		// キャリアメールのドメイン
+		domain = []string{
+			"docomo.ne.jp",
+			"ezweb.ne.jp",
+			"au.com",
+			"willcom.com",
+			"y-mobile.ne.jp",
+			"emobile.ne.jp",
+			"ymobile1.ne.jp",
+			"ymobile.ne.jp",
+			"softbank.ne.jp",
+			"vodafone.ne.jp",
+			"i.softbank.jp",
+			"disney.ne.jp",
+		}
+	)
+
+	// ここで入れるべき構造体はinterfaceによって必須のメソッドが定義され、持つべき引数が決まっている。GoDoc参照。
+	e.Renderer = &AceTemplate{}
+
 	// Middleware
 	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
 
 	userGoogle := new(googleUser)
 
-	refererURL := ""
-
-	e.GET("/login", func(c echo.Context) error {
-
-		// Create token
-		token := jwt.New(jwt.SigningMethodHS256)
-
-		// Set claims
-		claims := token.Claims.(jwt.MapClaims)
-		claims["email"] = "Jon Snow"
-		claims["admin"] = true
-		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
-
-		// Generate encoded token and send it as response.
-		t, err := token.SignedString([]byte("secret"))
-		if err != nil {
-			return err
-		}
-		user := c.Get("user").(*jwt.Token)
-		claims2 := user.Claims.(jwt.MapClaims)
-		email := claims2["email"].(string)
-		fmt.Fprintf(os.Stderr, "email:%s\n", email)
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
-		})
-	})
-
 	// Restricted group
-	r := e.Group("/r")
+	r := e.Group("/r", cookieToAuthMiddleware)
 	r.Use(middleware.JWT([]byte("secret")))
-	r.GET("", func(c echo.Context) error {
+	r.GET("/test", func(c echo.Context) error {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
 		email := claims["email"].(string)
@@ -302,7 +371,7 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		// fmt.Println(reflect.TypeOf(searchForm)) // string
 
-		return signinCheck("search_top", c)
+		return signinCheck("search_top", c, searchForm)
 	})
 
 	// 検索時に呼び出される
@@ -310,7 +379,7 @@ func main() {
 		// URLクエリパラメータを受け取る
 		q := c.QueryParam("q")
 		searchForm.Query = q
-		return signinCheck("search_result", c)
+		return signinCheck("search_result", c, searchForm)
 	})
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
@@ -359,23 +428,29 @@ func main() {
 		}
 
 		var (
-			redirect string
-			email    string
+			redirect   string
+			userInfoDB userinfo
 		)
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		email, err = sess.Select("email").From("userinfo").
+		_, err = dbSess.Select("ID", "email").From("userinfo").
 			Where("OAuth_userinfo = ?", userGoogle.Email).
-			ReturnString()
+			Load(&userInfoDB)
 
 		if err == nil {
 			// エラーが無い == 登録済み場合
 			// リファラーURLがこのサイトのものか確認する
-			createJwt(c, email)
+			createJwt(c, userInfoDB.ID, userInfoDB.Email)
 			fmt.Println("登録済み")
-			fmt.Fprintf(os.Stderr, "%s\n", refererURL)
 
-			redirect = refererCheck(refererURL)
+			sess, _ := session.Get("session", c)
+
+			rURL := sess.Values["refererURL"].(string)
+			sess.Save(c.Request(), c.Response())
+
+			fmt.Fprintf(os.Stderr, "%s\n", rURL)
+
+			redirect = refererCheck(rURL)
 		} else {
 			// エラーを吐いた == 中身が入ってない場合
 			oauthService = "Google"
@@ -406,7 +481,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "%s\n", email)
 
 		// 既に本登録されているユーザーとアドレスが被ってないか確認
-		emailDB, err := sess.Select("email").From("userinfo").
+		emailDB, err := dbSess.Select("email").From("userinfo").
 			Where("email = ?", email).
 			ReturnString()
 
@@ -439,14 +514,20 @@ func main() {
 				act := hex.EncodeToString(mac.Sum(nil))
 
 				// リファラーURLがこのサイトのものか確認する
-				redirect := refererCheck(refererURL)
+				sess, err := session.Get("session", c)
+				if err != nil {
+					return err
+				}
+				rURL := sess.Values["refererURL"].(string)
+
+				redirect := refererCheck(rURL)
 				fmt.Fprintf(os.Stderr, "act:%s\n", act)
 
 				t := time.Now()
 				tF := t.Format(timeLayout)
 
 				// 一時ユーザーのテーブルにアドレスと認証コード、リファラーURLを一緒に保存
-				result, err := sess.InsertInto("tmp_user").
+				result, err := dbSess.InsertInto("tmp_user").
 					Columns("OAuth_service", "act", "email", "referer", "send_time").
 					Values(oauthService, act, email, redirect, tF).
 					Exec()
@@ -480,7 +561,8 @@ func main() {
 	// メール確認URLへのアクセス時の処理
 	e.GET("/email_check", func(c echo.Context) error {
 		act := c.QueryParam("act")
-		_, err := sess.Select("act", "OAuth_service", "email", "referer").From("tmp_user").
+		var tmpUser tmpuser
+		_, err := dbSess.Select("act", "OAuth_service", "email", "referer").From("tmp_user").
 			Where("act = ?", act).
 			Load(&tmpUser)
 
@@ -498,7 +580,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "time: %s\n", tF)
 
 		// 正規のユーザーテーブルに追加
-		result, err := sess.InsertInto("userinfo").
+		result, err := dbSess.InsertInto("userinfo").
 			Columns("OAuth_service", "OAuth_userinfo", "email", "signup_date").
 			Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).
 			Exec()
@@ -509,7 +591,7 @@ func main() {
 		}
 
 		// 一時ユーザーのテーブルから削除
-		result, err = sess.DeleteFrom("tmp_user").Where("email = ?", tmpUser.Email).Exec()
+		result, err = dbSess.DeleteFrom("tmp_user").Where("email = ?", tmpUser.Email).Exec()
 		if err != nil {
 			panic(err)
 		} else {
@@ -526,17 +608,17 @@ func main() {
 
 	// 評価閲覧画面
 	e.GET("/preview_evaluation", func(c echo.Context) error {
-		return signinCheck("preview_evaluation", c)
+		return signinCheck("preview_evaluation", c, searchForm)
 	})
 
 	// 個別評価閲覧画面
 	e.GET("/individual_reviews", func(c echo.Context) error {
-		return signinCheck("individual_review", c)
+		return signinCheck("individual_review", c, searchForm)
 	})
 
 	// 通報完了画面
 	e.GET("/dengerous_complete", func(c echo.Context) error {
-		return signinCheck("dengerous_complete", c)
+		return signinCheck("dengerous_complete", c, searchForm)
 	})
 
 	// コメント入力画面
@@ -551,12 +633,12 @@ func main() {
 
 	// ページ属性編集画面
 	e.GET("/edit_page_cate", func(c echo.Context) error {
-		return signinCheck("edit_page_cate", c)
+		return signinCheck("edit_page_cate", c, searchForm)
 	})
 
 	// テスト（ヘッダーメニュー）
 	e.GET("/header_menu", func(c echo.Context) error {
-		return signinCheck("header_menu", c)
+		return signinCheck("header_menu", c, searchForm)
 	})
 
 	// テスト（フッター）
@@ -571,12 +653,12 @@ func main() {
 
 	// 利用規約
 	e.GET("/term_of_service", func(c echo.Context) error {
-		return signinCheck("term_of_service", c)
+		return signinCheck("term_of_service", c, searchForm)
 	})
 
 	// このサイトについて
 	e.GET("/about", func(c echo.Context) error {
-		return signinCheck("about", c)
+		return signinCheck("about", c, searchForm)
 	})
 
 	// ソケット生成
