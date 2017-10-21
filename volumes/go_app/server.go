@@ -160,7 +160,7 @@ func createJwt(c echo.Context, id int, email string) error {
 
 // Token によってサインイン状況をチェック（ログインが必須でないページ）
 // サインインの状況に応じてページの一部を変更する
-func signinCheck(page string, c echo.Context, value PageValue) error {
+func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
 	// 	// もしログイン済みなら、
 	// 	// 上部メニューの"ログイン"のところを変更する
@@ -206,7 +206,6 @@ func main() {
 		mailForm = PageValue{
 			Error: "",
 		}
-		evalForm EvalForm
 	)
 
 	var (
@@ -519,7 +518,50 @@ func main() {
 
 	// ページ属性編集画面
 	r.GET("/edit_page_cate", func(c echo.Context) error {
-		return signinCheck("edit_page_cate", c, searchForm)
+		var (
+			genreSL []string
+			genre   struct {
+				X1 string
+				X2 string
+				X3 string
+				X4 string
+				X5 string
+				X6 string
+				X7 string
+				X8 string
+			}
+			mediaSL []string
+			media   struct {
+				X1 string
+				X2 string
+				X3 string
+				X4 string
+				X5 string
+			}
+			evalForm EvalForm
+		)
+
+		dbSess.Select("genre").From("page_status_item").Load(&genreSL)
+		dbSess.Select("media").From("page_status_item").Load(&mediaSL)
+
+		genre.X1 = genreSL[0]
+		genre.X2 = genreSL[1]
+		genre.X3 = genreSL[2]
+		genre.X4 = genreSL[3]
+		genre.X5 = genreSL[4]
+		genre.X6 = genreSL[5]
+		genre.X7 = genreSL[6]
+		genre.X8 = genreSL[7]
+		evalForm.Genre = genre
+
+		media.X1 = mediaSL[0]
+		media.X2 = mediaSL[1]
+		media.X3 = mediaSL[2]
+		media.X4 = mediaSL[3]
+		media.X5 = mediaSL[4]
+		evalForm.Media = media
+
+		return signinCheck("edit_page_cate", c, evalForm)
 	})
 
 	// 評価入力画面
