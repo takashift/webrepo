@@ -64,6 +64,12 @@ type PageValue struct {
 	Error string
 }
 
+type EvalForm struct {
+	Genre interface{}
+	Media interface{}
+	tag   interface{}
+}
+
 type (
 	// データベースのテスト
 	userinfoJSON struct {
@@ -193,13 +199,15 @@ func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
 func main() {
 	// テンプレートに渡す値
-	var searchForm = PageValue{
-		Query: "",
-	}
-
-	var mailForm = PageValue{
-		Error: "",
-	}
+	var (
+		searchForm = PageValue{
+			Query: "",
+		}
+		mailForm = PageValue{
+			Error: "",
+		}
+		evalForm EvalForm
+	)
 
 	var (
 		e = echo.New()
@@ -477,11 +485,6 @@ func main() {
 		return signinCheck("dengerous_complete", c, searchForm)
 	})
 
-	// ページ属性編集画面
-	e.GET("/edit_page_cate", func(c echo.Context) error {
-		return signinCheck("edit_page_cate", c, searchForm)
-	})
-
 	// 利用規約
 	e.GET("/term_of_service", func(c echo.Context) error {
 		return signinCheck("term_of_service", c, searchForm)
@@ -512,6 +515,11 @@ func main() {
 	// 新規ページ登録画面
 	r.GET("/register_page", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "register_page", searchForm)
+	})
+
+	// ページ属性編集画面
+	r.GET("/edit_page_cate", func(c echo.Context) error {
+		return signinCheck("edit_page_cate", c, searchForm)
 	})
 
 	// 評価入力画面

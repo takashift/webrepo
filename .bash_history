@@ -1,9 +1,3 @@
-cd ../echo/
-rcode Dockerfile
-cd ../cron/
-rcode Dockerfile
-cd ../echo/
-rcode Dockerfile
 cd ../cron/
 docker build
 docker images
@@ -998,3 +992,9 @@ docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
+cd volumes/go_app/views/
+ls
+rcde 
+rcode
+rcode register_page.ace 
+rcode edit_page_cate.ace 

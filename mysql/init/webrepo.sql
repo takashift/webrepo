@@ -25,6 +25,9 @@ CREATE TABLE page_status(
 	regist_date datetime not null,
 	last_update datetime,
 	admin_user_id int,
+	media text,
+	genru text,
+	dead tinyint,
 	tag1 varchar(30),
 	tag2 varchar(30),
 	tag3 varchar(30),
@@ -123,3 +126,16 @@ CREATE TABLE all_NG_word(
 	Lv4 varchar(255),
 	Lv5 varchar(255)
 );
+
+INSERT INTO page_status_item (genre, media) VALUES(
+	'ブログ', '文章'),
+	('掲示板', '動画'),
+	('5chまとめ', '画像'),
+	('企業', '音楽'),
+	('ニュース', 'ゲーム'),
+	('学術', 'その他'),
+	('通販', NULL),
+	('漫画・アニメ', NULL),
+	('ゲーム', NULL),
+	('その他', NULL);
+	
