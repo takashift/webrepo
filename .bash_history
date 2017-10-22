@@ -1,125 +1,3 @@
-cd ../cron/
-docker build
-docker images
-docker build cron
-docker build -t cron .
-docker run cron
-docker ps
-docker run -d  --name cron cron
-docker ps
-docker ps -a
-docker rmi cron
-docker ps -a
-docker rmi 76da55c8019d
-docker rmi 804e826b61c4
-docker down cron
-docker stop cron
-docker stop fervent_cray
-docker images
-docker run -d  --name cron alpine
-docker images
-docker ps -a
-docker rmi 76da55c8019d
-docker rmi 75e637fcf723
-docker stop 75e637fcf723
-docker stop 
-docker stop cbe55a9b4d26
-docker images
-docker ps -a
-docker rm cbe55a9b4d26
-docker rm 75e637fcf723
-docker ps -a
-docker run -it  --name cron alpine
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/db_data/
-ls
-cd
-cd volumes/go_app/
-rcode server.go 
-exit
-docker run -it --name cron alpine
-docker rm corn
-docker stop corn
-docker ps -a
-docker stop cron
-docker rm cron
-docker ps -a
-docker run -it --name cron alpine
-docker rm cron
-docker ps -a
-cd cron/
-rcode Dockerfile 
-xit
-exit
-cd cron/
-rcode Dockerfile 
-rcode Dockerfile cd ..
-cd
-rcode docker-compose.yml
-cd cron/
-rcode Dockerfile 
-exit
-cd volumes/go_app/
-rcode server.go 
-cd
-cd exit
-exot
-exit
-cd volumes/go_app/
-rcode server.go 
-exit
-rcode docker-compose.yml
-exit
-rcode docker-compose.yml
-exit
-cd volumes/go_app/
-rcode docker-compose.yml
-exit
-rcode docker-compose.yml
-cd volumes/go_app/
-rcode server.go 
-git log
-cd
-cd mysql/
-rcode Dockerfile 
-rcode docker-compose.yml
-git status
-cd cron/
-ls
-git add Dockerfile 
-git status
-rcode Dockerfile 
-git commit -am "やっぱり Docker の使い方として1コンテナに1プロセスなので、apt-get update は消してcron用の Dockerfile を作成。"
-gitpush 
-gitpush -f
-git push -f
-docker log
-docker logs
-docker logs cron
-rcode docker-compose.yml
-ls -l /var/run/docker.sock
-cd volumes/go_app/
-ls
-cd views/
-ls
-cd ..
-rcode server.go 
-cd ../
-cd ..
-cd mysql/init/
-rcode webrepo.sql 
-docker-compose down
-cd ../../cron/
-cd ../volumes/db_data/
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
 docker-compose down
 docker-compose up -d --build
 docker-compose down
@@ -998,3 +876,125 @@ rcde
 rcode
 rcode register_page.ace 
 rcode edit_page_cate.ace 
+ls
+cd mysql/
+cd init/
+ls
+rcode webrepo.sql 
+git status
+git commit -am 'DB に ジャンルと媒体の一覧を作成'
+gitpush 
+docker-compose logs
+ls
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd mysql/
+cd ..
+cd volumes/db_data/
+ls
+sudo rm -r *
+docker stop tuna_mysql_1
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker stop tuna_mysql_1
+docker-compose up -d --build
+docker stop tuna_mysql_1
+sudo rm -r *
+docker-compose up -d --build
+docker stop tuna_mysql_1
+sudo rm -r *
+pwd
+docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker stop tuna_mysql_1
+docker-compose up -d --build
+docker-compose logs
+ls
+pwd
+docker stop tuna_mysql_1
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker stop tuna_mysql_1
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker-compose stop
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/views/
+cd
+cd volumes/go_app/views/
+cd ..
+rcode server.go 
+cd views/
+rcode edit_page_cate.ace 
+rcode search_result.ace 
+rcode te
+cd ..
+rcode template_no_proxy.go_ 
+git commit -am "ページ属性編集画面にジャンルと媒体を格納する処理を追加"
+gitpush 
+git log
+cd views/
+ls
+rcode register_page.ace 
+cd views/
+cd volumes/go_app/views/
+;s
+ls
+cd ..
+ls
+rcode server.go 
+exit

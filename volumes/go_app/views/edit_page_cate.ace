@@ -52,6 +52,13 @@ html lang=ja
         text-align: center;
         cursor: pointer;        
       }
+    = javascript
+      onload = function() {
+      	var genre = document.getElementById({{.Genre.Select}});
+      	genre.setAttribute("selected", "");
+        var media = document.getElementById({{.Media.Select}});
+        media.setAttribute("selected", "");
+      }
     = include JWT
   body
     = include header_menu
@@ -62,24 +69,24 @@ html lang=ja
             h2 ジャンル
           .input
             select name="genre" required=""
-              option value="" {{.Genre.X1}}
-              option value="" {{.Genre.X2}}
-              option value="" {{.Genre.X3}}
-              option value="" {{.Genre.X4}}
-              option value="" {{.Genre.X5}}
-              option value="" {{.Genre.X6}}
-              option value="" {{.Genre.X7}}
-              option value="" {{.Genre.X8}}
-        .form_block
+              option id="genreX1" value="" {{.Genre.X1}}
+              option id="genreX2" value="" {{.Genre.X2}}
+              option id="genreX3" value="" {{.Genre.X3}}
+              option id="genreX4" value="" {{.Genre.X4}}
+              option id="genreX5" value="" {{.Genre.X5}}
+              option id="genreX6" value="" {{.Genre.X6}}
+              option id="genreX7" value="" {{.Genre.X7}}
+              option id="genreX8" value="" {{.Genre.X8}}
+         .form_block
           .subject
             h2 媒体
           .input
             select name="media" required=""
-              option value="" {{.Media.X1}}
-              option value="" {{.Media.X2}}
-              option value="" {{.Media.X3}}
-              option value="" {{.Media.X4}}
-              option value="" {{.Media.X5}}
+              option id="mediaX1" value="" {{.Media.X1}}
+              option id="mediaX2" value="" {{.Media.X2}}
+              option id="mediaX3" value="" {{.Media.X3}}
+              option id="mediaX4" value="" {{.Media.X4}}
+              option id="mediaX5" value="" {{.Media.X5}}
         .form_block
           .subject
             h2 タグ

@@ -11,6 +11,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -65,9 +66,9 @@ type PageValue struct {
 }
 
 type EvalForm struct {
-	Genre interface{}
-	Media interface{}
-	tag   interface{}
+	Genre interface{} `db:"genre"`
+	Media interface{} `db:"media"`
+	Tag   interface{}
 }
 
 type (
@@ -95,6 +96,28 @@ type (
 		Email        string `db:"email"`
 		Referer      string `db:"referer"`
 		SendTime     string `db:"send_time"`
+	}
+
+	PageStatus struct {
+		ID          int    `db:"id"`
+		Title       string `db:"title"`
+		URL         string `db:"URL"`
+		RegistDate  string `db:"regist_date"`
+		LastUpdate  string `db:"last_update"`
+		AdminUserID int    `db:"admin_user_id"`
+		Genre       string `db:"genre"`
+		Media       string `db:"media"`
+		Dead        int    `db:"dead"`
+		Tag1        string `db:"tag1"`
+		Tag2        string `db:"tag2"`
+		Tag3        string `db:"tag3"`
+		Tag4        string `db:"tag4"`
+		Tag5        string `db:"tag5"`
+		Tag6        string `db:"tag6"`
+		Tag7        string `db:"tag7"`
+		Tag8        string `db:"tag8"`
+		Tag9        string `db:"tag9"`
+		Tag10       string `db:"tag10"`
 	}
 
 	pagePath struct {
@@ -181,7 +204,7 @@ func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 				MaxAge:   86400 * 7,
 				HttpOnly: true,
 			}
-			sess.Values["refererURL"] = fmt.Sprintf("%s", c.Request().URL)
+			sess.Values["refererURL"] = fmt.Sprint(c.Request().URL)
 			sess.Save(c.Request(), c.Response())
 
 			// サインイン画面へリダイレクト
@@ -195,6 +218,81 @@ func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		fmt.Fprintf(os.Stderr, "token:%v\n", sess)
 		return next(c)
 	}
+}
+
+func getPageStatusItem(id int) (EvalForm, PageStatus) {
+	var (
+		genreSL []string
+		genre   struct {
+			// Xはインデックスの意
+			X1     string
+			X2     string
+			X3     string
+			X4     string
+			X5     string
+			X6     string
+			X7     string
+			X8     string
+			Select string
+		}
+		mediaSL []string
+		media   struct {
+			// Xはインデックスの意
+			X1     string
+			X2     string
+			X3     string
+			X4     string
+			X5     string
+			Select string
+		}
+		evalForm   EvalForm
+		pageStatus PageStatus
+	)
+
+	dbSess.Select("genre").From("page_status_item").Load(&genreSL)
+	dbSess.Select("media").From("page_status_item").Load(&mediaSL)
+
+	if id >= 0 {
+		dbSess.Select("genre", "media", "tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+			From("page_status").
+			Where("id = ?", id).
+			Load(&pageStatus)
+
+		// テスト用
+		pageStatus.Genre = "通販"
+
+		for i, v := range genreSL {
+			if pageStatus.Genre == v {
+				genre.Select = fmt.Sprintf("genreX%d", i+1)
+				fmt.Printf("%s\n", v)
+			}
+		}
+
+		for i, v := range mediaSL {
+			if pageStatus.Media == v {
+				media.Select = fmt.Sprintf("mediaX%d", i+1)
+			}
+		}
+	}
+
+	genre.X1 = genreSL[0]
+	genre.X2 = genreSL[1]
+	genre.X3 = genreSL[2]
+	genre.X4 = genreSL[3]
+	genre.X5 = genreSL[4]
+	genre.X6 = genreSL[5]
+	genre.X7 = genreSL[6]
+	genre.X8 = genreSL[7]
+	evalForm.Genre = genre
+
+	media.X1 = mediaSL[0]
+	media.X2 = mediaSL[1]
+	media.X3 = mediaSL[2]
+	media.X4 = mediaSL[3]
+	media.X5 = mediaSL[4]
+	evalForm.Media = media
+
+	return evalForm, pageStatus
 }
 
 func main() {
@@ -501,8 +599,9 @@ func main() {
 	r.GET("/test", func(c echo.Context) error {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
+		id := int(claims["id"].(float64))
 		email := claims["email"].(string)
-		return c.String(http.StatusOK, "Welcome "+email+"!")
+		return c.String(http.StatusOK, "Welcome "+fmt.Sprint(id)+" "+email+"!")
 		// return signinCheckJWT(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
 	})
 
@@ -513,53 +612,22 @@ func main() {
 
 	// 新規ページ登録画面
 	r.GET("/register_page", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "register_page", searchForm)
+		evalForm, _ := getPageStatusItem(-1)
+
+		return c.Render(http.StatusOK, "register_page", evalForm)
 	})
 
 	// ページ属性編集画面
-	r.GET("/edit_page_cate", func(c echo.Context) error {
-		var (
-			genreSL []string
-			genre   struct {
-				X1 string
-				X2 string
-				X3 string
-				X4 string
-				X5 string
-				X6 string
-				X7 string
-				X8 string
-			}
-			mediaSL []string
-			media   struct {
-				X1 string
-				X2 string
-				X3 string
-				X4 string
-				X5 string
-			}
-			evalForm EvalForm
-		)
+	r.GET("/edit_page_cate/:id", func(c echo.Context) error {
+		// v := reflect.Indirect()
 
-		dbSess.Select("genre").From("page_status_item").Load(&genreSL)
-		dbSess.Select("media").From("page_status_item").Load(&mediaSL)
+		id := c.Param("id")
+		idInt, err := strconv.Atoi(id)
+		if err != nil {
+			return err
+		}
 
-		genre.X1 = genreSL[0]
-		genre.X2 = genreSL[1]
-		genre.X3 = genreSL[2]
-		genre.X4 = genreSL[3]
-		genre.X5 = genreSL[4]
-		genre.X6 = genreSL[5]
-		genre.X7 = genreSL[6]
-		genre.X8 = genreSL[7]
-		evalForm.Genre = genre
-
-		media.X1 = mediaSL[0]
-		media.X2 = mediaSL[1]
-		media.X3 = mediaSL[2]
-		media.X4 = mediaSL[3]
-		media.X5 = mediaSL[4]
-		evalForm.Media = media
+		evalForm, _ := getPageStatusItem(idInt)
 
 		return signinCheck("edit_page_cate", c, evalForm)
 	})

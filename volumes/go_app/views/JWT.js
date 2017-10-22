@@ -14,3 +14,7 @@ function getHeader(){
 }
 getHeader();
 
+onload = function() {
+	var element = document.getElementById({{}});
+	element.setAttribute("selected", "");	
+}
