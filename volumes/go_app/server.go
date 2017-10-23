@@ -1,3 +1,8 @@
+// アクセスToken( JWT ) は Cookie に保存。
+// Cookie からのデータの読み込みとアクセストークンのチェックは認証のあるページでのみ行う。
+// Cookie から取り出したアクセストークンは、同じくヘッダーの Authorization にコピー。
+// 最後に JWT のミドルウェアで Token を解読させる。
+
 package main
 
 import (
@@ -257,9 +262,6 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 			From("page_status").
 			Where("id = ?", id).
 			Load(&pageStatus)
-
-		// テスト用
-		pageStatus.Genre = "通販"
 
 		for i, v := range genreSL {
 			if pageStatus.Genre == v {
