@@ -1,9 +1,4 @@
 docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
 docker-compose up -d --build
 docker-compose logs
 docker-compose down
@@ -998,3 +993,8 @@ ls
 cd volumes/go_app/
 ls
 rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+git status
+git commit -am "アクセストークンの保存方法について先頭にコメントを追加"
+gitpush \
