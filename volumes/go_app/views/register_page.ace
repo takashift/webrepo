@@ -76,6 +76,7 @@ html lang=ja
             h2 ジャンル
           .input
             select name="genre" required=""
+              option value="" selected="" 選択して下さい
               option value="" {{.Genre.X1}}
               option value="" {{.Genre.X2}}
               option value="" {{.Genre.X3}}
@@ -88,8 +89,8 @@ html lang=ja
           .subject
             h2 媒体
           .input
-            {{ template "tmpl" . }}
             select name="media" required=""
+              option value="" selected="" 選択して下さい
               option value="" {{.Media.X1}}
               option value="" {{.Media.X2}}
               option value="" {{.Media.X3}}

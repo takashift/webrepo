@@ -68,7 +68,7 @@ html lang=ja
           .subject
             h2 ジャンル
           .input
-            select name="genre" required=""
+            select name="genre"
               option id="genreX1" value="" {{.Genre.X1}}
               option id="genreX2" value="" {{.Genre.X2}}
               option id="genreX3" value="" {{.Genre.X3}}
@@ -81,7 +81,7 @@ html lang=ja
           .subject
             h2 媒体
           .input
-            select name="media" required=""
+            select name="media"
               option id="mediaX1" value="" {{.Media.X1}}
               option id="mediaX2" value="" {{.Media.X2}}
               option id="mediaX3" value="" {{.Media.X3}}
