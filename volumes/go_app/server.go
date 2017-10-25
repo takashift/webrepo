@@ -277,6 +277,17 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 		}
 	}
 
+	evalForm.Tag = pageStatus.Tag1 + "\n" +
+		pageStatus.Tag2 + "\n" +
+		pageStatus.Tag3 + "\n" +
+		pageStatus.Tag4 + "\n" +
+		pageStatus.Tag5 + "\n" +
+		pageStatus.Tag6 + "\n" +
+		pageStatus.Tag7 + "\n" +
+		pageStatus.Tag8 + "\n" +
+		pageStatus.Tag9 + "\n" +
+		pageStatus.Tag10
+
 	genre.X1 = genreSL[0]
 	genre.X2 = genreSL[1]
 	genre.X3 = genreSL[2]

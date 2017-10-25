@@ -1,9 +1,3 @@
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
 docker-compose down
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +992,9 @@ rcode server.go
 git status
 git commit -am "アクセストークンの保存方法について先頭にコメントを追加"
 gitpush \
+cd volumes/go_app/views/
+ls
+rcode consent_form.ace 
+git status
+git commit -am "同意書の内容を更新"
+gitpush 
