@@ -629,6 +629,11 @@ func main() {
 
 		return c.Render(http.StatusOK, "register_page", evalForm)
 	})
+	r.POST("/register_page", func(c echo.Context) error {
+		url := c.FormValue("url")
+
+		return c.Redirect(http.StatusMovedPermanently, "")
+	})
 
 	// ページ属性編集画面
 	r.GET("/edit_page_cate/:id", func(c echo.Context) error {
@@ -643,6 +648,11 @@ func main() {
 		evalForm, _ := getPageStatusItem(idInt)
 
 		return signinCheck("edit_page_cate", c, evalForm)
+	})
+	r.POST("/edit_page_cate/:id", func(c echo.Context) error {
+		evalForm, _ := getPageStatusItem(-1)
+
+		return c.Redirect(http.StatusMovedPermanently, "")
 	})
 
 	// 評価入力画面

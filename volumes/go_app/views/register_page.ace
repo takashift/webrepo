@@ -77,25 +77,25 @@ html lang=ja
           .input
             select name="genre" required=""
               option value="" selected="" 選択して下さい
-              option value="" {{.Genre.X1}}
-              option value="" {{.Genre.X2}}
-              option value="" {{.Genre.X3}}
-              option value="" {{.Genre.X4}}
-              option value="" {{.Genre.X5}}
-              option value="" {{.Genre.X6}}
-              option value="" {{.Genre.X7}}
-              option value="" {{.Genre.X8}}
+              option value={{.Genre.X1}} {{.Genre.X1}}
+              option value={{.Genre.X2}} {{.Genre.X2}}
+              option value={{.Genre.X3}} {{.Genre.X3}}
+              option value={{.Genre.X4}} {{.Genre.X4}}
+              option value={{.Genre.X5}} {{.Genre.X5}}
+              option value={{.Genre.X6}} {{.Genre.X6}}
+              option value={{.Genre.X7}} {{.Genre.X7}}
+              option value={{.Genre.X8}} {{.Genre.X8}}
         .form_block
           .subject
             h2 媒体
           .input
             select name="media" required=""
               option value="" selected="" 選択して下さい
-              option value="" {{.Media.X1}}
-              option value="" {{.Media.X2}}
-              option value="" {{.Media.X3}}
-              option value="" {{.Media.X4}}
-              option value="" {{.Media.X5}}
+              option value={{.Media.X1}} {{.Media.X1}}
+              option value={{.Media.X2}} {{.Media.X2}}
+              option value={{.Media.X3}} {{.Media.X3}}
+              option value={{.Media.X4}} {{.Media.X4}}
+              option value={{.Media.X5}} {{.Media.X5}}
         .form_block
           .subject
             h2 タグ
