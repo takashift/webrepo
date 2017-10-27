@@ -419,7 +419,6 @@ func main() {
 		}
 
 		var (
-			redirect   string
 			userInfoDB userinfo
 		)
 
@@ -428,27 +427,26 @@ func main() {
 			Where("OAuth_userinfo = ?", userGoogle.Email).
 			Load(&userInfoDB)
 
-		if err == nil {
-			// エラーが無い == 登録済み場合
-			// リファラーURLがこのサイトのものか確認する
-			createJwt(c, userInfoDB.ID, userInfoDB.Email)
-			fmt.Println("登録済み")
-
-			sess, _ := session.Get("session", c)
-			rURL := sess.Values["refererURL"].(string)
-			sess.Values["refererURL"] = nil
-			sess.Save(c.Request(), c.Response())
-
-			fmt.Fprintf(os.Stderr, "%s\n", rURL)
-
-			redirect = rURL
-		} else {
-			// エラーを吐いた == 中身が入ってない場合
+		// エラーを吐いた == 中身が入ってない場合
+		if userInfoDB.Email == "" {
 			oauthService = "Google"
-			redirect = "/OAuth_signup"
+			return c.Redirect(http.StatusFound, "/OAuth_signup")
 		}
 
-		return c.Redirect(http.StatusSeeOther, redirect)
+		// エラーが無い == 登録済み場合
+		// リファラーURLがこのサイトのものか確認する
+		createJwt(c, userInfoDB.ID, userInfoDB.Email)
+		fmt.Println("登録済み")
+
+		sess, _ := session.Get("session", c)
+		rURL := sess.Values["refererURL"].(string)
+		sess.Values["refererURL"] = nil
+		sess.Save(c.Request(), c.Response())
+
+		fmt.Fprintf(os.Stderr, "%s\n", rURL)
+
+		return c.Redirect(http.StatusSeeOther, rURL)
+
 	})
 
 	// OAuth認証サインアップ（同意）フォーム
@@ -584,6 +582,14 @@ func main() {
 			fmt.Fprintf(os.Stderr, "delete tempuser:%s\n", result)
 		}
 
+		var userInfoDB userinfo
+
+		// OAuth、キャリアメールが本登録されてるか確認
+		_, err = dbSess.Select("ID", "email").From("userinfo").
+			Where("OAuth_userinfo = ?", userGoogle.Email).
+			Load(&userInfoDB)
+
+		createJwt(c, userInfoDB.ID, userInfoDB.Email)
 		return c.Redirect(http.StatusSeeOther, tmpUser.Referer)
 	})
 

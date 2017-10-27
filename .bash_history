@@ -1,38 +1,3 @@
-docker exec -it tuna_cron_1 /bin/ash
-docker exec -it cron /bin/ash
-docker -ps
-docker ps -a
-docker exec -it tuna_cron_1 /bin/ash
-docker ps -a
-docker exec -it tuna_cron_1 /bin/ash
-docker ps -a
-docker exec -it tuna_cron_1 /bin/ash
-docker ps -a
-docker-compose logs
-cd ..
-cd go/
-rcode D
-cd
-cd echo/
-rcode Dockerfile
-docker ps -a
-echo `*/5 * * * * mysql -h mysql -u rtuna -pUSER_PASSWORD Webrepo -e 'DELETE FROM tmp_user WHERE send_time < CURRENT_TIMESTAMP - INTERVAL 12 HOUR'`
-docker ps -a
-rcode Dockerfile
-docker run -it alpine
-docker ps -a
-docker run -it alpine
-docker ps -a
-docker exec -it tuna_cron_1 /bin/ash
-docker ps -a
-docker exec -it tuna_cron_1 /bin/ash
-docker exec -it tuna_mysql_1 /bin/ash
-docker exec -it tuna_mysql_1 /bin/bash
-git commit -am "１２時間が経過した一時ユーザーを削除するコンテナを作成"
-git status
-git commit --amend
-gitpush 
-cd cron/
 rcode Dockerfile 
 docker-compose logs
 docker-compose down
@@ -998,3 +963,38 @@ rcode Dockerfile
 exit
 cd echo/
 exit
+cd echo/
+rcode Dockerfile
+cd
+cd volumes/g`
+`
+cd volumes/go_app/
+rcode 
+rcode server.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "テンプレに埋め込む構造体がグローバルだと他のユーザーまで値が変わってしまうので、関数内で宣言するように変更"
+gitpush 
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+cd mysql/init/
+rcode webrepo.sql 
+cd
+cd volumes/go_app/views/
+ls
+rcode register_page.ace 
+rcode edit_page_cate.ace 
+git status
+git commit -am 'ジャンルと媒体の選択肢にその他が出るように修正'
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
