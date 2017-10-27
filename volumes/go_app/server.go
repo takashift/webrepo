@@ -365,6 +365,32 @@ func main() {
 		return signinCheck("search_top", c, nil)
 	})
 
+	e.GET("test", func(c echo.Context) error {
+		uri := "http://" + host + "/test///"
+		if strings.HasPrefix(uri, "http://") {
+			uri = strings.TrimPrefix(uri, "https://")
+			uri = strings.TrimPrefix(uri, "http://")
+			uri = strings.TrimSuffix(uri, "/")
+		}
+
+		uri = "https://ja.wikipedia.org/wiki/%E8%A6%8B%E6%B2%BC%E5%8C%BA"
+		resp, _ := http.Get(uri)
+		up := resp.Header.Get("Last-Modified")
+
+		var title string
+		// url, _ = dbSess.Select("email").From("userinfo").
+		// 	Where("email = ? OR email = ?", "docomo.ne.jp", "sm_2-7.ryuuta@"+"docomo.ne.jp").
+		// 	ReturnString()
+		doc, err := goquery.NewDocument(uri)
+		if err != nil {
+			panic(err)
+		}
+		doc.Find("head").Each(func(i int, s *goquery.Selection) {
+			title = s.Find("title").Text()
+		})
+
+		return c.String(http.StatusOK, up)
+	})
 	// 検索時に呼び出される
 	e.GET("/search", func(c echo.Context) error {
 		searchForm := PageValue{
@@ -644,13 +670,60 @@ func main() {
 	})
 	r.POST("/register_page", func(c echo.Context) error {
 
-		var newPS PageStatus
+		var (
+			newPS  PageStatus
+			isSSL  bool
+			isUpd  = false
+			tagArr [10]string
+		)
+
 		newPS.URL = c.FormValue("url")
-		// URL のプロトコルが https でも http でも無い時は戻す。
-		if !strings.Contains(newPS.URL, "https://") || !strings.Contains(newPS.URL, "http://") {
+		// URL のプロトコルが https でも http でも無い時は戻る。
+		if !strings.HasPrefix(newPS.URL, "https://") && !strings.HasPrefix(newPS.URL, "http://") {
 			evalForm, _ := getPageStatusItem(-1)
 			return c.Render(http.StatusOK, "register_page", evalForm)
 		}
+
+		if strings.HasPrefix(newPS.URL, "http://") {
+			isSSL = false
+		} else {
+			isSSL = true
+		}
+
+		// https:// も http:// も取り除いた変数を用意
+		uri := strings.TrimPrefix(newPS.URL, "https://")
+		uri = strings.TrimPrefix(uri, "http://")
+		// 末尾のスラッシュを削除
+		uri = strings.TrimSuffix(uri, "/")
+
+		var dbPS = struct {
+			ID  int    `db:"id"`
+			URL string `db:"URL"`
+		}{
+			ID:  -1,
+			URL: "",
+		}
+
+		_, err := dbSess.Select("id", "URL").From("page_status").
+			Where("url = ? OR url = ?", "http://"+uri, "https://"+uri).
+			Load(&dbPS)
+		if err != nil {
+			panic(err)
+		}
+
+		// 同じ URI が既に登録されてる時
+		if dbPS.URL != "" {
+			// DBの方が http で且つ、新規の URL が https の時はアップデートフラグを立てる
+			if strings.HasPrefix(dbPS.URL, "http://") && isSSL {
+				isUpd = true
+			} else {
+				// 新規のURLもDBも http なら評価閲覧画面にリダイレクト
+				// DBの方が https なら評価閲覧画面にリダイレクト
+				return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+string(dbPS.ID))
+			}
+		}
+
+		fmt.Println("URLのチェックはOK")
 
 		newPS.Genre = c.FormValue("genre")
 		newPS.Media = c.FormValue("media")
@@ -659,33 +732,44 @@ func main() {
 		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
 		// structVal.Field(i? + 9).Set(v)
 
-		// for i, v := range tag {
-		// 	structVal.Field(i + 9).Set(v)
-		// }
-		newPS.Tag1 = tag[0]
-		newPS.Tag2 = tag[1]
-		newPS.Tag3 = tag[2]
-		newPS.Tag4 = tag[3]
-		newPS.Tag5 = tag[4]
-		newPS.Tag6 = tag[5]
-		newPS.Tag7 = tag[6]
-		newPS.Tag8 = tag[7]
-		newPS.Tag9 = tag[8]
-		newPS.Tag10 = tag[9]
+		for i, v := range tag {
+			tagArr[i] = v
+			// 	structVal.Field(i + 9).Set(v)
+		}
+
+		newPS.Tag1 = tagArr[0]
+		newPS.Tag2 = tagArr[1]
+		newPS.Tag3 = tagArr[2]
+		newPS.Tag4 = tagArr[3]
+		newPS.Tag5 = tagArr[4]
+		newPS.Tag6 = tagArr[5]
+		newPS.Tag7 = tagArr[6]
+		newPS.Tag8 = tagArr[7]
+		newPS.Tag9 = tagArr[8]
+		newPS.Tag10 = tagArr[9]
 		// fmt.Printf("tag10:%s\n", structVal.Field())
+		fmt.Printf("isUpd:%t\n", isUpd)
 
 		newPS.RegistDate = time.Now().Format(timeLayout)
 
-		doc, err := goquery.NewDocument(newPS.URL)
+		resp, err := http.Get(newPS.URL)
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
+
+		mod, _ := time.Parse(timeLayout, resp.Header.Get("Last-Modified"))
+		newPS.LastUpdate = fmt.Sprint(mod)
+
+		doc, err := goquery.NewDocumentFromResponse(resp)
 		if err != nil {
 			panic(err)
 		}
 		doc.Find("head").Each(func(i int, s *goquery.Selection) {
 			newPS.Title = s.Find("title").Text()
 		})
-		// fmt.Printf("tag10:%s\n", structVal.Field())
 
-		// newPS.
+		// 登録しようとしてる URL が https で、既に登録されてる URL が http だったら置き換えてリダイレクト
 
 		_, err = dbSess.InsertInto("page_status").
 			Columns("*").
@@ -693,6 +777,7 @@ func main() {
 			Exec()
 
 		if err != nil {
+			fmt.Println("データーベースに入れらんない")
 			panic(err)
 		}
 
