@@ -1,75 +1,3 @@
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
 docker-compose up -d --build
 docker-compose logs
 docker-compose down
@@ -998,3 +926,75 @@ rcode consent_form.ace
 git status
 git commit -am "同意書の内容を更新"
 gitpush 
+cd mysql/init/
+ls
+rcode 
+rcode webrepo.sql 
+docker-compose logs
+cd volumes/go_app/
+ls
+cd views/
+ls
+rcode 
+cd ..
+rcode server.go 
+cd views/
+rcode edit_page_cate.ace 
+docker-compose logs
+rcode edit_page_cate.ace 
+docker-compose logs
+git commit -am "ページ属性編集画面の元の設定のタグを表示するようにした。"
+git commit --amend
+gitpush 
+docker-compose logs
+rcode register_page.ace 
+docker-compose logs
+rcode header_menu.ace 
+docker-compose logs
+git status
+git commit -am "ページ属性編集画面のジャンルと媒体の選択を任意に、新規ページ登録の初期選択は「選択して下さい」に変更"
+git commit --amend
+gitpush 
+git log
+ls
+git commit -am '新規ページ登録、属性編集画面のvalueを設定'
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git log
+cd mysql/init/
+rcode 
+rcode webrepo.sql 
+git sutatus
+git status
+git lo
+git log
+cd volumes/db_data/
+sudo rm -r *
+docker-compose up -d --build
+ls
+docker-compose up -d --build
+ls
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_mysql_1
+sudo rm -r *;
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *;
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_mysql_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_mysql_1
+ls
+sudo rm -r *;
+sudo rm -r *
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash

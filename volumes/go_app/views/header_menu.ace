@@ -34,7 +34,7 @@
       a href="https://twitter.com/web_repo" 更新・障害情報
   #header_menu_center
     span.hd_m_elem
-      a href="register_page" 新規ページ登録・評価
+      a href="/r/register_page" 新規ページ登録・評価
   #header_menu_right
     span.hd_m_elem
       a href="https://www.google.co.jp/" Google
@@ -45,4 +45,4 @@
     span.hd_m_elem
       a href="http://b.hatena.ne.jp/" はてブ
     span.hd_m_elem
-      a href="mypage" マイページ
+      a href="/r/mypage" マイページ

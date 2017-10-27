@@ -238,6 +238,8 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 			X6     string
 			X7     string
 			X8     string
+			X9     string
+			X10    string
 			Select string
 		}
 		mediaSL []string
@@ -248,6 +250,7 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 			X3     string
 			X4     string
 			X5     string
+			X6     string
 			Select string
 		}
 		evalForm   EvalForm
@@ -296,6 +299,8 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 	genre.X6 = genreSL[5]
 	genre.X7 = genreSL[6]
 	genre.X8 = genreSL[7]
+	genre.X9 = genreSL[8]
+	genre.X10 = genreSL[9]
 	evalForm.Genre = genre
 
 	media.X1 = mediaSL[0]
@@ -303,6 +308,7 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 	media.X3 = mediaSL[2]
 	media.X4 = mediaSL[3]
 	media.X5 = mediaSL[4]
+	media.X6 = mediaSL[5]
 	evalForm.Media = media
 
 	return evalForm, pageStatus
@@ -630,9 +636,43 @@ func main() {
 		return c.Render(http.StatusOK, "register_page", evalForm)
 	})
 	r.POST("/register_page", func(c echo.Context) error {
-		url := c.FormValue("url")
+		var newPS PageStatus
+		newPS.URL = c.FormValue("url")
+		newPS.Genre = c.FormValue("genre")
+		newPS.Media = c.FormValue("media")
+		tag := strings.Split(c.FormValue("tag"), "\n")
 
-		return c.Redirect(http.StatusMovedPermanently, "")
+		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
+		// structVal.Field(i? + 9).Set(v)
+
+		// for i, v := range tag {
+		// 	structVal.Field(i + 9).Set(v)
+		// }
+		newPS.Tag1 = tag[0]
+		newPS.Tag2 = tag[1]
+		newPS.Tag3 = tag[2]
+		newPS.Tag4 = tag[3]
+		newPS.Tag5 = tag[4]
+		newPS.Tag6 = tag[5]
+		newPS.Tag7 = tag[6]
+		newPS.Tag8 = tag[7]
+		newPS.Tag9 = tag[8]
+		newPS.Tag10 = tag[9]
+		// fmt.Printf("tag10:%s\n", structVal.Field())
+
+		newPS.RegistDate = time.Now().Format(timeLayout)
+		// newPS.
+
+		_, err := dbSess.InsertInto("page_status").
+			Columns("*").
+			Values(newPS).
+			Exec()
+
+		if err != nil {
+			panic(err)
+		}
+
+		return c.Redirect(http.StatusMovedPermanently, "../")
 	})
 
 	// ページ属性編集画面
@@ -650,7 +690,6 @@ func main() {
 		return signinCheck("edit_page_cate", c, evalForm)
 	})
 	r.POST("/edit_page_cate/:id", func(c echo.Context) error {
-		evalForm, _ := getPageStatusItem(-1)
 
 		return c.Redirect(http.StatusMovedPermanently, "")
 	})

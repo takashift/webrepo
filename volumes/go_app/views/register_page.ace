@@ -85,6 +85,8 @@ html lang=ja
               option value={{.Genre.X6}} {{.Genre.X6}}
               option value={{.Genre.X7}} {{.Genre.X7}}
               option value={{.Genre.X8}} {{.Genre.X8}}
+              option value={{.Genre.X9}} {{.Genre.X9}}
+              option value={{.Genre.X10}} {{.Genre.X10}}
         .form_block
           .subject
             h2 媒体
@@ -96,6 +98,7 @@ html lang=ja
               option value={{.Media.X3}} {{.Media.X3}}
               option value={{.Media.X4}} {{.Media.X4}}
               option value={{.Media.X5}} {{.Media.X5}}
+              option value={{.Media.X6}} {{.Media.X6}}
         .form_block
           .subject
             h2 タグ
