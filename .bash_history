@@ -1,15 +1,3 @@
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_cron_1 /bin/ash
-git status
-cd cron/
-rcode Dockerfile 
-docker exec -it tuna_crom_1 /bin/ash
 docker exec -it tuna_cron_1 /bin/ash
 docker exec -it cron /bin/ash
 docker -ps
@@ -998,3 +986,15 @@ sudo rm -r *
 docker-compose up -d --build
 docker-compose logs
 docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+ls
+rcode server.go 
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+cd echo/
+rcode Dockerfile
+exit
+cd echo/
+exit

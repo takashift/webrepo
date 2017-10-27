@@ -20,6 +20,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/PuerkitoBio/goquery"
+
 	"github.com/dchest/uniuri"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/sessions"
@@ -213,7 +215,7 @@ func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			sess.Save(c.Request(), c.Response())
 
 			// サインイン画面へリダイレクト
-			return c.Redirect(http.StatusTemporaryRedirect, "/signin_select")
+			return c.Redirect(http.StatusSeeOther, "/signin_select")
 		}
 
 		t := sess.Values["token"].(string)
@@ -315,16 +317,6 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 }
 
 func main() {
-	// テンプレートに渡す値
-	var (
-		searchForm = PageValue{
-			Query: "",
-		}
-		mailForm = PageValue{
-			Error: "",
-		}
-	)
-
 	var (
 		e = echo.New()
 
@@ -370,11 +362,15 @@ func main() {
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
-		return signinCheck("search_top", c, searchForm)
+		return signinCheck("search_top", c, nil)
 	})
 
 	// 検索時に呼び出される
 	e.GET("/search", func(c echo.Context) error {
+		searchForm := PageValue{
+			Query: "",
+		}
+
 		// URLクエリパラメータを受け取る
 		q := c.QueryParam("q")
 		searchForm.Query = q
@@ -384,7 +380,7 @@ func main() {
 	e.GET("/signin_select", func(c echo.Context) error {
 		fmt.Println("signin_select")
 		// return c.Render(http.StatusOK, "signin_select", searchForm)
-		return c.Redirect(http.StatusTemporaryRedirect, "/google_OAuth")
+		return c.Redirect(http.StatusSeeOther, "/google_OAuth")
 	})
 
 	// パスワードサインインフォーム
@@ -396,7 +392,7 @@ func main() {
 	e.GET("/google_OAuth", func(c echo.Context) error {
 		oauthStateString := uniuri.New()
 		url := googleOauthConfig.AuthCodeURL(oauthStateString)
-		return c.Redirect(http.StatusTemporaryRedirect, url)
+		return c.Redirect(http.StatusSeeOther, url)
 	})
 
 	// Google からのコールバック
@@ -452,17 +448,22 @@ func main() {
 			redirect = "/OAuth_signup"
 		}
 
-		return c.Redirect(http.StatusTemporaryRedirect, redirect)
+		return c.Redirect(http.StatusSeeOther, redirect)
 	})
 
 	// OAuth認証サインアップ（同意）フォーム
 	e.GET("/OAuth_signup", func(c echo.Context) error {
-		mailForm.Error = ""
+		mailForm := PageValue{
+			Error: "",
+		}
 		return c.Render(http.StatusOK, "OAuth_signup", mailForm)
 	})
 
 	// 同意後のアドレス確認促進画面
 	e.POST("/agree_signup", func(c echo.Context) error {
+		mailForm := PageValue{
+			Error: "",
+		}
 		email := c.FormValue("email")
 		fmt.Fprintf(os.Stderr, "%s\n", email)
 
@@ -535,7 +536,7 @@ func main() {
 					panic(err)
 				}
 
-				return c.Render(http.StatusOK, "agree_signup", searchForm)
+				return c.Render(http.StatusOK, "agree_signup", nil)
 			}
 		}
 
@@ -583,32 +584,32 @@ func main() {
 			fmt.Fprintf(os.Stderr, "delete tempuser:%s\n", result)
 		}
 
-		return c.Redirect(http.StatusTemporaryRedirect, tmpUser.Referer)
+		return c.Redirect(http.StatusSeeOther, tmpUser.Referer)
 	})
 
 	// 評価閲覧画面
 	e.GET("/preview_evaluation", func(c echo.Context) error {
-		return signinCheck("preview_evaluation", c, searchForm)
+		return signinCheck("preview_evaluation", c, nil)
 	})
 
 	// 個別評価閲覧画面
 	e.GET("/individual_reviews", func(c echo.Context) error {
-		return signinCheck("individual_review", c, searchForm)
+		return signinCheck("individual_review", c, nil)
 	})
 
 	// 通報完了画面
 	e.GET("/dengerous_complete", func(c echo.Context) error {
-		return signinCheck("dengerous_complete", c, searchForm)
+		return signinCheck("dengerous_complete", c, nil)
 	})
 
 	// 利用規約
 	e.GET("/term_of_service", func(c echo.Context) error {
-		return signinCheck("term_of_service", c, searchForm)
+		return signinCheck("term_of_service", c, nil)
 	})
 
 	// このサイトについて
 	e.GET("/about", func(c echo.Context) error {
-		return signinCheck("about", c, searchForm)
+		return signinCheck("about", c, nil)
 	})
 
 	// Restricted group
@@ -626,7 +627,7 @@ func main() {
 
 	// マイページ
 	r.GET("/mypage", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "mypage_top", searchForm)
+		return c.Render(http.StatusOK, "mypage_top", nil)
 	})
 
 	// 新規ページ登録画面
@@ -636,8 +637,15 @@ func main() {
 		return c.Render(http.StatusOK, "register_page", evalForm)
 	})
 	r.POST("/register_page", func(c echo.Context) error {
+
 		var newPS PageStatus
 		newPS.URL = c.FormValue("url")
+		// URL のプロトコルが https でも http でも無い時は戻す。
+		if !strings.Contains(newPS.URL, "https://") || !strings.Contains(newPS.URL, "http://") {
+			evalForm, _ := getPageStatusItem(-1)
+			return c.Render(http.StatusOK, "register_page", evalForm)
+		}
+
 		newPS.Genre = c.FormValue("genre")
 		newPS.Media = c.FormValue("media")
 		tag := strings.Split(c.FormValue("tag"), "\n")
@@ -661,9 +669,19 @@ func main() {
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 
 		newPS.RegistDate = time.Now().Format(timeLayout)
+
+		doc, err := goquery.NewDocument(newPS.URL)
+		if err != nil {
+			panic(err)
+		}
+		doc.Find("head").Each(func(i int, s *goquery.Selection) {
+			newPS.Title = s.Find("title").Text()
+		})
+		// fmt.Printf("tag10:%s\n", structVal.Field())
+
 		// newPS.
 
-		_, err := dbSess.InsertInto("page_status").
+		_, err = dbSess.InsertInto("page_status").
 			Columns("*").
 			Values(newPS).
 			Exec()
@@ -672,7 +690,7 @@ func main() {
 			panic(err)
 		}
 
-		return c.Redirect(http.StatusMovedPermanently, "../")
+		return c.Redirect(http.StatusSeeOther, "../")
 	})
 
 	// ページ属性編集画面
@@ -691,17 +709,17 @@ func main() {
 	})
 	r.POST("/edit_page_cate/:id", func(c echo.Context) error {
 
-		return c.Redirect(http.StatusMovedPermanently, "")
+		return c.Redirect(http.StatusSeeOther, "")
 	})
 
 	// 評価入力画面
 	r.GET("/input_evaluation", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "input_evaluation", searchForm)
+		return c.Render(http.StatusOK, "input_evaluation", nil)
 	})
 
 	// コメント入力画面
 	r.GET("/input_comment", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "input_comment", searchForm)
+		return c.Render(http.StatusOK, "input_comment", nil)
 	})
 
 	// ソケット生成

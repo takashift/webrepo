@@ -30,6 +30,9 @@ RUN go get -u gopkg.in/gomail.v2
 RUN go get -u github.com/labstack/echo-contrib/session
 RUN go get -u github.com/gorilla/sessions
 
+# GetしたHTMLのスクレイピング
+RUN go get -u github.com/PuerkitoBio/goquery
+
 WORKDIR /go/src/app
 
 CMD ["/go/bin/godo", "server", "--watch"]
