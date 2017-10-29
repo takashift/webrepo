@@ -20,6 +20,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unsafe"
 
 	"github.com/PuerkitoBio/goquery"
 
@@ -107,25 +108,30 @@ type (
 	}
 
 	PageStatus struct {
-		ID          int    `db:"id"`
-		Title       string `db:"title"`
-		URL         string `db:"URL"`
-		RegistDate  string `db:"regist_date"`
-		LastUpdate  string `db:"last_update"`
-		AdminUserID int    `db:"admin_user_id"`
-		Genre       string `db:"genre"`
-		Media       string `db:"media"`
-		Dead        int    `db:"dead"`
-		Tag1        string `db:"tag1"`
-		Tag2        string `db:"tag2"`
-		Tag3        string `db:"tag3"`
-		Tag4        string `db:"tag4"`
-		Tag5        string `db:"tag5"`
-		Tag6        string `db:"tag6"`
-		Tag7        string `db:"tag7"`
-		Tag8        string `db:"tag8"`
-		Tag9        string `db:"tag9"`
-		Tag10       string `db:"tag10"`
+		ID           int    `db:"id"`
+		Title        string `db:"title"`
+		URL          string `db:"URL"`
+		RegisterDate string `db:"register_date"`
+		LastUpdate   string `db:"last_update"`
+		AdminUserID  int    `db:"admin_user_id"`
+		Genre        string `db:"genre"`
+		Media        string `db:"media"`
+		Dead         int    `db:"dead"`
+		Tag1         string `db:"tag1"`
+		Tag2         string `db:"tag2"`
+		Tag3         string `db:"tag3"`
+		Tag4         string `db:"tag4"`
+		Tag5         string `db:"tag5"`
+		Tag6         string `db:"tag6"`
+		Tag7         string `db:"tag7"`
+		Tag8         string `db:"tag8"`
+		Tag9         string `db:"tag9"`
+		Tag10        string `db:"tag10"`
+	}
+
+	PageStatusTiny struct {
+		ID  int    `db:"id"`
+		URL string `db:"URL"`
 	}
 
 	pagePath struct {
@@ -621,7 +627,7 @@ func main() {
 	})
 
 	// 評価閲覧画面
-	e.GET("/preview_evaluation", func(c echo.Context) error {
+	e.GET("/preview_evaluation/:id", func(c echo.Context) error {
 		return signinCheck("preview_evaluation", c, nil)
 	})
 
@@ -673,9 +679,10 @@ func main() {
 
 		var (
 			newPS  PageStatus
+			tagArr [10]string
+			dbPS   PageStatusTiny
 			isSSL  bool
 			isUpd  = false
-			tagArr [10]string
 		)
 
 		newPS.URL = c.FormValue("url")
@@ -696,14 +703,6 @@ func main() {
 		uri = strings.TrimPrefix(uri, "http://")
 		// 末尾のスラッシュを削除
 		uri = strings.TrimSuffix(uri, "/")
-
-		var dbPS = struct {
-			ID  int    `db:"id"`
-			URL string `db:"URL"`
-		}{
-			ID:  -1,
-			URL: "",
-		}
 
 		_, err := dbSess.Select("id", "URL").From("page_status").
 			Where("url = ? OR url = ?", "http://"+uri, "https://"+uri).
@@ -760,9 +759,9 @@ func main() {
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 		fmt.Println("tag10:", newPS.Tag9)
 
-		newPS.RegistDate = time.Now().Format(timeLayout)
+		newPS.RegisterDate = time.Now().Format(timeLayout)
 
-		fmt.Println(newPS.RegistDate)
+		fmt.Println(newPS.RegisterDate)
 
 		resp, err := http.Get(newPS.URL)
 		if err != nil {
@@ -771,6 +770,7 @@ func main() {
 			return c.Render(http.StatusOK, "register_page", evalForm)
 		}
 		defer resp.Body.Close()
+		newPS.Dead = 0
 
 		// ヘッダーの更新日時をパース
 		mod, err := time.Parse(http.TimeFormat, resp.Header.Get("Last-Modified"))
@@ -806,13 +806,12 @@ func main() {
 
 			for i := 0; i < typ.NumField(); i++ {
 				field := structVal.Field(i)
-
-				fmt.Println("canset:", field.CanSet())
+				// fmt.Println("canset:", field.CanSet())
 				mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
 			}
 
 			fmt.Println("map:", mapVal)
-			_, err = dbSess.Update("page_status").SetMap(mapVal).Where("url = ?", "http://"+uri).Exec()
+			_, err = dbSess.Update("page_status").SetMap(mapVal).Where("id = ?", dbPS.ID).Exec()
 			if err != nil {
 				fmt.Println("Update 出来ない")
 				panic(err)
@@ -821,9 +820,8 @@ func main() {
 			return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+string(dbPS.ID))
 		}
 
-		newPS.Dead = 0
 		_, err = dbSess.InsertInto("page_status").
-			Columns("title", "URL", "regist_date", "last_update",
+			Columns("title", "URL", "register_date", "last_update",
 				"admin_user_id", "genre", "media",
 				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
 			Record(newPS).
@@ -837,7 +835,13 @@ func main() {
 			panic(err)
 		}
 
-		return c.Redirect(http.StatusSeeOther, "../")
+		id, err := dbSess.Select("id").From("page_status").
+			Where("url = ?", newPS.URL).
+			ReturnString()
+		if err != nil {
+			panic(err)
+		}
+		return c.Redirect(http.StatusSeeOther, "edit_page_cate/"+id)
 	})
 
 	// ページ属性編集画面
@@ -856,7 +860,121 @@ func main() {
 	})
 	r.POST("/edit_page_cate/:id", func(c echo.Context) error {
 
-		return c.Redirect(http.StatusSeeOther, "")
+		var (
+			newPS  PageStatus
+			tagArr [10]string
+			dbPS   PageStatusTiny
+		)
+
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			panic(err)
+		}
+
+		_, err = dbSess.Select("id", "URL").From("page_status").
+			Where("id = ?", id).
+			Load(&dbPS)
+		if err != nil {
+			panic(err)
+		}
+
+		newPS.Genre = c.FormValue("genre")
+		newPS.Media = c.FormValue("media")
+		tag := strings.Split(c.FormValue("tag"), "\n")
+
+		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
+		// structVal.Field(i? + 9).Set(v)
+
+		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
+		i := 0
+		for j, v := range tag {
+			// 何故か何も表示されないにも関わらず、Goのスライスでは空白文字を入れると空白ではなく、[]byte型で13が入ってしまう謎の挙動をする
+			// https://qiita.com/Sheile/items/ba51ac9091e09927b95c
+			if !reflect.DeepEqual(*(*[]byte)(unsafe.Pointer(&v)), []byte{13}) {
+				tagArr[i] = v
+				if i >= 9 {
+					break
+				}
+				i++
+				fmt.Print(v + "\n")
+			}
+			fmt.Println(*(*[]byte)(unsafe.Pointer(&v)))
+			if len(tag)-1-j == 0 {
+				for n := i; n <= 9; n++ {
+					tagArr[i] = string([]byte{13})
+					fmt.Println(*(*[]byte)(unsafe.Pointer(&tagArr[i])))
+				}
+			}
+			// 	structVal.Field(i + 9).Set(v)
+		}
+
+		newPS.Tag1 = tagArr[0]
+		newPS.Tag2 = tagArr[1]
+		newPS.Tag3 = tagArr[2]
+		newPS.Tag4 = tagArr[3]
+		newPS.Tag5 = tagArr[4]
+		newPS.Tag6 = tagArr[5]
+		newPS.Tag7 = tagArr[6]
+		newPS.Tag8 = tagArr[7]
+		newPS.Tag9 = tagArr[8]
+		newPS.Tag10 = tagArr[9]
+		// fmt.Printf("tag10:%s\n", structVal.Field())
+
+		fmt.Println("URL:", dbPS.URL)
+		// ちゃんとレスポンスが返ってこない時は死亡フラグを立てる
+		resp, err := http.Get(dbPS.URL)
+		if err != nil {
+			newPS.Dead = 1
+		} else {
+			defer resp.Body.Close()
+		}
+		fmt.Println("dead:", newPS.Dead)
+
+		// 情報を更新
+		if newPS.Dead == 0 {
+			// ヘッダーの更新日時をパース
+			mod, err := time.Parse(http.TimeFormat, resp.Header.Get("Last-Modified"))
+			if err != nil {
+				fmt.Println("time型に出来ない")
+			} else {
+				newPS.LastUpdate = mod.Format(timeLayout)
+				fmt.Println(newPS.LastUpdate)
+			}
+
+			// ページタイトルを取得
+			doc, err := goquery.NewDocumentFromResponse(resp)
+			if err != nil {
+				panic(err)
+			}
+			doc.Find("head").Each(func(i int, s *goquery.Selection) {
+				newPS.Title = s.Find("title").Text()
+				if newPS.Title == "" {
+					newPS.Title = newPS.URL
+				}
+			})
+		}
+
+		// Struct を Map に変換
+		structVal := reflect.Indirect(reflect.ValueOf(newPS))
+		typ := structVal.Type()
+		mapVal := make(map[string]interface{})
+		for i := 0; i < typ.NumField(); i++ {
+			field := structVal.Field(i)
+			if field.String() != "" {
+				mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
+				fmt.Println("tag:", typ.Field(i).Tag.Get("db"))
+			}
+		}
+
+		fmt.Println("id", string(dbPS.ID))
+		// アップデート
+		_, err = dbSess.Update("page_status").SetMap(mapVal).Where("id = ?", dbPS.ID).Exec()
+		if err != nil {
+			fmt.Println("Update 出来ない")
+			panic(err)
+		}
+		fmt.Println("Update!")
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+fmt.Sprint(dbPS.ID))
 	})
 
 	// 評価入力画面

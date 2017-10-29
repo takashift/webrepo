@@ -23,7 +23,7 @@ CREATE TABLE page_status(
 	id int unique not null auto_increment primary key,
 	title varchar(255) not null,
 	URL varchar(8190) not null,
-	regist_date datetime not null,
+	register_date datetime not null,
 	last_update datetime,
 	admin_user_id int,
 	genre text,
