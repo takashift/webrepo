@@ -38,7 +38,7 @@ import (
 )
 
 const (
-	// 2017-10-06 17:20:00 では何故か出来なかった。。
+	// 2017-10-06 17:20:00 では何故か出来なかった。。 → この日時じゃないと駄目らしい。
 	timeLayout = "2006-01-02 15:04:05"
 
 	host         = "webrepo.nal.ie.u-ryukyu.ac.jp"
@@ -752,14 +752,23 @@ func main() {
 
 		newPS.RegistDate = time.Now().Format(timeLayout)
 
+		fmt.Println(newPS.RegistDate)
+
 		resp, err := http.Get(newPS.URL)
 		if err != nil {
-			panic(err)
+			// ちゃんとレスポンスが返ってこない（URLがおかしい）時は戻る。
+			evalForm, _ := getPageStatusItem(-1)
+			return c.Render(http.StatusOK, "register_page", evalForm)
 		}
 		defer resp.Body.Close()
 
-		mod, _ := time.Parse(timeLayout, resp.Header.Get("Last-Modified"))
-		newPS.LastUpdate = fmt.Sprint(mod)
+		mod, err := time.Parse(http.TimeFormat, resp.Header.Get("Last-Modified"))
+		if err != nil {
+			fmt.Println("time型に出来ない")
+		} else {
+			newPS.LastUpdate = mod.Format(timeLayout)
+			fmt.Println(newPS.LastUpdate)
+		}
 
 		doc, err := goquery.NewDocumentFromResponse(resp)
 		if err != nil {
@@ -767,6 +776,9 @@ func main() {
 		}
 		doc.Find("head").Each(func(i int, s *goquery.Selection) {
 			newPS.Title = s.Find("title").Text()
+			if newPS.Title == "" {
+				newPS.Title = newPS.URL
+			}
 		})
 
 		// 登録しようとしてる URL が https で、既に登録されてる URL が http だったら置き換えてリダイレクト
@@ -775,6 +787,8 @@ func main() {
 			Columns("*").
 			Values(newPS).
 			Exec()
+
+		fmt.Printf("newPS:%v\n", newPS)
 
 		if err != nil {
 			fmt.Println("データーベースに入れらんない")

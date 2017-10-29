@@ -1,99 +1,3 @@
-rcode Dockerfile 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker exec -it tuna_cron_1 /bin/ash
-docker-compose down
-docker-compose up -d --build
-docker exec -it tuna_cron_1 /bin/ash
-cd
-rcode docker-compose.yml
-docker exec -it tuna_cron_1 /bin/ash
-docker-compose up -d --build
-docker exec -it tuna_cron_1 /bin/ash
-docker-compose up -d --build
-docker exec -it tuna_cron_1 /bin/ash
-cd volumes/go_app/
-ls
-cd views
-cd ..
-rcode server.go 
-git commit -am "一時ユーザーの構造体にもSQLに合わせてsend_timeを追加"
-gitpush 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-ls
-rcode template_no_proxy.go 
-cd views/
-rcode search_
-rcode search_result.ace 
-rcode search_top.ace 
-rcode OAuth_signup.ace 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-rcode docker-compose.yml
-xit
-exit
-exit
-rcode docker-compose.yml
-docker exec -it tuna_cron_1 /bin/ash
-git log
-git commit -am "トランザクションが最低限になるようにtmp_userで指定しているカラムを修正"
-gito
-gitpush 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-git commit -am "メールアドレス入力時にエラーの内容を表示するようにした。"
-gitpush 
-git status
-docker-compose logs
-git commit -am "Google以外の認証方法は一旦保留にするので、ログイン方法選択画面を Google の認証へリダイレクトするように変更"
-gitpush 
-git status
-git commit --amend
-gitpush 
-git push -f
-git commit -am "パスワードサインインのページは使わないので攻撃防止のためにコメントアウト。"
-gitpush 
-cd volumes/go_app/
-ls
-cd views/
-ls
-rcode signin_select.ace 
-rcode OAuth_signup.ace 
-rcode pass_signin.ace 
-rcode agree_signup.ace 
-rcode dengerous_complete.ace 
-git status
-rcode signin_select.ace 
-git status
-git commit -am "検索エンジンに引っ掛けたくないページに設定を追加"
-gitpush 
-rcode OAuth_signup.ace 
-git log
-rcode docker-compose.yml
-cd volumes/go_app/
-ls
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-cd
-docker-compose logs
-
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
 docker-compose down
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +902,99 @@ gitpush
 docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
+cd volumes/go_app/views/
+ls
+rcode mypage_top.ace 
+rcode register_page.ace 
+cd volumes/go_app/views/
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+rcode server.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "ログイン機能がJWTを使ったことで正常に機能しなくなっていたので修正"
+gitpush 
+rcode template_no_proxy.go_ 
+docker-compose logs
+rcode template_no_proxy.go_ 
+docker-compose logs
+rcode template_no_proxy.go_ 
+docker-compose logs
+rcode template_no_proxy.go_ 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "タグが空白時のエラーを克服"
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+exit
+cd volumes/go_app/
+rcode server.go 
