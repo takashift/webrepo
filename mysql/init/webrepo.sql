@@ -18,6 +18,7 @@ CREATE TABLE tmp_user(
 	send_time DATETIME not null
 );
 
+-- 最後の行で拡張している
 CREATE TABLE page_status(
 	id int unique not null auto_increment primary key,
 	title varchar(255) not null,

@@ -16,6 +16,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -732,8 +733,17 @@ func main() {
 		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
 		// structVal.Field(i? + 9).Set(v)
 
+		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
 		for i, v := range tag {
 			tagArr[i] = v
+			if i >= 9 {
+				break
+			}
+			// 	structVal.Field(i + 9).Set(v)
+		}
+
+		for _, v := range tagArr {
+			fmt.Println(v)
 			// 	structVal.Field(i + 9).Set(v)
 		}
 
@@ -748,7 +758,7 @@ func main() {
 		newPS.Tag9 = tagArr[8]
 		newPS.Tag10 = tagArr[9]
 		// fmt.Printf("tag10:%s\n", structVal.Field())
-		fmt.Printf("isUpd:%t\n", isUpd)
+		fmt.Println("tag10:", newPS.Tag9)
 
 		newPS.RegistDate = time.Now().Format(timeLayout)
 
@@ -762,6 +772,7 @@ func main() {
 		}
 		defer resp.Body.Close()
 
+		// ヘッダーの更新日時をパース
 		mod, err := time.Parse(http.TimeFormat, resp.Header.Get("Last-Modified"))
 		if err != nil {
 			fmt.Println("time型に出来ない")
@@ -770,6 +781,7 @@ func main() {
 			fmt.Println(newPS.LastUpdate)
 		}
 
+		// ページタイトルを取得
 		doc, err := goquery.NewDocumentFromResponse(resp)
 		if err != nil {
 			panic(err)
@@ -782,16 +794,46 @@ func main() {
 		})
 
 		// 登録しようとしてる URL が https で、既に登録されてる URL が http だったら置き換えてリダイレクト
+		if isUpd {
+			// Struct を Map に変換
+			structVal := reflect.Indirect(reflect.ValueOf(newPS))
+			typ := structVal.Type()
 
+			mapVal := make(map[string]interface{})
+			fmt.Println("tag:", typ.Field(1).Tag.Get("db"))
+			fmt.Println("value:", structVal.Field(1).Interface())
+			fmt.Println("len:", typ.NumField())
+
+			for i := 0; i < typ.NumField(); i++ {
+				field := structVal.Field(i)
+
+				fmt.Println("canset:", field.CanSet())
+				mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
+			}
+
+			fmt.Println("map:", mapVal)
+			_, err = dbSess.Update("page_status").SetMap(mapVal).Where("url = ?", "http://"+uri).Exec()
+			if err != nil {
+				fmt.Println("Update 出来ない")
+				panic(err)
+			}
+			fmt.Println("Update!")
+			return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+string(dbPS.ID))
+		}
+
+		newPS.Dead = 0
 		_, err = dbSess.InsertInto("page_status").
-			Columns("*").
-			Values(newPS).
+			Columns("title", "URL", "regist_date", "last_update",
+				"admin_user_id", "genre", "media",
+				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+			Record(newPS).
 			Exec()
 
 		fmt.Printf("newPS:%v\n", newPS)
 
 		if err != nil {
 			fmt.Println("データーベースに入れらんない")
+			fmt.Println(err)
 			panic(err)
 		}
 
