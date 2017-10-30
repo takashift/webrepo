@@ -51,8 +51,9 @@ var (
 	tablename = "userinfo"
 	seq       = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
-	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
-	dbSess      = conn.NewSession(nil)
+	conn, dberr        = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
+	dbSess             = conn.NewSession(nil)
+	IndividualEvalForm = map[string]interface{}{}
 )
 
 type googleUser struct {
@@ -129,6 +130,25 @@ type (
 		Tag10        string `db:"tag10"`
 	}
 
+	// IndividualEval struct {
+	// 	PageID               int    `db:"page_id"`
+	// 	EvaluatorID          int    `db:"evaluator_id"`
+	// 	Posted               string `db:"posted"`
+	// 	BrowseTime           string `db:"browse_time"`
+	// 	BrowsePurpose        string `db:"browse_purpose"`
+	// 	Deliberate           int    `db:"deliberate"`
+	// 	DescriptionEval      string `db:"description_eval"`
+	// 	RecommendGood        int    `db:"recommend_good"`
+	// 	RecommendBad         int    `db:"recommend_bad"`
+	// 	GoodnessOfFit        int    `db:"goodness_of_fit"`
+	// 	BecauseGoodnessOfFit string `db:"because_goodness_of_fit"`
+	// 	Device               string `db:"device"`
+	// 	Visibility           int    `db:"visibility"`
+	// 	BecauseVisibility    string `db:"because_visibility"`
+	// 	NumTypo              int    `db:"num_typo"`
+	// 	BecauseNumTypo       string `db:"because_num_typo"`
+	// }
+
 	PageStatusTiny struct {
 		ID  int    `db:"id"`
 		URL string `db:"URL"`
@@ -139,6 +159,8 @@ type (
 		URL  string
 	}
 )
+
+var IndividualEval = map[string]interface{}{}
 
 // ここでレシーバ変数を定義したことでAceTemplateに以下の関数がメソッドとして関連付けられる
 func (at *AceTemplate) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
@@ -835,13 +857,17 @@ func main() {
 			panic(err)
 		}
 
+		// 個別評価テーブルを作成する
+
+		// 個別評価のコメントテーブルを作成する
+
 		id, err := dbSess.Select("id").From("page_status").
 			Where("url = ?", newPS.URL).
 			ReturnString()
 		if err != nil {
 			panic(err)
 		}
-		return c.Redirect(http.StatusSeeOther, "edit_page_cate/"+id)
+		return c.Redirect(http.StatusSeeOther, "input_evaluation/"+id)
 	})
 
 	// ページ属性編集画面
@@ -865,6 +891,9 @@ func main() {
 			tagArr [10]string
 			dbPS   PageStatusTiny
 		)
+
+		c.Bind(IndividualEvalForm)
+		fmt.Println(IndividualEvalForm)
 
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -996,6 +1025,17 @@ func main() {
 			return err
 		}
 		fmt.Println(idInt)
+
+		// フォームの評価を取得
+		err = c.Bind(IndividualEvalForm)
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(IndividualEvalForm)
+
+		// 時刻のフォーマットが正しくセットできてない時はNULLのままにする
+
 		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+id)
 	})
 

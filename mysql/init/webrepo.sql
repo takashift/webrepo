@@ -41,11 +41,12 @@ CREATE TABLE page_status(
 	tag10 varchar(30)
 ) ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE individual_eval_template(
-	num int unique not null auto_increment primary key,
-	posted datetime not null,
+CREATE TABLE individual_eval(
+	num int unique not null auto_increment,
+	page_id int unique not null,
 	evaluator_id int unique not null,
-	browse_time datetime not null,
+	posted datetime not null,
+	browse_time datetime,
 	browse_purpose text not null,
 	deliberate tinyint DEFAULT 0,
 	description_eval text,
@@ -53,6 +54,7 @@ CREATE TABLE individual_eval_template(
 	recommend_bad int,
 	goodness_of_fit tinyint not null,
 	because_goodness_of_fit text,
+	device varchar(255),
 	visibility tinyint not null,
 	because_visibility text,
 	num_typo tinyint not null,
@@ -76,26 +78,32 @@ CREATE TABLE individual_eval_template(
 	opt9 int,
 	because_opt9 text,
 	opt10 int,
-	because_opt10 text
+	because_opt10 text,
+	PRIMARY KEY(page_id, evaluator_id)
 );
 
-CREATE TABLE individual_eval_comment_template(
-	num int unique not null auto_increment primary key,
+CREATE TABLE individual_eval_comment(
+	num int unique not null auto_increment,
+	page_id int unique not null,
+	commenter_id int unique not null,
 	posted datetime not null,
-	commenter_id int not null,
 	reply_eval_num int,
 	reply_comment_num int,
 	deliberate tinyint DEFAULT 0,
 	comment text not null,
 	recommend_good int,
-	recommend_bad int
+	recommend_bad int,
+	PRIMARY KEY(page_id, commenter_id)
 );
 
-CREATE TABLE typo_template(num int unique not null auto_increment primary key,
-	evaluator_id int not null,
-	individual_eval_num int not null,
+CREATE TABLE typo(
+	num int unique not null auto_increment,
+	page_id int unique not null,
+	evaluator_id int unique not null,
+	individual_eval_num int unique not null,
 	incorrect varchar(255) not null,
-	correct varchar(255) not null
+	correct varchar(255) not null,
+	PRIMARY KEY(page_id, evaluator_id)
 );
 
 CREATE TABLE rating_item(
@@ -120,12 +128,34 @@ CREATE TABLE page_status_item(
 	media varchar(30)
 );
 
-CREATE TABLE all_NG_word(
-	Lv1 varchar(255),
-	Lv2 varchar(255),
-	Lv3 varchar(255),
-	Lv4 varchar(255),
-	Lv5 varchar(255)
+CREATE TABLE NG_word_Lv1(
+	num int UNIQUE NOT NULL auto_increment PRIMARY KEY,
+	user_id int NOT NULL,
+	NG_word varchar(255) NOT NULL
+);
+
+CREATE TABLE NG_word_Lv2(
+	num int UNIQUE NOT NULL auto_increment PRIMARY KEY,
+	user_id int NOT NULL,
+	NG_word varchar(255) NOT NULL
+);
+
+CREATE TABLE NG_word_Lv3(
+	num int UNIQUE NOT NULL auto_increment PRIMARY KEY,
+	user_id int NOT NULL,
+	NG_word varchar(255) NOT NULL
+);
+
+CREATE TABLE NG_word_Lv4(
+	num int UNIQUE NOT NULL auto_increment PRIMARY KEY,
+	user_id int NOT NULL,
+	NG_word varchar(255) NOT NULL
+);
+
+CREATE TABLE NG_word_Lv5(
+	num int UNIQUE NOT NULL auto_increment PRIMARY KEY,
+	user_id int NOT NULL,
+	NG_word varchar(255) NOT NULL
 );
 
 INSERT INTO page_status_item (genre, media) VALUES(
@@ -138,5 +168,6 @@ INSERT INTO page_status_item (genre, media) VALUES(
 	('通販', NULL),
 	('漫画・アニメ', NULL),
 	('ゲーム', NULL),
-	('その他', NULL);
-	
+	('その他', NULL
+);
+

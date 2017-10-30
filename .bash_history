@@ -1,189 +1,3 @@
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker down tuna_echo_1
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker rm tuna_echo_1
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-rcode docker-compose.yml
-cd volumes/go_app/
-rcode server.go 
-git status
-git commit -am 'サインインチェックを各ページに設定'
-gitpush 
-ls
-rcode template_no_proxy.go 
-cd views/
-ls
-rcode search_top.ace 
-rcode header_menu.ace 
-rcode 
-rcode search_result.ace 
-rcode header_menu.ace 
-rcode search_top.ace 
-cp about.ace 
-cp about.ace mypage_top.ace
-ls
-rcode mypage_top.ace 
-cd ..
-rcode server.go 
-cd views/
-rcode header_menu.ace 
-rcode about.ace 
-cd ..
-rcode template_no_proxy.go 
-rcode server.go 
-git log
-git commit -am "インクルードされたテンプレートには変数を適用できなかったので、ヘッダーのログインの部分は常時マイページになるようにした。"
-gitpush 
-git log
-rcode server.go 
-cd volumes/go_app/
-ls
-rcode server.go 
-git log
-docker-compose logs
-cd volumes/go_app/
-rcode server.go 
-esit
-exit
-docker stop tuna_echo_1
-git commit -am "JWTのコードを追加"
-gitpush 
-docker-compose logs
-go get github.com/dgrijalva/jwt-go
-docker-compose logs
-go get github.com/dgrijalva/jwt-go
-go -h
-go list
-go list -h
-go list github.com
-go packages
-go list packages
-docker-compose logs
-go get jwt
-go list jwt
-go get -u github.com/dgrijalva/jwt-go
-docker-compose logs
-docker ps
-docker-compose up -d --build
-docker-compose logs
-go install github.com/dgrijalva/jwt-go
-go list echo
-go list
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "取り敢えずJWTを例のまま作ったが、Token が読み込めず…"
-gitpush 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git log
-git commit -am "毎回 Google の認証を通せるように signinCheckStrong() を少し修正"
-gitpush 
-git log
-cd volumes/go_app/
-rcode server.go 
-cd
-cd echo/
-rcode Dockerfile
-cd
-cd volumes/go_app/
-rcode template_no_proxy.go 
-rcode server.go 
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +812,189 @@ docker-compose logs
 exit
 cd volumes/go_app/
 rcode server.go 
+cd volumes/go_app/
+rcode server.go 
+docker exec -it tuna_mysql_1 /bin/bash
+cd
+cd mysql/
+ls
+cd init/
+rcode webrepo.sql 
+cd
+cd volumes/db_data/
+ls
+sudo rm -r *
+ls
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+docker-compose logs
+docker stop tuna_echo_1
+cd volumes/go_app/
+cd
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd mysql/init/
+rcode webrepo.sql 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+git commit -am 'HTTPヘッダーの時刻がParse出来ない問題が解決'
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "新規ページ登録が完成"
+git[; ;; ]
+gitpush 
+docker-compose logs
+cd
+cd volumes/db_data/
+ls
+docker stop tuna_mysql_1
+sudo rm -r *
+ls
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git log
+git commit -am "属性編集画面の機能がタグを消せない点以外完成"
+gitpush 
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+gitpush 
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+git commit -am "fmt.Sprintはメモリコピーが発生するらしいので、Itoaなどに修正"
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git log
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
