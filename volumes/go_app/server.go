@@ -218,7 +218,7 @@ func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 				MaxAge:   86400 * 7,
 				HttpOnly: true,
 			}
-			sess.Values["refererURL"] = fmt.Sprint(c.Request().URL)
+			sess.Values["refererURL"] = c.Request().URL.String()
 			sess.Save(c.Request(), c.Response())
 
 			// サインイン画面へリダイレクト
@@ -277,14 +277,14 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 
 		for i, v := range genreSL {
 			if pageStatus.Genre == v {
-				genre.Select = fmt.Sprintf("genreX%d", i+1)
+				genre.Select = "genreX" + strconv.Itoa(i+1)
 				fmt.Printf("%s\n", v)
 			}
 		}
 
 		for i, v := range mediaSL {
 			if pageStatus.Media == v {
-				media.Select = fmt.Sprintf("mediaX%d", i+1)
+				media.Select = "mediaX" + strconv.Itoa(i+1)
 			}
 		}
 	}
@@ -888,8 +888,10 @@ func main() {
 		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
 		i := 0
 		for j, v := range tag {
-			// 何故か何も表示されないにも関わらず、Goのスライスでは空白文字を入れると空白ではなく、[]byte型で13が入ってしまう謎の挙動をする
+			// 何故か何も表示されないにも関わらず、Goのスライスでは空白文字を入れると空白ではなく、[]byte型で13が入ってしまう謎の挙動をする。
 			// https://qiita.com/Sheile/items/ba51ac9091e09927b95c
+			// []byteはまともにチェックするとメモリコピーが発生してしまうので、unsafeを使用。
+			// reflect.DeepEqual を使わないと簡単に比較できない。
 			if !reflect.DeepEqual(*(*[]byte)(unsafe.Pointer(&v)), []byte{13}) {
 				tagArr[i] = v
 				if i >= 9 {
@@ -899,13 +901,17 @@ func main() {
 				fmt.Print(v + "\n")
 			}
 			fmt.Println(*(*[]byte)(unsafe.Pointer(&v)))
+
+			// スライスの中身が無くなったら、その後のタグは[]byte{13}で埋める。
 			if len(tag)-1-j == 0 {
 				for n := i; n <= 9; n++ {
+					// byteスライスからstringへのキャストもメモリコピーが発生してしまう。
+					// だが、Sprintf()でも発生するらしいのでもう無理。
 					tagArr[i] = string([]byte{13})
 					fmt.Println(*(*[]byte)(unsafe.Pointer(&tagArr[i])))
 				}
 			}
-			// 	structVal.Field(i + 9).Set(v)
+			// structVal.Field(i + 9).Set(v)
 		}
 
 		newPS.Tag1 = tagArr[0]
@@ -974,7 +980,7 @@ func main() {
 			panic(err)
 		}
 		fmt.Println("Update!")
-		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+fmt.Sprint(dbPS.ID))
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+strconv.Itoa(dbPS.ID))
 	})
 
 	// 評価入力画面
