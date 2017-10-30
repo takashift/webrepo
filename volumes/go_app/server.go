@@ -986,8 +986,17 @@ func main() {
 	})
 
 	// 評価入力画面
-	r.GET("/input_evaluation", func(c echo.Context) error {
+	r.GET("/input_evaluation/:id", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "input_evaluation", nil)
+	})
+	r.POST("/input_evaluation/:id", func(c echo.Context) error {
+		id := c.Param("id")
+		idInt, err := strconv.Atoi(id)
+		if err != nil {
+			return err
+		}
+		fmt.Println(idInt)
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+id)
 	})
 
 	// コメント入力画面
