@@ -91,6 +91,22 @@ html lang=ja
       input[value="5"]:checked + .star:before {
         content: "★★★★★";
       }
+      #select_device h3 {
+        display: inline-block;
+        margin-left: 1rem;
+      }
+      #select_device input {
+        margin-right: 0.5rem;
+      }
+      #select_device label {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+        padding: 0.2rem 0.5rem;
+        font-size: large;
+        background-color: rgba(255,255,255,1);
+      }
       #typo {
         display: flex;
         justify-content: space-between;
@@ -141,7 +157,7 @@ html lang=ja
           .input
             p そのページを見るに至った経緯、得たい情報、その情報によって何がしたかったかを文章でなるべく詳細に記述してください。
             p 複数に分けられる場合は改行して下さい。
-            p ヒント：得たかった情報が誰向けに書かれた情報か（例：○○初心者向けの〜、若者向けの〜など）、書いていただけるとより内容の指向性が明確になり、細かい目的を判定できる検索エンジンが完成します。
+            p ヒント：得たかった情報が誰向けに書かれた情報か（例：○○初心者向けの〜、若者向けの〜など）を書いていただけるとより内容の指向性が明確になり、細かい目的を判定できる検索エンジンが完成します。
             textarea name="purpose" cols="500" rows="2" required=""
         .form_block
           .subject
@@ -163,13 +179,19 @@ html lang=ja
             label.star_rating 極めて不適合　
               input.rating type="radio" name="rating_pp" value="1" required=""
               span.star
-            p#note ※エラーは出ませんが必須項目です。
+            p#note ※エラーは出ませんが選択必須です。
         .form_block
           .subject
             h2 見やすさ
           .input
             p ページの見やすさを評価して下さい。
             p ヒント：広告の数が多くて目障りな場合なども含めてください。
+            #select_device
+              h3 閲覧デバイス
+              label
+                input type="radio" name="device" value="PC" required="" パソコン　　　　　　　　
+              label
+                input type="radio" name="device" value="SP" required="" スマートフォン・タブレット端末
             label.star_rating 極めて見やすい　
               input.rating type="radio" name="rating_vw" value="5" required=""
               span.star
@@ -185,16 +207,15 @@ html lang=ja
             label.star_rating 極めて見づらい　
               input.rating type="radio" name="rating_vw" value="1" required=""
               span.star
-            p#note ※エラーは出ませんが必須項目です。
+            p#note ※エラーは出ませんが選択必須です。
         .form_block
           .subject
             h2 誤字脱字
           .input
-            p 誤植単語及び本来の単語を1対1で記入して下さい。
-              br また、複数ある場合は改行して下さい。
-            p ※1 文字単位ではなく、単語単位（場合により特別な用法のある連語など）で記入して下さい。
-              br ※2 対象は主体となるコンテンツのみでコメント等は含めません。
-              br ※3 意図的と思われるものやスラング化しているものは含めないで下さい。ただし、判断出来ないものについては入力して頂いて構いません。
+            p 誤植単語及び本来の単語を1対1で記入して下さい。複数ある場合は改行して下さい。
+            p ※1 意図的と思われるものやスラング化しているものは含めないで下さい。ただし、判断出来ないものについては入力して頂いて構いません。
+              br ※2 文字単位ではなく、単語単位（場合により特別な用法のある連語など）で記入して下さい。
+              br ※3 対象は主体となるコンテンツのみで記事に対するコメント等は含めません。
             #typo
               label 
                 h3 誤植単語

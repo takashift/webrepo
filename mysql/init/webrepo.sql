@@ -54,7 +54,7 @@ CREATE TABLE individual_eval(
 	recommend_bad int,
 	goodness_of_fit tinyint not null,
 	because_goodness_of_fit text,
-	device varchar(255),
+	device varchar(30),
 	visibility tinyint not null,
 	because_visibility text,
 	num_typo tinyint not null,

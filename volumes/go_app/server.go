@@ -51,9 +51,8 @@ var (
 	tablename = "userinfo"
 	seq       = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
-	conn, dberr        = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
-	dbSess             = conn.NewSession(nil)
-	IndividualEvalForm = map[string]interface{}{}
+	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
+	dbSess      = conn.NewSession(nil)
 )
 
 type googleUser struct {
@@ -130,24 +129,24 @@ type (
 		Tag10        string `db:"tag10"`
 	}
 
-	// IndividualEval struct {
-	// 	PageID               int    `db:"page_id"`
-	// 	EvaluatorID          int    `db:"evaluator_id"`
-	// 	Posted               string `db:"posted"`
-	// 	BrowseTime           string `db:"browse_time"`
-	// 	BrowsePurpose        string `db:"browse_purpose"`
-	// 	Deliberate           int    `db:"deliberate"`
-	// 	DescriptionEval      string `db:"description_eval"`
-	// 	RecommendGood        int    `db:"recommend_good"`
-	// 	RecommendBad         int    `db:"recommend_bad"`
-	// 	GoodnessOfFit        int    `db:"goodness_of_fit"`
-	// 	BecauseGoodnessOfFit string `db:"because_goodness_of_fit"`
-	// 	Device               string `db:"device"`
-	// 	Visibility           int    `db:"visibility"`
-	// 	BecauseVisibility    string `db:"because_visibility"`
-	// 	NumTypo              int    `db:"num_typo"`
-	// 	BecauseNumTypo       string `db:"because_num_typo"`
-	// }
+	IndividualEval struct {
+		PageID               int    `db:"page_id"`
+		EvaluatorID          int    `db:"evaluator_id"`
+		Posted               string `db:"posted"`
+		BrowseTime           string `db:"browse_time"`
+		BrowsePurpose        string `db:"browse_purpose"`
+		Deliberate           int    `db:"deliberate"`
+		DescriptionEval      string `db:"description_eval"`
+		RecommendGood        int    `db:"recommend_good"`
+		RecommendBad         int    `db:"recommend_bad"`
+		GoodnessOfFit        int    `db:"goodness_of_fit"`
+		BecauseGoodnessOfFit string `db:"because_goodness_of_fit"`
+		Device               string `db:"device"`
+		Visibility           int    `db:"visibility"`
+		BecauseVisibility    string `db:"because_visibility"`
+		NumTypo              int    `db:"num_typo"`
+		BecauseNumTypo       string `db:"because_num_typo"`
+	}
 
 	PageStatusTiny struct {
 		ID  int    `db:"id"`
@@ -160,7 +159,7 @@ type (
 	}
 )
 
-var IndividualEval = map[string]interface{}{}
+// var IndividualEval = map[string]interface{}{}
 
 // ここでレシーバ変数を定義したことでAceTemplateに以下の関数がメソッドとして関連付けられる
 func (at *AceTemplate) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
@@ -892,9 +891,6 @@ func main() {
 			dbPS   PageStatusTiny
 		)
 
-		c.Bind(IndividualEvalForm)
-		fmt.Println(IndividualEvalForm)
-
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
 			panic(err)
@@ -1019,24 +1015,32 @@ func main() {
 		return c.Render(http.StatusOK, "input_evaluation", nil)
 	})
 	r.POST("/input_evaluation/:id", func(c echo.Context) error {
-		id := c.Param("id")
-		idInt, err := strconv.Atoi(id)
+		indEval := new(IndividualEval)
+		pageIDStr := c.Param("id")
+
+		var err error
+		indEval.PageID, err = strconv.Atoi(pageIDStr)
 		if err != nil {
 			return err
 		}
-		fmt.Println(idInt)
 
 		// フォームの評価を取得
-		err = c.Bind(IndividualEvalForm)
+		indEval.BrowsePurpose = c.FormValue("purpose")
+		indEval.GoodnessOfFit, err = strconv.Atoi(c.FormValue("rating_pp"))
+		if err != nil {
+			return err
+		}
+		// IndividualEval.Device = c.FormValue("device")
+		indEval.Visibility, err = strconv.Atoi(c.FormValue("rating_vw"))
 		if err != nil {
 			return err
 		}
 
-		fmt.Println(IndividualEvalForm)
+		// fmt.Println(IndividualEval)
 
 		// 時刻のフォーマットが正しくセットできてない時はNULLのままにする
 
-		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+id)
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageIDStr)
 	})
 
 	// コメント入力画面
