@@ -880,6 +880,7 @@ func main() {
 
 		newPS.Genre = c.FormValue("genre")
 		newPS.Media = c.FormValue("media")
+		// tag := bytes.Split(c.FormValue("tag"), []byte{13, '\n'})
 		tag := strings.Split(c.FormValue("tag"), "\n")
 
 		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
@@ -888,11 +889,21 @@ func main() {
 		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
 		i := 0
 		for j, v := range tag {
-			// 何故か何も表示されないにも関わらず、Goのスライスでは空白文字を入れると空白ではなく、[]byte型で13が入ってしまう謎の挙動をする。
-			// https://qiita.com/Sheile/items/ba51ac9091e09927b95c
-			// []byteはまともにチェックするとメモリコピーが発生してしまうので、unsafeを使用。
-			// reflect.DeepEqual を使わないと簡単に比較できない。
-			if !reflect.DeepEqual(*(*[]byte)(unsafe.Pointer(&v)), []byte{13}) {
+			// スライスの中身が無くなったら、その後のタグは[]byte{13}で埋める。
+			if len(tag)-1-j == 0 {
+				for n := i; n <= 9; n++ {
+					// byteスライスからstringへのキャストもメモリコピーが発生してしまう。
+					// だが、Sprintf()でも発生するらしいのでもう無理。
+					tagArr[n] = string([]byte{13})
+					fmt.Println(n)
+					fmt.Println(*(*[]byte)(unsafe.Pointer(&tagArr[n])))
+				}
+			} else if reflect.DeepEqual(*(*[]byte)(unsafe.Pointer(&v)), []byte{13}) {
+				// 何故か何も表示されないにも関わらず、Goのスライスでは空白文字を入れると空白ではなく、[]byte型で13が入ってしまう謎の挙動をする。
+				// https://qiita.com/Sheile/items/ba51ac9091e09927b95c
+				// []byteはまともにチェックするとメモリコピーが発生してしまうので、unsafeを使用。
+				// reflect.DeepEqual を使わないと簡単に比較できない。
+			} else {
 				tagArr[i] = v
 				if i >= 9 {
 					break
@@ -900,19 +911,10 @@ func main() {
 				i++
 				fmt.Print(v + "\n")
 			}
+			fmt.Println(i)
 			fmt.Println(*(*[]byte)(unsafe.Pointer(&v)))
-
-			// スライスの中身が無くなったら、その後のタグは[]byte{13}で埋める。
-			if len(tag)-1-j == 0 {
-				for n := i; n <= 9; n++ {
-					// byteスライスからstringへのキャストもメモリコピーが発生してしまう。
-					// だが、Sprintf()でも発生するらしいのでもう無理。
-					tagArr[i] = string([]byte{13})
-					fmt.Println(*(*[]byte)(unsafe.Pointer(&tagArr[i])))
-				}
-			}
-			// structVal.Field(i + 9).Set(v)
 		}
+		// structVal.Field(i + 9).Set(v)
 
 		newPS.Tag1 = tagArr[0]
 		newPS.Tag2 = tagArr[1]
