@@ -161,22 +161,22 @@ html lang=ja
             textarea name="purpose" cols="500" rows="2" required=""
         .form_block
           .subject
-            h2 目的適合度
+            h2 目的達成度
           .input
             p 閲覧目的に対するページの適合度を入力して下さい。
-            label.star_rating 極めて適合　　
+            label.star_rating 求めていた以上に達成できた
               input.rating type="radio" name="rating_pp" value="5" required=""
               span.star
-            label.star_rating 大体適合　　　
+            label.star_rating 完全に達成できた　　　　　
               input.rating type="radio" name="rating_pp" value="4" required=""
               span.star
-            label.star_rating 半分くらい適合
+            label.star_rating ほぼ達成できた　　　　　　
               input.rating type="radio" name="rating_pp" value="3" required=""
               span.star
-            label.star_rating 大体不適合　　
+            label.star_rating あまり達成できなかった　　
               input.rating type="radio" name="rating_pp" value="2" required=""
               span.star
-            label.star_rating 極めて不適合　
+            label.star_rating 全然達成できなかった　　　
               input.rating type="radio" name="rating_pp" value="1" required=""
               span.star
             p#note ※エラーは出ませんが選択必須です。
@@ -212,7 +212,7 @@ html lang=ja
           .subject
             h2 誤字脱字
           .input
-            p 誤植単語及び本来の単語を1対1で記入して下さい。複数ある場合は改行して下さい。
+            p 誤植単語があれば、本来の単語と1対1で記入して下さい。複数ある場合は改行して下さい。
             p ※1 意図的と思われるものやスラング化しているものは含めないで下さい。ただし、判断出来ないものについては入力して頂いて構いません。
               br ※2 文字単位ではなく、単語単位（場合により特別な用法のある連語など）で記入して下さい。
               br ※3 対象は主体となるコンテンツのみで記事に対するコメント等は含めません。
@@ -227,7 +227,7 @@ html lang=ja
           .subject
             h2 記述評価
           .input
-            p その他、ページに対する評価を入力して下さい。
+            p その他、ページに対する評価があれば入力して下さい。
             p ヒント：コンテンツのどこが良く、どこが駄目なのか、を明確に書いていただけるとより正確な判断ができる検索エンジンが完成します。
             textarea name="freedom" cols="500" rows="4"
             p#note ※飽くまで評価を行う対象はウェブページであるため、ページ作成者に対する意見は当該ページのコメント欄、SNS等で直接お問い合わせ願います。
@@ -236,8 +236,8 @@ html lang=ja
             h2 閲覧日時
           .input
             p Chorme ではフォーム右端をクリックすることで、マウスで日付を選択できます。
-            p それ以外のブラウザでは「2017/08/01 00:01」のように入力してください。
-            input type="datetime-local" name="browse" placeholder="2017/08/01 00:01"
-            p#note ※分からなければ大体で良いので必ず時刻も上記の形式で入力してください。
+            p それ以外のブラウザでは半角で、「2017-08-01 23:59」のように入力してください。時刻は無くても構いません。
+            input type="datetime-local" name="browse" placeholder="2017-08-01 23:59"
+            p#note ※分からなければ大体でも良いので、入力していただけると幸いです。
         .form_block
       input.button type="submit" value="送信する"

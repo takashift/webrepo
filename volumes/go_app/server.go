@@ -53,6 +53,7 @@ var (
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	dbSess      = conn.NewSession(nil)
+	byte13Str   = string([]byte{13})
 )
 
 type googleUser struct {
@@ -129,7 +130,13 @@ type (
 		Tag10        string `db:"tag10"`
 	}
 
+	PageStatusTiny struct {
+		ID  int    `db:"id"`
+		URL string `db:"URL"`
+	}
+
 	IndividualEval struct {
+		Num                  int    `db:"num"`
 		PageID               int    `db:"page_id"`
 		EvaluatorID          int    `db:"evaluator_id"`
 		Posted               string `db:"posted"`
@@ -148,9 +155,13 @@ type (
 		BecauseNumTypo       string `db:"because_num_typo"`
 	}
 
-	PageStatusTiny struct {
-		ID  int    `db:"id"`
-		URL string `db:"URL"`
+	Typo struct {
+		Num               int    `db:"num"`
+		PageID            int    `db:"page_id"`
+		EvaluatorID       int    `db:"evaluator_id"`
+		IndividualEvalNum int    `db:"individual_eval_num"`
+		Incorrect         string `db:"incorrect"`
+		Correct           string `db:"correct"`
 	}
 
 	pagePath struct {
@@ -195,7 +206,7 @@ func createJwt(c echo.Context, id int, email string) error {
 	claims := token.Claims.(jwt.MapClaims)
 	claims["id"] = id
 	claims["email"] = email
-	// claims["exp_time"] = time.Now().Add(time.Hour * 72).Unix()
+	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 	// Generate encoded token and send it as response.
 	t, err := token.SignedString([]byte("oppai"))
@@ -227,7 +238,7 @@ func signinCheck(page string, c echo.Context, value interface{}) error {
 	return c.Render(http.StatusOK, page, value)
 }
 
-func cookieToAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+func cookieToHeaderAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 
 		sess, err := session.Get("session", c)
@@ -673,7 +684,7 @@ func main() {
 	})
 
 	// Restricted group
-	r := e.Group("/r", cookieToAuthMiddleware)
+	r := e.Group("/r", cookieToHeaderAuthMiddleware)
 	// Token によってサインイン状況をチェック（ログインが必須なページ）
 	r.Use(middleware.JWT([]byte("oppai")))
 	r.GET("/test", func(c echo.Context) error {
@@ -825,7 +836,8 @@ func main() {
 			fmt.Println("value:", structVal.Field(1).Interface())
 			fmt.Println("len:", typ.NumField())
 
-			for i := 0; i < typ.NumField(); i++ {
+			// IDもマップに含めると0が入ってしまうので入れない。
+			for i := 1; i < typ.NumField(); i++ {
 				field := structVal.Field(i)
 				// fmt.Println("canset:", field.CanSet())
 				mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
@@ -919,7 +931,7 @@ func main() {
 				for n := i; n <= 9; n++ {
 					// byteスライスからstringへのキャストもメモリコピーが発生してしまう。
 					// だが、Sprintf()でも発生するらしいのでもう無理。
-					tagArr[n] = string([]byte{13})
+					tagArr[n] = byte13Str
 					fmt.Println(n)
 					fmt.Println(*(*[]byte)(unsafe.Pointer(&tagArr[n])))
 				}
@@ -1016,29 +1028,113 @@ func main() {
 	})
 	r.POST("/input_evaluation/:id", func(c echo.Context) error {
 		indEval := new(IndividualEval)
+		typo := new(Typo)
 		pageIDStr := c.Param("id")
 
-		var err error
+		var (
+			err            error
+			browseTime     time.Time
+			corrNoNullSL   []string
+			incorrNoNullSL []string
+		)
 		indEval.PageID, err = strconv.Atoi(pageIDStr)
 		if err != nil {
 			return err
 		}
 
+		// 評価者の ID を取得
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		indEval.EvaluatorID = int(claims["id"].(float64))
+
+		bro := strings.Replace(c.FormValue("browse"), "T", " ", -1)
+		fmt.Println(bro)
+		// 時刻のフォーマットが正しくセットできてない時は DB に値を入れない
+		browseTime, err = time.Parse("2006-01-02 15:04", bro)
+		if err != nil {
+			browseTime, err = time.Parse("2006-01-02", bro)
+		}
+		if err != nil {
+			fmt.Println("time型に出来ない")
+		} else {
+			indEval.BrowseTime = browseTime.Format(timeLayout)
+			fmt.Println(indEval.BrowseTime)
+		}
+
 		// フォームの評価を取得
 		indEval.BrowsePurpose = c.FormValue("purpose")
+		indEval.DescriptionEval = c.FormValue("freedom")
 		indEval.GoodnessOfFit, err = strconv.Atoi(c.FormValue("rating_pp"))
 		if err != nil {
 			return err
 		}
-		// IndividualEval.Device = c.FormValue("device")
+		indEval.Device = c.FormValue("device")
 		indEval.Visibility, err = strconv.Atoi(c.FormValue("rating_vw"))
 		if err != nil {
 			return err
 		}
 
-		// fmt.Println(IndividualEval)
+		incorr := c.FormValue("typo")
+		corr := c.FormValue("typo_answer")
+		// []byte{13}を削除して、カンマで区切る
+		incorr = strings.Replace(incorr, byte13Str+"\n", "\n", -1)
+		corr = strings.Replace(corr, byte13Str+"\n", "\n", -1)
+		fmt.Println(incorr)
+		// typo のスライスを作成
+		incorrSL := strings.Split(incorr, "\n")
+		corrSL := strings.Split(corr, "\n")
+		// 空白を除外したスライスを作成
+		for _, v := range incorrSL {
+			if v != "" {
+				incorrNoNullSL = append(incorrNoNullSL, v)
+			}
+		}
+		for _, v := range corrSL {
+			if v != "" {
+				corrNoNullSL = append(corrNoNullSL, v)
+			}
+		}
+		fmt.Println(incorrNoNullSL)
 
-		// 時刻のフォーマットが正しくセットできてない時はNULLのままにする
+		typo.Incorrect = strings.Join(incorrNoNullSL, "\n")
+		typo.Correct = strings.Join(corrNoNullSL, "\n")
+		typo.PageID = indEval.PageID
+		typo.EvaluatorID = indEval.EvaluatorID
+
+		// スライスの長さから typo の数を格納する。
+		indEval.NumTypo = len(incorrNoNullSL)
+
+		// 現在の時刻を取得する
+		indEval.Posted = time.Now().Format(timeLayout)
+
+		// 評価を DB に格納する
+		if indEval.BrowseTime != "" {
+			err = dbSess.InsertInto("individual_eval").
+				Columns("page_id", "evaluator_id", "posted", "browse_time",
+					"browse_purpose", "description_eval", "goodness_of_fit",
+					"device", "visibility", "num_typo").
+				Record(indEval).
+				Load(indEval)
+		} else {
+			err = dbSess.InsertInto("individual_eval").
+				Columns("page_id", "evaluator_id", "posted",
+					"browse_purpose", "description_eval", "goodness_of_fit",
+					"device", "visibility", "num_typo").
+				Record(indEval).
+				Load(indEval)
+		}
+		if err != nil {
+			fmt.Println("データーベースに入れらんない")
+			fmt.Println(err)
+			return c.String(http.StatusOK, "あなたはもう既にこのページを評価しています。")
+		}
+
+		// typo も DB に格納する
+		typo.IndividualEvalNum = indEval.Num
+		_, err = dbSess.InsertInto("typo").
+			Columns("page_id", "evaluator_id", "individual_eval_num", "incorrect", "correct").
+			Record(typo).
+			Exec()
 
 		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageIDStr)
 	})

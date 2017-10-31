@@ -28,7 +28,7 @@ CREATE TABLE page_status(
 	admin_user_id int,
 	genre text,
 	media text,
-	dead tinyint,
+	dead tinyint DEFAULT 0,
 	tag1 varchar(30),
 	tag2 varchar(30),
 	tag3 varchar(30),
@@ -83,17 +83,16 @@ CREATE TABLE individual_eval(
 );
 
 CREATE TABLE individual_eval_comment(
-	num int unique not null auto_increment,
+	num int unique not null auto_increment PRIMARY KEY,
 	page_id int unique not null,
-	commenter_id int unique not null,
+	commenter_id int not null,
 	posted datetime not null,
 	reply_eval_num int,
 	reply_comment_num int,
 	deliberate tinyint DEFAULT 0,
 	comment text not null,
 	recommend_good int,
-	recommend_bad int,
-	PRIMARY KEY(page_id, commenter_id)
+	recommend_bad int
 );
 
 CREATE TABLE typo(
@@ -103,7 +102,7 @@ CREATE TABLE typo(
 	individual_eval_num int unique not null,
 	incorrect varchar(255) not null,
 	correct varchar(255) not null,
-	PRIMARY KEY(page_id, evaluator_id)
+	PRIMARY KEY(page_id, evaluator_id, individual_eval_num)
 );
 
 CREATE TABLE rating_item(

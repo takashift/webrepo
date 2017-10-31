@@ -1,174 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-free
-docker exec -it tuna_echo_1 /bin/ash
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-rcode docker-compose.yml
-cd echo/
-rcode Dockerfile
-docker rm tuna_echo_1
-docker stop tuna_echo_1
-docker rm tuna_echo_1
-docker rmi tuna_echo
-docker-compose up -d --build
-docker rm tuna_echo_1
-docker stop tuna_echo_1
-docker rmi tuna_echo
-docker rmi alpine
-docker images
-docker golang
-docker rmi golang
-docker rmi golang:alpine
-docker rmi ed119d8f7db5
-docker ps
-ps -a
-dockerps -a
-docker ps -a
-docker rm hungry_beaver
-docker rm reverent_lalande
-docker rm 946a4b54b755
-docker rm d632a01b7c64
-docker ps -a
-docker rm 33272634e9c1
-docker rmcad9bf29046e
-docker rm cad9bf29046e
-docker rm fd5397b35d10
-docker rm 7f2a3024b359
-docker rm 9b5fc421646e
-docker ps -a
-docker rm 642ac43804eb
-docker ps -a
-docker rmi golang:alpine
-docker images
-docker-compose up -d --build
-docker ps -a
-docker-compose logs
-docker exec -it tuna_echo_1 /bin/bash
-docker exec -it tuna_echo_1 /bin/baash
-docker exec -it tuna_echo_1 /bin/ash
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-exit
-cd volumes/go_app/
-ls
-rcode server.go 
-ls
-rcode server.go 
-rcode template_no_proxy.go 
-mv template_no_proxy.go template_no_proxy.go_
-rm template_no_proxy.go
-mv template_no_proxy.go_ template_no_proxy.go
-ls
-touch ctx_test.go
-rcode ctx_test.go 
-mv server.go server.go_
-mv template_no_proxy.go template_no_proxy.go_
-mv ctx_test.go ctx.go 
-rcode ctx.go 
-rcode server.go_ 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_echo_1 /bin/ash
-docker-compose logs
-docker exec -it tuna_echo_1 /bin/ash
-docker exec -it tuna_echo_1 /bin/bash
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-cd nginx/
-ls
-rcode app.conf 
-cd
-rcode docker-compose.yml
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down --rmi all
-docker-compose up -d --build
-docker-compose logs
-cd echo/
-rcode Dockerfile
-cd ..
-cd nginx/
-rcode Dockerfile
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git status
-docker-compose logs
-curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
-Copy
-curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY"
-curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
-curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY"
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
-curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjE5NTcxMzZ9.RB3arc4-OyzASAaUhC2W3ReWaXAt_z2Fd3BN4aWTgEY"
-curl -X POST -d 'username=jon' -d 'password=shhh!' localhost:1323/login
-curl localhost:1323/restricted -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNTA4MzI1ODIwLCJuYW1lIjoiSm9uIFNub3cifQ.BDj3InHyXlm7OwLt8r6YFhMXxkgqXCt4G-jHWJWT_hU"
-docker-compose logs
-cd volumes/go_app/
-rcode server.go_ 
-rcode ctx.go 
 mv ctx.go ctx.go_
 mv server.go_ server.go
 mv template_no_proxy.go_ template_no_proxy.go
@@ -998,3 +827,174 @@ docker-compose down
 docker-compose up -d --build
 docker-compose logs
 docker-compose down
+cd volumes/g
+cd volumes/go_app/
+rcode server.go 
+cd views/
+rcode input_evaluation.ace 
+git log
+git commit -am "改行を入れた時にタグが消えない問題を解決"
+gitpush 
+rcode header_menu.ace 
+git commit -am "ヘッダーのTOPの部分をサービス名WebRepo★彡に変更"
+gitp
+gitpush 
+git commit --amend
+gitpush 
+git push -f
+docker-compose logs
+ls
+rcode preview_evaluation.ace 
+rcode input_evaluation.ace 
+git status
+git log
+git commit -am "評価入力のカラムに閲覧デバイスのカラムを用意。閲覧目的の説明修正。ページ登録後のリダイレクト先が属性編集画面になっていたので評価入力画面に修正"
+gitpush 
+git log
+git commit -am '評価入力画面に閲覧デバイスの選択肢を追加'
+gitpush 
+git commit --amend
+cd volumes/db_data/
+ls
+sudo rm -r *
+cd
+cd mysql/init/
+rcode webrepo.sql 
+cd volumes/go_app/
+rcode server.go 
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cdvd
+cd volumes/db_data/
+ls
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+ls
+sudo rm -r *
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+ls
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+rcode server.go 
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd mysql/init/
+rcode webrepo.sql 
+cd volumes/go_app/
+ls
+cd views/
+ls
+rcode edit_page_cate.ace 
+rcode in
+rcode input_evaluation.ace 
+cd volumes/db_data/
+sudo rm -r *
+ls
+sudo rm -r *
+ls
+docker exec -it tuna_mysql_1 /bin/bash
+sudo rm -r *
+ls
+docker exec -it tuna_mysql_1 /bin/bash
