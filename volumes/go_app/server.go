@@ -836,7 +836,7 @@ func main() {
 			fmt.Println("value:", structVal.Field(1).Interface())
 			fmt.Println("len:", typ.NumField())
 
-			// IDもマップに含めると0が入ってしまうので入れない。
+			// IDもマップに含めると更新する時に0が入ってしまうので入れない。
 			for i := 1; i < typ.NumField(); i++ {
 				field := structVal.Field(i)
 				// fmt.Println("canset:", field.CanSet())
@@ -1003,7 +1003,8 @@ func main() {
 		structVal := reflect.Indirect(reflect.ValueOf(newPS))
 		typ := structVal.Type()
 		mapVal := make(map[string]interface{})
-		for i := 0; i < typ.NumField(); i++ {
+		// IDもマップに含めると更新する時に0が入ってしまうので入れない。
+		for i := 1; i < typ.NumField(); i++ {
 			field := structVal.Field(i)
 			if field.String() != "" {
 				mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
@@ -1028,6 +1029,7 @@ func main() {
 	})
 	r.POST("/input_evaluation/:id", func(c echo.Context) error {
 		indEval := new(IndividualEval)
+		indEvalLoad := new(IndividualEval)
 		typo := new(Typo)
 		pageIDStr := c.Param("id")
 
@@ -1109,30 +1111,31 @@ func main() {
 
 		// 評価を DB に格納する
 		if indEval.BrowseTime != "" {
-			err = dbSess.InsertInto("individual_eval").
+			_, err = dbSess.InsertInto("individual_eval").
 				Columns("page_id", "evaluator_id", "posted", "browse_time",
 					"browse_purpose", "description_eval", "goodness_of_fit",
 					"device", "visibility", "num_typo").
 				Record(indEval).
-				Load(indEval)
+				Exec()
 		} else {
-			err = dbSess.InsertInto("individual_eval").
+			_, err = dbSess.InsertInto("individual_eval").
 				Columns("page_id", "evaluator_id", "posted",
 					"browse_purpose", "description_eval", "goodness_of_fit",
 					"device", "visibility", "num_typo").
 				Record(indEval).
-				Load(indEval)
+				Exec()
 		}
 		if err != nil {
 			fmt.Println("データーベースに入れらんない")
 			fmt.Println(err)
 			return c.String(http.StatusOK, "あなたはもう既にこのページを評価しています。")
 		}
+		fmt.Println(indEvalLoad)
 
 		// typo も DB に格納する
-		typo.IndividualEvalNum = indEval.Num
+		typo.IndividualEvalNum = indEvalLoad.Num
 		_, err = dbSess.InsertInto("typo").
-			Columns("page_id", "evaluator_id", "individual_eval_num", "incorrect", "correct").
+			Columns("page_id", "evaluator_id", "incorrect", "correct").
 			Record(typo).
 			Exec()
 

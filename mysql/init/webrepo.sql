@@ -99,10 +99,10 @@ CREATE TABLE typo(
 	num int unique not null auto_increment,
 	page_id int unique not null,
 	evaluator_id int unique not null,
-	individual_eval_num int unique not null,
+	individual_eval_num int unique,
 	incorrect varchar(255) not null,
 	correct varchar(255) not null,
-	PRIMARY KEY(page_id, evaluator_id, individual_eval_num)
+	PRIMARY KEY(page_id, evaluator_id)
 );
 
 CREATE TABLE rating_item(

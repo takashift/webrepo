@@ -26,6 +26,7 @@ html lang=ja
       textarea {
         width: 100%;
         /*max-width: 100%;*/
+        font-size: 1rem;
         resize: vertical;
       }
       textarea[name="purpose"] {
@@ -128,6 +129,10 @@ html lang=ja
       #note {
         font-size: 0.9rem;
       }
+      input[name="browse"] {
+        font-size: 1rem;
+      }
+
       .red {
         color: red;
       }

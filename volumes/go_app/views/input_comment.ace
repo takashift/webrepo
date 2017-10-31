@@ -109,6 +109,7 @@ html lang=ja
 
       textarea[name="comment"] {
         height: 10rem;
+        font-size: 1rem;
       }
       #note {
         font-size: 0.9rem;
