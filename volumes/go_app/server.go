@@ -68,13 +68,11 @@ type AceTemplate struct {
 }
 
 // サイトで共通情報
-type ServiceInfo struct {
-	Title string
-}
-
 type PageValue struct {
-	Query string
-	Error string
+	Title  string
+	Query  string
+	Error  string
+	Option interface{}
 }
 
 type EvalForm struct {
@@ -157,6 +155,19 @@ type (
 		BecauseNumTypo       string `db:"because_num_typo"`
 	}
 
+	IndividualEvalComment struct {
+		Num             int    `db:"num"`
+		PageID          int    `db:"page_id"`
+		CommenterID     int    `db:"commenter_id"`
+		Posted          string `db:"posted"`
+		ReplyEvalNum    int    `db:"reply_eval_num"`
+		ReplyCommentNum int    `db:"reply_comment_num"`
+		Deliberate      int    `db:"deliberate"`
+		Comment         string `db:"comment"`
+		RecommendGood   int    `db:"recommend_good"`
+		RecommendBad    int    `db:"recommend_bad"`
+	}
+
 	Typo struct {
 		Num               int    `db:"num"`
 		PageID            int    `db:"page_id"`
@@ -169,33 +180,6 @@ type (
 	pagePath struct {
 		Page string
 		URL  string
-	}
-
-	PrevIndiEval struct {
-		Title           string
-		EvaluatorName   string
-		BrowseTime      string
-		GoodnessOfFit   string
-		Visibility      string
-		NumTypo         string
-		Incorrect       string
-		Correct         string
-		DescriptionEval string
-		Posted          string
-		EvalNum         string
-		RecommendGood   string
-		RecommendBad    string
-		NumComment      string
-	}
-
-	PrevEvalComment struct {
-		CommenterName string
-		Comment       string
-		Posted        string
-		ReplyEvalNum  string
-		CommentNum    string
-		RecommendGood string
-		RecommendBad  string
 	}
 )
 
@@ -689,7 +673,11 @@ func main() {
 
 	// 評価閲覧画面
 	e.GET("/preview_evaluation/:id", func(c echo.Context) error {
-		// var pageStatus = map[string]interface{}{}
+
+		pageValue := new(PageValue)
+		pageValue.Option = map[string]interface{}{}
+
+
 		pageID := c.Param("id")
 		pageIDInt, err := strconv.Atoi(pageID)
 		if err != nil {
@@ -709,11 +697,14 @@ func main() {
 		}
 		fmt.Println("PS OK")
 
+		pageValue.Option["PageStatus"] := pageStatus
+
 		// DB から評価を取得
-		individualEval := new(IndividualEval)
-		_, err = dbSess.Select("page_id", "evaluator_id", "posted", "browse_time",
+		// 複数の評価データを格納するために構造体のスライスを作成
+		var individualEval []IndividualEval
+		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
 			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
-			"device", "visibility", "num_typo").
+			"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
 			From("individual_eval").
 			Where("page_id = ?", pageIDInt).Load(&individualEval)
 		if err != nil {
@@ -722,12 +713,16 @@ func main() {
 		fmt.Println("PS OK")
 		fmt.Println(individualEval)
 
-		// DB からコメントを取得
+		pageValue.Option["DinamicValue"] := ""
 
 		// for文で回す
+		// Ace に入れる構造体に格納
+		for _, v := range individualEval {
+			pageValue.Option["DinamicValue"] += makePrevEval(v)
+		}
 
 		// return signinCheck("preview_evaluation", c, nil)
-		return signinCheck("tmp_preview_evaluation", c, nil)
+		return signinCheck("tmp_preview_evaluation", c, dinamicValue)
 	})
 
 	// 個別評価閲覧画面
@@ -1115,6 +1110,7 @@ func main() {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
 		indEval.EvaluatorID = int(claims["id"].(float64))
+		indEval.EvaluatorID = 1
 
 		bro := strings.Replace(c.FormValue("browse"), "T", " ", -1)
 		fmt.Println(bro)

@@ -211,7 +211,7 @@ html lang=ja
       #review_list
         .review
           h3 はなくその味ってみんな同じなのか知りたかった
-          p.author 投稿者　小学生
+          p.author 評価者　小学生
           p.date 閲覧日　2017/08/04
           h4.first 目的達成度　★★★★★ 4.5
           h4 見やすさ　　★★★★★ 4.5
