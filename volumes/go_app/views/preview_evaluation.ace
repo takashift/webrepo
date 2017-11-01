@@ -166,14 +166,14 @@ html lang=ja
       #head
         h1
           a href="/" style="text-decoration: none;"
-            span.blue G
-            span.red o
-            span.yellow o
-            span.blue g
-            span.green l
+            span.blue W
             span.red e
-            / span.green o
-            / span.yellow ★彡
+            span.yellow b
+            span.blue R
+            span.green e
+            span.red p
+            span.green o
+            span.yellow ★彡
         .button#input_eval 以下のページを評価する
         #title
           h1 はなくその食レポ - Ahoo!

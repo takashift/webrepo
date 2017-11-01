@@ -1,19 +1,3 @@
-mv ctx.go ctx.go_
-mv server.go_ server.go
-mv template_no_proxy.go_ template_no_proxy.go
-ls
-rcode server.go
-rcode template_no_proxy.go 
-git add ctx.go_ views/mypage_top.ace 
-git commit -am "JWTのTokenをヘッダーに書き込む処理を追加"
-gitpush 
-mv server.go server.go_
-mv template_no_proxy.go template_no_proxy.go_
-mv ctx.go_ ctx.go
-rcode ctx.go 
-rcode template_no_proxy.go_ 
-rcode server.go_ 
-rcode server.go
 ls
 rcode cron/
 cd volumes/go_app/
@@ -998,3 +982,19 @@ docker exec -it tuna_mysql_1 /bin/bash
 sudo rm -r *
 ls
 docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/views/
+ls
+rcode input_evaluation.ace 
+rcode input_comment.ace 
+rcode register_page.ace 
+rcode edit_page_cate.ace 
+rcode search_result.ace 
+rcode search_top.ace 
+rcode preview_evaluation.ace 
+rcode individual_review.ace
+cp individual_review.ace tmp_preview_evaluation.ace 
+ls
+rcode tmp_preview_evaluation.ace 
+rcode search_top.ace 
+rcode search_result.ace 
+rcode tmp.html

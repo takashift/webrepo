@@ -34,7 +34,7 @@
       a href="https://twitter.com/web_repo" 更新・障害情報
   #header_menu_center
     span.hd_m_elem
-      a href="/r/register_page" 新規ページ登録・評価
+      a href="/r/register_page" ページ評価・登録
   #header_menu_right
     span.hd_m_elem
       a href="https://www.google.co.jp/" Google

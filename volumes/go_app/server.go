@@ -439,7 +439,9 @@ func main() {
 		// URLクエリパラメータを受け取る
 		q := c.QueryParam("q")
 		searchForm.Query = q
-		return signinCheck("search_result", c, searchForm)
+
+		return c.Redirect(http.StatusSeeOther, "https://www.google.co.jp/search?q=site%3Awebrepo.nal.ie.u-ryukyu.ac.jp+"+q)
+		// return signinCheck("search_result", c, searchForm)
 	})
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
@@ -660,7 +662,8 @@ func main() {
 
 	// 評価閲覧画面
 	e.GET("/preview_evaluation/:id", func(c echo.Context) error {
-		return signinCheck("preview_evaluation", c, nil)
+
+		return signinCheck("tmp_preview_evaluation", c, nil)
 	})
 
 	// 個別評価閲覧画面
@@ -1029,7 +1032,7 @@ func main() {
 	})
 	r.POST("/input_evaluation/:id", func(c echo.Context) error {
 		indEval := new(IndividualEval)
-		indEvalLoad := new(IndividualEval)
+		// indEvalLoad := new(IndividualEval)
 		typo := new(Typo)
 		pageIDStr := c.Param("id")
 
@@ -1130,10 +1133,9 @@ func main() {
 			fmt.Println(err)
 			return c.String(http.StatusOK, "あなたはもう既にこのページを評価しています。")
 		}
-		fmt.Println(indEvalLoad)
 
 		// typo も DB に格納する
-		typo.IndividualEvalNum = indEvalLoad.Num
+		// typo.IndividualEvalNum = indEvalLoad.Num
 		_, err = dbSess.InsertInto("typo").
 			Columns("page_id", "evaluator_id", "incorrect", "correct").
 			Record(typo).

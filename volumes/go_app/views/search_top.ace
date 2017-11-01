@@ -20,7 +20,7 @@ html lang=ja
       button.new_eval {
         padding: 4rem 3rem;
         border-radius: 1rem;
-        background-color: rgba(0,0,0,0.2);
+        background-color: rgba(0,165,8,0.8);
         color: rgba(255,255,255,1);
         text-align: center;
         text-shadow: 2px 2px 2px rgba(0,0,0,0.8);        
@@ -28,7 +28,7 @@ html lang=ja
         cursor: pointer;
       }
       button.new_eval:hover {
-        background-color: rgba(255,50,0,0.755555);
+        background-color: rgba(0,165,8,1);
       }
       a.new_eval {
         text-decoration: none;
@@ -94,21 +94,23 @@ html lang=ja
     #search
       #space_h
       a.new_eval href="r/register_page"
-        button.new_eval 未登録ページを評価する
+        button.new_eval Webページを評価する
           br
             span ★★★★★
       h1
-        s
-          span.blue G
-          span.red o
-          span.yellow o
-          span.blue g
-          span.green l
-          span.red e
+        span.blue W
+        span.red e
+        span.yellow b
+        span.blue R
+        span.green e
+        span.red p
+        span.green o
+        span.yellow ★彡
       form action="/search" method="get"
         p.shadow
           input.search name="q" required=""
         p
-          input.button type="submit" value="評価・ページを検索"
+          / input.button type="submit" value="評価・ページを検索"
+          input.button type="submit" value="Googleでサイト内検索"
       #space_f
     = include footer
