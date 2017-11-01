@@ -1,0 +1,273 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title はなくその食レポ の評価(詳細) | WebRepo★彡
+    = css
+      body {
+        margin-bottom: 0;
+        color: rgba(0,0,0,0.8);
+      }
+      #content {
+        max-width: 1200px;
+        / width: 90%;
+        margin: auto;
+      }
+      #head {
+        margin: 2rem;
+      }
+      #head h1 {
+        display: inline;
+      }
+      .blue {
+        color: #4183FF;
+      }
+      .red {
+        color: #EC452C;
+      }
+      .yellow {
+        color: #FFCF42;
+      }
+      .green {
+        color: #00A508;
+      }
+      #popu_pp{
+        margin-left: 1rem;
+      }
+      .button {
+        display: block;
+        font-size: larger;
+        color: rgba(255,255,255,0.9);
+        border-style: none;
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 0.5rem;
+        width: auto;
+        margin-left: 3rem;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;        
+      }
+      .button#input_eval {
+        display: inline-block;
+        background-color: rgba(0,50,255,0.8);
+      }
+      .button#top {
+        display: inline-block;
+        color: rgba(255,255,255,1);
+      }
+      #title {
+        margin-top: 2rem;
+        text-align: center;
+      }
+      #status {
+        display: flex;
+      }
+      .left {
+        width: 400px;
+        margin-right: 2rem;
+        flex-shrink: 0; /* サイズ固定 */
+      }
+      .ScrPr {
+        text-align: center;
+        /height: 150px;
+      }
+      .ScrPr img {
+        width: 350px;
+        height: 350px;
+      }
+      .right {
+      }
+      #cate #value {
+        margin-left: 2rem;
+      }
+      #cate_edit {
+        text-align: center;
+      }
+      #cate_edit .button {
+        display: inline-block;
+        margin: auto;
+        padding: 0.5rem 1rem;
+        background-color: rgba(255,50,0,0.8);
+      }
+      #review_list {
+        margin: 2rem 0 0 0;
+        padding: 2rem;
+        background-color: rgba(0,0,0,0.05);
+      }
+      .author {
+        text-align: right;
+        margin: 0;
+      }
+      p.date {
+        text-align: right;
+        margin: 0;
+      }
+      .review {
+        flex-shrink: 0;
+        flex-basis: 400px;
+        margin: 1.5rem;
+        padding: 2rem;
+        background-color: rgba(255,255,255,1);
+      }
+      h4.first {
+        margin-top: 0;
+      }
+      .typo {
+        margin-left: 2rem;
+        display: flex;
+      }
+      .typo_list {
+        margin-left: 1.5rem;
+      }
+      .typo_list h4 {
+        margin-right: 1.1rem;
+        margin-top: 0;
+        margin-bottom: 4px;
+        padding: 0 1rem;
+        background-color: rgba(255,255,255,1);
+      }
+      .incorrect {
+        margin-right: 1.5rem;
+        padding: 1rem;
+        width: 45%;
+        background-color: rgba(0,0,0,0.05);
+      }
+      .correct {
+        padding: 1rem;
+        width: 45%;
+        background-color: rgba(0,0,0,0.05);
+      }
+      .doc {
+        margin-left: 2rem;
+      }
+      .res {
+        text-align: right;
+      }
+      .res #posted {
+        margin-right: 30%;
+      }
+      .recommend {
+        display: inline;
+        margin-left: 2%;
+      }
+      .recommend input {
+        margin-left: 3%;
+      }
+      form#res_button {
+        margin-top: 1rem;
+        display: flex;
+      }
+      .input_dangerous {
+        flex-grow: 1;
+      }
+      .input_comment {
+        text-align: right;
+        flex-grow: 1;
+      }
+      .comment_block {
+        margin-left: 3rem;
+      }
+      .comment {
+        margin-left: 1.5rem;
+      }
+    = include JWT
+
+  body
+    = include header_menu
+    #content
+      #head
+        h1
+          a href="/" style="text-decoration: none;"
+            span.blue W
+            span.red e
+            span.yellow b
+            span.blue R
+            span.green e
+            span.red p
+            span.green o
+            span.yellow ★彡
+        a href="/r/input_evaluation/{{.PageID}}"
+          .button#input_eval 以下のページを評価する
+        #title
+          h1 {{.Title}}
+          h2 {{.URL}}
+      #status
+        .left
+          #eval
+            s
+              h3 最も高評価な閲覧目的
+            h2#popu_pp {{.PopuPP}}
+            h3 評価平均
+            / h4 総合　　　　★★★★★ {{}}
+            h4 目的達成度　★★★★★ {{.GFP}}
+            h4 見やすさ　　★★★★★ {{.VisP}}
+            / hr size="1.5" width="100%" color="#AAAAAA"
+          h4 誤字脱字　　{{.NumTypo}}箇所
+        .right
+          #cate
+            h3 ジャンル
+            h4#value ニュース
+            h3 媒体
+            h4#value 文章（マスコミ）
+            h3 タグ
+            h4#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料
+            a#cate_edit href="/r/edit_page_cate/{{.PageID}}"
+              .button ジャンル、媒体、タグを編集する
+      #review_list
+        {{.EvalHTML}}
+        / .review
+          / h3 {{.Eval1.Title}}
+          / p.author 投稿者　{{.Eval1.EvaluatorName}}
+          / p.date 閲覧日　{{.Eval1.BrowseDate}}
+          / h4.first 目的達成度　★★★★★ {{.Eval1.GFP}}
+          / h4 見やすさ　　★★★★★ {{.Eval1.VisP}}
+          / h4 誤字脱字数　{{.Eval1.NumTypo}}箇所
+          / .typo
+            / .incorrect
+              / h3 ✕ 誤
+              / .typo_list
+                / h4 花 
+                / h4 花 
+                / h4 花 
+                / h4 花 
+                / h4 花 
+                / h4 花 
+            / .correct
+              / h3 ⭕ 正
+              / .typo_list
+                / h4 鼻
+                / h4 鼻
+                / h4 鼻
+                / h4 鼻
+                / h4 鼻
+                / h4 鼻
+          / h4 記述評価
+          / .doc
+            / h4 はなくその味がみんなみんな同じなのかすごくきになって夜も眠れなかったので調べました。このサイトにはいろんなひとがその味について書き込んでいるのですが、各々のブツの味について語られていてどんな味のバリエーションがあるかまでわかりました。👍
+          / .res
+            / span#posted 投稿日　2017/08/04
+            / span 参考に...
+              / form.recommend name="レビュー１" method="post" action=""
+              / input type="submit" value="なった👍" name="recommend" 1?
+              / input type="submit" value="ならなかった👎" name="recommend" 1?
+          / form#res_button action="" method="get" target="_blank"
+            / .input_dengerous
+              / input type="submit" value="通報する" name="dengerous"
+            / .input_comment
+              / input type="submit" value="コメントする" name="comment"
+        / h3.comment_block コメント
+        / .comment
+          / .review
+            / p.author 投稿者　大先輩
+            / h4 そうだよ（便乗）
+            / .res
+              / span#posted 投稿日　2017/08/04
+              / span 参考に...
+                / form.recommend name="レビュー１のコメント１" method="post" action=""
+                / input type="submit" value="なった👍" name="recommend" 1?
+                / input type="submit" value="ならなかった👎" name="recommend" 1?
+            / form#res_button action="" method="get" target="_blank"
+              / .input_dengerous
+                / input type="submit" value="通報する" name="dengerous"
+              / .input_comment
+                / input type="submit" value="コメントする" name="comment"
