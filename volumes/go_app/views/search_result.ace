@@ -113,14 +113,14 @@ html lang=ja
     #search_form
       h1
         a href="/" style="text-decoration: none;"
-          span.blue W
+          span.blue G
+          span.red o
+          span.yellow o
+          span.blue g
+          span.green l
           span.red e
-          span.yellow b
-          span.blue R
-          span.green e
-          span.red p
-          span.green o
-          span.yellow ★彡
+          / span.green o
+          / span.yellow ★彡
       form action="/search" method="get"
         p.shadow
           input.search name="q" value={{.Query}} required=""

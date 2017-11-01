@@ -5,7 +5,7 @@ CREATE TABLE userinfo(
 	email varchar(255) unique not null,
 	password varchar(255),
 	name varchar(255) DEFAULT '名無し',
-	signup_date datetime not null,
+	signup_date datetime not null DEFAULT CURRENT_TIMESTAMP,
 	safe_search tinyint not null DEFAULT 0,
 	NG_count int DEFAULT 0
 );
@@ -23,8 +23,8 @@ CREATE TABLE page_status(
 	id int unique not null auto_increment primary key,
 	title varchar(255) not null,
 	URL varchar(8190) not null,
-	register_date datetime not null,
-	last_update datetime,
+	register_date datetime not null DEFAULT CURRENT_TIMESTAMP,
+	last_update datetime DEFAULT '0001-01-01 01:01:01',
 	admin_user_id int,
 	genre text,
 	media text,
@@ -43,10 +43,10 @@ CREATE TABLE page_status(
 
 CREATE TABLE individual_eval(
 	num int unique not null auto_increment,
-	page_id int unique not null,
-	evaluator_id int unique not null,
-	posted datetime not null,
-	browse_time datetime,
+	page_id int not null,
+	evaluator_id int not null,
+	posted datetime not null DEFAULT CURRENT_TIMESTAMP,
+	browse_time datetime DEFAULT '0001-01-01 01:01:01',
 	browse_purpose text not null,
 	deliberate tinyint DEFAULT 0,
 	description_eval text,
@@ -86,7 +86,7 @@ CREATE TABLE individual_eval_comment(
 	num int unique not null auto_increment PRIMARY KEY,
 	page_id int unique not null,
 	commenter_id int not null,
-	posted datetime not null,
+	posted datetime not null DEFAULT CURRENT_TIMESTAMP,
 	reply_eval_num int,
 	reply_comment_num int,
 	deliberate tinyint DEFAULT 0,
@@ -97,8 +97,8 @@ CREATE TABLE individual_eval_comment(
 
 CREATE TABLE typo(
 	num int unique not null auto_increment,
-	page_id int unique not null,
-	evaluator_id int unique not null,
+	page_id int not null,
+	evaluator_id int not null,
 	individual_eval_num int unique,
 	incorrect varchar(255) not null,
 	correct varchar(255) not null,

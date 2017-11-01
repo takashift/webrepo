@@ -48,6 +48,8 @@ const (
 )
 
 var (
+	e = echo.New()
+
 	tablename = "userinfo"
 	seq       = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
@@ -167,6 +169,33 @@ type (
 	pagePath struct {
 		Page string
 		URL  string
+	}
+
+	PrevIndiEval struct {
+		Title           string
+		EvaluatorName   string
+		BrowseTime      string
+		GoodnessOfFit   string
+		Visibility      string
+		NumTypo         string
+		Incorrect       string
+		Correct         string
+		DescriptionEval string
+		Posted          string
+		EvalNum         string
+		RecommendGood   string
+		RecommendBad    string
+		NumComment      string
+	}
+
+	PrevEvalComment struct {
+		CommenterName string
+		Comment       string
+		Posted        string
+		ReplyEvalNum  string
+		CommentNum    string
+		RecommendGood string
+		RecommendBad  string
 	}
 )
 
@@ -357,8 +386,6 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 
 func main() {
 	var (
-		e = echo.New()
-
 		googleOauthConfig = &oauth2.Config{
 			ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
 			ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
@@ -662,7 +689,44 @@ func main() {
 
 	// 評価閲覧画面
 	e.GET("/preview_evaluation/:id", func(c echo.Context) error {
+		// var pageStatus = map[string]interface{}{}
+		pageID := c.Param("id")
+		pageIDInt, err := strconv.Atoi(pageID)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("Atoi OK")
 
+		// DB からページ属性を取得
+		pageStatus := new(PageStatus)
+		_, err = dbSess.Select("id", "title", "URL", "register_date", "last_update",
+			"admin_user_id", "genre", "media",
+			"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+			From("page_status").
+			Where("id = ?", pageIDInt).Load(&pageStatus)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("PS OK")
+
+		// DB から評価を取得
+		individualEval := new(IndividualEval)
+		_, err = dbSess.Select("page_id", "evaluator_id", "posted", "browse_time",
+			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+			"device", "visibility", "num_typo").
+			From("individual_eval").
+			Where("page_id = ?", pageIDInt).Load(&individualEval)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("PS OK")
+		fmt.Println(individualEval)
+
+		// DB からコメントを取得
+
+		// for文で回す
+
+		// return signinCheck("preview_evaluation", c, nil)
 		return signinCheck("tmp_preview_evaluation", c, nil)
 	})
 
