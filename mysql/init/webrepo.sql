@@ -12,6 +12,7 @@ CREATE TABLE userinfo(
 
 CREATE TABLE tmp_user(
 	OAuth_service VARCHAR(255),
+	OAuth_userinfo VARCHAR(255) unique not null,
 	act varchar(255) unique not null,
 	email varchar(255) unique not null,
 	referer VARCHAR(255),
@@ -82,6 +83,13 @@ CREATE TABLE individual_eval(
 	PRIMARY KEY(page_id, evaluator_id)
 );
 
+CREATE TABLE individual_eval_recom(
+	eval_num int unique not null,
+	user_id int unique not null,
+	recommend varchar(30) not null,
+	PRIMARY KEY(eval_num, user_id)
+);
+
 CREATE TABLE individual_eval_comment(
 	num int unique not null auto_increment PRIMARY KEY,
 	page_id int unique not null,
@@ -93,6 +101,13 @@ CREATE TABLE individual_eval_comment(
 	comment text not null,
 	recommend_good int DEFAULT 0,
 	recommend_bad int DEFAULT 0
+);
+
+CREATE TABLE individual_eval_comment_recom(
+	comment_num int not null,
+	user_id int not null,
+	recommend varchar(30) not null,
+	PRIMARY KEY(comment_num, user_id)
 );
 
 CREATE TABLE typo(

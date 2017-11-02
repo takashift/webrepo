@@ -29,7 +29,40 @@ import "strings"
 // 			CommentNum    string
 // 			RecommendGood string
 // 			RecommendBad  string
-// 		}
+//		}
+
+// 	IndividualEval struct {
+// 		Num                  int    `db:"num"`
+// 		PageID               int    `db:"page_id"`
+// 		EvaluatorID          int    `db:"evaluator_id"`
+// 		Posted               string `db:"posted"`
+// 		BrowseTime           string `db:"browse_time"`
+// 		BrowsePurpose        string `db:"browse_purpose"`
+// 		Deliberate           int    `db:"deliberate"`
+// 		DescriptionEval      string `db:"description_eval"`
+// 		RecommendGood        int    `db:"recommend_good"`
+// 		RecommendBad         int    `db:"recommend_bad"`
+// 		GoodnessOfFit        int    `db:"goodness_of_fit"`
+// 		BecauseGoodnessOfFit string `db:"because_goodness_of_fit"`
+// 		Device               string `db:"device"`
+// 		Visibility           int    `db:"visibility"`
+// 		BecauseVisibility    string `db:"because_visibility"`
+// 		NumTypo              int    `db:"num_typo"`
+// 		BecauseNumTypo       string `db:"because_num_typo"`
+// 	}
+
+// 	IndividualEvalComment struct {
+// 		Num             int    `db:"num"`
+// 		PageID          int    `db:"page_id"`
+// 		CommenterID     int    `db:"commenter_id"`
+// 		Posted          string `db:"posted"`
+// 		ReplyEvalNum    int    `db:"reply_eval_num"`
+// 		ReplyCommentNum int    `db:"reply_comment_num"`
+// 		Deliberate      int    `db:"deliberate"`
+// 		Comment         string `db:"comment"`
+// 		RecommendGood   int    `db:"recommend_good"`
+// 		RecommendBad    int    `db:"recommend_bad"`
+// 	}
 // )
 
 func makePrevEval(eval IndividualEval) string {
@@ -39,6 +72,8 @@ func makePrevEval(eval IndividualEval) string {
 		return ""
 	}
 
+	fmt.Println(eval.EvaluatorID)
+
 	// DB から評価者名を取得
 	evaluatorName, err := dbSess.Select("name").From("userinfo").
 		Where("id = ?", eval.EvaluatorID).
@@ -47,7 +82,7 @@ func makePrevEval(eval IndividualEval) string {
 		panic(err)
 	}
 
-	fmt.Println("evaluatorName")
+	fmt.Println(evaluatorName)
 
 	// DB から誤字脱字を取得
 	typo := new(Typo)
@@ -55,17 +90,17 @@ func makePrevEval(eval IndividualEval) string {
 		From("typo").
 		Where("evaluator_id = ?", eval.EvaluatorID).Load(&typo)
 
+	// 閲覧日がデフォルト値のときは修正
+	if eval.BrowseTime == "0001-01-01 01:01:01" {
+		eval.BrowseTime = "不明"
+	}
+
 	// 単なる改行区切りなので、スライスに再解凍
 	var (
 		incorrect, correct, typoEnd string
 	)
 	incorrSL := strings.Split(typo.Incorrect, "\n")
 	corrSL := strings.Split(typo.Correct, "\n")
-
-	// 閲覧日がデフォルト値のときは修正
-	if eval.BrowseTime == "0001-01-01 01:01:01" {
-		eval.BrowseTime = "不明"
-	}
 
 	// 誤字脱字の数だけ必要なHTMLタグもセットで生成
 	if incorrSL[0] == "" {
@@ -126,18 +161,19 @@ func makePrevEval(eval IndividualEval) string {
 			<h4>%s</h4>
 		</div>
 		<div class="res">
-			<span id="posted">投稿日　%s</span>
+			<span id="posted">投稿日　%s　</span>
 			<span>参考に...
-				<form class="recommend" name="評価%d" method="post" action></form>
-				<input type="submit" value="なった👍" name="recommend"> %d
-				<input type="submit" value="ならなかった👎" name="recommend"> %d</span>
+				<form class="recommend" name="評価" method="post" action="/r/recommend_eval/%d/%d">
+					<input type="submit" value="なった👍" name="recommend"> %d
+					<input type="submit" value="ならなかった👎" name="recommend"> %d</span>
+				</form>
 		</div>
-		<form id="res_button" action method="get" tprevet="_blank">
+		<form class="res_button" method="get" tprevet="_blank">
 			<div class="input_dengerous">
-				<input type="submit" value="通報する" name="dengerous">
+				<input type="submit" formaction="/dengerous" value="通報する" name="dengerous">
 			</div>
 			<div class="input_comment">
-				<input type="submit" value="コメントする" name="comment">
+				<input type="submit" formaction="/input_comment" value="コメントする" name="comment">
 			</div>
 		</form>
 	</div>
@@ -146,7 +182,7 @@ func makePrevEval(eval IndividualEval) string {
 	`, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
 		eval.GoodnessOfFit, eval.Visibility, eval.NumTypo,
 		incorrect, correct, typoEnd, eval.DescriptionEval,
-		eval.Posted, eval.Num,
+		eval.Posted, eval.PageID, eval.Num,
 		eval.RecommendGood, eval.RecommendBad, numComment)
 
 	// コメントのテンプレートを追加
@@ -178,23 +214,24 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 			<p class="author">投稿者　%s</p>
 			<h4>%s</h4>
 			<div class="res">
-				<span id="posted">投稿日　%s</span>
+				<span class="posted">投稿日　%s　</span>
 				<span>参考に...
-					<form class="recommend" name="評価%sのコメント%s" method="post" action></form>
-					<input type="submit" value="なった👍" name="recommend">%s
-					<input type="submit" value="ならなかった👎" name="recommend">%s</span>
+					<form class="recommend" name="評価のコメント" method="post" action="/r/recommend_comment/%d/%d">
+						<input type="submit" value="なった👍" name="recommendComment"> %d
+						<input type="submit" value="ならなかった👎" name="recommendComment"> %d</span>
+					</form>
 			</div>
-			<form id="res_button" action method="get" tprevet="_blank">
+			<form class="res_button" action method="get" tprevet="_blank">
 				<div class="input_dengerous">
-					<input type="submit" value="通報する" name="dengerous">
+					<input type="submit" formaction="/dengerous" value="通報する" name="dengerous">
 				</div>
 				<div class="input_comment">
-					<input type="submit" value="コメントする" name="comment">
+					<input type="submit" formaction="/input_comment" value="コメントする" name="comment">
 				</div>
 			</form>
 		</div>
 	</div>
 	`, commenterName, comment.Comment, comment.Posted,
-		comment.ReplyEvalNum, comment.Num,
+		comment.PageID, comment.Num,
 		comment.RecommendGood, comment.RecommendBad)
 }

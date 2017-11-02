@@ -59,6 +59,9 @@ html lang=ja
         margin-top: 2rem;
         text-align: center;
       }
+      #title a {
+        color: rgba(0,0,0,0.55);
+      }
       #status {
         display: flex;
       }
@@ -143,7 +146,7 @@ html lang=ja
       .res {
         text-align: right;
       }
-      .res #posted {
+      .res .posted {
         margin-right: 30%;
       }
       .recommend {
@@ -152,17 +155,24 @@ html lang=ja
       }
       .recommend input {
         margin-left: 3%;
+        font-size: 1rem;
       }
-      form#res_button {
+      form.res_button {
         margin-top: 1rem;
         display: flex;
       }
       .input_dangerous {
         flex-grow: 1;
       }
+      .input_dangerous input {
+        font-size: 1rem;
+      }
       .input_comment {
         text-align: right;
         flex-grow: 1;
+      }
+      .input_comment input {
+        font-size: 1rem;
       }
       .comment_block {
         margin-left: 3rem;
@@ -194,7 +204,7 @@ html lang=ja
         a href="/r/input_evaluation/{{.ID}}"
           .button#input_eval 以下のページを評価する
         #title
-          a href="{{.URL}}" style="text-decoration: none; color=rgba(0,0,0,0.8)"
+          a href="{{.URL}}" style="text-decoration: none;"
             h1 {{.Title}}
             h2 {{.URL}}
       #status
@@ -253,8 +263,8 @@ html lang=ja
             / span#posted 投稿日　2017/08/04
             / span 参考に...
               / form.recommend name="レビュー１" method="post" action=""
-              / input type="submit" value="なった👍" name="recommend" 1?
-              / input type="submit" value="ならなかった👎" name="recommend" 1?
+                / input type="submit" value="なった👍" name="recommend" 1?
+                / input type="submit" value="ならなかった👎" name="recommend" 1?
           / form#res_button action="" method="get" target="_blank"
             / .input_dengerous
               / input type="submit" value="通報する" name="dengerous"
@@ -269,8 +279,8 @@ html lang=ja
               / span#posted 投稿日　2017/08/04
               / span 参考に...
                 / form.recommend name="レビュー１のコメント１" method="post" action=""
-                / input type="submit" value="なった👍" name="recommend" 1?
-                / input type="submit" value="ならなかった👎" name="recommend" 1?
+                  / input type="submit" value="なった👍" name="recommend" 1?
+                  / input type="submit" value="ならなかった👎" name="recommend" 1?
             / form#res_button action="" method="get" target="_blank"
               / .input_dengerous
                 / input type="submit" value="通報する" name="dengerous"

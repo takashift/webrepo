@@ -1,35 +1,3 @@
-sudo rm -r *
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
-docker-compose stop
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
@@ -998,3 +966,35 @@ sudo rm -r *
 docker exec -it tuna_mysql_1 /bin/bash
 sudo rm -r *
 ls
+cd volumes/db_data/
+cd v
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/db_data/
+ls
+cd
+cd volumes/go_app/
+ls
+rcode server.go 
+rcode createPrevEvalPage.go 
+cd volumes/go_app/views/
+ls
+rcode tmp_preview_evaluation.ace 
+rcode edit_page_cate.ace 
+rcode JWT.
+rcode JWT.js 
+git status
+git commit -am "評価を動的に表示する処理をJSで実現"
+gitpush 
+docker-compose logs
+docker-compose up -d --build
+cd volumes/go_app/
+rcode server.go 
+rcode createPrevEvalPage.go 
+docker-compose logs
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs

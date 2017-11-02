@@ -106,11 +106,12 @@ type (
 	}
 
 	tmpuser struct {
-		OAuthService string `db:"OAuth_service"`
-		Act          string `db:"act"`
-		Email        string `db:"email"`
-		Referer      string `db:"referer"`
-		SendTime     string `db:"send_time"`
+		OAuthService  string `db:"OAuth_service"`
+		OAuthUserinfo string `db:"OAuth_userinfo"`
+		Act           string `db:"act"`
+		Email         string `db:"email"`
+		Referer       string `db:"referer"`
+		SendTime      string `db:"send_time"`
 	}
 
 	PageStatus struct {
@@ -185,6 +186,12 @@ type (
 	pagePath struct {
 		Page string
 		URL  string
+	}
+
+	RecommendSQL struct {
+		UpdTable  string
+		IntoTable string
+		NumColumn string
 	}
 )
 
@@ -373,6 +380,57 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 	return evalForm, pageStatus
 }
 
+func incrementRecommend(c echo.Context, arg RecommendSQL) error {
+	var (
+		recommStatus    string
+		updRecommColumn string
+	)
+
+	pageID := c.Param("pageID")
+	pageIDInt, err := strconv.Atoi(pageID)
+	if err != nil {
+		panic(err)
+	}
+
+	num := c.Param("num")
+	numInt, err := strconv.Atoi(num)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Atoi OK")
+
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	userID := int(claims["id"].(float64))
+
+	// 参考になった or ならなかったを取得
+	if c.FormValue("recommend") == "なった👍" {
+		updRecommColumn = "recommend_good"
+		recommStatus = "good"
+	} else {
+		updRecommColumn = "recommend_bad"
+		recommStatus = "bad"
+	}
+
+	// 多重に押されるのを防止するためにボタンを押したユーザーを記録する
+	_, err = dbSess.InsertInto(arg.IntoTable).
+		Columns(arg.NumColumn, "user_id", "recommend").
+		Values(numInt, userID, recommStatus).
+		Exec()
+	if err != nil {
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+	}
+
+	// DBをインクリメントする
+	_, err = dbSess.UpdateBySql("UPDATE ? SET ? = ? + 1 WHERE id = ?",
+		arg.UpdTable, updRecommColumn, updRecommColumn, pageIDInt).Exec()
+	if err != nil {
+		panic(err)
+	}
+
+	return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+}
+
 func main() {
 	var (
 		googleOauthConfig = &oauth2.Config{
@@ -412,8 +470,10 @@ func main() {
 	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
-
-	userGoogle := new(googleUser)
+	// Restricted group
+	r := e.Group("/r", cookieToHeaderAuthMiddleware)
+	// Token によってサインイン状況をチェック（ログインが必須なページ）
+	r.Use(middleware.JWT([]byte("oppai")))
 
 	// "/" の時に返すhtml
 	e.GET("/", func(c echo.Context) error {
@@ -486,16 +546,14 @@ func main() {
 			panic(err)
 		}
 
+		userGoogle := new(googleUser)
 		client = googleOauthConfig.Client(oauth2.NoContext, token)
-
 		// JSON が返ってくる
 		response, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 		if err != nil {
 			panic(err)
 		}
-
 		defer response.Body.Close()
-
 		err = json.NewDecoder(response.Body).Decode(userGoogle)
 		if err != nil {
 			panic(err)
@@ -506,12 +564,17 @@ func main() {
 		)
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		_, err = dbSess.Select("ID", "email").From("userinfo").
+		_, err = dbSess.Select("id", "email").From("userinfo").
 			Where("OAuth_userinfo = ?", userGoogle.Email).
 			Load(&userInfoDB)
 
+		sess, _ := session.Get("session", c)
+		sess.Values["GoogleMail"] = userGoogle.Email
+
 		// エラーを吐いた == 中身が入ってない場合
 		if userInfoDB.Email == "" {
+			sess.Save(c.Request(), c.Response())
+
 			oauthService = "Google"
 			return c.Redirect(http.StatusFound, "/OAuth_signup")
 		}
@@ -521,7 +584,6 @@ func main() {
 		createJwt(c, userInfoDB.ID, userInfoDB.Email)
 		fmt.Println("登録済み")
 
-		sess, _ := session.Get("session", c)
 		rURL := sess.Values["refererURL"].(string)
 		sess.Values["refererURL"] = nil
 		sess.Save(c.Request(), c.Response())
@@ -587,6 +649,10 @@ func main() {
 					return err
 				}
 				rURL := sess.Values["refererURL"].(string)
+				gmail := sess.Values["GoogleMail"].(string)
+				sess.Values["refererURL"] = nil
+				sess.Values["GoogleMail"] = nil
+				sess.Save(c.Request(), c.Response())
 
 				fmt.Fprintf(os.Stderr, "act:%s\n", act)
 
@@ -595,8 +661,8 @@ func main() {
 
 				// 一時ユーザーのテーブルにアドレスと認証コード、リファラーURLを一緒に保存
 				result, err := dbSess.InsertInto("tmp_user").
-					Columns("OAuth_service", "act", "email", "referer", "send_time").
-					Values(oauthService, act, email, rURL, tF).
+					Columns("OAuth_service", "OAuth_userinfo", "act", "email", "referer", "send_time").
+					Values(oauthService, gmail, act, email, rURL, tF).
 					Exec()
 
 				if err != nil {
@@ -629,7 +695,7 @@ func main() {
 	e.GET("/email_check", func(c echo.Context) error {
 		act := c.QueryParam("act")
 		var tmpUser tmpuser
-		_, err := dbSess.Select("act", "OAuth_service", "email", "referer").From("tmp_user").
+		_, err := dbSess.Select("act", "OAuth_service", "OAuth_userinfo", "email", "referer").From("tmp_user").
 			Where("act = ?", act).
 			Load(&tmpUser)
 
@@ -649,7 +715,7 @@ func main() {
 		// 正規のユーザーテーブルに追加
 		result, err := dbSess.InsertInto("userinfo").
 			Columns("OAuth_service", "OAuth_userinfo", "email", "signup_date").
-			Values(tmpUser.OAuthService, userGoogle.Email, tmpUser.Email, tF).
+			Values(tmpUser.OAuthService, tmpUser.OAuthUserinfo, tmpUser.Email, tF).
 			Exec()
 		if err != nil {
 			panic(err)
@@ -668,8 +734,8 @@ func main() {
 		var userInfoDB userinfo
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		_, err = dbSess.Select("ID", "email").From("userinfo").
-			Where("OAuth_userinfo = ?", userGoogle.Email).
+		_, err = dbSess.Select("id", "email").From("userinfo").
+			Where("OAuth_userinfo = ?", tmpUser.OAuthUserinfo).
 			Load(&userInfoDB)
 
 		createJwt(c, userInfoDB.ID, userInfoDB.Email)
@@ -707,20 +773,42 @@ func main() {
 			"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
 			From("individual_eval").
 			Where("page_id = ?", pageIDInt).Load(&individualEval)
-		if err != nil {
-			panic(err)
-		}
+
 		fmt.Println("PS OK")
 		fmt.Println(individualEval)
 
-		// for文で回す
-		// Ace に入れる構造体に格納
-		for _, v := range individualEval {
-			pageValue.Content += makePrevEval(v)
+		if err != nil {
+			panic(err)
+		} else if &individualEval[0] != nil {
+			// for文で回す
+			// Ace に入れる構造体に格納
+			for _, v := range individualEval {
+				pageValue.Content += makePrevEval(v)
+			}
 		}
 
 		// return signinCheck("preview_evaluation", c, nil)
 		return signinCheck("tmp_preview_evaluation", c, pageValue)
+	})
+
+	e.POST("r/recommend_eval/:pageID/:num", func(c echo.Context) error {
+
+		var recommendSQL RecommendSQL
+		recommendSQL.UpdTable = "individual_eval"
+		recommendSQL.IntoTable = "individual_eval_recom"
+		recommendSQL.NumColumn = "eval_num"
+
+		return incrementRecommend(c, recommendSQL)
+	})
+
+	e.POST("r/recommend_comment/:pageID/:num", func(c echo.Context) error {
+
+		var recommendSQL RecommendSQL
+		recommendSQL.UpdTable = "individual_eval_comment"
+		recommendSQL.IntoTable = "individual_eval_comment_recom"
+		recommendSQL.NumColumn = "comment_num"
+
+		return incrementRecommend(c, recommendSQL)
 	})
 
 	// 個別評価閲覧画面
@@ -729,7 +817,7 @@ func main() {
 	})
 
 	// 通報完了画面
-	e.GET("/dengerous_complete", func(c echo.Context) error {
+	e.GET("/dengerous", func(c echo.Context) error {
 		return signinCheck("dengerous_complete", c, nil)
 	})
 
@@ -743,10 +831,6 @@ func main() {
 		return signinCheck("about", c, nil)
 	})
 
-	// Restricted group
-	r := e.Group("/r", cookieToHeaderAuthMiddleware)
-	// Token によってサインイン状況をチェック（ログインが必須なページ）
-	r.Use(middleware.JWT([]byte("oppai")))
 	r.GET("/test", func(c echo.Context) error {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
@@ -811,7 +895,7 @@ func main() {
 			} else {
 				// 新規のURLもDBも http なら評価閲覧画面にリダイレクト
 				// DBの方が https なら評価閲覧画面にリダイレクト
-				return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+string(dbPS.ID))
+				return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+strconv.Itoa(dbPS.ID))
 			}
 		}
 
@@ -910,7 +994,7 @@ func main() {
 				panic(err)
 			}
 			fmt.Println("Update!")
-			return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+string(dbPS.ID))
+			return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+strconv.Itoa(dbPS.ID))
 		}
 
 		_, err = dbSess.InsertInto("page_status").
@@ -1108,7 +1192,7 @@ func main() {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
 		indEval.EvaluatorID = int(claims["id"].(float64))
-		indEval.EvaluatorID = 1
+		// indEval.EvaluatorID = 1
 
 		bro := strings.Replace(c.FormValue("browse"), "T", " ", -1)
 		fmt.Println(bro)
