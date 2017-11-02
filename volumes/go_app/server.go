@@ -387,10 +387,6 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 	)
 
 	pageID := c.Param("pageID")
-	pageIDInt, err := strconv.Atoi(pageID)
-	if err != nil {
-		panic(err)
-	}
 
 	num := c.Param("num")
 	numInt, err := strconv.Atoi(num)
@@ -424,7 +420,80 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 	// DBをインクリメントする
 	// string型は+で繋げないとエラーになる。それ以外は?で置き換える。
 	_, err = dbSess.UpdateBySql("UPDATE "+arg.UpdTable+" SET "+updRecommColumn+" = "+updRecommColumn+" + 1 WHERE num = ?",
-		pageIDInt).Exec()
+		numInt).Exec()
+	if err != nil {
+		panic(err)
+	}
+
+	return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+}
+
+func reportDangerous(c echo.Context, updTable string, numColumn string) error {
+	// 審議中は2
+	deliberate := 2
+
+	num := c.Param("num")
+	numInt, err := strconv.Atoi(num)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Atoi OK")
+
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	userID := int(claims["id"].(float64))
+
+	// 通報されまくると困るから一応ユーザーを記録
+	_, err = dbSess.InsertInto("dangerous_log").
+		Columns("user_id", numColumn).
+		Values(userID, numInt).
+		Exec()
+	if err != nil {
+		panic(err)
+	}
+
+	// DBの審議中カラムを1にする
+	_, err = dbSess.Update(updTable).
+		Set("deliberate", deliberate).
+		Where("num = ?", numInt).
+		Exec()
+	if err != nil {
+		panic(err)
+	}
+
+	return c.Render(http.StatusOK, "dangerous_complete", nil)
+}
+
+func insertComment(c echo.Context) error {
+	pageID := c.Param("pageID")
+	pageIDInt, err := strconv.Atoi(pageID)
+	if err != nil {
+		panic(err)
+	}
+
+	evalNum := c.Param("evalNum")
+	evalNumInt, err := strconv.Atoi(evalNum)
+	if err != nil {
+		panic(err)
+	}
+
+	num := c.Param("num")
+	numInt, err := strconv.Atoi(num)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Atoi OK")
+
+	comment := c.FormValue("comment")
+
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	userID := int(claims["id"].(float64))
+
+	_, err = dbSess.InsertInto("individual_eval_comment").
+		Columns("page_id", "commenter_id", "reply_eval_num", "reply_comment_num", "comment").
+		Values(pageIDInt, userID, evalNumInt, numInt, comment).
+		Exec()
 	if err != nil {
 		panic(err)
 	}
@@ -780,7 +849,7 @@ func main() {
 
 		if err != nil {
 			panic(err)
-		} else if &individualEval[0] != nil {
+		} else if individualEval != nil {
 			// for文で回す
 			// Ace に入れる構造体に格納
 			for _, v := range individualEval {
@@ -820,81 +889,17 @@ func main() {
 	// 通報完了画面
 	r.GET("/dangerous_eval/:pageID/:num", func(c echo.Context) error {
 
-		// 審議中は2
-		deliberate := 2
 		updTable := "individual_eval"
+		numColumn := "eval_num"
 
-		pageID := c.Param("pageID")
-
-		num := c.Param("num")
-		numInt, err := strconv.Atoi(num)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println("Atoi OK")
-
-		user := c.Get("user").(*jwt.Token)
-		claims := user.Claims.(jwt.MapClaims)
-		userID := int(claims["id"].(float64))
-
-		// 通報されまくると困るから一応ユーザーを記録
-		_, err = dbSess.InsertInto("dangerous_log").
-			Columns("user_id", "eval_num").
-			Values(userID, numInt).
-			Exec()
-		if err != nil {
-			panic(err)
-		}
-
-		// DBの審議中カラムを1にする
-		_, err = dbSess.Update(updTable).
-			Set("deliberate", deliberate).
-			Where("num = ?", numInt).
-			Exec()
-		if err != nil {
-			panic(err)
-		}
-
-		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+		return reportDangerous(c, updTable, numColumn)
 	})
 	r.GET("/dangerous_comment/:pageID/:num", func(c echo.Context) error {
 
-		// 審議中は2
-		deliberate := 2
 		updTable := "individual_eval_comment"
+		numColumn := "comment_num"
 
-		pageID := c.Param("pageID")
-
-		num := c.Param("num")
-		numInt, err := strconv.Atoi(num)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println("Atoi OK")
-
-		user := c.Get("user").(*jwt.Token)
-		claims := user.Claims.(jwt.MapClaims)
-		userID := int(claims["id"].(float64))
-
-		// 通報されまくると困るから一応ユーザーを記録
-		_, err = dbSess.InsertInto("dangerous_log").
-			Columns("user_id", "eval_num").
-			Values(userID, numInt).
-			Exec()
-		if err != nil {
-			panic(err)
-		}
-
-		// DBの審議中カラムを1にする
-		_, err = dbSess.Update(updTable).
-			Set("deliberate", deliberate).
-			Where("num = ?", numInt).
-			Exec()
-		if err != nil {
-			panic(err)
-		}
-
-		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+		return reportDangerous(c, updTable, numColumn)
 	})
 
 	// 利用規約
@@ -1363,9 +1368,11 @@ func main() {
 	})
 
 	// コメント入力画面
-	r.GET("/input_comment", func(c echo.Context) error {
+	r.GET("/input_comment/:pageID/:evalNum/:num", func(c echo.Context) error {
+
 		return c.Render(http.StatusOK, "input_comment", nil)
 	})
+	r.POST("/input_comment/:pageID/:evalNum/:num", insertComment)
 
 	// ソケット生成
 	os.Remove("/usock/domain.sock")

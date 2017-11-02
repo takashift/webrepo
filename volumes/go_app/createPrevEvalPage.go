@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "strings"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 // type (
 // 		PrevIndiEval struct {
@@ -136,13 +139,21 @@ func makePrevEval(eval IndividualEval) string {
 	}
 
 	// DB からコメントを取得
-	var individualEvalComment []IndividualEvalComment
+	var individualEvalCommentRaw []IndividualEvalComment
 	_, _ = dbSess.Select("num", "page_id", "commenter_id", "posted",
 		"reply_eval_num", "reply_comment_num", "deliberate", "comment",
 		"recommend_good", "recommend_bad").
 		From("individual_eval_comment").
-		Where("page_id = ?", eval.PageID).Load(&individualEvalComment)
+		Where("reply_eval_num = ?", eval.Num).Load(&individualEvalCommentRaw)
+
 	// スライスの要素数からコメントの数を取得
+	// deliberate が 2 以上のものは数えない
+	var individualEvalComment []IndividualEvalComment
+	for i := 0; i < len(individualEvalCommentRaw); i++ {
+		if individualEvalCommentRaw[i].Deliberate <= 1 {
+			individualEvalComment = append(individualEvalComment, individualEvalCommentRaw[i])
+		}
+	}
 	numComment := len(individualEvalComment)
 
 	result := fmt.Sprintf(
@@ -173,7 +184,7 @@ func makePrevEval(eval IndividualEval) string {
 				<input type="submit" formaction="/r/dangerous_eval/%d/%d" value="通報する" name="dangerous">
 			</div>
 			<div class="input_comment">
-				<input type="submit" formaction="/r/input_comment/%d/%d" value="コメントする" name="comment">
+				<input type="submit" formaction="/r/input_comment/%d/%d/%d" value="コメントする" name="comment">
 			</div>
 		</form>
 	</div>
@@ -183,7 +194,7 @@ func makePrevEval(eval IndividualEval) string {
 		eval.GoodnessOfFit, eval.Visibility, eval.NumTypo,
 		incorrect, correct, typoEnd, eval.DescriptionEval,
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
-		eval.PageID, eval.Num, eval.PageID, eval.Num, numComment)
+		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
 
 	// コメントのテンプレートを追加
 	for _, v := range individualEvalComment {
@@ -195,10 +206,10 @@ func makePrevEval(eval IndividualEval) string {
 
 func makePrevEvalComment(comment IndividualEvalComment) string {
 
-	// 審議中なら""を返す
-	if comment.Deliberate != 0 {
-		return ""
-	}
+	// // 審議中なら""を返す
+	// if comment.Deliberate >= 2 {
+	// 	return ""
+	// }
 
 	// DB から投稿者名を取得
 	commenterName, _ := dbSess.Select("name").From("userinfo").
@@ -212,13 +223,13 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 		`<div class="comment">
 		<div class="review">
 			<p class="author">投稿者　%s</p>
-			<h4>%s</h4>
+			<h4>>>%s　%s</h4>
 			<div class="res">
-				<span class="posted">投稿日　%s　</span>
+				<span class="posted">No.%d　　投稿日　%s　</span>
 				<span>参考に...
 					<form class="recommend" name="評価のコメント" method="post" action="/r/recommend_comment/%d/%d">
-						<input type="submit" value="なった👍" name="recommendComment"> %d
-						<input type="submit" value="ならなかった👎" name="recommendComment"> %d</span>
+						<input type="submit" value="なった👍" name="recommend"> %d
+						<input type="submit" value="ならなかった👎" name="recommend"> %d</span>
 					</form>
 			</div>
 			<form class="res_button" action method="get" tprevet="_blank">
@@ -226,14 +237,24 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 					<input type="submit" formaction="/r/dangerous_comment/%d/%d" value="通報する" name="dangerous">
 				</div>
 				<div class="input_comment">
-					<input type="submit" formaction="/r/input_comment/%d/%d" value="コメントする" name="comment">
+					<input type="submit" formaction="/r/input_comment/%d/%d/%d" value="コメントする" name="comment">
 				</div>
 			</form>
 		</div>
 	</div>
-	`, commenterName, comment.Comment, comment.Posted,
+	`, commenterName, toEval(comment.ReplyCommentNum), comment.Comment, comment.Num, comment.Posted,
 		comment.PageID, comment.Num,
 		comment.RecommendGood, comment.RecommendBad,
 		comment.PageID, comment.Num,
-		comment.PageID, comment.Num)
+		comment.PageID, comment.ReplyEvalNum, comment.Num)
+}
+
+func toEval(num int) string {
+	var value string
+	if num == 0 {
+		value = "評価"
+	} else {
+		value = strconv.Itoa(num)
+	}
+	return value
 }

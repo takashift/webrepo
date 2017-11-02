@@ -1,7 +1,7 @@
 CREATE TABLE userinfo(
 	id int unique not null auto_increment primary key,
 	OAuth_service VARCHAR(255),
-	OAuth_userinfo VARCHAR(255),
+	OAuth_userinfo VARCHAR(255) unique not null,
 	email varchar(255) unique not null,
 	password varchar(255),
 	name varchar(255) DEFAULT '名無し',
@@ -93,16 +93,19 @@ CREATE TABLE individual_eval_recom(
 );
 
 CREATE TABLE individual_eval_comment(
-	num int unique not null auto_increment PRIMARY KEY,
-	page_id int unique not null,
+	num int unique not null auto_increment,
+	num_on_eval int not null
+	page_id int not null,
 	commenter_id int not null,
 	posted datetime not null DEFAULT CURRENT_TIMESTAMP,
-	reply_eval_num int DEFAULT 0,
+	reply_eval_num int not null DEFAULT 0,
 	reply_comment_num int DEFAULT 0,
+	-- 審議（無し=0、済=1、審議中=2、アウト=3）
 	deliberate tinyint DEFAULT 0,
 	comment text not null,
 	recommend_good int DEFAULT 0,
-	recommend_bad int DEFAULT 0
+	recommend_bad int DEFAULT 0,
+	PRIMARY KEY(num_on_eval, page_id, commenter_id)
 );
 
 CREATE TABLE individual_eval_comment_recom(
@@ -115,7 +118,8 @@ CREATE TABLE individual_eval_comment_recom(
 CREATE TABLE dangerous_log(
 	user_id int not null,
 	eval_num int,
-	comment_num int
+	comment_num int,
+	posted datetime not null DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE typo(
