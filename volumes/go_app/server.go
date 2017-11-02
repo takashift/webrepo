@@ -8,6 +8,7 @@ package main
 import (
 	"crypto/hmac"
 	"crypto/sha256"
+	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -421,12 +422,15 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
 	}
 
+	var r sql.Result
 	// DBをインクリメントする
-	_, err = dbSess.UpdateBySql("UPDATE `?` SET `?` = `?` + 1 WHERE num = `?`",
-		arg.UpdTable, updRecommColumn, updRecommColumn, pageIDInt).Exec()
+	r, err = dbSess.UpdateBySql("UPDATE "+arg.UpdTable+" SET "+updRecommColumn+" = "+updRecommColumn+" + 1 WHERE num = ?",
+		pageIDInt).Exec()
 	if err != nil {
 		panic(err)
 	}
+	fmt.Printf("%s\n", r)
+	fmt.Println("実行されてる？")
 
 	return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
 }
