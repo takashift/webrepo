@@ -8,7 +8,6 @@ package main
 import (
 	"crypto/hmac"
 	"crypto/sha256"
-	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -422,15 +421,13 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
 	}
 
-	var r sql.Result
 	// DBをインクリメントする
-	r, err = dbSess.UpdateBySql("UPDATE "+arg.UpdTable+" SET "+updRecommColumn+" = "+updRecommColumn+" + 1 WHERE num = ?",
+	// string型は+で繋げないとエラーになる。それ以外は?で置き換える。
+	_, err = dbSess.UpdateBySql("UPDATE "+arg.UpdTable+" SET "+updRecommColumn+" = "+updRecommColumn+" + 1 WHERE num = ?",
 		pageIDInt).Exec()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%s\n", r)
-	fmt.Println("実行されてる？")
 
 	return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
 }
@@ -821,8 +818,83 @@ func main() {
 	})
 
 	// 通報完了画面
-	e.GET("/dangerous", func(c echo.Context) error {
-		return signinCheck("dangerous_complete", c, nil)
+	r.GET("/dangerous_eval/:pageID/:num", func(c echo.Context) error {
+
+		// 審議中は2
+		deliberate := 2
+		updTable := "individual_eval"
+
+		pageID := c.Param("pageID")
+
+		num := c.Param("num")
+		numInt, err := strconv.Atoi(num)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("Atoi OK")
+
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		userID := int(claims["id"].(float64))
+
+		// 通報されまくると困るから一応ユーザーを記録
+		_, err = dbSess.InsertInto("dangerous_log").
+			Columns("user_id", "eval_num").
+			Values(userID, numInt).
+			Exec()
+		if err != nil {
+			panic(err)
+		}
+
+		// DBの審議中カラムを1にする
+		_, err = dbSess.Update(updTable).
+			Set("deliberate", deliberate).
+			Where("num = ?", numInt).
+			Exec()
+		if err != nil {
+			panic(err)
+		}
+
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+	})
+	r.GET("/dangerous_comment/:pageID/:num", func(c echo.Context) error {
+
+		// 審議中は2
+		deliberate := 2
+		updTable := "individual_eval_comment"
+
+		pageID := c.Param("pageID")
+
+		num := c.Param("num")
+		numInt, err := strconv.Atoi(num)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("Atoi OK")
+
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		userID := int(claims["id"].(float64))
+
+		// 通報されまくると困るから一応ユーザーを記録
+		_, err = dbSess.InsertInto("dangerous_log").
+			Columns("user_id", "eval_num").
+			Values(userID, numInt).
+			Exec()
+		if err != nil {
+			panic(err)
+		}
+
+		// DBの審議中カラムを1にする
+		_, err = dbSess.Update(updTable).
+			Set("deliberate", deliberate).
+			Where("num = ?", numInt).
+			Exec()
+		if err != nil {
+			panic(err)
+		}
+
+		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
 	})
 
 	// 利用規約

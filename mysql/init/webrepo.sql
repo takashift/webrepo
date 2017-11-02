@@ -50,8 +50,9 @@ CREATE TABLE individual_eval(
 	posted datetime not null DEFAULT CURRENT_TIMESTAMP,
 	browse_time datetime DEFAULT '0001-01-01 01:01:01',
 	browse_purpose text not null,
-	deliberate tinyint DEFAULT 0,
 	description_eval text,
+	-- 審議（無し=0、済=1、審議中=2、アウト=3）
+	deliberate tinyint DEFAULT 0,
 	recommend_good int DEFAULT 0,
 	recommend_bad int DEFAULT 0,
 	goodness_of_fit tinyint not null,
@@ -85,8 +86,8 @@ CREATE TABLE individual_eval(
 );
 
 CREATE TABLE individual_eval_recom(
-	eval_num int unique not null,
-	user_id int unique not null,
+	eval_num int not null,
+	user_id int not null,
 	recommend varchar(30) not null,
 	PRIMARY KEY(eval_num, user_id)
 );
@@ -109,6 +110,12 @@ CREATE TABLE individual_eval_comment_recom(
 	user_id int not null,
 	recommend varchar(30) not null,
 	PRIMARY KEY(comment_num, user_id)
+);
+
+CREATE TABLE dangerous_log(
+	user_id int not null,
+	eval_num int,
+	comment_num int
 );
 
 CREATE TABLE typo(

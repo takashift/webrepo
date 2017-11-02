@@ -68,7 +68,7 @@ import "strings"
 func makePrevEval(eval IndividualEval) string {
 
 	// 審議中なら""を返す
-	if eval.Deliberate != 0 {
+	if eval.Deliberate >= 2 {
 		return ""
 	}
 
@@ -170,10 +170,10 @@ func makePrevEval(eval IndividualEval) string {
 		</div>
 		<form class="res_button" method="get" tprevet="_blank">
 			<div class="input_dangerous">
-				<input type="submit" formaction="/dangerous" value="通報する" name="dangerous">
+				<input type="submit" formaction="/r/dangerous_eval/%d/%d" value="通報する" name="dangerous">
 			</div>
 			<div class="input_comment">
-				<input type="submit" formaction="/input_comment" value="コメントする" name="comment">
+				<input type="submit" formaction="/r/input_comment/%d/%d" value="コメントする" name="comment">
 			</div>
 		</form>
 	</div>
@@ -182,8 +182,8 @@ func makePrevEval(eval IndividualEval) string {
 	`, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
 		eval.GoodnessOfFit, eval.Visibility, eval.NumTypo,
 		incorrect, correct, typoEnd, eval.DescriptionEval,
-		eval.Posted, eval.PageID, eval.Num,
-		eval.RecommendGood, eval.RecommendBad, numComment)
+		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
+		eval.PageID, eval.Num, eval.PageID, eval.Num, numComment)
 
 	// コメントのテンプレートを追加
 	for _, v := range individualEvalComment {
@@ -223,15 +223,17 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 			</div>
 			<form class="res_button" action method="get" tprevet="_blank">
 				<div class="input_dangerous">
-					<input type="submit" formaction="/dangerous" value="通報する" name="dangerous">
+					<input type="submit" formaction="/r/dangerous_comment/%d/%d" value="通報する" name="dangerous">
 				</div>
 				<div class="input_comment">
-					<input type="submit" formaction="/input_comment" value="コメントする" name="comment">
+					<input type="submit" formaction="/r/input_comment/%d/%d" value="コメントする" name="comment">
 				</div>
 			</form>
 		</div>
 	</div>
 	`, commenterName, comment.Comment, comment.Posted,
 		comment.PageID, comment.Num,
-		comment.RecommendGood, comment.RecommendBad)
+		comment.RecommendGood, comment.RecommendBad,
+		comment.PageID, comment.Num,
+		comment.PageID, comment.Num)
 }
