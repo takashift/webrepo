@@ -94,7 +94,7 @@ CREATE TABLE individual_eval_recom(
 
 CREATE TABLE individual_eval_comment(
 	num int unique not null auto_increment,
-	num_on_eval int not null
+	num_on_eval int not null,
 	page_id int not null,
 	commenter_id int not null,
 	posted datetime not null DEFAULT CURRENT_TIMESTAMP,

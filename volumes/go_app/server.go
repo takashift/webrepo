@@ -163,6 +163,7 @@ type (
 
 	IndividualEvalComment struct {
 		Num             int    `db:"num"`
+		NumOnEval       int    `db:"num_on_eval"`
 		PageID          int    `db:"page_id"`
 		CommenterID     int    `db:"commenter_id"`
 		Posted          string `db:"posted"`
