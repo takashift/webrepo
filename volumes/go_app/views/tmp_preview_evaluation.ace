@@ -170,6 +170,11 @@ html lang=ja
       .comment {
         margin-left: 1.5rem;
       }
+    = javascript
+      onload = function() {
+        document.getElementById("review_list").insertAdjacentHTML('afterbegin', {{.Content}});
+      }
+
     = include JWT
 
   body
@@ -186,23 +191,24 @@ html lang=ja
             span.red p
             span.green o
             span.yellow ★彡
-        a href="/r/input_evaluation/{{.PageID}}"
+        a href="/r/input_evaluation/{{.ID}}"
           .button#input_eval 以下のページを評価する
         #title
-          h1 {{.Title}}
-          h2 {{.URL}}
+          a href="{{.URL}}" style="text-decoration: none; color=rgba(0,0,0,0.8)"
+            h1 {{.Title}}
+            h2 {{.URL}}
       #status
         .left
           #eval
             s
               h3 最も高評価な閲覧目的
-            h2#popu_pp {{.PopuPP}}
+            / h2#popu_pp {{.PopuPP}}
             h3 評価平均
             / h4 総合　　　　★★★★★ {{}}
-            h4 目的達成度　★★★★★ {{.GFP}}
-            h4 見やすさ　　★★★★★ {{.VisP}}
+            / h4 目的達成度　★★★★★ {{.GFP}}
+            / h4 見やすさ　　★★★★★ {{.VisP}}
             / hr size="1.5" width="100%" color="#AAAAAA"
-          h4 誤字脱字　　{{.NumTypo}}箇所
+          / h4 誤字脱字　　{{.NumTypo}}箇所
         .right
           #cate
             h3 ジャンル
@@ -211,10 +217,9 @@ html lang=ja
             h4#value 文章（マスコミ）
             h3 タグ
             h4#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料
-            a#cate_edit href="/r/edit_page_cate/{{.PageID}}"
+            a#cate_edit href="/r/edit_page_cate/{{.ID}}"
               .button ジャンル、媒体、タグを編集する
       #review_list
-        {{.EvalHTML}}
         / .review
           / h3 {{.Eval1.Title}}
           / p.author 評価者　{{.Eval1.EvaluatorName}}

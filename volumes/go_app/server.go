@@ -67,21 +67,26 @@ type googleUser struct {
 type AceTemplate struct {
 }
 
-// サイトで共通情報
-type PageValue struct {
-	Title  string
-	Query  string
-	Error  string
-	Option interface{}
-}
-
-type EvalForm struct {
-	Genre interface{} `db:"genre"`
-	Media interface{} `db:"media"`
-	Tag   interface{}
-}
-
 type (
+	EvalForm struct {
+		Genre interface{} `db:"genre"`
+		Media interface{} `db:"media"`
+		Tag   interface{}
+	}
+
+	// サイトで共通情報
+	PageValue struct {
+		PageTitle string
+		Query     string
+		Error     string
+	}
+
+	PrevEvalPageValue struct {
+		PageValue
+		PageStatus
+		Content string
+	}
+
 	// データベースのテスト
 	userinfoJSON struct {
 		ID    int    `json:"id"`
@@ -674,9 +679,7 @@ func main() {
 	// 評価閲覧画面
 	e.GET("/preview_evaluation/:id", func(c echo.Context) error {
 
-		pageValue := new(PageValue)
-		pageValue.Option = map[string]interface{}{}
-
+		var pageValue PrevEvalPageValue
 
 		pageID := c.Param("id")
 		pageIDInt, err := strconv.Atoi(pageID)
@@ -686,18 +689,15 @@ func main() {
 		fmt.Println("Atoi OK")
 
 		// DB からページ属性を取得
-		pageStatus := new(PageStatus)
 		_, err = dbSess.Select("id", "title", "URL", "register_date", "last_update",
 			"admin_user_id", "genre", "media",
 			"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
 			From("page_status").
-			Where("id = ?", pageIDInt).Load(&pageStatus)
+			Where("id = ?", pageIDInt).Load(&pageValue)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println("PS OK")
-
-		pageValue.Option["PageStatus"] := pageStatus
+		fmt.Println(pageValue)
 
 		// DB から評価を取得
 		// 複数の評価データを格納するために構造体のスライスを作成
@@ -713,16 +713,14 @@ func main() {
 		fmt.Println("PS OK")
 		fmt.Println(individualEval)
 
-		pageValue.Option["DinamicValue"] := ""
-
 		// for文で回す
 		// Ace に入れる構造体に格納
 		for _, v := range individualEval {
-			pageValue.Option["DinamicValue"] += makePrevEval(v)
+			pageValue.Content += makePrevEval(v)
 		}
 
 		// return signinCheck("preview_evaluation", c, nil)
-		return signinCheck("tmp_preview_evaluation", c, dinamicValue)
+		return signinCheck("tmp_preview_evaluation", c, pageValue)
 	})
 
 	// 個別評価閲覧画面

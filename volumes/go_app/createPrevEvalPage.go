@@ -3,66 +3,34 @@ package main
 import "fmt"
 import "strings"
 
-type (
-	// 	PrevIndiEval struct {
-	// 		BrowsePurpose   string
-	// 		EvaluatorName   string
-	// 		BrowseTime      string
-	// 		GoodnessOfFit   string
-	// 		Visibility      string
-	// 		NumTypo         string
-	// 		Incorrect       string
-	// 		Correct         string
-	// 		DescriptionEval string
-	// 		Posted          string
-	// 		EvalNum         string
-	// 		RecommendGood   string
-	// 		RecommendBad    string
-	// 		NumComment      string
-	// 	}
+// type (
+// 		PrevIndiEval struct {
+// 			BrowsePurpose   string
+// 			EvaluatorName   string
+// 			BrowseTime      string
+// 			GoodnessOfFit   string
+// 			Visibility      string
+// 			NumTypo         string
+// 			Incorrect       string
+// 			Correct         string
+// 			DescriptionEval string
+// 			Posted          string
+// 			EvalNum         string
+// 			RecommendGood   string
+// 			RecommendBad    string
+// 			NumComment      string
+// 		}
 
-	// 	PrevEvalComment struct {
-	// 		CommenterName string
-	// 		Comment       string
-	// 		Posted        string
-	// 		ReplyEvalNum  string
-	// 		CommentNum    string
-	// 		RecommendGood string
-	// 		RecommendBad  string
-	// 	}
-	IndividualEval struct {
-		Num                  int    `db:"num"`
-		PageID               int    `db:"page_id"`
-		EvaluatorID          int    `db:"evaluator_id"`
-		Posted               string `db:"posted"`
-		BrowseTime           string `db:"browse_time"`
-		BrowsePurpose        string `db:"browse_purpose"`
-		Deliberate           int    `db:"deliberate"`
-		DescriptionEval      string `db:"description_eval"`
-		RecommendGood        int    `db:"recommend_good"`
-		RecommendBad         int    `db:"recommend_bad"`
-		GoodnessOfFit        int    `db:"goodness_of_fit"`
-		BecauseGoodnessOfFit string `db:"because_goodness_of_fit"`
-		Device               string `db:"device"`
-		Visibility           int    `db:"visibility"`
-		BecauseVisibility    string `db:"because_visibility"`
-		NumTypo              int    `db:"num_typo"`
-		BecauseNumTypo       string `db:"because_num_typo"`
-	}
-
-	IndividualEvalComment struct {
-		Num             int    `db:"num"`
-		PageID          int    `db:"page_id"`
-		CommenterID     int    `db:"commenter_id"`
-		Posted          string `db:"posted"`
-		ReplyEvalNum    int    `db:"reply_eval_num"`
-		ReplyCommentNum int    `db:"reply_comment_num"`
-		Deliberate      int    `db:"deliberate"`
-		Comment         string `db:"comment"`
-		RecommendGood   int    `db:"recommend_good"`
-		RecommendBad    int    `db:"recommend_bad"`
-	}
-)
+// 		PrevEvalComment struct {
+// 			CommenterName string
+// 			Comment       string
+// 			Posted        string
+// 			ReplyEvalNum  string
+// 			CommentNum    string
+// 			RecommendGood string
+// 			RecommendBad  string
+// 		}
+// )
 
 func makePrevEval(eval IndividualEval) string {
 
@@ -79,6 +47,8 @@ func makePrevEval(eval IndividualEval) string {
 		panic(err)
 	}
 
+	fmt.Println("evaluatorName")
+
 	// DB から誤字脱字を取得
 	typo := new(Typo)
 	dbSess.Select("incorrect", "correct").
@@ -87,33 +57,52 @@ func makePrevEval(eval IndividualEval) string {
 
 	// 単なる改行区切りなので、スライスに再解凍
 	var (
-		incorrNoNullSL, corrNoNullSL []string
-		incorrect, correct           string
+		incorrect, correct, typoEnd string
 	)
 	incorrSL := strings.Split(typo.Incorrect, "\n")
 	corrSL := strings.Split(typo.Correct, "\n")
-	for _, v := range incorrSL {
-		if v != "" {
-			incorrNoNullSL = append(incorrNoNullSL, v)
-		}
-	}
-	for _, v := range corrSL {
-		if v != "" {
-			corrNoNullSL = append(corrNoNullSL, v)
-		}
+
+	// 閲覧日がデフォルト値のときは修正
+	if eval.BrowseTime == "0001-01-01 01:01:01" {
+		eval.BrowseTime = "不明"
 	}
 
 	// 誤字脱字の数だけ必要なHTMLタグもセットで生成
-	for _, v := range incorrNoNullSL {
-		incorrect += "<h4>" + v + "</h4>"
+	if incorrSL[0] == "" {
+		incorrSL[0] = "無し"
+	} else {
+		incorrect =
+			`<div class="typo">
+			<div class="incorrect">
+				<h3>✕ 誤</h3>
+				<div class="typo_list">`
+		for _, v := range incorrSL {
+			incorrect += "<h4>" + v + "</h4>"
+		}
+		incorrect +=
+			`	</div>
+		</div>`
+		typoEnd = "</div>"
 	}
-	for _, v := range corrNoNullSL {
-		correct += "<h4>" + v + "</h4>"
+	if corrSL[0] == "" {
+		corrSL[0] = "無し"
+	} else {
+		incorrect =
+			`<div class="typo">
+			<div class="correct">
+			<h3>⭕ 正</h3>
+			<div class="typo_list">`
+		for _, v := range corrSL {
+			correct += "<h4>" + v + "</h4>"
+		}
+		incorrect +=
+			`	</div>
+		</div>`
 	}
 
 	// DB からコメントを取得
 	var individualEvalComment []IndividualEvalComment
-	_, err = dbSess.Select("num", "page_id", "commenter_id", "posted",
+	_, _ = dbSess.Select("num", "page_id", "commenter_id", "posted",
 		"reply_eval_num", "reply_comment_num", "deliberate", "comment",
 		"recommend_good", "recommend_bad").
 		From("individual_eval_comment").
@@ -129,20 +118,9 @@ func makePrevEval(eval IndividualEval) string {
 		<h4 class="first">目的達成度　★★★★★ %d</h4>
 		<h4>見やすさ　　★★★★★ %d</h4>
 		<h4>誤字脱字数　%d箇所</h4>
-		<div class="typo">
-			<div class="incorrect">
-				<h3>✕ 誤</h3>
-				<div class="typo_list">
 					%s
-				</div>
-			</div>
-			<div class="correct">
-				<h3>⭕ 正</h3>
-				<div class="typo_list">
 					%s
-				</div>
-			</div>
-		</div>
+					%s
 		<h4>記述評価</h4>
 		<div class="doc">
 			<h4>%s</h4>
@@ -164,10 +142,10 @@ func makePrevEval(eval IndividualEval) string {
 		</form>
 	</div>
 	
-	<h3>コメント（%d）</h3>
+	<h3>コメント(%d件)</h3>
 	`, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
 		eval.GoodnessOfFit, eval.Visibility, eval.NumTypo,
-		incorrect, correct, eval.DescriptionEval,
+		incorrect, correct, typoEnd, eval.DescriptionEval,
 		eval.Posted, eval.Num,
 		eval.RecommendGood, eval.RecommendBad, numComment)
 
@@ -187,12 +165,12 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 	}
 
 	// DB から投稿者名を取得
-	commenterName, err := dbSess.Select("name").From("userinfo").
+	commenterName, _ := dbSess.Select("name").From("userinfo").
 		Where("id = ?", comment.CommenterID).
 		ReturnString()
-	if err != nil {
-		panic(err)
-	}
+	// if err != nil {
+	// 	panic(err)
+	// }
 
 	return fmt.Sprintf(
 		`<div class="comment">

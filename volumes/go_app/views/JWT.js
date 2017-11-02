@@ -18,3 +18,5 @@ onload = function() {
 	var element = document.getElementById({{}});
 	element.setAttribute("selected", "");	
 }
+
+document.getElementById("review_list").insertAdjacentHTML('afterbegin', document.createTextNode({{.Content}}));
