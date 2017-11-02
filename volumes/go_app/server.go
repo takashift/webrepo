@@ -399,10 +399,6 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 	}
 	fmt.Println("Atoi OK")
 
-	user := c.Get("user").(*jwt.Token)
-	claims := user.Claims.(jwt.MapClaims)
-	userID := int(claims["id"].(float64))
-
 	// 参考になった or ならなかったを取得
 	if c.FormValue("recommend") == "なった👍" {
 		updRecommColumn = "recommend_good"
@@ -411,6 +407,10 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 		updRecommColumn = "recommend_bad"
 		recommStatus = "bad"
 	}
+
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	userID := int(claims["id"].(float64))
 
 	// 多重に押されるのを防止するためにボタンを押したユーザーを記録する
 	_, err = dbSess.InsertInto(arg.IntoTable).
@@ -422,7 +422,7 @@ func incrementRecommend(c echo.Context, arg RecommendSQL) error {
 	}
 
 	// DBをインクリメントする
-	_, err = dbSess.UpdateBySql("UPDATE ? SET ? = ? + 1 WHERE id = ?",
+	_, err = dbSess.UpdateBySql("UPDATE `?` SET `?` = `?` + 1 WHERE num = `?`",
 		arg.UpdTable, updRecommColumn, updRecommColumn, pageIDInt).Exec()
 	if err != nil {
 		panic(err)
@@ -791,7 +791,7 @@ func main() {
 		return signinCheck("tmp_preview_evaluation", c, pageValue)
 	})
 
-	e.POST("r/recommend_eval/:pageID/:num", func(c echo.Context) error {
+	r.POST("/recommend_eval/:pageID/:num", func(c echo.Context) error {
 
 		var recommendSQL RecommendSQL
 		recommendSQL.UpdTable = "individual_eval"
@@ -801,7 +801,7 @@ func main() {
 		return incrementRecommend(c, recommendSQL)
 	})
 
-	e.POST("r/recommend_comment/:pageID/:num", func(c echo.Context) error {
+	r.POST("/recommend_comment/:pageID/:num", func(c echo.Context) error {
 
 		var recommendSQL RecommendSQL
 		recommendSQL.UpdTable = "individual_eval_comment"
@@ -817,8 +817,8 @@ func main() {
 	})
 
 	// 通報完了画面
-	e.GET("/dengerous", func(c echo.Context) error {
-		return signinCheck("dengerous_complete", c, nil)
+	e.GET("/dangerous", func(c echo.Context) error {
+		return signinCheck("dangerous_complete", c, nil)
 	})
 
 	// 利用規約

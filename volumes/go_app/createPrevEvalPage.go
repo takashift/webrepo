@@ -169,8 +169,8 @@ func makePrevEval(eval IndividualEval) string {
 				</form>
 		</div>
 		<form class="res_button" method="get" tprevet="_blank">
-			<div class="input_dengerous">
-				<input type="submit" formaction="/dengerous" value="通報する" name="dengerous">
+			<div class="input_dangerous">
+				<input type="submit" formaction="/dangerous" value="通報する" name="dangerous">
 			</div>
 			<div class="input_comment">
 				<input type="submit" formaction="/input_comment" value="コメントする" name="comment">
@@ -222,8 +222,8 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 					</form>
 			</div>
 			<form class="res_button" action method="get" tprevet="_blank">
-				<div class="input_dengerous">
-					<input type="submit" formaction="/dengerous" value="通報する" name="dengerous">
+				<div class="input_dangerous">
+					<input type="submit" formaction="/dangerous" value="通報する" name="dangerous">
 				</div>
 				<div class="input_comment">
 					<input type="submit" formaction="/input_comment" value="コメントする" name="comment">

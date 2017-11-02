@@ -222,11 +222,11 @@ html lang=ja
         .right
           #cate
             h3 ジャンル
-            h4#value ニュース
+            h4#value {{.Genre}}
             h3 媒体
-            h4#value 文章（マスコミ）
+            h4#value {{.Media}}
             h3 タグ
-            h4#value 例のアレ 料理　レシピ　まずい　食レポ　しまちゅう（投稿者）　しょっぱい　甘い　科学　無料
+            h4#value {{.Tag1}}　{{.Tag2}}　{{.Tag3}}　{{.Tag4}}　{{.Tag5}}　{{.Tag6}}　{{.Tag7}}　{{.Tag8}}　{{.Tag9}}　{{.Tag10}}
             a#cate_edit href="/r/edit_page_cate/{{.ID}}"
               .button ジャンル、媒体、タグを編集する
       #review_list
@@ -266,8 +266,8 @@ html lang=ja
                 / input type="submit" value="なった👍" name="recommend" 1?
                 / input type="submit" value="ならなかった👎" name="recommend" 1?
           / form#res_button action="" method="get" target="_blank"
-            / .input_dengerous
-              / input type="submit" value="通報する" name="dengerous"
+            / .input_dangerous
+              / input type="submit" value="通報する" name="dangerous"
             / .input_comment
               / input type="submit" value="コメントする" name="comment"
         / h3.comment_block コメント
@@ -282,7 +282,7 @@ html lang=ja
                   / input type="submit" value="なった👍" name="recommend" 1?
                   / input type="submit" value="ならなかった👎" name="recommend" 1?
             / form#res_button action="" method="get" target="_blank"
-              / .input_dengerous
-                / input type="submit" value="通報する" name="dengerous"
+              / .input_dangerous
+                / input type="submit" value="通報する" name="dangerous"
               / .input_comment
                 / input type="submit" value="コメントする" name="comment"

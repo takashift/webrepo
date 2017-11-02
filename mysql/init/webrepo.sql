@@ -7,7 +7,8 @@ CREATE TABLE userinfo(
 	name varchar(255) DEFAULT '名無し',
 	signup_date datetime not null DEFAULT CURRENT_TIMESTAMP,
 	safe_search tinyint not null DEFAULT 0,
-	NG_count int DEFAULT 0
+	NG_count int DEFAULT 0,
+	dead tinyint not null DEFAULT 0
 );
 
 CREATE TABLE tmp_user(
