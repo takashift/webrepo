@@ -69,6 +69,7 @@ type (
 	}
 
 	EvalForm struct {
+		URL   string
 		Genre interface{} `db:"genre"`
 		Media interface{} `db:"media"`
 		Tag   interface{}
@@ -293,6 +294,7 @@ func cookieToHeaderAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
 func getPageStatusItem(id int) (EvalForm, PageStatus) {
 	var (
+		// ジャンルや媒体の追加時の変更箇所その１
 		genreSL []string
 		genre   struct {
 			// Xはインデックスの意
@@ -306,6 +308,7 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 			X8     string
 			X9     string
 			X10    string
+			X11    string
 			Select string
 		}
 		mediaSL []string
@@ -357,6 +360,7 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 		pageStatus.Tag9 + "\n" +
 		pageStatus.Tag10
 
+	// ジャンルや媒体の追加時の変更箇所その２
 	genre.X1 = genreSL[0]
 	genre.X2 = genreSL[1]
 	genre.X3 = genreSL[2]
@@ -367,6 +371,7 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 	genre.X8 = genreSL[7]
 	genre.X9 = genreSL[8]
 	genre.X10 = genreSL[9]
+	genre.X11 = genreSL[10]
 	evalForm.Genre = genre
 
 	media.X1 = mediaSL[0]
@@ -499,6 +504,190 @@ func insertComment(c echo.Context) error {
 	}
 
 	return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageID)
+}
+
+func inputEval(c echo.Context) error {
+	indEval := new(IndividualEval)
+	// indEvalLoad := new(IndividualEval)
+	typo := new(Typo)
+
+	var (
+		err            error
+		browseTime     time.Time
+		corrNoNullSL   []string
+		incorrNoNullSL []string
+		rURL           string
+	)
+
+	// 評価者の ID を取得
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	indEval.EvaluatorID = int(claims["id"].(float64))
+	// indEval.EvaluatorID = 1
+
+	bro := strings.Replace(c.FormValue("browse"), "T", " ", -1)
+	fmt.Println(bro)
+	// 時刻のフォーマットが正しくセットできてない時は DB に値を入れない
+	browseTime, err = time.Parse("2006-01-02 15:04", bro)
+	if err != nil {
+		browseTime, err = time.Parse("2006-01-02", bro)
+	}
+	if err != nil {
+		fmt.Println("time型に出来ない")
+	} else {
+		indEval.BrowseTime = browseTime.Format(timeLayout)
+		fmt.Println(indEval.BrowseTime)
+	}
+
+	// フォームの評価を取得
+	indEval.BrowsePurpose = c.FormValue("purpose")
+	indEval.DescriptionEval = c.FormValue("freedom")
+	indEval.GoodnessOfFit, err = strconv.Atoi(c.FormValue("rating_pp"))
+	if err != nil {
+		return err
+	}
+	indEval.Device = c.FormValue("device")
+	indEval.Visibility, err = strconv.Atoi(c.FormValue("rating_vw"))
+	if err != nil {
+		return err
+	}
+
+	incorr := c.FormValue("typo")
+	corr := c.FormValue("typo_answer")
+	// []byte{13}を削除して、カンマで区切る
+	incorr = strings.Replace(incorr, byte13Str+"\n", "\n", -1)
+	corr = strings.Replace(corr, byte13Str+"\n", "\n", -1)
+	fmt.Println(incorr)
+	// typo のスライスを作成
+	incorrSL := strings.Split(incorr, "\n")
+	corrSL := strings.Split(corr, "\n")
+	// 空白を除外したスライスを作成
+	for _, v := range incorrSL {
+		if v != "" {
+			incorrNoNullSL = append(incorrNoNullSL, v)
+		}
+	}
+	for _, v := range corrSL {
+		if v != "" {
+			corrNoNullSL = append(corrNoNullSL, v)
+		}
+	}
+	fmt.Println(incorrNoNullSL)
+
+	pageIDStr := c.Param("id")
+	url := c.FormValue("url")
+	if url != "" {
+
+		var (
+			newPS PageStatus
+			dbPS  PageStatus
+		)
+		newPS.URL = url
+
+		// URL のプロトコルが https でも http でも無い時は戻る。
+		if !strings.HasPrefix(newPS.URL, "https://") && !strings.HasPrefix(newPS.URL, "http://") {
+			return c.Render(http.StatusOK, "input_evaluation_url", nil)
+		}
+
+		// 末尾のスラッシュを削除
+		newPS.URL = strings.TrimSuffix(newPS.URL, "/")
+
+		// https:// も http:// も取り除いた変数を用意
+		uri := strings.TrimPrefix(newPS.URL, "https://")
+		uri = strings.TrimPrefix(uri, "http://")
+
+		_, err := dbSess.Select("id", "URL").From("page_status").
+			Where("url = ? OR url = ?", "http://"+uri, "https://"+uri).
+			Load(&dbPS)
+		if err != nil {
+			panic(err)
+		}
+
+		// 同じ URI が登録されていない時
+		if dbPS.URL == "" {
+
+			newPS.Title = "ページの属性（ジャンル、媒体、タグ）を編集して下さい（タイトルは自動で取得します）。"
+			newPS.Genre = "選択して下さい"
+			newPS.Media = "選択して下さい"
+
+			_, err = dbSess.InsertInto("page_status").
+				Columns("title", "URL", "genre", "media").
+				Record(newPS).
+				Exec()
+
+			fmt.Printf("newPS:%v\n", newPS)
+
+			if err != nil {
+				fmt.Println("データーベースに入れらんない")
+				fmt.Println(err)
+				panic(err)
+			}
+
+			pageIDStr, err = dbSess.Select("id").From("page_status").
+				Where("url = ?", newPS.URL).
+				ReturnString()
+			if err != nil {
+				panic(err)
+			}
+
+			rURL = "/r/register_page?url=" + newPS.URL
+			// strings.Replace(strings.Replace(newPS.URL, ":", "%3A", -1), "/", "%2F", -1)
+
+		} else {
+			// URLが入力されたけど既に登録されてる時
+			rURL = "/preview_evaluation/" + strconv.Itoa(dbPS.ID)
+			indEval.PageID = dbPS.ID
+		}
+		fmt.Println("URLのチェックはOK")
+
+	} else if pageIDStr != "" {
+		rURL = "/preview_evaluation/" + pageIDStr
+
+	}
+
+	indEval.PageID, err = strconv.Atoi(pageIDStr)
+	if err != nil {
+		return err
+	}
+
+	typo.Incorrect = strings.Join(incorrNoNullSL, "\n")
+	typo.Correct = strings.Join(corrNoNullSL, "\n")
+	typo.PageID = indEval.PageID
+	typo.EvaluatorID = indEval.EvaluatorID
+
+	// スライスの長さから typo の数を格納する。
+	indEval.NumTypo = len(incorrNoNullSL)
+
+	// 評価を DB に格納する
+	if indEval.BrowseTime != "" {
+		_, err = dbSess.InsertInto("individual_eval").
+			Columns("page_id", "evaluator_id", "browse_time",
+				"browse_purpose", "description_eval", "goodness_of_fit",
+				"device", "visibility", "num_typo").
+			Record(indEval).
+			Exec()
+	} else {
+		_, err = dbSess.InsertInto("individual_eval").
+			Columns("page_id", "evaluator_id",
+				"browse_purpose", "description_eval", "goodness_of_fit",
+				"device", "visibility", "num_typo").
+			Record(indEval).
+			Exec()
+	}
+	if err != nil {
+		fmt.Println("データーベースに入れらんない")
+		fmt.Println(err)
+		return c.String(http.StatusOK, "あなたはもう既にこのページを評価しています。")
+	}
+
+	// typo も DB に格納する
+	// typo.IndividualEvalNum = indEvalLoad.Num
+	_, err = dbSess.InsertInto("typo").
+		Columns("page_id", "evaluator_id", "incorrect", "correct").
+		Record(typo).
+		Exec()
+
+	return c.Redirect(http.StatusSeeOther, rURL)
 }
 
 func main() {
@@ -932,7 +1121,13 @@ func main() {
 
 	// 新規ページ登録画面
 	r.GET("/register_page", func(c echo.Context) error {
+
 		evalForm, _ := getPageStatusItem(-1)
+
+		url := c.QueryParam("url")
+		if url != "" {
+			evalForm.URL = url
+		}
 
 		return c.Render(http.StatusOK, "register_page", evalForm)
 	})
@@ -959,11 +1154,12 @@ func main() {
 			isSSL = true
 		}
 
+		// 末尾のスラッシュを削除
+		newPS.URL = strings.TrimSuffix(newPS.URL, "/")
+
 		// https:// も http:// も取り除いた変数を用意
 		uri := strings.TrimPrefix(newPS.URL, "https://")
 		uri = strings.TrimPrefix(uri, "http://")
-		// 末尾のスラッシュを削除
-		uri = strings.TrimSuffix(uri, "/")
 
 		_, err := dbSess.Select("id", "URL").From("page_status").
 			Where("url = ? OR url = ?", "http://"+uri, "https://"+uri).
@@ -1026,9 +1222,12 @@ func main() {
 
 		resp, err := http.Get(newPS.URL)
 		if err != nil {
+			resp, err = http.Get(newPS.URL + "/")
 			// ちゃんとレスポンスが返ってこない（URLがおかしい）時は戻る。
-			evalForm, _ := getPageStatusItem(-1)
-			return c.Render(http.StatusOK, "register_page", evalForm)
+			if err != nil {
+				evalForm, _ := getPageStatusItem(-1)
+				return c.Render(http.StatusOK, "register_page", evalForm)
+			}
 		}
 		defer resp.Body.Close()
 		newPS.Dead = 0
@@ -1253,123 +1452,15 @@ func main() {
 	})
 
 	// 評価入力画面
+	r.GET("/input_evaluation", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "input_evaluation_url", nil)
+	})
+	r.POST("/input_evaluation", inputEval)
+
 	r.GET("/input_evaluation/:id", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "input_evaluation", nil)
 	})
-	r.POST("/input_evaluation/:id", func(c echo.Context) error {
-		indEval := new(IndividualEval)
-		// indEvalLoad := new(IndividualEval)
-		typo := new(Typo)
-		pageIDStr := c.Param("id")
-
-		var (
-			err            error
-			browseTime     time.Time
-			corrNoNullSL   []string
-			incorrNoNullSL []string
-		)
-		indEval.PageID, err = strconv.Atoi(pageIDStr)
-		if err != nil {
-			return err
-		}
-
-		// 評価者の ID を取得
-		user := c.Get("user").(*jwt.Token)
-		claims := user.Claims.(jwt.MapClaims)
-		indEval.EvaluatorID = int(claims["id"].(float64))
-		// indEval.EvaluatorID = 1
-
-		bro := strings.Replace(c.FormValue("browse"), "T", " ", -1)
-		fmt.Println(bro)
-		// 時刻のフォーマットが正しくセットできてない時は DB に値を入れない
-		browseTime, err = time.Parse("2006-01-02 15:04", bro)
-		if err != nil {
-			browseTime, err = time.Parse("2006-01-02", bro)
-		}
-		if err != nil {
-			fmt.Println("time型に出来ない")
-		} else {
-			indEval.BrowseTime = browseTime.Format(timeLayout)
-			fmt.Println(indEval.BrowseTime)
-		}
-
-		// フォームの評価を取得
-		indEval.BrowsePurpose = c.FormValue("purpose")
-		indEval.DescriptionEval = c.FormValue("freedom")
-		indEval.GoodnessOfFit, err = strconv.Atoi(c.FormValue("rating_pp"))
-		if err != nil {
-			return err
-		}
-		indEval.Device = c.FormValue("device")
-		indEval.Visibility, err = strconv.Atoi(c.FormValue("rating_vw"))
-		if err != nil {
-			return err
-		}
-
-		incorr := c.FormValue("typo")
-		corr := c.FormValue("typo_answer")
-		// []byte{13}を削除して、カンマで区切る
-		incorr = strings.Replace(incorr, byte13Str+"\n", "\n", -1)
-		corr = strings.Replace(corr, byte13Str+"\n", "\n", -1)
-		fmt.Println(incorr)
-		// typo のスライスを作成
-		incorrSL := strings.Split(incorr, "\n")
-		corrSL := strings.Split(corr, "\n")
-		// 空白を除外したスライスを作成
-		for _, v := range incorrSL {
-			if v != "" {
-				incorrNoNullSL = append(incorrNoNullSL, v)
-			}
-		}
-		for _, v := range corrSL {
-			if v != "" {
-				corrNoNullSL = append(corrNoNullSL, v)
-			}
-		}
-		fmt.Println(incorrNoNullSL)
-
-		typo.Incorrect = strings.Join(incorrNoNullSL, "\n")
-		typo.Correct = strings.Join(corrNoNullSL, "\n")
-		typo.PageID = indEval.PageID
-		typo.EvaluatorID = indEval.EvaluatorID
-
-		// スライスの長さから typo の数を格納する。
-		indEval.NumTypo = len(incorrNoNullSL)
-
-		// 現在の時刻を取得する
-		indEval.Posted = time.Now().Format(timeLayout)
-
-		// 評価を DB に格納する
-		if indEval.BrowseTime != "" {
-			_, err = dbSess.InsertInto("individual_eval").
-				Columns("page_id", "evaluator_id", "posted", "browse_time",
-					"browse_purpose", "description_eval", "goodness_of_fit",
-					"device", "visibility", "num_typo").
-				Record(indEval).
-				Exec()
-		} else {
-			_, err = dbSess.InsertInto("individual_eval").
-				Columns("page_id", "evaluator_id", "posted",
-					"browse_purpose", "description_eval", "goodness_of_fit",
-					"device", "visibility", "num_typo").
-				Record(indEval).
-				Exec()
-		}
-		if err != nil {
-			fmt.Println("データーベースに入れらんない")
-			fmt.Println(err)
-			return c.String(http.StatusOK, "あなたはもう既にこのページを評価しています。")
-		}
-
-		// typo も DB に格納する
-		// typo.IndividualEvalNum = indEvalLoad.Num
-		_, err = dbSess.InsertInto("typo").
-			Columns("page_id", "evaluator_id", "incorrect", "correct").
-			Record(typo).
-			Exec()
-
-		return c.Redirect(http.StatusSeeOther, "/preview_evaluation/"+pageIDStr)
-	})
+	r.POST("/input_evaluation/:id", inputEval)
 
 	// コメント入力画面
 	r.GET("/input_comment/:pageID/:evalNum/:num", func(c echo.Context) error {

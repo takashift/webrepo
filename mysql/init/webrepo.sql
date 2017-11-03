@@ -1,9 +1,9 @@
 CREATE TABLE userinfo(
 	id int unique not null auto_increment primary key,
-	OAuth_service VARCHAR(255),
+	OAuth_service VARCHAR(255) DEFAULT '',
 	OAuth_userinfo VARCHAR(255) unique not null,
 	email varchar(255) unique not null,
-	password varchar(255),
+	password varchar(255) DEFAULT '',
 	name varchar(255) DEFAULT '名無し',
 	signup_date datetime not null DEFAULT CURRENT_TIMESTAMP,
 	safe_search tinyint not null DEFAULT 0,
@@ -12,11 +12,11 @@ CREATE TABLE userinfo(
 );
 
 CREATE TABLE tmp_user(
-	OAuth_service VARCHAR(255),
+	OAuth_service VARCHAR(255) DEFAULT '',
 	OAuth_userinfo VARCHAR(255) unique not null,
 	act varchar(255) unique not null,
 	email varchar(255) unique not null,
-	referer VARCHAR(255),
+	referer VARCHAR(255) DEFAULT '',
 	send_time DATETIME not null
 );
 
@@ -28,19 +28,19 @@ CREATE TABLE page_status(
 	register_date datetime not null DEFAULT CURRENT_TIMESTAMP,
 	last_update datetime DEFAULT '0001-01-01 01:01:01',
 	admin_user_id int DEFAULT 0,
-	genre text,
-	media text,
+	genre text DEFAULT '選択して下さい',
+	media text DEFAULT '選択して下さい',
 	dead tinyint DEFAULT 0,
-	tag1 varchar(30),
-	tag2 varchar(30),
-	tag3 varchar(30),
-	tag4 varchar(30),
-	tag5 varchar(30),
-	tag6 varchar(30),
-	tag7 varchar(30),
-	tag8 varchar(30),
-	tag9 varchar(30),
-	tag10 varchar(30)
+	tag1 varchar(30) DEFAULT '',
+	tag2 varchar(30) DEFAULT '',
+	tag3 varchar(30) DEFAULT '',
+	tag4 varchar(30) DEFAULT '',
+	tag5 varchar(30) DEFAULT '',
+	tag6 varchar(30) DEFAULT '',
+	tag7 varchar(30) DEFAULT '',
+	tag8 varchar(30) DEFAULT '',
+	tag9 varchar(30) DEFAULT '',
+	tag10 varchar(30) DEFAULT ''
 ) ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE individual_eval(
@@ -50,38 +50,38 @@ CREATE TABLE individual_eval(
 	posted datetime not null DEFAULT CURRENT_TIMESTAMP,
 	browse_time datetime DEFAULT '0001-01-01 01:01:01',
 	browse_purpose text not null,
-	description_eval text,
+	description_eval text DEFAULT '',
 	-- 審議（無し=0、済=1、審議中=2、アウト=3）
 	deliberate tinyint DEFAULT 0,
 	recommend_good int DEFAULT 0,
 	recommend_bad int DEFAULT 0,
 	goodness_of_fit tinyint not null,
-	because_goodness_of_fit text,
-	device varchar(30),
+	because_goodness_of_fit text DEFAULT '',
+	device varchar(30) DEFAULT '',
 	visibility tinyint not null,
-	because_visibility text,
+	because_visibility text DEFAULT '',
 	num_typo tinyint not null,
-	because_num_typo text,
+	because_num_typo text DEFAULT '',
 	opt1 int DEFAULT 0,
-	because_opt1 text,
+	because_opt1 text DEFAULT '',
 	opt2 int DEFAULT 0,
-	because_opt2 text,
+	because_opt2 text DEFAULT '',
 	opt3 int DEFAULT 0,
-	because_opt3 text,
+	because_opt3 text DEFAULT '',
 	opt4 int DEFAULT 0,
-	because_opt4 text,
+	because_opt4 text DEFAULT '',
 	opt5 int DEFAULT 0,
-	because_opt5 text,
+	because_opt5 text DEFAULT '',
 	opt6 int DEFAULT 0,
-	because_opt6 text,
+	because_opt6 text DEFAULT '',
 	opt7 int DEFAULT 0,
-	because_opt7 text,
+	because_opt7 text DEFAULT '',
 	opt8 int DEFAULT 0,
-	because_opt8 text,
+	because_opt8 text DEFAULT '',
 	opt9 int DEFAULT 0,
-	because_opt9 text,
+	because_opt9 text DEFAULT '',
 	opt10 int DEFAULT 0,
-	because_opt10 text,
+	because_opt10 text DEFAULT '',
 	PRIMARY KEY(page_id, evaluator_id)
 );
 
@@ -134,22 +134,22 @@ CREATE TABLE rating_item(
 	num int unique not null auto_increment primary key,
 	genre varchar(255) not null,
 	media varchar(30) not null,
-	opt1 text,
-	opt2 text,
-	opt3 text,
-	opt4 text,
-	opt5 text,
-	opt6 text,
-	opt7 text,
-	opt8 text,
-	opt9 text,
-	opt10 text
+	opt1 text DEFAULT '',
+	opt2 text DEFAULT '',
+	opt3 text DEFAULT '',
+	opt4 text DEFAULT '',
+	opt5 text DEFAULT '',
+	opt6 text DEFAULT '',
+	opt7 text DEFAULT '',
+	opt8 text DEFAULT '',
+	opt9 text DEFAULT '',
+	opt10 text DEFAULT ''
 );
 
 CREATE TABLE page_status_item(
 	num int unique not null auto_increment primary key,
-	genre varchar(255),
-	media varchar(30)
+	genre varchar(255) DEFAULT '',
+	media varchar(30) DEFAULT ''
 );
 
 CREATE TABLE NG_word_Lv1(
@@ -189,6 +189,7 @@ INSERT INTO page_status_item (genre, media) VALUES(
 	('企業', '音楽'),
 	('ニュース', 'ゲーム'),
 	('学術', 'その他'),
+	('辞典', NULL),
 	('通販', NULL),
 	('漫画・アニメ', NULL),
 	('ゲーム', NULL),

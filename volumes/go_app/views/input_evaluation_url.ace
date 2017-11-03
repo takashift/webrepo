@@ -1,0 +1,262 @@
+= doctype html
+html lang=ja
+  head
+    meta charset=utf-8
+    title 評価入力 | WebRepo★彡
+    = css
+      form {
+        width: 80%;
+        margin: auto;
+      }
+      .glay {
+        /*padding-top: 0.1rem;*/
+        background-color: rgba(0,0,0,0.05);
+      }
+      .form_block {
+        margin: 2rem;
+        display: flex;
+      }
+      .subject {
+        width: 9rem;
+      }
+      .input {
+        flex: 1;
+        margin: 0.5rem 1rem 1rem 1rem;
+      }
+      input.url {
+        height: 1.5rem;
+        width: 100%;
+        margin-top: 1rem;
+        padding: 3px 9px;
+        border-width: 1px;
+        border-color: rgba(0,0,0,0.4);
+        font-size: 16px;
+      }
+      textarea {
+        width: 100%;
+        /*max-width: 100%;*/
+        font-size: 1rem;
+        resize: vertical;
+      }
+      textarea[name="purpose"] {
+        height: 3rem;
+      }
+
+      /* 目的適合度 */
+      label.star_rating {
+        display: block;
+        cursor: pointer;
+        margin-bottom: 2px;
+        padding-left: 1rem;
+        width: 88%;
+        font-size: large;
+        background-color: rgba(255,255,255,1);
+      }
+      input.rating {
+        display: none;
+      }
+      input.rating + .star:before {
+        font-family: "iIonIcons";
+        font-size: 1.5rem;
+        color: rgba(255,255,255,1);
+        letter-spacing: 0.5rem;
+        -webkit-text-stroke: 2px rgba(0,0,0,0.5);
+        text-stroke: 2px rgba(0,0,0,0.5);
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+        margin-left: 1.5rem;
+      }
+      input[value="1"] + .star:before {
+        content: "★";
+      }
+      input[value="2"] + .star:before {
+        content: "★★";
+      }
+      input[value="3"] + .star:before {
+        content: "★★★";
+      }
+      input[value="4"] + .star:before {
+        content: "★★★★";
+      }
+      input[value="5"] + .star:before {
+        content: "★★★★★";
+      }
+      input.rating:checked + .star:before {
+        font-family: "IonIcons";
+        color: rgba(255,230,0,1);
+        -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+        text-stroke: 1px rgba(0,0,0,0.5);
+      }
+      input[value="1"]:checked + .star:before {
+        content: "★";
+      }
+      input[value="2"]:checked + .star:before {
+        content: "★★";
+      }
+      input[value="3"]:checked + .star:before {
+        content: "★★★";
+      }
+      input[value="4"]:checked + .star:before {
+        content: "★★★★";
+      }
+      input[value="5"]:checked + .star:before {
+        content: "★★★★★";
+      }
+      #select_device h3 {
+        display: inline-block;
+        margin-left: 1rem;
+      }
+      #select_device input {
+        margin-right: 0.5rem;
+      }
+      #select_device label {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+        padding: 0.2rem 0.5rem;
+        font-size: large;
+        background-color: rgba(255,255,255,1);
+      }
+      #typo {
+        display: flex;
+        justify-content: space-between;
+      }
+      #typo label {
+        width: 45%;
+      }
+      #typo h3 {
+        margin: 0 0 0.5rem 0.5rem;
+      }
+      #typo textarea {
+        width: 100%;
+        height: 3rem;
+      }
+
+      textarea[name="freedom"] {
+        height: 10rem;
+      }
+      #note {
+        font-size: 0.9rem;
+      }
+      input[name="browse"] {
+        font-size: 1rem;
+      }
+
+      .red {
+        color: red;
+      }
+      .button {
+        display: block;
+        font-size: large;
+        color: rgba(255,255,255,0.9);
+        border-style: none;
+        background-color: rgba(0,50,255,0.8);
+        border-radius: 0.5rem;
+        font-size: larger;
+        width: auto;
+        padding: 1rem;
+        margin: 2rem auto 2rem auto;
+        text-align: center;
+        cursor: pointer;        
+      }
+    = include JWT
+
+  body
+    = include header_menu
+    form action="" method="post"
+      .glay
+        .form_block
+          .subject
+            h2 URL
+          .input
+            input.url name="url" cols="500" required=""
+        .form_block
+          .subject
+            h2 閲覧目的
+          .input
+            p そのページを見るに至った経緯、得たい情報、その情報によって何がしたかったかを文章でなるべく詳細に記述してください。
+            p 複数に分けられる場合は改行して下さい。
+            p ヒント：得たかった情報が誰向けに書かれた情報か（例：○○初心者向けの〜、若者向けの〜など）を書いていただけるとより内容の指向性が明確になり、細かい目的を判定できる検索エンジンが完成します。
+            textarea name="purpose" cols="500" rows="2" required=""
+        .form_block
+          .subject
+            h2 目的達成度
+          .input
+            p 閲覧目的に対するページの適合度を入力して下さい。
+            label.star_rating 求めていた以上に達成できた
+              input.rating type="radio" name="rating_pp" value="5" required=""
+              span.star
+            label.star_rating 完全に達成できた　　　　　
+              input.rating type="radio" name="rating_pp" value="4" required=""
+              span.star
+            label.star_rating ほぼ達成できた　　　　　　
+              input.rating type="radio" name="rating_pp" value="3" required=""
+              span.star
+            label.star_rating あまり達成できなかった　　
+              input.rating type="radio" name="rating_pp" value="2" required=""
+              span.star
+            label.star_rating 全然達成できなかった　　　
+              input.rating type="radio" name="rating_pp" value="1" required=""
+              span.star
+            p#note ※エラーは出ませんが選択必須です。
+        .form_block
+          .subject
+            h2 見やすさ
+          .input
+            p ページの見やすさを評価して下さい。
+            p ヒント：広告の数が多くて目障りな場合なども含めてください。
+            #select_device
+              h3 閲覧デバイス
+              label
+                input type="radio" name="device" value="PC" required="" パソコン　　　　　　　　
+              label
+                input type="radio" name="device" value="SP" required="" スマートフォン・タブレット端末
+            label.star_rating 極めて見やすい　
+              input.rating type="radio" name="rating_vw" value="5" required=""
+              span.star
+            label.star_rating そこそこ見やすい
+              input.rating type="radio" name="rating_vw" value="4" required=""
+              span.star
+            label.star_rating 見づらくはない　
+              input.rating type="radio" name="rating_vw" value="3" required=""
+              span.star
+            label.star_rating そこそこ見づらい
+              input.rating type="radio" name="rating_vw" value="2" required=""
+              span.star
+            label.star_rating 極めて見づらい　
+              input.rating type="radio" name="rating_vw" value="1" required=""
+              span.star
+            p#note ※エラーは出ませんが選択必須です。
+        .form_block
+          .subject
+            h2 誤字脱字
+          .input
+            p 誤植単語があれば、本来の単語と1対1で記入して下さい。複数ある場合は改行して下さい。
+            p ※1 意図的と思われるものやスラング化しているものは含めないで下さい。ただし、判断出来ないものについては入力して頂いて構いません。
+              br ※2 文字単位ではなく、単語単位（場合により特別な用法のある連語など）で記入して下さい。
+              br ※3 対象は主体となるコンテンツのみで記事に対するコメント等は含めません。
+            #typo
+              label 
+                h3 誤植単語
+                textarea name="typo" cols="500" rows="2"
+              label
+                h3 本来の単語
+                textarea name="typo_answer" cols="500" rows="2"
+        .form_block
+          .subject
+            h2 記述評価
+          .input
+            p その他、ページに対する評価があれば入力して下さい。
+            p ヒント：コンテンツのどこが良く、どこが駄目なのか、を明確に書いていただけるとより正確な判断ができる検索エンジンが完成します。
+            textarea name="freedom" cols="500" rows="4"
+            p#note ※飽くまで評価を行う対象はウェブページであるため、ページ作成者に対する意見は当該ページのコメント欄、SNS等で直接お問い合わせ願います。
+        .form_block
+          .subject
+            h2 閲覧日時
+          .input
+            p Chorme ではフォーム右端をクリックすることで、マウスで日付を選択できます。
+            p それ以外のブラウザでは半角で、「2017-08-01 23:59」のように入力してください。時刻は無くても構いません。
+            input type="datetime-local" name="browse" placeholder="2017-08-01 23:59"
+            p#note ※分からなければ大体でも良いので、入力していただけると幸いです。
+        .form_block
+      input.button type="submit" value="送信する"

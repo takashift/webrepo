@@ -68,6 +68,7 @@ html lang=ja
           .subject
             h2 ジャンル
           .input
+            / ジャンルや媒体を増やしたい時はここだけ追加する
             select name="genre"
               option id="genreX1" value={{.Genre.X1}} {{.Genre.X1}}
               option id="genreX2" value={{.Genre.X2}} {{.Genre.X2}}
@@ -79,6 +80,7 @@ html lang=ja
               option id="genreX8" value={{.Genre.X8}} {{.Genre.X8}}
               option id="genreX9" value={{.Genre.X9}} {{.Genre.X9}}
               option id="genreX10" value={{.Genre.X10}} {{.Genre.X10}}
+              option id="genreX11" value={{.Genre.X11}} {{.Genre.X11}}
         .form_block
           .subject
             h2 媒体
