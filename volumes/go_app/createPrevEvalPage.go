@@ -68,7 +68,9 @@ import (
 // 	}
 // )
 
-func makePrevEval(eval IndividualEval) string {
+func makePrevEval(iEval int, eval IndividualEval) string {
+
+	iEval++
 
 	// 審議中なら""を返す
 	if eval.Deliberate >= 2 {
@@ -158,7 +160,7 @@ func makePrevEval(eval IndividualEval) string {
 
 	result := fmt.Sprintf(
 		`<div class="review">
-		<h3>%s</h3>
+		<h3>No.%d　　%s</h3>
 		<p class="author">評価者　%s</p>
 		<p class="date">閲覧日　%s</p>
 		<h4 class="first">目的達成度　★★★★★ %d</h4>
@@ -190,26 +192,31 @@ func makePrevEval(eval IndividualEval) string {
 	</div>
 	
 	<h3>コメント(%d件)</h3>
-	`, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
+	`, iEval, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
 		eval.GoodnessOfFit, eval.Visibility, eval.NumTypo,
 		incorrect, correct, typoEnd, eval.DescriptionEval,
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
 
+	fmt.Println("評価を取ってくるのはOK")
+
+	pageEvalCommentNumMap := map[int]int{}
 	// コメントのテンプレートを追加
-	for _, v := range individualEvalComment {
-		result += makePrevEvalComment(v)
+	for j, v := range individualEvalComment {
+		result += makePrevEvalComment(v, iEval, j, pageEvalCommentNumMap)
 	}
 
 	return result
 }
 
-func makePrevEvalComment(comment IndividualEvalComment) string {
+func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCommentNumMap map[int]int) string {
 
 	// // 審議中なら""を返す
 	// if comment.Deliberate >= 2 {
 	// 	return ""
 	// }
+	j++
+	pageEvalCommentNumMap[comment.Num] = j
 
 	// DB から投稿者名を取得
 	commenterName, _ := dbSess.Select("name").From("userinfo").
@@ -218,6 +225,8 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 	// if err != nil {
 	// 	panic(err)
 	// }
+
+	fmt.Println("Sprintfの前")
 
 	return fmt.Sprintf(
 		`<div class="comment">
@@ -242,19 +251,22 @@ func makePrevEvalComment(comment IndividualEvalComment) string {
 			</form>
 		</div>
 	</div>
-	`, commenterName, toEval(comment.ReplyCommentNum), comment.Comment, comment.Num, comment.Posted,
+	`, commenterName, toEval(i, comment, pageEvalCommentNumMap), comment.Comment, j, comment.Posted,
 		comment.PageID, comment.Num,
 		comment.RecommendGood, comment.RecommendBad,
 		comment.PageID, comment.Num,
 		comment.PageID, comment.ReplyEvalNum, comment.Num)
 }
 
-func toEval(num int) string {
+func toEval(i int, arg IndividualEvalComment, numMap map[int]int) string {
 	var value string
-	if num == 0 {
-		value = "評価"
+	num := strconv.Itoa(numMap[arg.ReplyCommentNum])
+	fmt.Println("toEval")
+
+	if num == "0" {
+		value = "評価" + strconv.Itoa(i)
 	} else {
-		value = strconv.Itoa(num)
+		value = num
 	}
 	return value
 }

@@ -58,16 +58,16 @@ var (
 	byte13Str   = string([]byte{13})
 )
 
-type googleUser struct {
-	// 先頭が大文字でないと格納されない。
-	Email string `json:"email"`
-}
-
 // e.Renderer に代入するために必須っぽい
 type AceTemplate struct {
 }
 
 type (
+	googleUser struct {
+		// 先頭が大文字でないと格納されない。
+		Email string `json:"email"`
+	}
+
 	EvalForm struct {
 		Genre interface{} `db:"genre"`
 		Media interface{} `db:"media"`
@@ -163,7 +163,6 @@ type (
 
 	IndividualEvalComment struct {
 		Num             int    `db:"num"`
-		NumOnEval       int    `db:"num_on_eval"`
 		PageID          int    `db:"page_id"`
 		CommenterID     int    `db:"commenter_id"`
 		Posted          string `db:"posted"`
@@ -853,8 +852,8 @@ func main() {
 		} else if individualEval != nil {
 			// for文で回す
 			// Ace に入れる構造体に格納
-			for _, v := range individualEval {
-				pageValue.Content += makePrevEval(v)
+			for i, v := range individualEval {
+				pageValue.Content += makePrevEval(i, v)
 			}
 		}
 

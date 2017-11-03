@@ -93,8 +93,7 @@ CREATE TABLE individual_eval_recom(
 );
 
 CREATE TABLE individual_eval_comment(
-	num int unique not null auto_increment,
-	num_on_eval int not null,
+	num int unique not null auto_increment PRIMARY KEY,
 	page_id int not null,
 	commenter_id int not null,
 	posted datetime not null DEFAULT CURRENT_TIMESTAMP,
@@ -104,8 +103,7 @@ CREATE TABLE individual_eval_comment(
 	deliberate tinyint DEFAULT 0,
 	comment text not null,
 	recommend_good int DEFAULT 0,
-	recommend_bad int DEFAULT 0,
-	PRIMARY KEY(num_on_eval, page_id, commenter_id)
+	recommend_bad int DEFAULT 0
 );
 
 CREATE TABLE individual_eval_comment_recom(
