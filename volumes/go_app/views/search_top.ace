@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title WebRepo
+    title WebRepo★彡
     = css
       body {
         height: 100%;

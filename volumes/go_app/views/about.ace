@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title このサイトについて | WebRepo☆彡
+    title このサイトについて | WebRepo★彡
     = css
       #main {
         margin: 5rem 15% 7rem 15%;

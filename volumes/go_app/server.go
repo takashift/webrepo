@@ -835,6 +835,10 @@ func main() {
 		}
 		fmt.Println(pageValue)
 
+		if pageValue.URL == "" {
+			return c.String(http.StatusNotFound, "Not found 404")
+		}
+
 		// DB から評価を取得
 		// 複数の評価データを格納するために構造体のスライスを作成
 		var individualEval []IndividualEval

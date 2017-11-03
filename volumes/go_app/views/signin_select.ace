@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title sign in - WebRepo
+    title sign in | WebRepo★彡
     = css
       #OAuth_menu {
         margin: 3rem 0 0 0;

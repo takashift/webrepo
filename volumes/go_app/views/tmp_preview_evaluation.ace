@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title はなくその食レポ の評価(詳細) | WebRepo★彡
+    title {{.Title}} の評価 | WebRepo★彡
     = css
       body {
         margin-bottom: 0;
