@@ -783,6 +783,19 @@ func main() {
 		return c.Redirect(http.StatusSeeOther, "https://www.google.co.jp/search?q=site%3Awebrepo.nal.ie.u-ryukyu.ac.jp+"+q)
 		// return signinCheck("search_result", c, searchForm)
 	})
+
+	e.GET("/page_list", func(c echo.Context) error {
+		searchForm := PageValue{
+			Query: "",
+		}
+
+		// URLクエリパラメータを受け取る
+		q := c.QueryParam("q")
+		searchForm.Query = q
+
+		return signinCheck("page_list", c, searchForm)
+	})
+
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
 		fmt.Println("signin_select")

@@ -116,6 +116,11 @@ html lang=ja
       h4.first {
         margin-top: 0;
       }
+      .star {
+        color: rgba(255,230,0,1);
+        -webkit-text-stroke: 1px rgba(0,0,0,0.7);
+        text-stroke: 1px rgba(0,0,0,0.7);
+      }
       .typo {
         margin-left: 2rem;
         display: flex;
@@ -212,9 +217,9 @@ html lang=ja
         .left
           #eval
             s
-              h3 最も高評価な閲覧目的
+            / h3 最も高評価な閲覧目的
             / h2#popu_pp {{.PopuPP}}
-            h3 評価平均
+            / h3 評価平均
             / h4 総合　　　　★★★★★ {{}}
             / h4 目的達成度　★★★★★ {{.GFP}}
             / h4 見やすさ　　★★★★★ {{.VisP}}

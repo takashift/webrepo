@@ -163,8 +163,8 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 		<h3>No.%d　　%s</h3>
 		<p class="author">評価者　%s</p>
 		<p class="date">閲覧日　%s</p>
-		<h4 class="first">目的達成度　★★★★★ %d</h4>
-		<h4>見やすさ　　★★★★★ %d</h4>
+		<h4 class="first">目的達成度　%s</h4>
+		<h4>見やすさ　　%s</h4>
 		<h4>誤字脱字数　%d箇所</h4>
 					%s
 					%s
@@ -193,7 +193,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	
 	<h3>コメント(%d件)</h3>
 	`, iEval, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
-		eval.GoodnessOfFit, eval.Visibility, eval.NumTypo,
+		pasteStar(eval.GoodnessOfFit), pasteStar(eval.Visibility), eval.NumTypo,
 		incorrect, correct, typoEnd, eval.DescriptionEval,
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
@@ -269,4 +269,24 @@ func toEval(i int, arg IndividualEvalComment, numMap map[int]int) string {
 		value = num
 	}
 	return value
+}
+
+func pasteStar(i int) string {
+	var result string
+	if i == 1 {
+		result = "<span class=\"star\">★</span>　　　　 1"
+	}
+	if i == 2 {
+		result = "<span class=\"star\">★★</span>　　　 2"
+	}
+	if i == 3 {
+		result = "<span class=\"star\">★★★</span>　　 3"
+	}
+	if i == 4 {
+		result = "<span class=\"star\">★★★★</span>　 4"
+	}
+	if i == 5 {
+		result = "<span class=\"star\">★★★★★</span> 5"
+	}
+	return result
 }
