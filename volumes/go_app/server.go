@@ -596,6 +596,7 @@ func inputEval(c echo.Context) error {
 		uri := strings.TrimPrefix(newPS.URL, "https://")
 		uri = strings.TrimPrefix(uri, "http://")
 
+		// 同じURIが登録されてないかチェック
 		_, err := dbSess.Select("id", "URL").From("page_status").
 			Where("url = ? OR url = ?", "http://"+uri, "https://"+uri).
 			Load(&dbPS)
@@ -630,7 +631,7 @@ func inputEval(c echo.Context) error {
 				panic(err)
 			}
 
-			rURL = "/r/register_page?url=" + newPS.URL
+			// rURL = "/r/register_page?url=" + newPS.URL
 			// strings.Replace(strings.Replace(newPS.URL, ":", "%3A", -1), "/", "%2F", -1)
 
 		} else {
@@ -640,7 +641,9 @@ func inputEval(c echo.Context) error {
 		}
 		fmt.Println("URLのチェックはOK")
 
-	} else if pageIDStr != "" {
+	}
+
+	if rURL == "" {
 		rURL = "/preview_evaluation/" + pageIDStr
 
 	}
@@ -679,7 +682,7 @@ func inputEval(c echo.Context) error {
 	if err != nil {
 		fmt.Println("データーベースに入れらんない")
 		fmt.Println(err)
-		return c.String(http.StatusOK, "あなたはもう既にこのページを評価しています。")
+		return c.String(http.StatusOK, "あなたはもう既にこのページを評価しているかもしれません。")
 	}
 
 	// typo も DB に格納する
@@ -1223,7 +1226,7 @@ func main() {
 		fmt.Println(newPS.RegisterDate)
 
 		resp, err := http.Get(newPS.URL)
-		if err != nil {
+		if resp == nil && err != nil {
 			fmt.Println("レスポンスエラー")
 			resp2, err2 := http.Get(newPS.URL + "/")
 			// ちゃんとレスポンスが返ってこない（URLがおかしい）時は戻る。

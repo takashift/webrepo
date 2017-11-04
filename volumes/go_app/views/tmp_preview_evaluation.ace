@@ -37,6 +37,7 @@ html lang=ja
       .button {
         display: block;
         font-size: larger;
+        font-weight: bold;
         color: rgba(255,255,255,0.9);
         border-style: none;
         background-color: rgba(0,0,0,0.6);
