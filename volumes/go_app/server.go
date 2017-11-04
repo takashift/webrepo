@@ -356,15 +356,23 @@ func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 			}
 		}
 	} else if genreQ != "" && mediaQ != "" {
-		for i, v := range genreSL {
-			if genreQ == v {
-				genre.Select = "genreX" + strconv.Itoa(i+1)
+		if genreQ == "*" {
+			genre.Select = "genre" + genreQ
+		} else {
+			for i, v := range genreSL {
+				if genreQ == v {
+					genre.Select = "genreX" + strconv.Itoa(i+1)
+				}
 			}
 		}
 
-		for i, v := range mediaSL {
-			if mediaQ == v {
-				media.Select = "mediaX" + strconv.Itoa(i+1)
+		if mediaQ == "*" {
+			media.Select = "media" + mediaQ
+		} else {
+			for i, v := range mediaSL {
+				if mediaQ == v {
+					media.Select = "mediaX" + strconv.Itoa(i+1)
+				}
 			}
 		}
 	}
@@ -813,15 +821,32 @@ func main() {
 				EvalForm: evalForm,
 				Content:  "",
 			}
-			dbPS []PageStatus
+			dbPS   []PageStatus
+			err    error
+			genreQ = c.QueryParam("genre")
+			mediaQ = c.QueryParam("media")
 		)
 
 		// DBから指定したジャンルと媒体のページを取得
-		_, err := dbSess.Select("id", "title", "URL",
-			"genre", "media", "dead",
-			"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
-			From("page_status").
-			Where("genre = ? AND media = ?", c.QueryParam("genre"), c.QueryParam("media")).Load(&dbPS)
+		if genreQ == "*" {
+			_, err = dbSess.Select("id", "title", "URL",
+				"genre", "media", "dead",
+				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+				From("page_status").
+				Where("media = ?", mediaQ).Load(&dbPS)
+		} else if mediaQ == "*" {
+			_, err = dbSess.Select("id", "title", "URL",
+				"genre", "media", "dead",
+				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+				From("page_status").
+				Where("genre = ?", genreQ).Load(&dbPS)
+		} else {
+			_, err = dbSess.Select("id", "title", "URL",
+				"genre", "media", "dead",
+				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+				From("page_status").
+				Where("genre = ? AND media = ?", genreQ, mediaQ).Load(&dbPS)
+		}
 		if err != nil {
 			panic(err)
 		}
