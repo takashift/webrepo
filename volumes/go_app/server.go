@@ -1225,12 +1225,13 @@ func main() {
 		resp, err := http.Get(newPS.URL)
 		if err != nil {
 			fmt.Println("レスポンスエラー")
-			resp, err = http.Get(newPS.URL + "/")
+			resp2, err2 := http.Get(newPS.URL + "/")
 			// ちゃんとレスポンスが返ってこない（URLがおかしい）時は戻る。
-			if err != nil {
+			if err2 != nil {
 				evalForm, _ := getPageStatusItem(-1)
 				return c.Render(http.StatusOK, "register_page", evalForm)
 			}
+			resp = resp2
 		}
 		defer resp.Body.Close()
 		newPS.Dead = 0
@@ -1270,8 +1271,10 @@ func main() {
 			// IDもマップに含めると更新する時に0が入ってしまうので入れない。
 			for i := 1; i < typ.NumField(); i++ {
 				field := structVal.Field(i)
-				// fmt.Println("canset:", field.CanSet())
-				mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
+				value := field.Interface()
+				if value != "" {
+					mapVal[typ.Field(i).Tag.Get("db")] = field.Interface()
+				}
 			}
 
 			fmt.Println("map:", mapVal)
