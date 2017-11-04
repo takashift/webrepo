@@ -236,6 +236,8 @@ html lang=ja
             a#cate_edit href="/r/edit_page_cate/{{.ID}}"
               .button ジャンル、媒体、タグを編集する
       #review_list
+        / ここには評価の一覧が入る。
+
         / .review
           / h3 {{.Eval1.Title}}
           / p.author 評価者　{{.Eval1.EvaluatorName}}
