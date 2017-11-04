@@ -59,7 +59,7 @@ html lang=ja
         var media = document.getElementById({{.Media.Select}});
         media.setAttribute("selected", "");
       }
-    = include JWT
+
   body
     = include header_menu
     form action="" method="post"

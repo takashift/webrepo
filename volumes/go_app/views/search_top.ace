@@ -87,7 +87,6 @@ html lang=ja
         cursor: pointer;
         background-color: #EEE;
       }
-    = include JWT
 
   body
     = include header_menu

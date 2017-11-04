@@ -88,6 +88,11 @@ type (
 		Content string
 	}
 
+	ListPageValue struct {
+		EvalForm
+		Content string
+	}
+
 	// データベースのテスト
 	userinfoJSON struct {
 		ID    int    `json:"id"`
@@ -292,7 +297,7 @@ func cookieToHeaderAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
-func getPageStatusItem(id int) (EvalForm, PageStatus) {
+func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 	var (
 		// ジャンルや媒体の追加時の変更箇所その１
 		genreSL []string
@@ -324,6 +329,9 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 		}
 		evalForm   EvalForm
 		pageStatus PageStatus
+
+		genreQ = c.QueryParam("genre")
+		mediaQ = c.QueryParam("media")
 	)
 
 	dbSess.Select("genre").From("page_status_item").Load(&genreSL)
@@ -344,6 +352,18 @@ func getPageStatusItem(id int) (EvalForm, PageStatus) {
 
 		for i, v := range mediaSL {
 			if pageStatus.Media == v {
+				media.Select = "mediaX" + strconv.Itoa(i+1)
+			}
+		}
+	} else if genreQ != "" && mediaQ != "" {
+		for i, v := range genreSL {
+			if genreQ == v {
+				genre.Select = "genreX" + strconv.Itoa(i+1)
+			}
+		}
+
+		for i, v := range mediaSL {
+			if mediaQ == v {
 				media.Select = "mediaX" + strconv.Itoa(i+1)
 			}
 		}
@@ -785,15 +805,67 @@ func main() {
 	})
 
 	e.GET("/page_list", func(c echo.Context) error {
+
+		evalForm, _ := getPageStatusItem(c, -1)
+
+		var (
+			listPageValue = ListPageValue{
+				EvalForm: evalForm,
+				Content:  "",
+			}
+			dbPS []PageStatus
+		)
+
+		// DBから指定したジャンルと媒体のページを取得
+		_, err := dbSess.Select("id", "title", "URL",
+			"genre", "media", "dead",
+			"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+			From("page_status").
+			Where("genre = ? AND media = ?", c.QueryParam("genre"), c.QueryParam("media")).Load(&dbPS)
+		if err != nil {
+			panic(err)
+		}
+
+		if dbPS != nil {
+
+			// dead が 0 以外のものは除外
+			var alivePS []PageStatus
+			for i := 0; i < len(dbPS); i++ {
+				if dbPS[i].Dead == 0 {
+					alivePS = append(alivePS, dbPS[i])
+				}
+			}
+			// スライスの要素数からページの件数を取得
+			resultNum := len(alivePS)
+			listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
+
+			for _, v := range alivePS {
+
+				listPageValue.Content +=
+					fmt.Sprintf(
+						`
+						<div class="page_status">
+							<h3><a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
+							<div class="cate">ジャンル：%s　媒体：%s</div>
+							<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
+							<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
+						</div>
+					`, v.ID, v.Title, v.URL, v.URL,
+						v.Genre, v.Media,
+						v.Tag1, v.Tag2, v.Tag3, v.Tag4, v.Tag5, v.Tag6, v.Tag7,
+						v.Tag8, v.Tag9, v.Tag10,
+						v.ID)
+			}
+		}
+		return signinCheck("page_list", c, listPageValue)
+	})
+
+	e.GET("/page_eval", func(c echo.Context) error {
 		searchForm := PageValue{
 			Query: "",
 		}
 
-		// URLクエリパラメータを受け取る
-		q := c.QueryParam("q")
-		searchForm.Query = q
-
-		return signinCheck("page_list", c, searchForm)
+		return signinCheck("preview_evaluation", c, searchForm)
 	})
 
 	// サインイン方法選択画面
@@ -1140,7 +1212,7 @@ func main() {
 	// 新規ページ登録画面
 	r.GET("/register_page", func(c echo.Context) error {
 
-		evalForm, _ := getPageStatusItem(-1)
+		evalForm, _ := getPageStatusItem(c, -1)
 
 		url := c.QueryParam("url")
 		if url != "" {
@@ -1162,7 +1234,7 @@ func main() {
 		newPS.URL = c.FormValue("url")
 		// URL のプロトコルが https でも http でも無い時は戻る。
 		if !strings.HasPrefix(newPS.URL, "https://") && !strings.HasPrefix(newPS.URL, "http://") {
-			evalForm, _ := getPageStatusItem(-1)
+			evalForm, _ := getPageStatusItem(c, -1)
 			return c.Render(http.StatusOK, "register_page", evalForm)
 		}
 
@@ -1244,7 +1316,7 @@ func main() {
 			resp2, err2 := http.Get(newPS.URL + "/")
 			// ちゃんとレスポンスが返ってこない（URLがおかしい）時は戻る。
 			if err2 != nil {
-				evalForm, _ := getPageStatusItem(-1)
+				evalForm, _ := getPageStatusItem(c, -1)
 				return c.Render(http.StatusOK, "register_page", evalForm)
 			}
 			resp = resp2
@@ -1350,7 +1422,7 @@ func main() {
 			return err
 		}
 
-		evalForm, _ := getPageStatusItem(idInt)
+		evalForm, _ := getPageStatusItem(c, idInt)
 
 		return signinCheck("edit_page_cate", c, evalForm)
 	})

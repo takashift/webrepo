@@ -37,6 +37,8 @@
       a href="/r/input_evaluation" 評価入力
     span.hd_m_elem
       a href="/r/register_page" ページ登録
+    span.hd_m_elem
+      a href="/page_list" ページ一覧
   #header_menu_right
     span.hd_m_elem
       a href="https://www.google.co.jp/" Google

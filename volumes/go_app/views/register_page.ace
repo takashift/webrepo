@@ -60,7 +60,6 @@ html lang=ja
         text-align: center;
         cursor: pointer;        
       }
-    = include JWT
     
   body
     = include header_menu

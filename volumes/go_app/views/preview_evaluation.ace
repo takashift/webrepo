@@ -99,6 +99,7 @@ html lang=ja
       }
       select {
         margin-top: 0.5rem;
+        margin-left: 0.5rem;
         font-size: 1rem;
       }
       option {
@@ -108,7 +109,6 @@ html lang=ja
         display: inline-block;
       }
       select {
-        margin-left: 0.5rem;
       }
       .sort select {
         display: block;
