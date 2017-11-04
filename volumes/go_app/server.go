@@ -645,9 +645,11 @@ func inputEval(c echo.Context) error {
 
 	}
 
-	indEval.PageID, err = strconv.Atoi(pageIDStr)
-	if err != nil {
-		return err
+	if pageIDStr != "" {
+		indEval.PageID, err = strconv.Atoi(pageIDStr)
+		if err != nil {
+			return err
+		}
 	}
 
 	typo.Incorrect = strings.Join(incorrNoNullSL, "\n")
@@ -1216,12 +1218,13 @@ func main() {
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 		fmt.Println("tag10:", newPS.Tag9)
 
-		newPS.RegisterDate = time.Now().Format(timeLayout)
+		// newPS.RegisterDate = time.Now().Format(timeLayout)
 
 		fmt.Println(newPS.RegisterDate)
 
 		resp, err := http.Get(newPS.URL)
 		if err != nil {
+			fmt.Println("レスポンスエラー")
 			resp, err = http.Get(newPS.URL + "/")
 			// ちゃんとレスポンスが返ってこない（URLがおかしい）時は戻る。
 			if err != nil {
@@ -1281,12 +1284,21 @@ func main() {
 			return c.Redirect(http.StatusSeeOther, "../preview_evaluation/"+strconv.Itoa(dbPS.ID))
 		}
 
-		_, err = dbSess.InsertInto("page_status").
-			Columns("title", "URL", "register_date", "last_update",
-				"admin_user_id", "genre", "media",
-				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
-			Record(newPS).
-			Exec()
+		if newPS.LastUpdate == "" {
+			_, err = dbSess.InsertInto("page_status").
+				Columns("title", "URL",
+					"admin_user_id", "genre", "media",
+					"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+				Record(newPS).
+				Exec()
+		} else {
+			_, err = dbSess.InsertInto("page_status").
+				Columns("title", "URL", "last_update",
+					"admin_user_id", "genre", "media",
+					"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+				Record(newPS).
+				Exec()
+		}
 
 		fmt.Printf("newPS:%v\n", newPS)
 
