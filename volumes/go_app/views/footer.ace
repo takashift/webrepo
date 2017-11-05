@@ -24,9 +24,9 @@
 
 #footer
   p
-    a href="term_of_service" 利用規約
+    a href="/term_of_service" 利用規約
   p
-    a href="about" このサイトについて
+    a href="/about" このサイトについて
   #copy Copyright &copy 2017 Tsunashima@
     a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
     {{HTML ". All rights reserved."}}

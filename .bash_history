@@ -5,312 +5,6 @@ docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
-cd volumes/go_app/views/
-cd
-cd volumes/go_app/views/
-cd ..
-rcode server.go 
-cd views/
-rcode edit_page_cate.ace 
-rcode search_result.ace 
-rcode te
-cd ..
-rcode template_no_proxy.go_ 
-git commit -am "ページ属性編集画面にジャンルと媒体を格納する処理を追加"
-gitpush 
-git log
-cd views/
-ls
-rcode register_page.ace 
-cd views/
-cd volumes/go_app/views/
-;s
-ls
-cd ..
-ls
-rcode server.go 
-exit
-cd volumes/go_app/
-ls
-rcode server.go 
-cd mysql/init/
-rcode webrepo.sql 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-rcode 
-rcode webrepo.sql 
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git glog
-git log
-git status
-git commit -am "JavaScript により、元の設定のジャンルと媒体がページ属性編集で選ばれるようにした。"
-gitpush 
-ls
-cd volumes/go_app/
-ls
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-git status
-git commit -am "アクセストークンの保存方法について先頭にコメントを追加"
-gitpush \
-cd volumes/go_app/views/
-ls
-rcode consent_form.ace 
-git status
-git commit -am "同意書の内容を更新"
-gitpush 
-cd mysql/init/
-ls
-rcode 
-rcode webrepo.sql 
-docker-compose logs
-cd volumes/go_app/
-ls
-cd views/
-ls
-rcode 
-cd ..
-rcode server.go 
-cd views/
-rcode edit_page_cate.ace 
-docker-compose logs
-rcode edit_page_cate.ace 
-docker-compose logs
-git commit -am "ページ属性編集画面の元の設定のタグを表示するようにした。"
-git commit --amend
-gitpush 
-docker-compose logs
-rcode register_page.ace 
-docker-compose logs
-rcode header_menu.ace 
-docker-compose logs
-git status
-git commit -am "ページ属性編集画面のジャンルと媒体の選択を任意に、新規ページ登録の初期選択は「選択して下さい」に変更"
-git commit --amend
-gitpush 
-git log
-ls
-git commit -am '新規ページ登録、属性編集画面のvalueを設定'
-gitpush 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git log
-cd mysql/init/
-rcode 
-rcode webrepo.sql 
-git sutatus
-git status
-git lo
-git log
-cd volumes/db_data/
-sudo rm -r *
-docker-compose up -d --build
-ls
-docker-compose up -d --build
-ls
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_mysql_1
-sudo rm -r *;
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-sudo rm -r *;
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_mysql_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_mysql_1
-ls
-sudo rm -r *;
-sudo rm -r *
-docker-compose up -d --build
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/go_app/
-ls
-rcode server.go 
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-cd echo/
-rcode Dockerfile
-exit
-cd echo/
-exit
-cd echo/
-rcode Dockerfile
-cd
-cd volumes/g`
-`
-cd volumes/go_app/
-rcode 
-rcode server.go 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "テンプレに埋め込む構造体がグローバルだと他のユーザーまで値が変わってしまうので、関数内で宣言するように変更"
-gitpush 
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-cd mysql/init/
-rcode webrepo.sql 
-cd
-cd volumes/go_app/views/
-ls
-rcode register_page.ace 
-rcode edit_page_cate.ace 
-git status
-git commit -am 'ジャンルと媒体の選択肢にその他が出るように修正'
-gitpush 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-cd volumes/go_app/views/
-ls
-rcode mypage_top.ace 
-rcode register_page.ace 
-cd volumes/go_app/views/
-docker-compose logs
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/go_app/
-rcode server.go 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "ログイン機能がJWTを使ったことで正常に機能しなくなっていたので修正"
-gitpush 
-rcode template_no_proxy.go_ 
-docker-compose logs
-rcode template_no_proxy.go_ 
-docker-compose logs
-rcode template_no_proxy.go_ 
-docker-compose logs
-rcode template_no_proxy.go_ 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +692,309 @@ docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+rcode createPrevEvalPage.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+rcode server.go 
+rcode createPrevEvalPage.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose up -d --build
+docker-compose logs
+docker-compose down
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+ls
+rcode template_no_proxy.go_ 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/views/
+cd
+git status
+gti commit -am
+gt commit -am
+git commit -am
+git commit -a
+gitpush 
+git log
+git commit -am "評価閲覧画面のコメント番号を評価毎の値で表示するように変更"
+gitpush 
+git commit -am "存在しないIDの評価閲覧画面を要求されても表示しないように変更"
+gitpush 
+git status
+git add volumes/go_app/views/input_evaluation_url.ace
+git status
+git commit -am "URLを直接入力してページを評価する処理を実装"
+gitpush 
+git log
+git commit -am "mysql はtext型にはDEFAULTを指定できないらしいので修正"
+gitpush 
+git commit -am "Update できなかった問題を解決"
+gitpush 
+git commit -am "URL付で評価入力された時は新規ページ登録画面にリダイレクトせずに評価閲覧ページを表示するように変更"
+gitpush 
+git commit -am "検索結果がまだGoogleになってたのでWebRepo★彡に修正"
+gitpush 
+git log
+git commit -am "ジャンルと媒体を指定して検索する機能を完成"
+git log
+gitpush 
+git commit -am "片方だけの指定で検索できるように修正"
+gitpush 
+git commit -am "ページ属性検索にGoogleでサイト内での検索用のフォームを追加"
+git commit --amend
+git add volumes/go_app/views/page_list.ace
+git commit --amend
+gitpush 
+git push -f
+git log
+git commit -am "ページ属性検索にGoogleでサイト内での検索用のフォームを追加"
+git commit -am "コメントを追加"
+gitpush 
+git log
+exit
+ls
+ls -s
+ls -a
+scp -4 .ssh tuna@笑.nal.ie.u-ryukyu.ac.jp:
+scp -4 .ssh tuna@xn--rvz.nal.ie.u-ryukyu.ac.jp:
