@@ -3,6 +3,7 @@ html lang=ja
   head
     meta charset=utf-8
     title {{.Title}} の評価 | WebRepo★彡
+    = include font-family
     = css
       body {
         margin-bottom: 0;

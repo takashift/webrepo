@@ -8,79 +8,6 @@ docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
-git commit -am "タグが空白時のエラーを克服"
-gitpush 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-exit
-cd volumes/go_app/
-rcode server.go 
-cd volumes/go_app/
-rcode server.go 
-docker exec -it tuna_mysql_1 /bin/bash
-cd
-cd mysql/
-ls
-cd init/
-rcode webrepo.sql 
-cd
-cd volumes/db_data/
-ls
-sudo rm -r *
-ls
-sudo rm -r *
-docker exec -it tuna_mysql_1 /bin/bash
-docker-compose logs
-docker stop tuna_echo_1
-cd volumes/go_app/
-cd
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd mysql/init/
-rcode webrepo.sql 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git status
-git commit -am 'HTTPヘッダーの時刻がParse出来ない問題が解決'
-gitpush 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +925,76 @@ ls -s
 ls -a
 scp -4 .ssh tuna@笑.nal.ie.u-ryukyu.ac.jp:
 scp -4 .ssh tuna@xn--rvz.nal.ie.u-ryukyu.ac.jp:
+docker-compose up -d --build
+mv -r ./webrepo/* .
+mv -h
+mv --help
+mv -r ./webrepo/* .
+mv ./webrepo/* .
+ls
+cd webrepo/
+l;s
+ls
+ls -a
+mv .bash_history ../
+mv .git ../
+cd ..
+ls -a
+cd .git/
+ls
+cd ..
+rm -r .git/
+cd webrepo/
+mv .git ../
+mv .gitconfig ../
+ls
+ls -a
+cd ..
+rm -r webrepo/
+ls
+ls -a
+docker-compose up -d --build
+yum update docker
+sudo yum update docker
+$ sudo yum remove docker docker-common docker-selinux docker-engine
+$ sudo yum remove docker
+docker
+$ sudo yum remove docker-common docker-selinux docker-engine
+$ sudo yum remove docker-common
+$ sudo yum remove docker-selinux docker-engine
+$ sudo yum remove docker-engine
+$ sudo yum remove docker
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum makecache fast
+yum list docker-ce.x86_64 --showduplicates | sort -r
+sudo yum install docker-ce-17.06.0.ce-1.el7.centos
+$ sudo yum remove docker-1.12.6-61.git85d7426.el7.centos.x86_64
+sudo yum remove docker docker-common docker-selinux docker-engine
+sudo yum install docker-ce-17.06.0.ce-1.el7.centos
+sudo yum remove docker docker-common docker-selinux docker-engine
+sudo yum install docker-ce.x86_64
+ sudo systemctl enable docker
+docker-compose up -d --build
+ docker run hello-world
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+ docker run hello-world
+sudo systemctl restart docker
+docker run hello-world
+docker-compose up -d --build
+docker ps
+ps
+docker ps
+ls
+cd volumes/go_app/views/
+sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
+sudo yum install -y wget
+sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
+sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
+chmod a+x /usr/local/bin/rcode
+sudo wget -O /usr/local/bin/rcode https://raw.github.com/aurora/rmate/master/rmate
+chmod a+x /usr/local/bin/rcode
+sudo chmod a+x /usr/local/bin/rcode
+ls
+rcode about.ace 
+exit

@@ -3,6 +3,7 @@ html lang=ja
   head
     meta charset=utf-8
     title sign in | WebRepo★彡
+    = include font-family
     = css
       #OAuth_menu {
         margin: 3rem 0 0 0;
