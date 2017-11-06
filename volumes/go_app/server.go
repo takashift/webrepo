@@ -237,7 +237,7 @@ func createJwt(c echo.Context, id int, email string) error {
 	claims := token.Claims.(jwt.MapClaims)
 	claims["id"] = id
 	claims["email"] = email
-	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+	// claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 	// Generate encoded token and send it as response.
 	t, err := token.SignedString([]byte("oppai"))

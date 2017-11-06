@@ -8,82 +8,6 @@ docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "新規ページ登録が完成"
-git[; ;; ]
-gitpush 
-docker-compose logs
-cd
-cd volumes/db_data/
-ls
-docker stop tuna_mysql_1
-sudo rm -r *
-ls
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 git log
 git commit -am "属性編集画面の機能がタグを消せない点以外完成"
 gitpush 
@@ -998,3 +922,79 @@ sudo chmod a+x /usr/local/bin/rcode
 ls
 rcode about.ace 
 exit
+cd volumes/go_app/views/
+rcode about.ace 
+rcode edit_page_cate.ace 
+rcode input_evaluation.ace 
+rcode OAuth_signup.ace 
+rcode search_result.ace 
+rcode agree_signup.ace 
+rcode *
+rcode footer.ace 
+rcode input_evaluation_url.ace 
+rcode page_list.ace 
+rcode search_top.ace 
+rcode tmp_preview_evaluation.ace 
+rcode header_menu.ace 
+rcode JWT.ace 
+rcode pass_signin.ace 
+rcode signin_select.ace 
+rcode consent_form.ace 
+rcode individual_review.ace 
+rcode preview_evaluation.ace 
+rcode term_of_service.ace 
+rcode dangerous_complete.ace 
+rcode input_comment.ace 
+rcode mypage_top.ace 
+rcode register_page.ace 
+rcode test.ace 
+rcode font-family.ace
+git log
+docker stop tuna_echo_1
+ docker-compose up -d --build
+ docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+ docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+ docker-compose logs
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+ docker-compose up -d --build
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+ docker-compose up -d --build
+docker stop tuna_echo_1
+ docker-compose up -d --build
+git status
+git add font-family.ace 
+git commit -am "フォントを設定"
+gitp
+gitpush 
