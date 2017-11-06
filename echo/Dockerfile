@@ -9,7 +9,7 @@ RUN apk --no-cache add gcc
 RUN apk --no-cache add musl-dev
 
 # task runner（ファイル監視ツール）
-RUN go get -u gopkg.in/godo.v2/cmd/godo
+# RUN go get -u gopkg.in/godo.v2/cmd/godo
 
 # framework
 RUN go get -u github.com/labstack/echo
@@ -35,12 +35,12 @@ RUN go get -u github.com/PuerkitoBio/goquery
 
 WORKDIR /go/src/app
 
-CMD ["/go/bin/godo", "server", "--watch"]
+# CMD ["/go/bin/godo", "server", "--watch"]
 
 # EXPOSE 1323
 
 # godo 不使用時のテスト
-# CMD ["go", "run", "server.go", "template_no_proxy.go"]
+CMD ["go", "run", "server.go", "createPrevEvalPage.go"]
 
 #ENTRYPOINT ["", ""]
 #CMD ["go", "run", "/fcgi/server.go"]

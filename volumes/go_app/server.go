@@ -729,7 +729,7 @@ func main() {
 			ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
 			ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
 			Endpoint:     google.Endpoint,
-			RedirectURL:  "https://webrepo.nal.ie.u-ryukyu.ac.jp/oauth2callback_google",
+			RedirectURL:  "https://" + host + "/oauth2callback_google",
 			Scopes: []string{
 				"email"},
 		}
@@ -1050,7 +1050,7 @@ func main() {
 				m.SetHeader("From", sendMailAdrr)
 				m.SetHeader("To", email)
 				m.SetHeader("Subject", "メールアドレスの確認")
-				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、このURLは無効となるので再度メールアドレスの登録をお願いします。\nhttps://webrepo.nal.ie.u-ryukyu.ac.jp/email_check?act="+act)
+				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、このURLは無効となるので再度メールアドレスの登録をお願いします。\nhttps://"+host+"/email_check?act="+act)
 
 				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: "USER_PASSWORD"}
 				if err := d.DialAndSend(m); err != nil {
