@@ -351,6 +351,7 @@ func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 			X9     string
 			X10    string
 			X11    string
+			None   string
 			Select string
 		}
 		mediaSL []string
@@ -362,6 +363,7 @@ func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 			X4     string
 			X5     string
 			X6     string
+			None   string
 			Select string
 		}
 		evalForm   EvalForm
@@ -374,7 +376,7 @@ func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 	dbSess.Select("genre").From("page_status_item").Load(&genreSL)
 	dbSess.Select("media").From("page_status_item").Load(&mediaSL)
 
-	if id >= 0 {
+	if id > 0 {
 		dbSess.Select("genre", "media", "tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
 			From("page_status").
 			Where("id = ?", id).
@@ -393,8 +395,13 @@ func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 			}
 		}
 	} else if genreQ != "" && mediaQ != "" {
+		genre.None = "未選択"
+		media.None = "未選択"
+
 		if genreQ == "*" {
 			genre.Select = "genre" + genreQ
+		} else if genreQ == "選択して下さい" {
+			genre.Select = "genre_none"
 		} else {
 			for i, v := range genreSL {
 				if genreQ == v {
@@ -405,6 +412,8 @@ func getPageStatusItem(c echo.Context, id int) (EvalForm, PageStatus) {
 
 		if mediaQ == "*" {
 			media.Select = "media" + mediaQ
+		} else if mediaQ == "選択して下さい" {
+			media.Select = "media_none"
 		} else {
 			for i, v := range mediaSL {
 				if mediaQ == v {

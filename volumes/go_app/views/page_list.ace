@@ -201,6 +201,7 @@ html lang=ja
               option id="genreX9" value={{.Genre.X9}} {{.Genre.X9}}
               option id="genreX10" value={{.Genre.X10}} {{.Genre.X10}}
               option id="genreX11" value={{.Genre.X11}} {{.Genre.X11}}
+              option id="genre_none" value="選択して下さい" 未選択
          label 媒体
           .sort
             select name="media" required=""
@@ -212,6 +213,7 @@ html lang=ja
               option id="mediaX4" value={{.Media.X4}} {{.Media.X4}}
               option id="mediaX5" value={{.Media.X5}} {{.Media.X5}}
               option id="mediaX6" value={{.Media.X6}} {{.Media.X6}}
+              option id="media_none" value="選択して下さい" 未選択
         label
           .sort
             input.button type="submit" value="表示"
