@@ -33,6 +33,10 @@ RUN go get -u github.com/gorilla/sessions
 # GetしたHTMLのスクレイピング
 RUN go get -u github.com/PuerkitoBio/goquery
 
+# 文字コード変換
+RUN go get -u github.com/saintfish/chardet
+RUN go get -u github.com/yuin/charsetutil
+
 WORKDIR /go/src/app
 
 # CMD ["/go/bin/godo", "server", "--watch"]

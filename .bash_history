@@ -3,27 +3,6 @@ docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git log
-git commit -am "属性編集画面の機能がタグを消せない点以外完成"
-gitpush 
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-gitpush 
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
 docker-compose logs
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +977,24 @@ git add font-family.ace
 git commit -am "フォントを設定"
 gitp
 gitpush 
+cd volumes/go_app/views/
+cd ..
+rcode server.go 
+git commit -am "JWTの期限を解除"
+gitpush 
+cd 
+cd echo/
+ls
+rcode Dockerfile
+cd
+cd volumes/go_app/
+ls
+rcode server.go 
+git commit -am "host名を変数に置き換え"
+gitpush 
+git log
+esir
+ls
+cd nginx/
+ls
+rcode app.conf 

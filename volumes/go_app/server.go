@@ -23,6 +23,8 @@ import (
 	"unsafe"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/saintfish/chardet"
+	"github.com/yuin/charsetutil"
 
 	"github.com/dchest/uniuri"
 	"github.com/dgrijalva/jwt-go"
@@ -42,20 +44,55 @@ import (
 const (
 	// 2017-10-06 17:20:00 では何故か出来なかった。。 → この日時じゃないと駄目らしい。
 	timeLayout = "2006-01-02 15:04:05"
+	tablename  = "userinfo"
 
-	host         = "webrepo.nal.ie.u-ryukyu.ac.jp"
+	// host         = "webrepo.nal.ie.u-ryukyu.ac.jp" 	// 本番環境
+	host         = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
 	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 
 var (
 	e = echo.New()
 
-	tablename = "userinfo"
-	seq       = 1
+	seq = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
 	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
 	dbSess      = conn.NewSession(nil)
 	byte13Str   = string([]byte{13})
+
+	googleOauthConfig = &oauth2.Config{
+		// 本番環境
+		// ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+		// ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
+		// テスト環境
+		ClientID:     "370442566774-868h6rc57kmfm82lu4hsviliuo9l6o07.apps.googleusercontent.com",
+		ClientSecret: "cX7ua-IKGwIJNsVxILni7vfp",
+
+		Endpoint:    google.Endpoint,
+		RedirectURL: "https://" + host + "/oauth2callback_google",
+		Scopes: []string{
+			"email"},
+	}
+
+	oauthService string
+
+	client *http.Client
+
+	// キャリアメールのドメイン
+	domain = []string{
+		"docomo.ne.jp",
+		"ezweb.ne.jp",
+		"au.com",
+		"willcom.com",
+		"y-mobile.ne.jp",
+		"emobile.ne.jp",
+		"ymobile1.ne.jp",
+		"ymobile.ne.jp",
+		"softbank.ne.jp",
+		"vodafone.ne.jp",
+		"i.softbank.jp",
+		"disney.ne.jp",
+	}
 )
 
 // e.Renderer に代入するために必須っぽい
@@ -723,37 +760,93 @@ func inputEval(c echo.Context) error {
 	return c.Redirect(http.StatusSeeOther, rURL)
 }
 
+// 文字コード判定
+func charDet(s string) (string, error) {
+	// sReader := strings.NewReader(s)
+	// fmt.Println(sReader)
+	// var by byte
+	// by, err := sReader.ReadByte()
+	// if err != nil {
+	// 	return "", err
+	// }
+	// b := []byte{by}
+	b := []byte(s)
+	fmt.Println(b)
+
+	d := chardet.NewTextDetector()
+	res, err := d.DetectBest(b)
+	if err != nil {
+		return "", err
+	}
+	switch res.Charset {
+	case "UTF-8":
+		return "utf8", nil
+	case "Shift_JIS":
+		return "SJIS", nil
+	case "EUC-JP":
+		return "EUC-JP", nil
+	case "ISO-2022-JP":
+		return "ISO-2022-JP", nil
+	default:
+		return res.Charset, err
+	}
+}
+
+// タイトルの取得
+func getPageTitle(url string, s *goquery.Selection) string {
+	title := s.Find("title").Text()
+	if title == "" {
+		title = url
+	} else {
+
+		// エンコードを確認
+		enc, exists := s.Find("meta").Attr("content")
+		if !exists {
+			enc = ""
+		} else {
+			enc = strings.ToUpper(strings.SplitAfter(enc, "charset=")[1])
+		}
+		fmt.Println(enc)
+
+		switch enc {
+		case "UTF-8":
+			enc = "utf8"
+		case "UTF8":
+			enc = "utf8"
+		case "SHIFT_JIS":
+			enc = "SJIS"
+		case "X-SJIS":
+			enc = "SJIS"
+		case "EUC-JP":
+			enc = "EUC-JP"
+		case "ISO-2022-JP":
+			enc = "ISO-2022-JP"
+		default:
+			fmt.Println("文字コードチェック")
+			enc, err := charDet(title)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("文字コードチェック完了" + enc)
+			if enc != "utf8" {
+				enc = ""
+			}
+		}
+
+		if enc != "utf8" {
+			fmt.Println("文字コード変換")
+			var err2 error
+			title, err2 = charsetutil.DecodeString(title, enc)
+			if err2 != nil {
+				title = url
+			}
+			fmt.Println(title)
+		}
+	}
+	return title
+}
+
 func main() {
-	var (
-		googleOauthConfig = &oauth2.Config{
-			ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
-			ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
-			Endpoint:     google.Endpoint,
-			RedirectURL:  "https://" + host + "/oauth2callback_google",
-			Scopes: []string{
-				"email"},
-		}
-
-		oauthService string
-
-		client *http.Client
-
-		// キャリアメールのドメイン
-		domain = []string{
-			"docomo.ne.jp",
-			"ezweb.ne.jp",
-			"au.com",
-			"willcom.com",
-			"y-mobile.ne.jp",
-			"emobile.ne.jp",
-			"ymobile1.ne.jp",
-			"ymobile.ne.jp",
-			"softbank.ne.jp",
-			"vodafone.ne.jp",
-			"i.softbank.jp",
-			"disney.ne.jp",
-		}
-	)
 
 	// ここで入れるべき構造体はinterfaceによって必須のメソッドが定義され、持つべき引数が決まっている。GoDoc参照。
 	e.Renderer = &AceTemplate{}
@@ -1050,7 +1143,8 @@ func main() {
 				m.SetHeader("From", sendMailAdrr)
 				m.SetHeader("To", email)
 				m.SetHeader("Subject", "メールアドレスの確認")
-				m.SetBody("text/plain", "WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、このURLは無効となるので再度メールアドレスの登録をお願いします。\nhttps://"+host+"/email_check?act="+act)
+				m.SetBody("text/plain",
+					"WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、このURLは無効となるので再度メールアドレスの登録をお願いします。\nhttps://"+host+"/email_check?act="+act)
 
 				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: "USER_PASSWORD"}
 				if err := d.DialAndSend(m); err != nil {
@@ -1363,11 +1457,9 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+
 		doc.Find("head").Each(func(i int, s *goquery.Selection) {
-			newPS.Title = s.Find("title").Text()
-			if newPS.Title == "" {
-				newPS.Title = newPS.URL
-			}
+			newPS.Title = getPageTitle(newPS.URL, s)
 		})
 
 		// 登録しようとしてる URL が https で、既に登録されてる URL が http だったら置き換えてリダイレクト
@@ -1548,10 +1640,7 @@ func main() {
 				panic(err)
 			}
 			doc.Find("head").Each(func(i int, s *goquery.Selection) {
-				newPS.Title = s.Find("title").Text()
-				if newPS.Title == "" {
-					newPS.Title = newPS.URL
-				}
+				newPS.Title = getPageTitle(dbPS.URL, s)
 			})
 		}
 
