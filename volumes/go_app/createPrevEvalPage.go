@@ -68,6 +68,23 @@ import (
 // 	}
 // )
 
+var (
+	gfpMenu = map[int]string{
+		5: "求めていた以上に達成できた",
+		4: "完全に達成できた",
+		3: "ほぼ達成できた",
+		2: "あまり達成できなかった",
+		1: "全然達成できなかった",
+	}
+	vispMenu = map[int]string{
+		5: "極めて見やすい",
+		4: "そこそこ見やすい",
+		3: "見づらくはない",
+		2: "そこそこ見づらい",
+		1: "極めて見づらい",
+	}
+)
+
 func makePrevEval(iEval int, eval IndividualEval) string {
 
 	iEval++
@@ -164,7 +181,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 		<p class="author">評価者　%s</p>
 		<p class="date">閲覧日　%s</p>
 		<h4 class="first">目的達成度　%s</h4>
-		<h4>見やすさ　　%s</h4>
+		<h4>見やすさ　　%s（%s）</h4>
 		<h4>誤字脱字数　%d箇所</h4>
 					%s
 					%s
@@ -193,7 +210,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	
 	<h3>コメント(%d件)</h3>
 	`, iEval, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
-		pasteStar(eval.GoodnessOfFit), pasteStar(eval.Visibility), eval.NumTypo,
+		pasteStar(eval.GoodnessOfFit, gfpMenu), pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
 		incorrect, correct, typoEnd, eval.DescriptionEval,
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
@@ -271,22 +288,31 @@ func toEval(i int, arg IndividualEvalComment, numMap map[int]int) string {
 	return value
 }
 
-func pasteStar(i int) string {
+func pasteStar(i int, m map[int]string) string {
 	var result string
 	if i == 1 {
-		result = "<span class=\"star\">★</span>　　　　 1"
+		result = "<span class=\"star\">★</span>　　　　 1　" + m[i]
 	}
 	if i == 2 {
-		result = "<span class=\"star\">★★</span>　　　 2"
+		result = "<span class=\"star\">★★</span>　　　 2　" + m[i]
 	}
 	if i == 3 {
-		result = "<span class=\"star\">★★★</span>　　 3"
+		result = "<span class=\"star\">★★★</span>　　 3　" + m[i]
 	}
 	if i == 4 {
-		result = "<span class=\"star\">★★★★</span>　 4"
+		result = "<span class=\"star\">★★★★</span>　 4　" + m[i]
 	}
 	if i == 5 {
-		result = "<span class=\"star\">★★★★★</span> 5"
+		result = "<span class=\"star\">★★★★★</span> 5　" + m[i]
 	}
 	return result
+}
+
+func setDevice(s string) string {
+	if s == "SP" {
+		s = "スマートフォン・タブレット端末"
+	} else {
+		s = "パソコン"
+	}
+	return s
 }

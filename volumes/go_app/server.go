@@ -1281,11 +1281,20 @@ func main() {
 				enableNum++
 			}
 		}
-		// 四捨五入して評価を表示
+		// 10倍して四捨五入
 		gfpf := math.Floor(math.Pow(float64(gfp)/float64(enableNum), 10) + 0.05)
 		vispf := math.Floor(math.Pow(float64(visp)/float64(enableNum), 10) + 0.05)
-		pageValue.AveGFP = fmt.Sprintf("%.1f", math.Pow(gfpf, -10))
-		pageValue.AveVisP = fmt.Sprintf("%.1f", math.Pow(vispf, -10))
+		// 0.1倍して代入
+		pageValue.AveGFP = strconv.FormatFloat(math.Pow(gfpf, -10), 'f', 1, 64)
+		pageValue.AveVisP = strconv.FormatFloat(math.Pow(vispf, -10), 'f', 1, 64)
+		// // スターを付ける
+		// aveGFPsl := strings.Split(pageValue.AveGFP, ".")
+		// aveVisPsl := strings.Split(pageValue.AveVisP, ".")
+		// gfp, _ = strconv.Atoi(aveGFPsl[0])
+		// visp, _ = strconv.Atoi(aveVisPsl[0])
+		// fmt.Println("GFP", gfp)
+		// pageValue.AveGFP = pasteStar(gfp) + "." + aveGFPsl[1]
+		// pageValue.AveVisP = pasteStar(visp) + "." + aveVisPsl[1]
 
 		if err != nil {
 			panic(err)

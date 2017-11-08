@@ -222,8 +222,8 @@ html lang=ja
             / h2#popu_pp {{.PopuPP}}
             h3 平均評価
             / h4 総合　　　　★★★★★ {{}}
-            h4 目的達成度 {{.AveGFP}}
-            h4 見やすさ　 {{.AveVisP}}
+            h4 目的達成度　{{.AveGFP}}
+            h4 見やすさ　　{{.AveVisP}}
             / hr size="1.5" width="100%" color="#AAAAAA"
           / h4 誤字脱字　　{{.NumTypo}}箇所
         .right
