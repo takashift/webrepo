@@ -47,8 +47,8 @@ const (
 	timeLayout = "2006-01-02 15:04:05"
 	tablename  = "userinfo"
 
+	host = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
 	// host         = "webrepo.nal.ie.u-ryukyu.ac.jp" 	// 本番環境
-	host         = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
 	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 
@@ -62,12 +62,12 @@ var (
 	byte13Str   = string([]byte{13})
 
 	googleOauthConfig = &oauth2.Config{
-		// 本番環境
-		// ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
-		// ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
 		// テスト環境
 		ClientID:     "370442566774-868h6rc57kmfm82lu4hsviliuo9l6o07.apps.googleusercontent.com",
 		ClientSecret: "cX7ua-IKGwIJNsVxILni7vfp",
+		// 本番環境
+		// ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+		// ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
 
 		Endpoint:    google.Endpoint,
 		RedirectURL: "https://" + host + "/oauth2callback_google",
@@ -877,6 +877,7 @@ func main() {
 		return signinCheck("search_top", c, nil)
 	})
 
+	// テスト環境のみ
 	e.GET("test", func(c echo.Context) error {
 		uri := "http://" + host + "/test///"
 		if strings.HasPrefix(uri, "http://") {
@@ -903,6 +904,7 @@ func main() {
 
 		return c.String(http.StatusOK, up)
 	})
+
 	// 検索時に呼び出される
 	e.GET("/search", func(c echo.Context) error {
 		searchForm := PageValue{
@@ -996,13 +998,14 @@ func main() {
 		return signinCheck("page_list", c, listPageValue)
 	})
 
-	e.GET("/page_eval", func(c echo.Context) error {
-		searchForm := PageValue{
-			Query: "",
-		}
+	// テスト環境のみ
+	// e.GET("/page_eval", func(c echo.Context) error {
+	// 	searchForm := PageValue{
+	// 		Query: "",
+	// 	}
 
-		return signinCheck("preview_evaluation", c, searchForm)
-	})
+	// 	return signinCheck("preview_evaluation", c, searchForm)
+	// })
 
 	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
@@ -1361,14 +1364,15 @@ func main() {
 		return signinCheck("about", c, nil)
 	})
 
-	r.GET("/test", func(c echo.Context) error {
-		user := c.Get("user").(*jwt.Token)
-		claims := user.Claims.(jwt.MapClaims)
-		id := int(claims["id"].(float64))
-		email := claims["email"].(string)
-		return c.String(http.StatusOK, "Welcome "+fmt.Sprint(id)+" "+email+"!")
-		// return signinCheckJWT(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
-	})
+	// テスト環境のみ
+	// r.GET("/test", func(c echo.Context) error {
+	// 	user := c.Get("user").(*jwt.Token)
+	// 	claims := user.Claims.(jwt.MapClaims)
+	// 	id := int(claims["id"].(float64))
+	// 	email := claims["email"].(string)
+	// 	return c.String(http.StatusOK, "Welcome "+fmt.Sprint(id)+" "+email+"!")
+	// 	// return signinCheckJWT(pagePath{Page: "mypage_top", URL: "/mypage"}, c)
+	// })
 
 	// マイページ
 	r.GET("/mypage", func(c echo.Context) error {
