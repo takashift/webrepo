@@ -220,10 +220,10 @@ html lang=ja
             s
             / h3 最も高評価な閲覧目的
             / h2#popu_pp {{.PopuPP}}
-            / h3 評価平均
+            h3 平均評価
             / h4 総合　　　　★★★★★ {{}}
-            / h4 目的達成度　★★★★★ {{.GFP}}
-            / h4 見やすさ　　★★★★★ {{.VisP}}
+            h4 目的達成度 {{.AveGFP}}
+            h4 見やすさ　 {{.AveVisP}}
             / hr size="1.5" width="100%" color="#AAAAAA"
           / h4 誤字脱字　　{{.NumTypo}}箇所
         .right

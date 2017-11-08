@@ -13,6 +13,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
 	"net"
 	"net/http"
 	"os"
@@ -123,6 +124,8 @@ type (
 		PageValue
 		PageStatus
 		Content string
+		AveGFP  string
+		AveVisP string
 	}
 
 	ListPageValue struct {
@@ -1263,6 +1266,26 @@ func main() {
 
 		fmt.Println("PS OK")
 		fmt.Println(individualEval)
+
+		var (
+			gfp       int
+			visp      int
+			enableNum int
+		)
+		// 平均評価を計算
+		for _, v := range individualEval {
+			// 審議なしか審議済みなら
+			if v.Deliberate <= 1 {
+				gfp += v.GoodnessOfFit
+				visp += v.Visibility
+				enableNum++
+			}
+		}
+		// 四捨五入して評価を表示
+		gfpf := math.Floor(math.Pow(float64(gfp)/float64(enableNum), 10) + 0.05)
+		vispf := math.Floor(math.Pow(float64(visp)/float64(enableNum), 10) + 0.05)
+		pageValue.AveGFP = fmt.Sprintf("%.1f", math.Pow(gfpf, -10))
+		pageValue.AveVisP = fmt.Sprintf("%.1f", math.Pow(vispf, -10))
 
 		if err != nil {
 			panic(err)
