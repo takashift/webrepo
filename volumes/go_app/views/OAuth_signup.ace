@@ -52,6 +52,9 @@ html lang=ja
       input[name="mod_pass"] {
         margin-bottom: 2rem;
       }
+      #consent_abst {
+        margin-top: 3rem;
+      }
       #consent_form {
         margin: 2rem auto 0 auto;
         padding: 1rem;
@@ -85,9 +88,22 @@ html lang=ja
         h2 新規登録
         label メールアドレス　　　
           input name="email" size="60" required=""
-          p.note ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
+          p ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
+          p ※キャリアのメールには迷惑メール・なりすましメール設定で受信拒否の設定がされている事があるので、
+            p
+              b @nal.ie.u-ryukyu.ac.jp
+            p  を受信する用に設定してください。
+              br （PCからのメールが受信されない設定になっていることがあります。）
+          p
+            a href="https://www.nttdocomo.co.jp/info/spam_mail/spmode/domain/index.html" ドコモの設定方法
+            span 　　
+            a href="https://www.au.com/support/service/mobile/trouble/mail/email/filter/detail/domain/" auの設定方法
+            span 　　
+            a href="https://www.softbank.jp/mobile/support/antispam/settings/whiteblack/" ソフトバンクの設定方法
+            span 　　
+            a href="http://www.ymobile.jp/service/others/spam/" Y!mobileの設定方法
           p.red {{.Error}}
-        p 以下の同意を以て登録となります。
+        p#consent_abst 以下の同意を以て登録となります。
         #consent_form
           = include consent_form
         p 上記の内容に、
