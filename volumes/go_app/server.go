@@ -983,7 +983,7 @@ func main() {
 							<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
 							<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
 						</div>
-					`, i, v.ID, v.Title, v.URL, v.URL,
+					`, i+1, v.ID, v.Title, v.URL, v.URL,
 							v.Genre, v.Media,
 							v.Tag1, v.Tag2, v.Tag3, v.Tag4, v.Tag5, v.Tag6, v.Tag7,
 							v.Tag8, v.Tag9, v.Tag10,
