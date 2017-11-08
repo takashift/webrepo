@@ -930,7 +930,9 @@ func main() {
 		)
 
 		// DBから指定したジャンルと媒体のページを取得
-		if genreQ == "*" {
+		if genreQ == "*" && mediaQ == "*" {
+			listPageValue.Content = "<p>ジャンルか媒体どちらかを選択して下さい。</p>"
+		} else if genreQ == "*" {
 			_, err = dbSess.Select("id", "title", "URL",
 				"genre", "media", "dead",
 				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
@@ -953,35 +955,39 @@ func main() {
 			panic(err)
 		}
 
-		if dbPS != nil {
+		if listPageValue.Content == "" {
+			if dbPS != nil {
 
-			// dead が 0 以外のものは除外
-			var alivePS []PageStatus
-			for i := 0; i < len(dbPS); i++ {
-				if dbPS[i].Dead == 0 {
-					alivePS = append(alivePS, dbPS[i])
+				// dead が 0 以外のものは除外
+				var alivePS []PageStatus
+				for i := 0; i < len(dbPS); i++ {
+					if dbPS[i].Dead == 0 {
+						alivePS = append(alivePS, dbPS[i])
+					}
 				}
-			}
-			// スライスの要素数からページの件数を取得
-			resultNum := len(alivePS)
-			listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
+				// スライスの要素数からページの件数を取得
+				resultNum := len(alivePS)
+				listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
 
-			for _, v := range alivePS {
+				for i, v := range alivePS {
 
-				listPageValue.Content +=
-					fmt.Sprintf(
-						`
+					listPageValue.Content +=
+						fmt.Sprintf(
+							`
 						<div class="page_status">
-							<h3><a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
+							<h3>%d： <a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
 							<div class="cate">ジャンル：%s　媒体：%s</div>
 							<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
 							<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
 						</div>
-					`, v.ID, v.Title, v.URL, v.URL,
-						v.Genre, v.Media,
-						v.Tag1, v.Tag2, v.Tag3, v.Tag4, v.Tag5, v.Tag6, v.Tag7,
-						v.Tag8, v.Tag9, v.Tag10,
-						v.ID)
+					`, i, v.ID, v.Title, v.URL, v.URL,
+							v.Genre, v.Media,
+							v.Tag1, v.Tag2, v.Tag3, v.Tag4, v.Tag5, v.Tag6, v.Tag7,
+							v.Tag8, v.Tag9, v.Tag10,
+							v.ID)
+				}
+			} else {
+				listPageValue.Content = "<p id=\"result_status\">検索結果：0件</p>"
 			}
 		}
 		return signinCheck("page_list", c, listPageValue)
