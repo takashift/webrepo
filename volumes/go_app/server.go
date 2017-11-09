@@ -93,7 +93,7 @@ var (
 		"vodafone.ne.jp",
 		"i.softbank.jp",
 		"disney.ne.jp",
-		"u-ryukyu.ac.jp"
+		"u-ryukyu.ac.jp",
 	}
 )
 
@@ -1060,34 +1060,17 @@ func main() {
 		sess, _ := session.Get("session", c)
 		sess.Values["GoogleMail"] = userGoogle.Email
 
-		fmt.Println(strings.SplitAfter(userGoogle.Email, "@")[1])
-
 		// エラーを吐いた == 中身が入ってない場合
 		// 本登録されてない時
 		if userInfoDB.Email == "" {
 			sess.Save(c.Request(), c.Response())
 
-			if !strings.Contains(strings.SplitAfter(userGoogle.Email, "@")[1], "ie.u-ryukyu.ac.jp") {
-				oauthService = "Google"
-				return c.Redirect(http.StatusFound, "/OAuth_signup")
+			oauthService = "Google"
+			if strings.HasSuffix(strings.SplitAfter(userGoogle.Email, "@")[1], "ie.u-ryukyu.ac.jp") {
+				return c.Render(http.StatusOK, "ie_OAuth_signup", nil)
 			}
 
-			// 学内のアドレスの場合はアドレスの入力無しでログインさせる
-			// 正規のユーザーテーブルに追加
-			result, err := dbSess.InsertInto("userinfo").
-				Columns("OAuth_service", "OAuth_userinfo", "email").
-				Values(oauthService, userGoogle.Email, userGoogle.Email).
-				Exec()
-			if err != nil {
-				panic(err)
-			} else {
-				fmt.Fprintf(os.Stderr, "insert userinfo:%s\n", result)
-			}
-
-			// OAuth、キャリアメールが本登録されてるか確認
-			_, err = dbSess.Select("id", "email").From("userinfo").
-				Where("OAuth_userinfo = ?", userGoogle.Email).
-				Load(&userInfoDB)
+			return c.Redirect(http.StatusFound, "/OAuth_signup")
 		}
 
 		// エラーが無い == 登録済み場合
@@ -1103,6 +1086,43 @@ func main() {
 
 		return c.Redirect(http.StatusSeeOther, rURL)
 
+	})
+
+	e.GET("ie_agree_signup", func(c echo.Context) error {
+
+		var userInfoDB userinfo
+
+		sess, _ := session.Get("session", c)
+		email := sess.Values["GoogleMail"].(string)
+		// 学内のアドレスの場合はアドレスの入力無しでログインさせる
+		// 正規のユーザーテーブルに追加
+		result, err := dbSess.InsertInto("userinfo").
+			Columns("OAuth_service", "OAuth_userinfo", "email").
+			Values(oauthService, email, email).
+			Exec()
+		if err != nil {
+			panic(err)
+		} else {
+			fmt.Fprintf(os.Stderr, "insert userinfo:%s\n", result)
+		}
+
+		// OAuth、キャリアメールが本登録されてるか確認
+		_, err = dbSess.Select("id", "email").From("userinfo").
+			Where("OAuth_userinfo = ?", email).
+			Load(&userInfoDB)
+
+		// エラーが無い == 登録済み場合
+		// リファラーURLがこのサイトのものか確認する
+		createJwt(c, userInfoDB.ID, userInfoDB.Email)
+		fmt.Println("登録済み")
+
+		rURL := sess.Values["refererURL"].(string)
+		sess.Values["refererURL"] = nil
+		sess.Save(c.Request(), c.Response())
+
+		fmt.Fprintf(os.Stderr, "%s\n", rURL)
+
+		return c.Redirect(http.StatusSeeOther, rURL)
 	})
 
 	// OAuth認証サインアップ（同意）フォーム
@@ -1147,7 +1167,7 @@ func main() {
 		for i := 0; i < len(domain); i++ {
 			fmt.Fprintf(os.Stderr, "%s : %s\n", eDomain, domain[i])
 
-			if strings.Contains(eDomain, domain[i]) {
+			if strings.HasSuffix(eDomain, domain[i]) {
 
 				// メールアドレスが登録されてないのでメールと関連付けたURLを発行
 				mac := hmac.New(sha256.New, []byte(uniuri.New()))
