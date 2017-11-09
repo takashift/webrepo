@@ -1,4 +1,3 @@
-docker stop tuna_echo_1
 docker-compose logs
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +997,4 @@ docker exec -it tuna_mysql_1 /bin/bash
 cd volumes/go_app/
 docker-compose logs
 rcode server.go 
+docker exec -it tuna_mysql_1 /bin/bash
