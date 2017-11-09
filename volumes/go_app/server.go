@@ -93,6 +93,7 @@ var (
 		"vodafone.ne.jp",
 		"i.softbank.jp",
 		"disney.ne.jp",
+		"u-ryukyu.ac.jp"
 	}
 )
 
@@ -1059,12 +1060,34 @@ func main() {
 		sess, _ := session.Get("session", c)
 		sess.Values["GoogleMail"] = userGoogle.Email
 
+		fmt.Println(strings.SplitAfter(userGoogle.Email, "@")[1])
+
 		// エラーを吐いた == 中身が入ってない場合
+		// 本登録されてない時
 		if userInfoDB.Email == "" {
 			sess.Save(c.Request(), c.Response())
 
-			oauthService = "Google"
-			return c.Redirect(http.StatusFound, "/OAuth_signup")
+			if !strings.Contains(strings.SplitAfter(userGoogle.Email, "@")[1], "ie.u-ryukyu.ac.jp") {
+				oauthService = "Google"
+				return c.Redirect(http.StatusFound, "/OAuth_signup")
+			}
+
+			// 学内のアドレスの場合はアドレスの入力無しでログインさせる
+			// 正規のユーザーテーブルに追加
+			result, err := dbSess.InsertInto("userinfo").
+				Columns("OAuth_service", "OAuth_userinfo", "email").
+				Values(oauthService, userGoogle.Email, userGoogle.Email).
+				Exec()
+			if err != nil {
+				panic(err)
+			} else {
+				fmt.Fprintf(os.Stderr, "insert userinfo:%s\n", result)
+			}
+
+			// OAuth、キャリアメールが本登録されてるか確認
+			_, err = dbSess.Select("id", "email").From("userinfo").
+				Where("OAuth_userinfo = ?", userGoogle.Email).
+				Load(&userInfoDB)
 		}
 
 		// エラーが無い == 登録済み場合
@@ -1197,14 +1220,14 @@ func main() {
 
 		fmt.Fprintf(os.Stderr, "act: %s\n", tmpUser.Act)
 
-		t := time.Now()
-		tF := t.Format(timeLayout)
-		fmt.Fprintf(os.Stderr, "time: %s\n", tF)
+		// t := time.Now()
+		// tF := t.Format(timeLayout)
+		// fmt.Fprintf(os.Stderr, "time: %s\n", tF)
 
 		// 正規のユーザーテーブルに追加
 		result, err := dbSess.InsertInto("userinfo").
-			Columns("OAuth_service", "OAuth_userinfo", "email", "signup_date").
-			Values(tmpUser.OAuthService, tmpUser.OAuthUserinfo, tmpUser.Email, tF).
+			Columns("OAuth_service", "OAuth_userinfo", "email").
+			Values(tmpUser.OAuthService, tmpUser.OAuthUserinfo, tmpUser.Email).
 			Exec()
 		if err != nil {
 			panic(err)

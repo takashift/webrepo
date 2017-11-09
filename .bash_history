@@ -1,27 +1,3 @@
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-ls
-docker-compose logs
-docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose logs
 docker-compose up -d --build
@@ -996,5 +972,29 @@ cd ..
 rcode server.go 
 docker stop tuna_echo_1
 docker-compose up -d --build
+docker-compose logs
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose log
+docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+ls
+cd volumes/go_app/
+ls
+rcode server.go 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+cd nginx/
+rcode Dockerfile 
+rcode app.conf 
+git commit -am "証明書の権限を変更するようにDockerfileを修正"
+gitpush 
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
 docker-compose logs
 rcode server.go 
