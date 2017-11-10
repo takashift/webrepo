@@ -813,13 +813,16 @@ func getPageTitle(url string, s *goquery.Selection) string {
 	} else {
 
 		// エンコードを確認
-		enc, exists := s.Find("meta").Attr("content")
+		enc, exists := s.Find("meta").Attr("charset") // HTML5
 		if !exists {
-			enc = ""
-		} else {
-			enc = strings.ToUpper(strings.SplitAfter(enc, "charset=")[1])
+			enc, exists := s.Find("meta").Attr("content")
+			if !exists {
+				enc = ""
+			} else {
+				enc = strings.ToUpper(strings.SplitAfter(enc, "charset=")[1])
+			}
+			fmt.Println(enc)
 		}
-		fmt.Println(enc)
 
 		switch enc {
 		case "UTF-8":
