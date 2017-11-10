@@ -96,6 +96,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 
 	fmt.Println(eval.EvaluatorID)
 
+	fmt.Println("評価者名を取得")
 	// DB から評価者名を取得
 	evaluatorName, err := dbSess.Select("name").From("userinfo").
 		Where("id = ?", eval.EvaluatorID).
