@@ -1,44 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_mysql_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_mysql_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-rcode template_no_proxy.go_ 
-docker-compose logs
-rcode template_no_proxy.go_ 
-docker-compose logs
-docker stop tuna_echo_1
-rcode template_no_proxy.go_ 
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
@@ -998,3 +957,44 @@ git status
 git add ie_OAuth_signup.ace 
 git commit -am "ie生用の同意画面をaddし忘れていたので追加"
 gitpush 
+ls
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "ieのアドレスなら、キャリアのアドレス無しに登録できるように変更"
+gitpush 
+rcode nginx/Dockerfile 
+rcode nginx/app.conf 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd nginx/s
+cd nginx/
+ls
+cd keys/
+ls
+mv server.crt server.cer
+touch server.crt
+cat server.cer >> server.crt
+cat nii-odcacssha1.cer >> server.crt
+ls -l
+chmod 400 server.crt nii-odcacssha1.cer
+ls -l
+git status
+git add server.cer nii-odcacssha1.cer 
+git commit -am "中間証明書と合成したファイルを追加"
+gitpush 
+git fetch origin
+git reset --hard origin/master
+cd 
+cd volumes/go_app/
+ls
+rcode server.go 
