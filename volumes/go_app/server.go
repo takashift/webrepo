@@ -814,12 +814,18 @@ func getPageTitle(url string, s *goquery.Selection) string {
 
 		// エンコードを確認
 		enc, exists := s.Find("meta").Attr("charset") // HTML5
+		fmt.Println(enc)
 		if !exists {
 			enc, exists := s.Find("meta").Attr("content")
 			if !exists {
 				enc = ""
 			} else {
-				enc = strings.ToUpper(strings.SplitAfter(enc, "charset=")[1])
+				encSL := strings.SplitAfter(enc, "charset=")
+				if len(encSL) >= 2 {
+					enc = strings.ToUpper(encSL[1])
+				} else {
+					enc = ""
+				}
 			}
 			fmt.Println(enc)
 		}
