@@ -836,7 +836,8 @@ func getPageTitle(url string, s *goquery.Selection) string {
 			enc = "ISO-2022-JP"
 		default:
 			fmt.Println("文字コードチェック")
-			enc, err := charDet(title)
+			var err error
+			enc, err = charDet(title)
 			if err != nil {
 				panic(err)
 			}
