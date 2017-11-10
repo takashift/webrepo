@@ -1,57 +1,3 @@
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +944,57 @@ cd volumes/go_app/
 docker-compose logs
 rcode server.go 
 docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+rcode server.go 
+ls ~/nginx/key
+ls ~/nginx/key/
+ls -l ~/nginx/key 
+cd 
+cd nginx/key
+ls
+cd nginx/
+ls
+rm key
+cd ..
+mv webrepo.nal.ie.u-ryukyu.ac.jp.key nginx/keys/
+mv webrepo.nal.ie.u-ryukyu.ac.jp.csr nginx/keys/
+mv webrepo.nal.ie.u-ryukyu.ac.jp.crt nginx/keys/
+ls
+cd nginx/keys/
+ls
+ls -l
+chmod 400 webrepo.nal.ie.u-ryukyu.ac.jp.crt webrepo.nal.ie.u-ryukyu.ac.jp.csr webrepo.nal.ie.u-ryukyu.ac.jp.key 
+mv webrepo.nal.ie.u-ryukyu.ac.jp.key server.key 
+mv webrepo.nal.ie.u-ryukyu.ac.jp.crt server.crt 
+mv webrepo.nal.ie.u-ryukyu.ac.jp.csr server.csr
+ls
+ls -l
+cat server.key 
+openssl rsa -in server.key -out server.key
+mv webrepo.nal.ie.u-ryukyu.ac.jp.key server.key 
+ls
+ls -l
+chmod 400 server.key 
+ls
+ls -l
+git commit -am "証明書を本番環境のものに置き換え"
+gitpush 
+cd vg
+cd
+cd volumes/go_app/
+ls
+cd views/
+ls
+cp OAuth_signup.ace ie_OAuth_signup.ace 
+rcode ie_OAuth_signup.ace 
+git commit -am "ie生でも同意画面を表示するように変更"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
+git stutus
+git status
+git add ie_OAuth_signup.ace 
+git commit -am "ie生用の同意画面をaddし忘れていたので追加"
+gitpush 
