@@ -992,8 +992,8 @@ func main() {
 						</div>
 					`, i+1, v.ID, v.Title, v.URL, v.URL,
 							v.Genre, v.Media,
-							v.Tag1, v.Tag2, v.Tag3, v.Tag4, v.Tag5, v.Tag6, v.Tag7,
-							v.Tag8, v.Tag9, v.Tag10,
+							v.Tag1, v.Tag2, v.Tag3, v.Tag4, v.Tag5,
+							v.Tag6, v.Tag7, v.Tag8, v.Tag9, v.Tag10,
 							v.ID)
 				}
 			} else {
@@ -1332,11 +1332,11 @@ func main() {
 			}
 		}
 		// 10倍して四捨五入
-		gfpf := math.Floor(math.Pow(float64(gfp)/float64(enableNum), 10) + 0.05)
-		vispf := math.Floor(math.Pow(float64(visp)/float64(enableNum), 10) + 0.05)
+		gfpf := math.Floor((float64(gfp)/float64(enableNum))*math.Pow10(1) + 0.05)
+		vispf := math.Floor((float64(visp)/float64(enableNum))*math.Pow10(1) + 0.05)
 		// 0.1倍して代入
-		pageValue.AveGFP = strconv.FormatFloat(math.Pow(gfpf, -10), 'f', 1, 64)
-		pageValue.AveVisP = strconv.FormatFloat(math.Pow(vispf, -10), 'f', 1, 64)
+		pageValue.AveGFP = strconv.FormatFloat(gfpf*math.Pow10(-1), 'f', 1, 64)
+		pageValue.AveVisP = strconv.FormatFloat(vispf*math.Pow10(-1), 'f', 1, 64)
 		// // スターを付ける
 		// aveGFPsl := strings.Split(pageValue.AveGFP, ".")
 		// aveVisPsl := strings.Split(pageValue.AveVisP, ".")
