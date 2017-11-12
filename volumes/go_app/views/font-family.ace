@@ -28,7 +28,7 @@
   }
 
   html {
-    font-family: -apple-system, "Hiragino Kaku Gothic ProN", BlinkMacSystemFont, "Helvetica Neue", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+    font-family: -apple-system, "Yu Gothic Midium", "Hiragino Kaku Gothic ProN", BlinkMacSystemFont, "Helvetica Neue", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
   }
 
   /* IE10以上 */
