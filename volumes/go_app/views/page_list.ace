@@ -18,7 +18,7 @@ html lang=ja
         margin-bottom: 0.5rem;
       }
       h1 {
-        font-family: 'Product Sans', 'Catull BQ', sans-serif;
+        font-family: 'Product Sans', 'Catull BQ';
         margin-right: 1rem;
         margin-left: 13px;
       }

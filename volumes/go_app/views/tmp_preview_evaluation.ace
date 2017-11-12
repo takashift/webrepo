@@ -18,6 +18,7 @@ html lang=ja
         margin: 2rem;
       }
       #head h1 {
+        font-family: 'Product Sans', 'Catull BQ';
         display: inline;
       }
       .blue {
