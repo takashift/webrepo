@@ -226,7 +226,9 @@ html lang=ja
             h4 目的達成度　{{.AveGFP}}
             h4 見やすさ　　{{.AveVisP}}
             / hr size="1.5" width="100%" color="#AAAAAA"
-          / h4 誤字脱字　　{{.NumTypo}}箇所
+            / h4 誤字脱字　　{{.NumTypo}}箇所
+            a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="&#13;&#10;{{.Title}}の評価 | WebRepo★彡&#13;&#10;みんなも評価しよう" data-hashtags="WebRepo #Webページ評価" data-related="web_repo" data-show-count="false" Tweet
+            script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"
         .right
           #cate
             h3 ジャンル
