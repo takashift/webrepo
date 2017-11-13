@@ -88,7 +88,7 @@ html lang=ja
         h2 新規登録
         label メールアドレス　　　
           input name="email" size="60" required=""
-          p ※docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
+          p ※.ac.jp/docomo/au/softbank/Y!mobile/emobile/willcomのアドレスのみ登録可
           p ※キャリアのメールには迷惑メール・なりすましメール設定で受信拒否の設定がされている事があるので、
             p
               b @nal.ie.u-ryukyu.ac.jp

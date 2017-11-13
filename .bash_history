@@ -1,65 +1,3 @@
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +936,65 @@ git commit -am "間違ったファイルを合成していたので週背"
 git commit --amend
 gitpush 
 docker exec -it tuna_mysql_1 /bin/bash
+git status
+ls
+cd volumes/go_app/
+ls
+rcode server.go 
+cd views/
+ls
+rcode font-family.ace 
+rcode search_top.ace 
+git log
+git sutatua
+git sutats
+git status
+git add ../../../nginx/keys/nii-odca3sha2.cer
+git commit -am "font-family の指定の前の方に游ゴシック体ミディアムを追加"
+gitpush 
+ls
+rcode search_top.ace 
+rcode search_result.ace 
+rcode page_list.ace 
+rcode p
+rcode preview_evaluation.ace 
+rcode t
+rcode tmp_preview_evaluation.ace 
+git commit -am "WebRepo★彡のフォント指定からsan-selfを削除"
+gitpush 
+git commit -am "トップページのタイトルを変更"
+gitpush 
+git commit -am "トップページのタイトルを変更"
+gitpush 
+cd
+cd bin/
+rcode _gitpulldep
+ls -l
+chmod 700 _gitpulldep 
+ls -l
+git commit -am "本番環境での pull を自動化するコマンドを作成"
+git commit --amend
+git status
+git add _gitpulldep 
+git status
+git commit -am "本番環境での pull を自動化するコマンドを作成"
+gitpush 
+git push -f
+git log
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git status
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git status
+git commit -am "評価閲覧ページにTwitterのシェアボタンを追加"
+gitpush 

@@ -93,7 +93,7 @@ var (
 		"vodafone.ne.jp",
 		"i.softbank.jp",
 		"disney.ne.jp",
-		"u-ryukyu.ac.jp",
+		".ac.jp",
 	}
 )
 
