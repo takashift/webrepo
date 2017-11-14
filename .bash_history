@@ -7,16 +7,6 @@ docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +988,13 @@ docker-compose up -d --build
 git status
 git commit -am "評価閲覧ページにTwitterのシェアボタンを追加"
 gitpush 
+ls
+cd volumes/go_app/views/
+ls
+rcode server.go
+rcode ../server.go
+rcode OAuth_signup.ace 
+git commit -am ".ac.jpのアドレスをキャリアメールの代わりに使えるように変更"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build

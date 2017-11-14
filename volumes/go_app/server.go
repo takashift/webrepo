@@ -258,16 +258,16 @@ func (at *AceTemplate) Render(w io.Writer, name string, data interface{}, c echo
 	return tpl.Execute(w, data)
 }
 
-// // リファラーURLがこのサイトのものか確認する関数
-// func refererCheck(refererURL string) string {
-// 	var redirect string
-// 	if strings.Contains(refererURL, host) {
-// 		redirect = refererURL
-// 	} else {
-// 		redirect = "/"
-// 	}
-// 	return redirect
-// }
+// リファラーURLがこのサイトのものか確認する関数
+func refererCheck(refererURL string) string {
+	var redirect string
+	if strings.Contains(refererURL, "/r/") {
+		redirect = refererURL
+	} else {
+		redirect = "/"
+	}
+	return redirect
+}
 
 func createJwt(c echo.Context, id int, email string) error {
 
@@ -322,7 +322,7 @@ func cookieToHeaderAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 				MaxAge:   86400 * 7,
 				HttpOnly: true,
 			}
-			sess.Values["refererURL"] = c.Request().URL.String()
+			sess.Values["refererURL"] = refererCheck(c.Request().URL.String())
 			sess.Save(c.Request(), c.Response())
 
 			// サインイン画面へリダイレクト
