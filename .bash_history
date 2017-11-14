@@ -1,7 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
@@ -998,3 +994,7 @@ git commit -am ".ac.jpのアドレスをキャリアメールの代わりに使�
 gitpush 
 docker stop tuna_echo_1
 docker-compose up -d --build
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+rcode OAuth_signup.ace 
+rcode server.go

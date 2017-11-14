@@ -1077,7 +1077,7 @@ func main() {
 
 			oauthService = "Google"
 			if strings.HasSuffix(strings.SplitAfter(userGoogle.Email, "@")[1], "ie.u-ryukyu.ac.jp") {
-				return c.Render(http.StatusOK, "ie_OAuth_signup", nil)
+				return c.Redirect(http.StatusFound, "/ie_OAuth_signup")
 			}
 
 			return c.Redirect(http.StatusFound, "/OAuth_signup")
@@ -1096,6 +1096,10 @@ func main() {
 
 		return c.Redirect(http.StatusSeeOther, rURL)
 
+	})
+
+	e.GET("ie_OAuth_signup", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "ie_OAuth_signup", nil)
 	})
 
 	e.GET("ie_agree_signup", func(c echo.Context) error {
