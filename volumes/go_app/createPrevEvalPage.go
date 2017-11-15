@@ -215,7 +215,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
 		pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
 		incorrect, correct, typoEndTag,
-		template.HTMLEscapeString(strings.Replace(eval.DescriptionEval, "\n", "<br>", -1)),
+		strings.Replace(template.HTMLEscapeString(eval.DescriptionEval), "\n", "<br>", -1),
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
 
@@ -273,7 +273,7 @@ func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCo
 		</div>
 	</div>
 	`, template.HTMLEscapeString(commenterName), toEval(i, comment, pageEvalCommentNumMap),
-		template.HTMLEscapeString(strings.Replace(comment.Comment, "\n", "<br>", -1)), j, comment.Posted,
+		strings.Replace(template.HTMLEscapeString(comment.Comment), "\n", "<br>", -1), j, comment.Posted,
 		comment.PageID, comment.Num,
 		comment.RecommendGood, comment.RecommendBad,
 		comment.PageID, comment.Num,
