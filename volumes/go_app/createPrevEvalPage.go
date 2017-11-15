@@ -211,7 +211,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	</div>
 	
 	<h3>コメント(%d件)</h3>
-	`, iEval, template.HTMLEscapeString(eval.BrowsePurpose), template.HTMLEscapeString(evaluatorName),
+	`, iEval, strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1), template.HTMLEscapeString(evaluatorName),
 		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
 		pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
 		incorrect, correct, typoEndTag,
