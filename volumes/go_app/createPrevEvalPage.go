@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"strconv"
 	"strings"
 )
@@ -120,7 +121,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 
 	// 単なる改行区切りなので、スライスに再解凍
 	var (
-		incorrect, correct, typoEnd string
+		incorrect, correct, typoEndTag string
 	)
 	incorrSL := strings.Split(typo.Incorrect, "\n")
 	corrSL := strings.Split(typo.Correct, "\n")
@@ -135,12 +136,12 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 				<h3>✕ 誤</h3>
 				<div class="typo_list">`
 		for _, v := range incorrSL {
-			incorrect += "<h4>" + v + "</h4>"
+			incorrect += "<h4>" + template.HTMLEscapeString(v) + "</h4>"
 		}
 		incorrect +=
 			`	</div>
 		</div>`
-		typoEnd = "</div>"
+		typoEndTag = "</div>"
 	}
 	if corrSL[0] == "" {
 		corrSL[0] = "無し"
@@ -151,7 +152,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 			<h3>⭕ 正</h3>
 			<div class="typo_list">`
 		for _, v := range corrSL {
-			correct += "<h4>" + v + "</h4>"
+			correct += "<h4>" + template.HTMLEscapeString(v) + "</h4>"
 		}
 		incorrect +=
 			`	</div>
@@ -210,9 +211,9 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	</div>
 	
 	<h3>コメント(%d件)</h3>
-	`, iEval, eval.BrowsePurpose, evaluatorName, eval.BrowseTime,
+	`, iEval, template.HTMLEscapeString(eval.BrowsePurpose), template.HTMLEscapeString(evaluatorName), eval.BrowseTime,
 		pasteStar(eval.GoodnessOfFit, gfpMenu), pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
-		incorrect, correct, typoEnd, eval.DescriptionEval,
+		incorrect, correct, typoEndTag, template.HTMLEscapeString(eval.DescriptionEval),
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
 
@@ -269,7 +270,7 @@ func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCo
 			</form>
 		</div>
 	</div>
-	`, commenterName, toEval(i, comment, pageEvalCommentNumMap), comment.Comment, j, comment.Posted,
+	`, template.HTMLEscapeString(commenterName), toEval(i, comment, pageEvalCommentNumMap), template.HTMLEscapeString(comment.Comment), j, comment.Posted,
 		comment.PageID, comment.Num,
 		comment.RecommendGood, comment.RecommendBad,
 		comment.PageID, comment.Num,
@@ -291,20 +292,20 @@ func toEval(i int, arg IndividualEvalComment, numMap map[int]int) string {
 
 func pasteStar(i int, m map[int]string) string {
 	var result string
-	if i == 1 {
-		result = "<span class=\"star\">★</span>　　　　 1　" + m[i]
-	}
-	if i == 2 {
-		result = "<span class=\"star\">★★</span>　　　 2　" + m[i]
-	}
-	if i == 3 {
-		result = "<span class=\"star\">★★★</span>　　 3　" + m[i]
+	if i == 5 {
+		result = "<span class=\"star\">★★★★★</span> 5　" + m[i]
 	}
 	if i == 4 {
 		result = "<span class=\"star\">★★★★</span>　 4　" + m[i]
 	}
-	if i == 5 {
-		result = "<span class=\"star\">★★★★★</span> 5　" + m[i]
+	if i == 3 {
+		result = "<span class=\"star\">★★★</span>　　 3　" + m[i]
+	}
+	if i == 2 {
+		result = "<span class=\"star\">★★</span>　　　 2　" + m[i]
+	}
+	if i == 1 {
+		result = "<span class=\"star\">★</span>　　　　 1　" + m[i]
 	}
 	return result
 }
