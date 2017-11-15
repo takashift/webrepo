@@ -1,29 +1,3 @@
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
 docker-compose logs
 docker-compose down
 docker-compose up -d --build
@@ -998,3 +972,29 @@ docker exec -it tuna_mysql_1 /bin/bash
 cd volumes/go_app/
 rcode OAuth_signup.ace 
 rcode server.go
+docker-compose logs
+cd volumes/go_app
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "リダイレクトした時に404エラーが表示される問題を修正"
+gitpush 
+git status
+cd views/
+ls
+rcode font-family.ace 
+git commit -am "Yu Go Medi の指定が間違ってたので修正"
+gitpush 
+cd volumes/go_app/
+rcode server.go
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+git commit -am "ie生で同意ボタンを押した後に501が出るかもしれない問題を修正"
+gitpush 
+docker-compose logs
