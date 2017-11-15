@@ -211,9 +211,11 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	</div>
 	
 	<h3>コメント(%d件)</h3>
-	`, iEval, template.HTMLEscapeString(eval.BrowsePurpose), template.HTMLEscapeString(evaluatorName), eval.BrowseTime,
-		pasteStar(eval.GoodnessOfFit, gfpMenu), pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
-		incorrect, correct, typoEndTag, template.HTMLEscapeString(eval.DescriptionEval),
+	`, iEval, template.HTMLEscapeString(eval.BrowsePurpose), template.HTMLEscapeString(evaluatorName),
+		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
+		pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
+		incorrect, correct, typoEndTag,
+		template.HTMLEscapeString(strings.Replace(eval.DescriptionEval, "\n", "<br>", -1)),
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
 
@@ -270,7 +272,8 @@ func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCo
 			</form>
 		</div>
 	</div>
-	`, template.HTMLEscapeString(commenterName), toEval(i, comment, pageEvalCommentNumMap), template.HTMLEscapeString(comment.Comment), j, comment.Posted,
+	`, template.HTMLEscapeString(commenterName), toEval(i, comment, pageEvalCommentNumMap),
+		template.HTMLEscapeString(strings.Replace(comment.Comment, "\n", "<br>", -1)), j, comment.Posted,
 		comment.PageID, comment.Num,
 		comment.RecommendGood, comment.RecommendBad,
 		comment.PageID, comment.Num,
