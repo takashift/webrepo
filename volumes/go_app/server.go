@@ -834,11 +834,10 @@ func getPageTitle(url string, s *goquery.Selection) string {
 					if strings.Contains(enc, "charset=") {
 						encSL = strings.SplitAfter(enc, "charset=")
 						fmt.Println("split")
+						break
 					} else {
-						enc = ""
-						fmt.Println("splitせず")
+						continue
 					}
-					break
 				} else {
 					enc = ""
 					fmt.Println("splitせず")
