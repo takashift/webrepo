@@ -822,11 +822,6 @@ func getPageTitle(url string, s *goquery.Selection) string {
 			var meta *goquery.Selection
 			for i := 0; ; i++ {
 				meta = s.Find("meta").Eq(i)
-				if meta == nil {
-					enc = ""
-					fmt.Println("meta")
-					break
-				}
 				enc, exists = meta.Attr("content")
 				// エラーじゃなかったら
 				if exists {
@@ -836,11 +831,12 @@ func getPageTitle(url string, s *goquery.Selection) string {
 						fmt.Println("split")
 						break
 					} else {
+						fmt.Println("charset= が無い")
 						continue
 					}
 				} else {
 					enc = ""
-					fmt.Println("splitせず")
+					fmt.Println("content= が無い")
 					break
 				}
 			}
