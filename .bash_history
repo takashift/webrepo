@@ -1,43 +1,3 @@
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +958,43 @@ git status
 git commit -am "ie生で同意ボタンを押した後に501が出るかもしれない問題を修正"
 gitpush 
 docker-compose logs
+cd volumes/go_app/
+rcode server.go 
+rcode createPrevEvalPage.go 
+git status
+git commit -am "ページ一覧でtemplate.HTMLEscapeString()するように変更"
+gitpush 
+git commit -am "評価閲覧ページでtemplate.HTMLEscapeString()するように変更"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "評価閲覧ページで"\n"を"<br>"に変換するように変更"
+git commit -am '評価閲覧ページで"\n"を"<br>"に変換するように変更'
+gitpush 
+git commit -am ''
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am '閲覧目的も"\'
+gitpush 
+cd views/
+rcode input_evaluation
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+git commit -am '記述評価と閲覧日時を任意と明記'
+gitpush 
+git commit -am '任意の位置が微妙だったので改行を追加'
+gitpush 
+rcode about.ace 
+rcode mypage_top.ace 
+git commit -am "マイページのタイトルがこのサイトについてだったので修正"
+gitpo
+gitpush 
+rcode cd echo/
+cd echo/
+rcode Dockerfile
