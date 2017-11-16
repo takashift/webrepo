@@ -815,20 +815,34 @@ func getPageTitle(url string, s *goquery.Selection) string {
 
 		// エンコードを確認
 		enc, exists := s.Find("meta").Attr("charset") // HTML5
-		fmt.Println(enc)
+		fmt.Println("HTML5:" + enc)
+		// エラーなら
 		if !exists {
-			enc, exists := s.Find("meta").Attr("content")
-			if !exists {
-				enc = ""
-			} else {
-				encSL := strings.SplitAfter(enc, "charset=")
-				if len(encSL) >= 2 {
-					enc = strings.ToUpper(encSL[1])
+			var encSL []string
+			var meta *goquery.Selection
+			for i := 0; ; i++ {
+				meta = s.Find("meta").Eq(i)
+				if meta == nil {
+					enc = ""
+					fmt.Println("meta")
+					break
+				}
+				enc, exists := meta.Attr("content")
+				// エラーじゃなかったら
+				if exists {
+					encSL = strings.SplitAfter(enc, "charset=")
+					fmt.Println("split")
+					break
 				} else {
 					enc = ""
+					fmt.Println("splitせず")
+					break
 				}
 			}
-			fmt.Println(enc)
+			if len(encSL) >= 2 {
+				enc = strings.ToUpper(encSL[1])
+			}
+			fmt.Println("charset", enc)
 		}
 
 		switch enc {
@@ -858,7 +872,7 @@ func getPageTitle(url string, s *goquery.Selection) string {
 		}
 
 		if enc != "utf8" {
-			fmt.Println("文字コード変換")
+			fmt.Println("文字コード変換" + enc)
 			var err2 error
 			title, err2 = charsetutil.DecodeString(title, enc)
 			if err2 != nil {
