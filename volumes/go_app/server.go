@@ -827,12 +827,17 @@ func getPageTitle(url string, s *goquery.Selection) string {
 					fmt.Println("meta")
 					break
 				}
-				enc, exists := meta.Attr("content")
+				enc, exists = meta.Attr("content")
 				// エラーじゃなかったら
 				if exists {
-					enc := strings.ToLower(enc)
-					encSL = strings.SplitAfter(enc, "charset=")
-					fmt.Println("split")
+					enc = strings.ToLower(enc)
+					if strings.Contains(enc, "charset=") {
+						encSL = strings.SplitAfter(enc, "charset=")
+						fmt.Println("split")
+					} else {
+						enc = ""
+						fmt.Println("splitせず")
+					}
 					break
 				} else {
 					enc = ""
