@@ -844,6 +844,8 @@ func getPageTitle(url string, s *goquery.Selection) string {
 				enc = strings.ToUpper(encSL[1])
 			}
 			fmt.Println("charset", enc)
+		} else {
+			enc = strings.ToUpper(enc)
 		}
 
 		switch enc {
