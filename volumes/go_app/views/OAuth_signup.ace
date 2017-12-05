@@ -3,7 +3,7 @@ html lang=ja
   head
     meta charset=utf-8
     meta name="robots" content="noindex"
-    title sign in | WebRepo★彡
+    title sign in | WebRepo☆彡
     = include font-family
     = css
       #main {

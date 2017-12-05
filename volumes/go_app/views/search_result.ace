@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title 検索結果(1ページ目) - 評価検索（仮） | WebRepo★彡
+    title 検索結果(1ページ目) - 評価検索（仮） | WebRepo☆彡
     = include font-family
     = css
       body {

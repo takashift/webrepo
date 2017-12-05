@@ -1,96 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-ls
-rcode template_no_proxy.go_ 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd volumes/go_app/views/
-cd
-git status
-gti commit -am
-gt commit -am
-git commit -am
-git commit -a
-gitpush 
-git log
-git commit -am "評価閲覧画面のコメント番号を評価毎の値で表示するように変更"
-gitpush 
-git commit -am "存在しないIDの評価閲覧画面を要求されても表示しないように変更"
-gitpush 
-git status
-git add volumes/go_app/views/input_evaluation_url.ace
-git status
-git commit -am "URLを直接入力してページを評価する処理を実装"
-gitpush 
-git log
-git commit -am "mysql はtext型にはDEFAULTを指定できないらしいので修正"
-gitpush 
-git commit -am "Update できなかった問題を解決"
-gitpush 
-git commit -am "URL付で評価入力された時は新規ページ登録画面にリダイレクトせずに評価閲覧ページを表示するように変更"
-gitpush 
-git commit -am "検索結果がまだGoogleになってたのでWebRepo★彡に修正"
-gitpush 
-git log
-git commit -am "ジャンルと媒体を指定して検索する機能を完成"
-git log
-gitpush 
-git commit -am "片方だけの指定で検索できるように修正"
-gitpush 
-git commit -am "ページ属性検索にGoogleでサイト内での検索用のフォームを追加"
-git commit --amend
-git add volumes/go_app/views/page_list.ace
-git commit --amend
-gitpush 
-git push -f
-git log
-git commit -am "ページ属性検索にGoogleでサイト内での検索用のフォームを追加"
-git commit -am "コメントを追加"
-gitpush 
-git log
 exit
 ls
 ls -s
@@ -998,3 +905,96 @@ gitpush
 rcode cd echo/
 cd echo/
 rcode Dockerfile
+mysql -u rtuna -pUSER_PASSWORD Webrepo
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+ls
+cd views/
+ls
+rcode fo
+rcode font-family.ace 
+git commit -am "FireFox で Yu Go Medi を表示する設定を追加"
+gitpush 
+rcode search_
+cd
+cd volumes/go_app/
+ls
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "X-SJISの場合の正常な文字コード変換とcharsetが一つ目の属性にない場合に２番目以降を探す処理を追加"
+gitpush 
+docker-compose logs
+gitpush 
+git log
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "charsetが大文字で書かれてる場合に対応"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git log
+docker-compose logs
+git commit -am "charset=が含まれているかを明確に確認するように変更"
+gitpush 
+git commit -am "charsetが見つからなかった時はcontinueするように修正"
+gitp
+gitpush 
+git commit -am "metaタグが取って来れない場合もnilにならないみたいなので判定をcontent属性のある無しに変更"
+gitpush 
+git commit -am "HTML5の時に文字コードを大文字にする処理が無かったので追加"
+gitpush 

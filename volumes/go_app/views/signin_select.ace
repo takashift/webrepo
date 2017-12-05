@@ -2,7 +2,7 @@
 html lang=ja
   head
     meta charset=utf-8
-    title sign in | WebRepo★彡
+    title sign in | WebRepo☆彡
     = include font-family
     = css
       #OAuth_menu {
