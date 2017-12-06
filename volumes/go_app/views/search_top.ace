@@ -1,8 +1,9 @@
 = doctype html
 html lang=ja
   head
+    = include common-setting
     meta charset="utf-8"
-    title WebRepo&#x2606;彡 - Webページをユーザー視点で評価できるサイト
+    title WebRepo☆彡 - Webページをユーザー視点で評価できるサイト
     meta name="google-site-verification" content="LiPXRwYVnSBCK63XRzBq2jllBrXQD-3_NAqERix9xMw"
     = include font-family
     = css
