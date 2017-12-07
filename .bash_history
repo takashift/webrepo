@@ -1,61 +1,3 @@
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
- docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker-compose logs
- docker-compose up -d --build
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker stop tuna_echo_1
- docker-compose up -d --build
-git status
-git add font-family.ace 
-git commit -am "フォントを設定"
-gitp
-gitpush 
-cd volumes/go_app/views/
-cd ..
-rcode server.go 
-git commit -am "JWTの期限を解除"
-gitpush 
-cd 
-cd echo/
-ls
-rcode Dockerfile
-cd
-cd volumes/go_app/
-ls
-rcode server.go 
-git commit -am "host名を変数に置き換え"
-gitpush 
-git log
-esir
-ls
-cd nginx/
-ls
-rcode app.conf 
-cd echo/
-rcode Dockerfile
-git commit -am "HTMLのメタタグで文字コードを読み込めるようにした。"
-gitpush 
-git commit -am "ジャンルと媒体が未選択のものも検索できるように変更"
-gitpush 
-git commit -am "キャリアメール、閲覧目的の説明を変更"
-gitpush 
-git commit -am "ジャンルと媒体両方未指定の時はどちらか指定するように表示"
-git log
-git status
 git commit --amend
 gitpush 
 git commit -am "評価閲覧ページで平均評価を表示するように変更"
@@ -998,3 +940,61 @@ ls
 rcode Dockerfile
 cd
 rcode docker-compose.yml
+cd volumes/
+ls
+cd
+cd nginx/
+ls
+rcode app.conf 
+cd
+cd volumes/go_app/views/
+rcode common-setting.ace 
+cd
+ls
+mv Twitter3.1（仮）.png favicon.png
+ls
+mv favicon.png volumes/web-vol/
+chown tuna volumes/web-vol/
+sudo chown tuna volumes/web-vol/
+ls volumes/web-vol/
+ls -l volumes/
+mv favicon.png volumes/web-vol/
+cd volumes/web-vol/
+mkdir image
+mv favicon.png image/
+docker stop tuna_echo_1
+docker stop tuna_nginx_1
+docker-compose up -d --build
+ls
+docker-compose logs
+ls
+docker stop tuna_nginx_1
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_nginx_1
+docker-compose up -d --build
+docker stop tuna_nginx_1
+docker-compose up -d --build
+ls volumes/web-vol/
+ls
+cd
+mv Twitter3.1拡大.png favicon.png
+mv favicon.png image/
+ls
+mv favicon.png volumes/web-vol/image/
+cd volumes/web-vol/image/
+ls
+git status
+cd
+git status
+git add volumes/web-vol/
+git commit -am 'ファビコンを設定'
+gitpush 
+ls
+rm Twitter3.1拡大.png 
+rcode volumes/go_app/
+ls volumes/go_app/views/
+ls
+
+cd  volumes/go_app/views/

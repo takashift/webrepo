@@ -170,7 +170,7 @@ html lang=ja
           .subject
             h2 目的達成度
           .input
-            p 閲覧目的に対するページの適合度を入力して下さい。
+            p 閲覧目的に対して、どれだけページが役立ったか（求めていた情報を得られたか）を評価して下さい。
             label.star_rating 求めていた以上に達成できた
               input.rating type="radio" name="rating_pp" value="5" required=""
               span.star
