@@ -90,11 +90,29 @@ html lang=ja
         cursor: pointer;
         background-color: #EEE;
       }
+    = javascript
+      var xhr;
+      onload = function () {
+        xhr = new XMLHttpRequest();
+        xhr.open("Get", "https://api.twitter.com/1.1/search/tweets.json?q='%23本日の評価ページお題'&result_type=recent&count=1", true);
+        xhr.setRequestHeader("Authorization", 'Bearer '+ 'AAAAAAAAAAAAAAAAAAAAADEp3gAAAAAA1utz8ysPQJLfahTh%2BIievBRebMw%3DJcaj7Z0fj0edHPVOZADriheIMugHxR1VsyZUod0y2eNQHHhbUS');
+        xhr.onreadystatechange = callback;
+        xhr.send(null);
+      }
+      function callback() {
+        if (xhr.status == 200) {
+          var myHeader = document.getElementById('daily_theme');
+          myHeader.value = xhr.responseText;
+          var tNode = document.createTextNode(xhr.responseText);
+          myHeader.appendChild(tNode);
+        }
+      }
 
   body
     = include header_menu
     #search
       #space_h
+      #daily_theme
       a.new_eval href="r/input_evaluation"
         button.new_eval Webページを評価する
           br
