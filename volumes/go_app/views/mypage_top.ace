@@ -25,7 +25,8 @@ html lang=ja
   body
     = include header_menu
     #main
-      p#signin_status ログイン済みです。
+      p#signin_status {{.UserName}}さん、こんにちは。
+      br
       p
         a 過去に付けた評価の一覧
       p

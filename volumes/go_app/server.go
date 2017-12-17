@@ -135,6 +135,10 @@ type (
 		Content string
 	}
 
+	MyPageValue struct {
+		UserName string
+	}
+
 	// データベースのテスト
 	userinfoJSON struct {
 		ID    int    `json:"id"`
@@ -1456,7 +1460,18 @@ func main() {
 
 	// マイページ
 	r.GET("/mypage", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "mypage_top", nil)
+
+		var mypageValue MyPageValue
+
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		if claims["name"] != nil {
+			mypageValue.UserName = claims["name"].(string)
+		} else {
+			mypageValue.UserName = "Cookie を削除して下さい！　"
+		}
+
+		return c.Render(http.StatusOK, "mypage_top", mypageValue)
 	})
 
 	// 新規ページ登録画面
@@ -1674,6 +1689,7 @@ func main() {
 
 		return signinCheck("edit_page_cate", c, evalForm)
 	})
+
 	r.POST("/edit_page_cate/:id", func(c echo.Context) error {
 
 		var (

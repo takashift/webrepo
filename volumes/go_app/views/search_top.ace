@@ -22,7 +22,7 @@ html lang=ja
       }
       button.new_eval {
         margin-bottom: 5rem;
-        padding: 2rem 3rem;
+        padding: 1.5rem 2.3rem;
         border-radius: 1rem;
         background-color: rgba(0,165,8,0.8);
         color: rgba(255,255,255,1);
@@ -36,7 +36,7 @@ html lang=ja
       }
       button.new_eval #recom {
         margin-top: 0.5rem;
-        font-size: 2rem;
+        font-size: 1.83rem;
       }
       a.new_eval {
         text-decoration: none;
