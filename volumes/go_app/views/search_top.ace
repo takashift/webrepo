@@ -18,7 +18,7 @@ html lang=ja
       }
       #space_h {
         min-height: 100%;
-        margin: 2rem 0 5rem 0;
+        margin: 2rem 0 3rem 0;
       }
       button.new_eval {
         margin-bottom: 5rem;
@@ -33,6 +33,10 @@ html lang=ja
       }
       button.new_eval:hover {
         background-color: rgba(0,165,8,1);
+      }
+      button.new_eval #recom {
+        margin-top: 0.5rem;
+        font-size: 2rem;
       }
       a.new_eval {
         text-decoration: none;
@@ -129,6 +133,7 @@ html lang=ja
         button.new_eval Webページを評価する
           br
             span ★★★★★
+          #recom ブックマーク推奨
       form action="/search" method="get"
         p.shadow
           input.search name="q" required="" placeholder="評価を検索"
