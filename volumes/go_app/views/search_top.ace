@@ -18,16 +18,17 @@ html lang=ja
       }
       #space_h {
         min-height: 100%;
-        margin: 4rem 0 0 0;
+        margin: 2rem 0 5rem 0;
       }
       button.new_eval {
-        padding: 4rem 3rem;
+        margin-bottom: 5rem;
+        padding: 2rem 3rem;
         border-radius: 1rem;
         background-color: rgba(0,165,8,0.8);
         color: rgba(255,255,255,1);
         text-align: center;
         text-shadow: 2px 2px 2px rgba(0,0,0,0.8);        
-        font-size: 3rem;
+        font-size: 2.5rem;
         cursor: pointer;
       }
       button.new_eval:hover {
@@ -46,7 +47,7 @@ html lang=ja
       #search h1 {
         font-family: 'Product Sans', 'Catull BQ';
         font-size: 5rem;
-        margin-top: 5rem;
+        margin-top: 4rem;
         margin-bottom: 1rem;
       }
       #space_f {
@@ -111,12 +112,6 @@ html lang=ja
   body
     = include header_menu
     #search
-      #space_h
-      #daily_theme
-      a.new_eval href="r/input_evaluation"
-        button.new_eval Webページを評価する
-          br
-            span ★★★★★
       h1
         span.blue W
         span.red e
@@ -126,11 +121,19 @@ html lang=ja
         span.red p
         span.green o
         span.yellow ★彡
+      #space_h
+        h3 このサイトは、自分の見たページが
+          br どれだけ役に立ったかを評価できるサイトです。
+      #daily_theme
+      a.new_eval href="r/input_evaluation"
+        button.new_eval Webページを評価する
+          br
+            span ★★★★★
       form action="/search" method="get"
         p.shadow
-          input.search name="q" required=""
+          input.search name="q" required="" placeholder="評価を検索"
         p
           / input.button type="submit" value="評価・ページを検索"
           input.button type="submit" value="Googleでサイト内検索"
-      #space_f
+      / #space_f
     = include footer

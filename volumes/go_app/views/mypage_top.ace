@@ -9,11 +9,7 @@ html lang=ja
       #main {
         margin: 5rem 15% 7rem 15%;
       }
-      #main h1,#main h2,#main h3 {
-        margin-top: 5rem;
-        text-align: center;
-      }
-      #main p {
+      #main p#signin_status {
         font-size: 1.2rem;
         text-align: center;
       }
@@ -27,6 +23,6 @@ html lang=ja
   body
     = include header_menu
     #main
-      p ログイン済みです。
-      p 現在マイページで閲覧できる情報はありません。
+      p#signin_status ログイン済みです。
+      
     = include footer

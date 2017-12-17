@@ -1,80 +1,3 @@
-git commit --amend
-gitpush 
-git commit -am "評価閲覧ページで平均評価を表示するように変更"
-gitpush 
-git log
-git commit -am "評価閲覧画面の目的達成度、見やすさの選択肢の名前・デバイス名を表示するように変更"
-gitpush 
-cd
-rcode docker-compose.yml
-git reset --hard origin/master
-git commit -am "ページ一覧の番号が0から振られていたので1からに修正"
-gitpush 
-git commit -am "本番環境で見えちゃいけないものを修正"
-gitpush 
-cd volumes/go_app/
-rcode server.go 
-cd 
-cd echo/
-ls
-rcode Dockerfile
-rcode server.go 
-cd
-cd volumes/go_app/
-ls
-rcode server.go 
-docker-compose logs
- docker-compose up -d --build
-docker-compose logs
- docker-compose up -d --build
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker stop tuna_echo_1
- docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose down
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
@@ -998,3 +921,80 @@ ls volumes/go_app/views/
 ls
 
 cd  volumes/go_app/views/
+cd volumes/go_app/views/
+ls
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+git stauts
+git stautus
+git status
+git commit -am "目的達成度の説明を変更"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode header_menu.ace 
+git stautus
+git stauts
+git status
+git commit -am "FAQへのリンクを追加"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+ls
+rcode page_list.ace 
+rcode search_top.ace 
+cd ..
+rcode server.go 
+rcode JWT.ace
+cd views/
+rcode JWT.ace
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+rcode JWT.js 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+git commit -am 'ツイートを取得するjavaScriptコードをトップページに記述（まだエラー）'
+gitpush 

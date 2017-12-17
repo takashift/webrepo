@@ -5,6 +5,7 @@
     margin-right: 0;
   }
   #footer {
+    margin-top: 2rem;
     padding: 1rem 130px;
     background-color: rgba(242,242,242,1);
   }
