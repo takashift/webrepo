@@ -270,7 +270,7 @@ func refererCheck(refererURL string) string {
 	return redirect
 }
 
-func createJwt(c echo.Context, id int, email string) error {
+func createJwt(c echo.Context, id int, email string, name string) error {
 
 	// Create token
 	token := jwt.New(jwt.SigningMethodHS256)
@@ -279,6 +279,7 @@ func createJwt(c echo.Context, id int, email string) error {
 	claims := token.Claims.(jwt.MapClaims)
 	claims["id"] = id
 	claims["email"] = email
+	claims["name"] = name
 	// claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 	// Generate encoded token and send it as response.
@@ -1085,7 +1086,7 @@ func main() {
 		)
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		_, err = dbSess.Select("id", "email").From("userinfo").
+		_, err = dbSess.Select("id", "email", "name").From("userinfo").
 			Where("OAuth_userinfo = ?", userGoogle.Email).
 			Load(&userInfoDB)
 
@@ -1107,7 +1108,7 @@ func main() {
 
 		// エラーが無い == 登録済み場合
 		// リファラーURLがこのサイトのものか確認する
-		createJwt(c, userInfoDB.ID, userInfoDB.Email)
+		createJwt(c, userInfoDB.ID, userInfoDB.Email, userInfoDB.Name)
 		fmt.Println("登録済み")
 
 		rURL := sess.Values["refererURL"].(string)
@@ -1143,13 +1144,13 @@ func main() {
 		}
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		_, err = dbSess.Select("id", "email").From("userinfo").
+		_, err = dbSess.Select("id", "email", "name").From("userinfo").
 			Where("OAuth_userinfo = ?", email).
 			Load(&userInfoDB)
 
 		// エラーが無い == 登録済み場合
 		// リファラーURLがこのサイトのものか確認する
-		createJwt(c, userInfoDB.ID, userInfoDB.Email)
+		createJwt(c, userInfoDB.ID, userInfoDB.Email, userInfoDB.Name)
 		fmt.Println("登録済み")
 
 		rURL := sess.Values["refererURL"].(string)
@@ -1302,11 +1303,11 @@ func main() {
 		var userInfoDB userinfo
 
 		// OAuth、キャリアメールが本登録されてるか確認
-		_, err = dbSess.Select("id", "email").From("userinfo").
+		_, err = dbSess.Select("id", "email", "name").From("userinfo").
 			Where("OAuth_userinfo = ?", tmpUser.OAuthUserinfo).
 			Load(&userInfoDB)
 
-		createJwt(c, userInfoDB.ID, userInfoDB.Email)
+		createJwt(c, userInfoDB.ID, userInfoDB.Email, userInfoDB.Name)
 		return c.Redirect(http.StatusSeeOther, tmpUser.Referer)
 	})
 

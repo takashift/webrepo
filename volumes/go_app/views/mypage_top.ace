@@ -7,7 +7,9 @@ html lang=ja
     = include font-family
     = css
       #main {
-        margin: 5rem 15% 7rem 15%;
+        margin: 5rem auto 7rem auto;
+        width: 500px;
+        font-size: 1.2rem;        
       }
       #main p#signin_status {
         font-size: 1.2rem;
@@ -24,5 +26,12 @@ html lang=ja
     = include header_menu
     #main
       p#signin_status ログイン済みです。
+      p
+        a 過去に付けた評価の一覧
+      p
+        a ユーザー設定
+      br
+      p
+        a ユーザー登録の解除
       
     = include footer
