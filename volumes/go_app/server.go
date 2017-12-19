@@ -1486,6 +1486,26 @@ func main() {
 		return c.Render(http.StatusOK, "user_settings", mypageValue)
 	})
 
+	// ユーザー設定送信後の処理
+	r.POST("/user_settings", func(c echo.Context) error {
+
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		userID := claims["id"].(float64)
+
+		userName := c.FormValue("user_name")
+
+		_, err := dbSess.Update("userinfo").Set("name", userName).Where("id = ?", userID).Exec()
+		if err != nil {
+			fmt.Println("Update 出来ない")
+			panic(err)
+		}
+
+		createJwt(c, int(userID), claims["email"].(string), userName)
+
+		return c.Redirect(http.StatusSeeOther, "mypage")
+	})
+
 	// 新規ページ登録画面
 	r.GET("/register_page", func(c echo.Context) error {
 

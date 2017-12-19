@@ -49,6 +49,6 @@ html lang=ja
           h2 ユーザー設定
         .input
           h3 ユーザー名
-          input.user_name name="user_name" required="" value="ユーザー名"
+          input.user_name name="user_name" placeholder="{{.UserName}}"
           
       input.button type="submit" value="設定する"
