@@ -1,0 +1,54 @@
+= doctype html
+html lang=ja
+  head
+    = include common-setting
+    = include font-family
+    title ユーザー設定 | WebRepo☆彡
+    = css
+      .form_block {
+        margin: auto;
+        width: 20rem;
+      }
+      .subject {
+        text-align: center;
+      }
+      .input {
+        margin: 0.5rem 1rem 1rem 1rem;
+      }
+      .user_name {
+        height: 1.5rem;
+        width: 100%;
+        border-width: 1px;
+        border-color: rgba(0,0,0,0.5);
+        font-size: 1rem;
+        padding: 3px 5px;
+        margin: auto;
+        display: block;
+        / box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3);         
+      }
+      .button {
+        display: block;
+        font-size: large;
+        color: rgba(255,255,255,0.9);
+        border-style: none;
+        background-color: rgba(0,50,255,0.8);
+        border-radius: 0.5rem;
+        font-size: larger;
+        width: auto;
+        padding: 1rem;
+        margin: 2rem auto 2rem auto;
+        text-align: center;
+        cursor: pointer;
+      }
+
+  body
+    = include header_menu
+    form action="" method="post"
+      .form_block
+        .subject
+          h2 ユーザー設定
+        .input
+          h3 ユーザー名
+          input.user_name name="user_name" required="" value="ユーザー名"
+          
+      input.button type="submit" value="設定する"
