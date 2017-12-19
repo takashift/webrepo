@@ -30,7 +30,7 @@ html lang=ja
       p
         a 過去に付けた評価の一覧
       p
-        a ユーザー設定
+        a href="user_settings" ユーザー設定
       br
       p
         a ユーザー登録の解除

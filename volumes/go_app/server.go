@@ -912,32 +912,32 @@ func main() {
 	})
 
 	// テスト環境のみ
-	e.GET("test", func(c echo.Context) error {
-		uri := "http://" + host + "/test///"
-		if strings.HasPrefix(uri, "http://") {
-			uri = strings.TrimPrefix(uri, "https://")
-			uri = strings.TrimPrefix(uri, "http://")
-			uri = strings.TrimSuffix(uri, "/")
-		}
+	// e.GET("test", func(c echo.Context) error {
+	// 	uri := "http://" + host + "/test///"
+	// 	if strings.HasPrefix(uri, "http://") {
+	// 		uri = strings.TrimPrefix(uri, "https://")
+	// 		uri = strings.TrimPrefix(uri, "http://")
+	// 		uri = strings.TrimSuffix(uri, "/")
+	// 	}
 
-		uri = "https://ja.wikipedia.org/wiki/%E8%A6%8B%E6%B2%BC%E5%8C%BA"
-		resp, _ := http.Get(uri)
-		up := resp.Header.Get("Last-Modified")
+	// 	uri = "https://ja.wikipedia.org/wiki/%E8%A6%8B%E6%B2%BC%E5%8C%BA"
+	// 	resp, _ := http.Get(uri)
+	// 	up := resp.Header.Get("Last-Modified")
 
-		var title string
-		// url, _ = dbSess.Select("email").From("userinfo").
-		// 	Where("email = ? OR email = ?", "docomo.ne.jp", "sm_2-7.ryuuta@"+"docomo.ne.jp").
-		// 	ReturnString()
-		doc, err := goquery.NewDocument(uri)
-		if err != nil {
-			panic(err)
-		}
-		doc.Find("head").Each(func(i int, s *goquery.Selection) {
-			title = s.Find("title").Text()
-		})
+	// 	var title string
+	// 	// url, _ = dbSess.Select("email").From("userinfo").
+	// 	// 	Where("email = ? OR email = ?", "docomo.ne.jp", "sm_2-7.ryuuta@"+"docomo.ne.jp").
+	// 	// 	ReturnString()
+	// 	doc, err := goquery.NewDocument(uri)
+	// 	if err != nil {
+	// 		panic(err)
+	// 	}
+	// 	doc.Find("head").Each(func(i int, s *goquery.Selection) {
+	// 		title = s.Find("title").Text()
+	// 	})
 
-		return c.String(http.StatusOK, up)
-	})
+	// 	return c.String(http.StatusOK, up)
+	// })
 
 	// 検索時に呼び出される
 	e.GET("/search", func(c echo.Context) error {
@@ -1472,6 +1472,18 @@ func main() {
 		}
 
 		return c.Render(http.StatusOK, "mypage_top", mypageValue)
+	})
+
+	// ユーザー設定
+	r.GET("/user_settings", func(c echo.Context) error {
+
+		var mypageValue MyPageValue
+
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		mypageValue.UserName = claims["name"].(string)
+
+		return c.Render(http.StatusOK, "user_settings", mypageValue)
 	})
 
 	// 新規ページ登録画面
