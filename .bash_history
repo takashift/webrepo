@@ -1,15 +1,3 @@
-cd nginx/key
-ls
-cd nginx/
-ls
-rm key
-cd ..
-mv webrepo.nal.ie.u-ryukyu.ac.jp.key nginx/keys/
-mv webrepo.nal.ie.u-ryukyu.ac.jp.csr nginx/keys/
-mv webrepo.nal.ie.u-ryukyu.ac.jp.crt nginx/keys/
-ls
-cd nginx/keys/
-ls
 ls -l
 chmod 400 webrepo.nal.ie.u-ryukyu.ac.jp.crt webrepo.nal.ie.u-ryukyu.ac.jp.csr webrepo.nal.ie.u-ryukyu.ac.jp.key 
 mv webrepo.nal.ie.u-ryukyu.ac.jp.key server.key 
@@ -998,3 +986,15 @@ rcode common-setting.ace
 rcode input_evaluation.ace 
 rcode search_top.ace 
 git add eval_form_css.ace user_settings.ace 
+cd volumes/go_app/views/
+ls
+rcode my_eval_list.ace
+rcode mypage_top.ace 
+rcode user_settings.ace 
+rcode search_result.ace 
+rcode tmp_preview_evaluation.ace 
+rcode page_list.ace 
+git status
+git add my_eval_list.ace 
+git commit -am "ユーザーの付けた評価の一覧ページを用意"
+gitpush 
