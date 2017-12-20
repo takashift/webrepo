@@ -1506,6 +1506,18 @@ func main() {
 		return c.Redirect(http.StatusSeeOther, "mypage")
 	})
 
+	// 自分の付けた評価の一覧
+	r.GET("/my_eval_list", func(c echo.Context) error {
+
+		var mypageValue MyPageValue
+
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		mypageValue.UserName = claims["name"].(string)
+
+		return c.Render(http.StatusOK, "my_eval_list", mypageValue)
+	})
+
 	// 新規ページ登録画面
 	r.GET("/register_page", func(c echo.Context) error {
 
