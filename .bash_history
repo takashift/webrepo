@@ -1,15 +1,3 @@
-ls -l
-chmod 400 webrepo.nal.ie.u-ryukyu.ac.jp.crt webrepo.nal.ie.u-ryukyu.ac.jp.csr webrepo.nal.ie.u-ryukyu.ac.jp.key 
-mv webrepo.nal.ie.u-ryukyu.ac.jp.key server.key 
-mv webrepo.nal.ie.u-ryukyu.ac.jp.crt server.crt 
-mv webrepo.nal.ie.u-ryukyu.ac.jp.csr server.csr
-ls
-ls -l
-cat server.key 
-openssl rsa -in server.key -out server.key
-mv webrepo.nal.ie.u-ryukyu.ac.jp.key server.key 
-ls
-ls -l
 chmod 400 server.key 
 ls
 ls -l
@@ -998,3 +986,15 @@ git status
 git add my_eval_list.ace 
 git commit -am "ユーザーの付けた評価の一覧ページを用意"
 gitpush 
+cd volumes/go_app/views/
+ls
+rcode mypage_top.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "マイページに自分の付けた評価一覧へのリンクを用意"
+gitpush 
+git log
+git status
+cd volumes/go_app/
+ls
+rcode server.go 

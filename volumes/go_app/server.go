@@ -1515,6 +1515,46 @@ func main() {
 		claims := user.Claims.(jwt.MapClaims)
 		mypageValue.UserName = claims["name"].(string)
 
+		// if listPageValue.Content == "" {
+		// 	if dbPS != nil {
+
+		// 		// dead が 0 以外のものは除外
+		// 		var alivePS []PageStatus
+		// 		for i := 0; i < len(dbPS); i++ {
+		// 			if dbPS[i].Dead == 0 {
+		// 				alivePS = append(alivePS, dbPS[i])
+		// 			}
+		// 		}
+		// 		// スライスの要素数からページの件数を取得
+		// 		resultNum := len(alivePS)
+		// 		listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
+
+		// 		for i, v := range alivePS {
+
+		// 			listPageValue.Content +=
+		// 				fmt.Sprintf(
+		// 					`
+		// 				<div class="page_status">
+		// 					<h3>%d： <a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
+		// 					<div class="cate">ジャンル：%s　媒体：%s</div>
+		// 					<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
+		// 					<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
+		// 				</div>
+		// 			`, i+1, v.ID, template.HTMLEscapeString(v.Title),
+		// 					template.HTMLEscapeString(v.URL), template.HTMLEscapeString(v.URL),
+		// 					template.HTMLEscapeString(v.Genre), template.HTMLEscapeString(v.Media),
+		// 					template.HTMLEscapeString(v.Tag1), template.HTMLEscapeString(v.Tag2),
+		// 					template.HTMLEscapeString(v.Tag3), template.HTMLEscapeString(v.Tag4),
+		// 					template.HTMLEscapeString(v.Tag5), template.HTMLEscapeString(v.Tag6),
+		// 					template.HTMLEscapeString(v.Tag7), template.HTMLEscapeString(v.Tag8),
+		// 					template.HTMLEscapeString(v.Tag9), template.HTMLEscapeString(v.Tag10),
+		// 					v.ID)
+		// 		}
+		// 	} else {
+		// 		listPageValue.Content = "<p id=\"result_status\">検索結果：0件</p>"
+		// 	}
+		// }
+
 		return c.Render(http.StatusOK, "my_eval_list", mypageValue)
 	})
 

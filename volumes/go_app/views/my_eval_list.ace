@@ -5,26 +5,17 @@ html lang=ja
     = include font-family
     title {{.UserName}}さんの付けた評価一覧 | WebRepo☆彡
     = css
-      .form_block {
-        margin: auto;
-        width: 20rem;
+      #list {
+        / margin: 0 0 0 150px;
+        padding: 0 0 0 0.5rem;
+        min-height: 1500px;
       }
       .subject {
+        margin: 3.5rem;
         text-align: center;
       }
       .input {
         margin: 0.5rem 1rem 1rem 1rem;
-      }
-      .user_name {
-        height: 1.5rem;
-        width: 100%;
-        border-width: 1px;
-        border-color: rgba(0,0,0,0.5);
-        font-size: 1rem;
-        padding: 3px 5px;
-        margin: auto;
-        display: block;
-        / box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3);         
       }
       .button {
         display: block;
@@ -43,12 +34,8 @@ html lang=ja
 
   body
     = include header_menu
-    form action="" method="post"
-      .form_block
-        .subject
-          h2 {{.UserName}}さんの付けた評価一覧
-        .input
-          h3 ユーザー名
-          input.user_name name="user_name" placeholder="{{.UserName}}"
-          
-      input.button type="submit" value="設定する"
+    #list
+      .subject
+        h2 {{.UserName}}さんの付けた評価一覧
+      .input
+        #eval_list
