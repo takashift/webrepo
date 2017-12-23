@@ -344,7 +344,7 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 			<span id="posted">投稿日　%s　　コメント(%d件)　　参考に... なった👍%d　ならなかった👎%d</span>
 		</div>
 	</div>
-	`, iEval, pageStatus.ID, template.HTMLEscapeString(pageStatus.Title),
+	`, iEval, eval.PageID, template.HTMLEscapeString(pageStatus.Title),
 		template.HTMLEscapeString(pageStatus.Genre), template.HTMLEscapeString(pageStatus.Media),
 		template.HTMLEscapeString(pageStatus.Tag1), template.HTMLEscapeString(pageStatus.Tag2),
 		template.HTMLEscapeString(pageStatus.Tag3), template.HTMLEscapeString(pageStatus.Tag4),
