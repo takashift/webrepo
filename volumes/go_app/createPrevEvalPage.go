@@ -88,8 +88,6 @@ var (
 
 func makePrevEval(iEval int, eval IndividualEval) string {
 
-	iEval++
-
 	// 審議中なら""を返す
 	if eval.Deliberate >= 2 {
 		return ""
@@ -177,6 +175,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	}
 	numComment := len(individualEvalComment)
 
+	iEval++
 	result := fmt.Sprintf(
 		`<div class="review">
 		<h3>No.%d　　%s</h3>
@@ -212,7 +211,8 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	</div>
 	
 	<h3>コメント(%d件)</h3>
-	`, iEval, strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1), template.HTMLEscapeString(evaluatorName),
+	`, iEval, strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1),
+		template.HTMLEscapeString(evaluatorName),
 		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
 		pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
 		incorrect, correct, typoEndTag,
@@ -234,14 +234,12 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 // 自分のページの評価を表示用（通報、GoodBad、コメントボタン、コメント無し。）
 func makePrevMyEval(iEval int, eval IndividualEval) string {
 
-	iEval++
-
 	// 審議中なら""を返す
 	if eval.Deliberate >= 2 {
 		return ""
 	}
 
-	fmt.Println(eval.EvaluatorID)
+	fmt.Println(eval.Num)
 
 	// DB から評価ページのタイトル、タグ、媒体を取得
 	var pageStatus PageStatus
@@ -324,6 +322,7 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 	}
 	numComment := len(individualEvalComment)
 
+	iEval++
 	result := fmt.Sprintf(
 		`<div class="review">
 		<h3 class="page_tilte">No.%d　　<a href="/preview_evaluation/%d">%s</a></h3>
@@ -345,7 +344,8 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 			<span id="posted">投稿日　%s　　コメント(%d件)　　参考に... なった👍%d　ならなかった👎%d</span>
 		</div>
 	</div>
-	`, iEval, pageStatus.ID, pageStatus.Title, template.HTMLEscapeString(pageStatus.Genre), template.HTMLEscapeString(pageStatus.Media),
+	`, iEval, pageStatus.ID, template.HTMLEscapeString(pageStatus.Title),
+		template.HTMLEscapeString(pageStatus.Genre), template.HTMLEscapeString(pageStatus.Media),
 		template.HTMLEscapeString(pageStatus.Tag1), template.HTMLEscapeString(pageStatus.Tag2),
 		template.HTMLEscapeString(pageStatus.Tag3), template.HTMLEscapeString(pageStatus.Tag4),
 		template.HTMLEscapeString(pageStatus.Tag5), template.HTMLEscapeString(pageStatus.Tag6),
