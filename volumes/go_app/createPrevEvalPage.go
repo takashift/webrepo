@@ -112,7 +112,7 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	typo := new(Typo)
 	dbSess.Select("incorrect", "correct").
 		From("typo").
-		Where("evaluator_id = ?", eval.EvaluatorID).Load(&typo)
+		Where("individual_eval_num = ?", eval.Num).Load(&typo)
 
 	// 閲覧日がデフォルト値のときは修正
 	if eval.BrowseTime == "0001-01-01 01:01:01" {
@@ -197,8 +197,9 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 			<span>参考に...
 				<form class="recommend" name="評価" method="post" action="/r/recommend_eval/%d/%d">
 					<input type="submit" value="なった👍" name="recommend"> %d
-					<input type="submit" value="ならなかった👎" name="recommend"> %d</span>
+					<input type="submit" value="ならなかった👎" name="recommend"> %d
 				</form>
+			</span>
 		</div>
 		<form class="res_button" method="get" tprevet="_blank">
 			<div class="input_dangerous">
@@ -218,6 +219,132 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 		strings.Replace(template.HTMLEscapeString(eval.DescriptionEval), "\n", "<br>", -1),
 		eval.Posted, eval.PageID, eval.Num, eval.RecommendGood, eval.RecommendBad,
 		eval.PageID, eval.Num, eval.PageID, eval.Num, 0, numComment)
+
+	fmt.Println("評価を取ってくるのはOK")
+
+	pageEvalCommentNumMap := map[int]int{}
+	// コメントのテンプレートを追加
+	for j, v := range individualEvalComment {
+		result += makePrevEvalComment(v, iEval, j, pageEvalCommentNumMap)
+	}
+
+	return result
+}
+
+// 自分のページの評価を表示用（通報、GoodBad、コメントボタン、コメント無し。）
+func makePrevMyEval(iEval int, eval IndividualEval) string {
+
+	iEval++
+
+	// 審議中なら""を返す
+	if eval.Deliberate >= 2 {
+		return ""
+	}
+
+	fmt.Println(eval.EvaluatorID)
+
+	// DB から評価ページのタイトルを取得
+	pageTitle, err := dbSess.Select("title").From("page_status").
+		Where("id = ?", eval.PageID).
+		ReturnString()
+	if err != nil {
+		fmt.Println("タイトルの取得に失敗")
+		panic(err)
+	}
+
+	// DB から誤字脱字を取得
+	typo := new(Typo)
+	dbSess.Select("incorrect", "correct").
+		From("typo").
+		Where("individual_eval_num = ?", eval.Num).Load(&typo)
+
+	// 閲覧日がデフォルト値のときは修正
+	if eval.BrowseTime == "0001-01-01 01:01:01" {
+		eval.BrowseTime = "不明"
+	}
+
+	// 単なる改行区切りなので、スライスに再解凍
+	var (
+		incorrect, correct, typoEndTag string
+	)
+	incorrSL := strings.Split(typo.Incorrect, "\n")
+	corrSL := strings.Split(typo.Correct, "\n")
+
+	// 誤字脱字の数だけ必要なHTMLタグもセットで生成
+	if incorrSL[0] == "" {
+		incorrSL[0] = "無し"
+	} else {
+		incorrect =
+			`<div class="typo">
+			<div class="incorrect">
+				<h3>✕ 誤</h3>
+				<div class="typo_list">`
+		for _, v := range incorrSL {
+			incorrect += "<h4>" + template.HTMLEscapeString(v) + "</h4>"
+		}
+		incorrect +=
+			`	</div>
+		</div>`
+		typoEndTag = "</div>"
+	}
+	if corrSL[0] == "" {
+		corrSL[0] = "無し"
+	} else {
+		incorrect =
+			`<div class="typo">
+			<div class="correct">
+			<h3>⭕ 正</h3>
+			<div class="typo_list">`
+		for _, v := range corrSL {
+			correct += "<h4>" + template.HTMLEscapeString(v) + "</h4>"
+		}
+		incorrect +=
+			`	</div>
+		</div>`
+	}
+
+	// DB からコメントを取得
+	var individualEvalCommentRaw []IndividualEvalComment
+	_, _ = dbSess.Select("num", "page_id", "commenter_id", "posted",
+		"reply_eval_num", "reply_comment_num", "deliberate", "comment",
+		"recommend_good", "recommend_bad").
+		From("individual_eval_comment").
+		Where("reply_eval_num = ?", eval.Num).Load(&individualEvalCommentRaw)
+
+	// スライスの要素数からコメントの数を取得
+	// deliberate が 2 以上のものは数えない
+	var individualEvalComment []IndividualEvalComment
+	for i := 0; i < len(individualEvalCommentRaw); i++ {
+		if individualEvalCommentRaw[i].Deliberate <= 1 {
+			individualEvalComment = append(individualEvalComment, individualEvalCommentRaw[i])
+		}
+	}
+	numComment := len(individualEvalComment)
+
+	result := fmt.Sprintf(
+		`<div class="review">
+		<h3>No.%d　　%s</h3>
+		<p class="date">閲覧日　%s</p>
+		<h4 class="first">目的達成度　%s</h4>
+		<h4>見やすさ　　%s（%s）</h4>
+		<h4>誤字脱字数　%d箇所</h4>
+					%s
+					%s
+					%s
+		<h4>記述評価</h4>
+		<div class="doc">
+			<h4>%s</h4>
+		</div>
+		<div class="res">
+			<span id="posted">投稿日　%s　　コメント(%d件)</span>
+		</div>
+	</div>
+	`, iEval, strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1),
+		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
+		pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
+		incorrect, correct, typoEndTag,
+		strings.Replace(template.HTMLEscapeString(eval.DescriptionEval), "\n", "<br>", -1),
+		eval.Posted, numComment)
 
 	fmt.Println("評価を取ってくるのはOK")
 

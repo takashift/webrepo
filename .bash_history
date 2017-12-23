@@ -1,35 +1,3 @@
-chmod 400 server.key 
-ls
-ls -l
-git commit -am "証明書を本番環境のものに置き換え"
-gitpush 
-cd vg
-cd
-cd volumes/go_app/
-ls
-cd views/
-ls
-cp OAuth_signup.ace ie_OAuth_signup.ace 
-rcode ie_OAuth_signup.ace 
-git commit -am "ie生でも同意画面を表示するように変更"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose down
-docker-compose up -d --build
-git stutus
-git status
-git add ie_OAuth_signup.ace 
-git commit -am "ie生用の同意画面をaddし忘れていたので追加"
-gitpush 
-ls
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 git commit -am "ieのアドレスなら、キャリアのアドレス無しに登録できるように変更"
 gitpush 
 rcode nginx/Dockerfile 
@@ -998,3 +966,35 @@ git status
 cd volumes/go_app/
 ls
 rcode server.go 
+cd volumes/go_app/
+ls
+rcode server.go 
+docker-compose up -d --build
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode ~/mysql/init/webrepo.sql 
+cd volumes/go_app/views/
+ls
+rcode my_eval_list.ace 
+rcode mypage_top.ace 
+docker stop tuna_echo_1
+rcode page_list.ace 
+rcode header_menu.ace 
+git commit -am "ページ一覧を表示した時にデフォルトで媒体に文章が選択されるように変更"
+gitpush 
+rcode preview_evaluation.ace 

@@ -1514,6 +1514,24 @@ func main() {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
 		mypageValue.UserName = claims["name"].(string)
+		evaluatorID := claims["id"].(int)
+
+		// DB から特定ユーザーの評価を取得
+		// 複数の評価データを格納するために構造体のスライスを作成
+		var individualEval []IndividualEval
+		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+			"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+			From("individual_eval").
+			Where("evaluator_id = ?", evaluatorID).Load(&individualEval)
+
+		if individualEval != nil {
+			// for文で回す
+			// Ace に入れる構造体に格納
+			for i, v := range individualEval {
+				pageValue.Content += makePrevMyEval(mypageValue, i, v)
+			}
+		}
 
 		// if listPageValue.Content == "" {
 		// 	if dbPS != nil {
