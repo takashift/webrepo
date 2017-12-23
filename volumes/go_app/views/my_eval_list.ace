@@ -37,6 +37,23 @@ html lang=ja
         -webkit-text-stroke: 2px rgba(0,0,0,0.7);
         text-stroke: 2px rgba(0,0,0,0.7);
       }
+      #footer {
+        margin-top: 2rem 0;
+        padding: 1rem 130px;
+        background-color: rgba(242,242,242,1);
+      }
+      #footer p {
+        display: inline-block;
+        padding-left: 02rem;
+      }
+      #footer p a {
+        text-decoration: none;
+        color: rgba(0,0,0,0.7);
+      }
+      #copy {
+        margin: 1rem auto 2rem auto;
+        text-align: center;
+      }
     = javascript
       onload = function() {
         document.getElementById("eval_list").insertAdjacentHTML('afterbegin', {{.Content}});
@@ -48,3 +65,12 @@ html lang=ja
       .subject
         h2 {{.UserName}}さんの付けた評価一覧
       #eval_list
+
+  #footer
+    p
+      a href="/term_of_service" 利用規約
+    p
+      a href="/about" このサイトについて
+    #copy Copyright &copy 2017 Tsunashima@
+      a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
+
