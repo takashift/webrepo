@@ -11,7 +11,7 @@
   }
   #footer p {
     display: inline-block;
-    padding-left: 02rem;
+    padding-left: 2rem;
   }
   #footer p a {
     text-decoration: none;

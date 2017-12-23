@@ -7,7 +7,7 @@ html lang=ja
     = css
       #list {
         / margin: 0 0 0 150px;
-        padding: 0 0 0 0.5rem;
+        padding: 0 0 2rem 0;
         min-height: 1500px;
       }
       .subject {
@@ -44,7 +44,7 @@ html lang=ja
       }
       #footer p {
         display: inline-block;
-        padding-left: 02rem;
+        padding-left: 2rem;
       }
       #footer p a {
         text-decoration: none;
@@ -66,11 +66,11 @@ html lang=ja
         h2 {{.UserName}}さんの付けた評価一覧
       #eval_list
 
-  #footer
-    p
-      a href="/term_of_service" 利用規約
-    p
-      a href="/about" このサイトについて
-    #copy Copyright &copy 2017 Tsunashima@
-      a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
+    #footer
+      p
+        a href="/term_of_service" 利用規約
+      p
+        a href="/about" このサイトについて
+      #copy Copyright &copy 2017 Tsunashima@
+        a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
 
