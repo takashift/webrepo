@@ -243,10 +243,14 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 
 	fmt.Println(eval.EvaluatorID)
 
-	// DB から評価ページのタイトルを取得
-	pageTitle, err := dbSess.Select("title").From("page_status").
+	// DB から評価ページのタイトル、タグ、媒体を取得
+	var pageStatus PageStatus
+	_, err := dbSess.Select("title", "genre", "media",
+		"tag1", "tag2", "tag3", "tag4", "tag5",
+		"tag6", "tag7", "tag8", "tag9", "tag10").
+		From("page_status").
 		Where("id = ?", eval.PageID).
-		ReturnString()
+		Load(&pageStatus)
 	if err != nil {
 		fmt.Println("タイトルの取得に失敗")
 		panic(err)
@@ -306,8 +310,7 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 	// DB からコメントを取得
 	var individualEvalCommentRaw []IndividualEvalComment
 	_, _ = dbSess.Select("num", "page_id", "commenter_id", "posted",
-		"reply_eval_num", "reply_comment_num", "deliberate", "comment",
-		"recommend_good", "recommend_bad").
+		"reply_eval_num", "reply_comment_num", "deliberate").
 		From("individual_eval_comment").
 		Where("reply_eval_num = ?", eval.Num).Load(&individualEvalCommentRaw)
 
@@ -323,7 +326,10 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 
 	result := fmt.Sprintf(
 		`<div class="review">
-		<h3>No.%d　　%s</h3>
+		<h3 class="page_tilte">No.%d　　<a href="/preview_evaluation/%d">%s</a></h3>
+		<div class="cate">ジャンル：%s　媒体：%s</div>
+		<div class="tag">タグ：%s %s %s %s %s %s %s %s %s %s</div>
+		<h3>目的：%s</h3>
 		<p class="date">閲覧日　%s</p>
 		<h4 class="first">目的達成度　%s</h4>
 		<h4>見やすさ　　%s（%s）</h4>
@@ -336,23 +342,23 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 			<h4>%s</h4>
 		</div>
 		<div class="res">
-			<span id="posted">投稿日　%s　　コメント(%d件)</span>
+			<span id="posted">投稿日　%s　　コメント(%d件)　　参考に... なった👍%d　ならなかった👎%d</span>
 		</div>
 	</div>
-	`, iEval, strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1),
+	`, iEval, pageStatus.ID, pageStatus.Title, template.HTMLEscapeString(pageStatus.Genre), template.HTMLEscapeString(pageStatus.Media),
+		template.HTMLEscapeString(pageStatus.Tag1), template.HTMLEscapeString(pageStatus.Tag2),
+		template.HTMLEscapeString(pageStatus.Tag3), template.HTMLEscapeString(pageStatus.Tag4),
+		template.HTMLEscapeString(pageStatus.Tag5), template.HTMLEscapeString(pageStatus.Tag6),
+		template.HTMLEscapeString(pageStatus.Tag7), template.HTMLEscapeString(pageStatus.Tag8),
+		template.HTMLEscapeString(pageStatus.Tag9), template.HTMLEscapeString(pageStatus.Tag10),
+		strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1),
 		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
 		pasteStar(eval.Visibility, vispMenu), setDevice(eval.Device), eval.NumTypo,
 		incorrect, correct, typoEndTag,
 		strings.Replace(template.HTMLEscapeString(eval.DescriptionEval), "\n", "<br>", -1),
-		eval.Posted, numComment)
+		eval.Posted, numComment, eval.RecommendGood, eval.RecommendBad)
 
 	fmt.Println("評価を取ってくるのはOK")
-
-	pageEvalCommentNumMap := map[int]int{}
-	// コメントのテンプレートを追加
-	for j, v := range individualEvalComment {
-		result += makePrevEvalComment(v, iEval, j, pageEvalCommentNumMap)
-	}
 
 	return result
 }

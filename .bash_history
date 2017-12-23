@@ -1,21 +1,3 @@
-git commit -am "ieのアドレスなら、キャリアのアドレス無しに登録できるように変更"
-gitpush 
-rcode nginx/Dockerfile 
-rcode nginx/app.conf 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd nginx/s
-cd nginx/
-ls
-cd keys/
-ls
-mv server.crt server.cer
-touch server.crt
 cat server.cer >> server.crt
 cat nii-odcacssha1.cer >> server.crt
 ls -l
@@ -998,3 +980,21 @@ rcode header_menu.ace
 git commit -am "ページ一覧を表示した時にデフォルトで媒体に文章が選択されるように変更"
 gitpush 
 rcode preview_evaluation.ace 
+cd volumes/go_app/
+rcode server.go 
+rcode createPrevEvalPage.go 
+cd ~/mysql/init/webrepo.sql 
+rcode ~/mysql/init/webrepo.sql 
+git commit -am "評価閲覧ページの typo の取得が評価ナンバーじゃなく評価者IDになっていたので、修正"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd volumes/go_app/views/
+ls
+rcode mypage_top.ace 
+rcode my_eval_list.ace 
+rcode page_list.ace 
