@@ -31,8 +31,10 @@ html lang=ja
         a href="my_eval_list" 過去に付けた評価の一覧
       p
         a href="user_settings" ユーザー設定
+      p
+        a href="sign_out" ログアウト（Cookieの削除）
       br
       p
-        a ユーザー登録の解除
+      /  a ユーザー登録の解除
       
     = include footer

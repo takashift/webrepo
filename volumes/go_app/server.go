@@ -1486,11 +1486,7 @@ func main() {
 
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
-		if claims["name"] != nil {
-			mypageValue.UserName = claims["name"].(string)
-		} else {
-			mypageValue.UserName = "Cookie を削除して下さい！　"
-		}
+		mypageValue.UserName = claims["name"].(string)
 
 		return c.Render(http.StatusOK, "mypage_top", mypageValue)
 	})
@@ -1558,6 +1554,20 @@ func main() {
 		}
 
 		return c.Render(http.StatusOK, "my_eval_list", mypageValue)
+	})
+
+	r.GET("/sign_out", func(c echo.Context) error {
+
+		sess, _ := session.Get("session", c)
+
+		sess.Options = &sessions.Options{
+			Path:     "/",
+			MaxAge:   -1,
+			HttpOnly: true,
+		}
+		sess.Save(c.Request(), c.Response())
+
+		return c.Redirect(http.StatusSeeOther, "/")
 	})
 
 	// 新規ページ登録画面
