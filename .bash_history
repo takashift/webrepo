@@ -1,121 +1,3 @@
-cat server.cer >> server.crt
-cat nii-odcacssha1.cer >> server.crt
-ls -l
-chmod 400 server.crt nii-odcacssha1.cer
-ls -l
-git status
-git add server.cer nii-odcacssha1.cer 
-git commit -am "中間証明書と合成したファイルを追加"
-gitpush 
-git fetch origin
-git reset --hard origin/master
-cd 
-cd volumes/go_app/
-ls
-rcode server.go 
-cd volumes/go_app/
-ls
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd
-cd nginx/keys/
-ls
-mv nii-odcacssha1.cer nii-odca3sha1.cer
-cat nii-odca3sha1.cer 
-ls
-ls -l
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git status
-git add nii-odca3sha1.cer 
-git commit -am "文字コードを指定していないutf8でタイトルを取ってこれないようになっていたので修正"
-gitpush 
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd
-cd volumes/go_app/
-ls
-rcode c
-rcode createPrevEvalPage.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-git commit -am '評価一覧のタグ間のスペースを修正'
-gitpush 
-cd
-cd nginx/
-;s
-ls
-rcode app.conf 
-rcode ~/docker-compose.yml
-cd
-cd volumes/web-vol/
-ls
-rcode googledc7e8e91c55f39d7.html
-docker stop tuna_nginx_1
-docker-compose up -d --build
-ls
-cd ..
-cd go_app/views/
-rcode search_top.ace 
-cd
-cd volumes/go_app/
-rcode server.go 
-git statis
-git status
-git commit -am "メタタグの部分にGoogle認証用の記述を追加。HTML5の文字コード指定の書き方に対応"
-docker stop tuna_nginx_1
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-gitpush 
-docker-compose logs
-rcode server.go 
-rcode createPrevEvalPage.go 
-git status
- git commit -am "平均値の計算を修正"
-gitp
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-git commit -am "charsetの含まれるメタタグの属性名contentが２つ目以降の場合もエラーが起こらないようにに修正"
-git commit --amend
-gitpush 
-docker-compose logs
-cd 
-cd .
-cd nginx/keys/
-ls
-vi server.crt
-cat server.cer nii-odca3sha2.cer >> server.crt
-cat server.crt 
-git commit -am "中間証明書のアルゴリズムの種類が間違ってるっぽかったので修正"
-gitpush 
-exi
-exit
-cd nginx/keys/
-ls
-vi nii-odca3sha1.cer 
-chmod 700 nii-odca3sha1.cer 
-vi nii-odca3sha1.cer 
 chmod 400 nii-odca3sha1.cer 
 rm server.crt 
 ls
@@ -998,3 +880,121 @@ ls
 rcode mypage_top.ace 
 rcode my_eval_list.ace 
 rcode page_list.ace 
+cd volumes/go_app/
+ls
+rcode createPrevEvalPage.go 
+git stahs
+git staths
+git status
+rcode createPrevEvalPage.go 
+git status
+git commit -am "タイトルをHTMLエスケープしてなかったので修正"
+gitpush 
+rcode createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "タイトルのリンクを間違っていたので修正"
+gito
+gitop
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "キャリアメールの壁を排除してGoogleアカウントがあれば、使えるように仕様を変更"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "見やすさを任意の入力項目に変更"
+gitpush 
+cd volumes/go_app/
+ls
+rcode server.go 
+rcode createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+rcode server.go 
+rcode createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
