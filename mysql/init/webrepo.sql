@@ -58,7 +58,7 @@ CREATE TABLE individual_eval(
 	goodness_of_fit tinyint not null,
 	because_goodness_of_fit text,
 	device varchar(30) DEFAULT '',
-	visibility tinyint not null,
+	visibility tinyint DEFAULT 0,
 	because_visibility text,
 	num_typo tinyint not null,
 	because_num_typo text,

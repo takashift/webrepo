@@ -1,34 +1,3 @@
-chmod 400 nii-odca3sha1.cer 
-rm server.crt 
-ls
-touch server.crt
-cat server.cer nii-odca3sha1.cer >> server.crt 
-cat server.crt 
-git commit -am "間違ったファイルを合成していたので週背"
-git commit --amend
-gitpush 
-docker exec -it tuna_mysql_1 /bin/bash
-git status
-ls
-cd volumes/go_app/
-ls
-rcode server.go 
-cd views/
-ls
-rcode font-family.ace 
-rcode search_top.ace 
-git log
-git sutatua
-git sutats
-git status
-git add ../../../nginx/keys/nii-odca3sha2.cer
-git commit -am "font-family の指定の前の方に游ゴシック体ミディアムを追加"
-gitpush 
-ls
-rcode search_top.ace 
-rcode search_result.ace 
-rcode page_list.ace 
-rcode p
 rcode preview_evaluation.ace 
 rcode t
 rcode tmp_preview_evaluation.ace 
@@ -998,3 +967,34 @@ docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
+cd volumes/go_app/
+ls
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ページ登録画面に説明を追加"
+gitpq
+gitpush 
+cd volumes/go_app/views/
+ls
+rcode input_evaluation.ace 
+rcode input_evaluation_
+rcode input_evaluation_url.ace 
+rcode register_page.ace 
+git log
