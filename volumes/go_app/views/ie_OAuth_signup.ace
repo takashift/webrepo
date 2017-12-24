@@ -87,7 +87,7 @@ html lang=ja
     #main
       form name="sign_up" action="/ie_agree_signup" method="get" 
         h2 新規登録
-        p ie生
+        / p ie生
         p#consent_abst 以下の同意を以て登録となります。
         #consent_form
           = include consent_form

@@ -1104,11 +1104,11 @@ func main() {
 			sess.Save(c.Request(), c.Response())
 
 			oauthService = "Google"
-			if strings.HasSuffix(strings.SplitAfter(userGoogle.Email, "@")[1], "ie.u-ryukyu.ac.jp") {
-				return c.Redirect(http.StatusFound, "/ie_OAuth_signup")
-			}
+			// if strings.HasSuffix(strings.SplitAfter(userGoogle.Email, "@")[1], "ie.u-ryukyu.ac.jp") {
+			return c.Redirect(http.StatusFound, "/ie_OAuth_signup")
+			// }
 
-			return c.Redirect(http.StatusFound, "/OAuth_signup")
+			// return c.Redirect(http.StatusFound, "/OAuth_signup")
 		}
 
 		// エラーが無い == 登録済み場合
@@ -1116,7 +1116,12 @@ func main() {
 		createJwt(c, userInfoDB.ID, userInfoDB.Email, userInfoDB.Name)
 		fmt.Println("登録済み")
 
-		rURL := sess.Values["refererURL"].(string)
+		var rURL string
+		if sess.Values["refererURL"] != nil {
+			rURL = sess.Values["refererURL"].(string)
+		} else {
+			rURL = "/"
+		}
 		sess.Values["refererURL"] = nil
 		sess.Save(c.Request(), c.Response())
 
@@ -1158,7 +1163,12 @@ func main() {
 		createJwt(c, userInfoDB.ID, userInfoDB.Email, userInfoDB.Name)
 		fmt.Println("登録済み")
 
-		rURL := sess.Values["refererURL"].(string)
+		var rURL string
+		if sess.Values["refererURL"] != nil {
+			rURL = sess.Values["refererURL"].(string)
+		} else {
+			rURL = "/"
+		}
 		sess.Values["refererURL"] = nil
 		sess.Save(c.Request(), c.Response())
 
@@ -1221,7 +1231,13 @@ func main() {
 				if err != nil {
 					return err
 				}
-				rURL := sess.Values["refererURL"].(string)
+
+				var rURL string
+				if sess.Values["refererURL"] != nil {
+					rURL = sess.Values["refererURL"].(string)
+				} else {
+					rURL = "/"
+				}
 				gmail := sess.Values["GoogleMail"].(string)
 				sess.Values["refererURL"] = nil
 				sess.Values["GoogleMail"] = nil
