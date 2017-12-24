@@ -449,8 +449,10 @@ func pasteStar(i int, m map[int]string) string {
 func setDevice(s string) string {
 	if s == "SP" {
 		s = "スマートフォン・タブレット端末"
-	} else {
+	} else if s == "PC" {
 		s = "パソコン"
+	} else {
+		s = "評価なし"
 	}
 	return s
 }

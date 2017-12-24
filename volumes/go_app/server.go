@@ -629,12 +629,12 @@ func inputEval(c echo.Context) error {
 	indEval.DescriptionEval = c.FormValue("freedom")
 	indEval.GoodnessOfFit, err = strconv.Atoi(c.FormValue("rating_pp"))
 	if err != nil {
-		return err
+		panic(err)
 	}
 	indEval.Device = c.FormValue("device")
 	indEval.Visibility, err = strconv.Atoi(c.FormValue("rating_vw"))
 	if err != nil {
-		return err
+		// panic(err)
 	}
 
 	incorr := c.FormValue("typo")
@@ -1375,19 +1375,23 @@ func main() {
 			gfp       int
 			visp      int
 			enableNum int
+			visNum    int
 		)
 		// 平均評価を計算
 		for _, v := range individualEval {
 			// 審議なしか審議済みなら
 			if v.Deliberate <= 1 {
 				gfp += v.GoodnessOfFit
-				visp += v.Visibility
+				if v.Visibility >= 1 {
+					visp += v.Visibility
+					visNum++
+				}
 				enableNum++
 			}
 		}
 		// 10倍して四捨五入
 		gfpf := math.Floor((float64(gfp)/float64(enableNum))*math.Pow10(1) + 0.05)
-		vispf := math.Floor((float64(visp)/float64(enableNum))*math.Pow10(1) + 0.05)
+		vispf := math.Floor((float64(visp)/float64(visNum))*math.Pow10(1) + 0.05)
 		// 0.1倍して代入
 		pageValue.AveGFP = strconv.FormatFloat(gfpf*math.Pow10(-1), 'f', 1, 64)
 		pageValue.AveVisP = strconv.FormatFloat(vispf*math.Pow10(-1), 'f', 1, 64)
