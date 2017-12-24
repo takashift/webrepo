@@ -103,6 +103,10 @@ html lang=ja
       input[value="5"]:checked + .star:before {
         content: "★★★★★";
       }
+      .desc_center {
+        text-align: center;
+        font-size: 1.1rem;
+      }
       #select_device h3 {
         display: inline-block;
         margin-left: 1rem;
@@ -201,6 +205,9 @@ html lang=ja
               input.rating type="radio" name="rating_pp" value="1" required=""
               span.star
             p#note ※エラーは出ませんが選択必須です。
+
+        .desc_center 以下の入力は任意です。
+
         .form_block
           .subject
             h2 見やすさ
@@ -210,25 +217,24 @@ html lang=ja
             #select_device
               h3 閲覧デバイス
               label
-                input type="radio" name="device" value="PC" required="" パソコン　　　　　　　　
+                input type="radio" name="device" value="PC" パソコン　　　　　　　　
               label
-                input type="radio" name="device" value="SP" required="" スマートフォン・タブレット端末
+                input type="radio" name="device" value="SP" スマートフォン・タブレット端末
             label.star_rating 極めて見やすい　
-              input.rating type="radio" name="rating_vw" value="5" required=""
+              input.rating type="radio" name="rating_vw" value="5"
               span.star
             label.star_rating そこそこ見やすい
-              input.rating type="radio" name="rating_vw" value="4" required=""
+              input.rating type="radio" name="rating_vw" value="4"
               span.star
             label.star_rating 見づらくはない　
-              input.rating type="radio" name="rating_vw" value="3" required=""
+              input.rating type="radio" name="rating_vw" value="3"
               span.star
             label.star_rating そこそこ見づらい
-              input.rating type="radio" name="rating_vw" value="2" required=""
+              input.rating type="radio" name="rating_vw" value="2"
               span.star
             label.star_rating 極めて見づらい　
-              input.rating type="radio" name="rating_vw" value="1" required=""
+              input.rating type="radio" name="rating_vw" value="1"
               span.star
-            p#note ※エラーは出ませんが選択必須です。
         .form_block
           .subject
             h2 誤字脱字
@@ -247,7 +253,6 @@ html lang=ja
         .form_block
           .subject
             h2 記述評価
-              br (任意)
           .input
             p その他、ページに対する評価があれば入力して下さい。
             p ヒント：コンテンツのどこが良く、どこが駄目なのか、を明確に書いていただけるとより正確な判断ができる検索エンジンが完成します。
@@ -256,7 +261,6 @@ html lang=ja
         .form_block
           .subject
             h2 閲覧日時
-              br (任意)
           .input
             p Chorme ではフォーム右端をクリックすることで、マウスで日付を選択できます。
             p それ以外のブラウザでは半角で、「2017-08-01 23:59」のように入力してください。時刻は無くても構いません。
