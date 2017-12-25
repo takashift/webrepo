@@ -208,9 +208,9 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 				<input type="submit" formaction="/r/input_comment/%d/%d/%d" value="コメントする" name="comment">
 			</div>
 		</form>
-	</div>
+		<h3>コメント(%d件)</h3>
+		</div>
 	
-	<h3>コメント(%d件)</h3>
 	`, iEval, strings.Replace(template.HTMLEscapeString(eval.BrowsePurpose), "\n", "<br>", -1),
 		template.HTMLEscapeString(evaluatorName),
 		eval.BrowseTime, pasteStar(eval.GoodnessOfFit, gfpMenu),
@@ -229,6 +229,56 @@ func makePrevEval(iEval int, eval IndividualEval) string {
 	}
 
 	return result
+}
+
+func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCommentNumMap map[int]int) string {
+
+	// // 審議中なら""を返す
+	// if comment.Deliberate >= 2 {
+	// 	return ""
+	// }
+	j++
+	pageEvalCommentNumMap[comment.Num] = j
+
+	// DB から投稿者名を取得
+	commenterName, _ := dbSess.Select("name").From("userinfo").
+		Where("id = ?", comment.CommenterID).
+		ReturnString()
+	// if err != nil {
+	// 	panic(err)
+	// }
+
+	fmt.Println("Sprintfの前")
+
+	return fmt.Sprintf(
+		`<div class="comment">
+		<div class="review">
+			<p class="author">投稿者　%s</p>
+			<h4>>>%s　%s</h4>
+			<div class="res">
+				<span class="posted">No.%d　　投稿日　%s　</span>
+				<span>参考に...
+					<form class="recommend" name="評価のコメント" method="post" action="/r/recommend_comment/%d/%d">
+						<input type="submit" value="なった👍" name="recommend"> %d
+						<input type="submit" value="ならなかった👎" name="recommend"> %d</span>
+					</form>
+			</div>
+			<form class="res_button" action method="get" tprevet="_blank">
+				<div class="input_dangerous">
+					<input type="submit" formaction="/r/dangerous_comment/%d/%d" value="通報する" name="dangerous">
+				</div>
+				<div class="input_comment">
+					<input type="submit" formaction="/r/input_comment/%d/%d/%d" value="コメントする" name="comment">
+				</div>
+			</form>
+		</div>
+	</div>
+	`, template.HTMLEscapeString(commenterName), toEval(i, comment, pageEvalCommentNumMap),
+		strings.Replace(template.HTMLEscapeString(comment.Comment), "\n", "<br>", -1), j, comment.Posted,
+		comment.PageID, comment.Num,
+		comment.RecommendGood, comment.RecommendBad,
+		comment.PageID, comment.Num,
+		comment.PageID, comment.ReplyEvalNum, comment.Num)
 }
 
 // 自分のページの評価を表示用（通報、GoodBad、コメントボタン、コメント無し。）
@@ -363,56 +413,6 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 	return result
 }
 
-func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCommentNumMap map[int]int) string {
-
-	// // 審議中なら""を返す
-	// if comment.Deliberate >= 2 {
-	// 	return ""
-	// }
-	j++
-	pageEvalCommentNumMap[comment.Num] = j
-
-	// DB から投稿者名を取得
-	commenterName, _ := dbSess.Select("name").From("userinfo").
-		Where("id = ?", comment.CommenterID).
-		ReturnString()
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	fmt.Println("Sprintfの前")
-
-	return fmt.Sprintf(
-		`<div class="comment">
-		<div class="review">
-			<p class="author">投稿者　%s</p>
-			<h4>>>%s　%s</h4>
-			<div class="res">
-				<span class="posted">No.%d　　投稿日　%s　</span>
-				<span>参考に...
-					<form class="recommend" name="評価のコメント" method="post" action="/r/recommend_comment/%d/%d">
-						<input type="submit" value="なった👍" name="recommend"> %d
-						<input type="submit" value="ならなかった👎" name="recommend"> %d</span>
-					</form>
-			</div>
-			<form class="res_button" action method="get" tprevet="_blank">
-				<div class="input_dangerous">
-					<input type="submit" formaction="/r/dangerous_comment/%d/%d" value="通報する" name="dangerous">
-				</div>
-				<div class="input_comment">
-					<input type="submit" formaction="/r/input_comment/%d/%d/%d" value="コメントする" name="comment">
-				</div>
-			</form>
-		</div>
-	</div>
-	`, template.HTMLEscapeString(commenterName), toEval(i, comment, pageEvalCommentNumMap),
-		strings.Replace(template.HTMLEscapeString(comment.Comment), "\n", "<br>", -1), j, comment.Posted,
-		comment.PageID, comment.Num,
-		comment.RecommendGood, comment.RecommendBad,
-		comment.PageID, comment.Num,
-		comment.PageID, comment.ReplyEvalNum, comment.Num)
-}
-
 func toEval(i int, arg IndividualEvalComment, numMap map[int]int) string {
 	var value string
 	num := strconv.Itoa(numMap[arg.ReplyCommentNum])
@@ -429,19 +429,19 @@ func toEval(i int, arg IndividualEvalComment, numMap map[int]int) string {
 func pasteStar(i int, m map[int]string) string {
 	var result string
 	if i == 5 {
-		result = "<span class=\"star\">★★★★★</span> 5　" + m[i]
+		result = "<span class=\"star\">★ ★ ★ ★ ★</span> 5　" + m[i]
 	}
 	if i == 4 {
-		result = "<span class=\"star\">★★★★</span>　 4　" + m[i]
+		result = "<span class=\"star\">★ ★ ★ ★ </span>　 4　" + m[i]
 	}
 	if i == 3 {
-		result = "<span class=\"star\">★★★</span>　　 3　" + m[i]
+		result = "<span class=\"star\">★ ★ ★ </span>　 　 3　" + m[i]
 	}
 	if i == 2 {
-		result = "<span class=\"star\">★★</span>　　　 2　" + m[i]
+		result = "<span class=\"star\">★ ★ </span>　 　 　 2　" + m[i]
 	}
 	if i == 1 {
-		result = "<span class=\"star\">★</span>　　　　 1　" + m[i]
+		result = "<span class=\"star\">★ </span>　 　 　 　 1　" + m[i]
 	}
 	return result
 }
