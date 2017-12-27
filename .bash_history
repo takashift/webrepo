@@ -1,82 +1,3 @@
-rcode preview_evaluation.ace 
-rcode t
-rcode tmp_preview_evaluation.ace 
-git commit -am "WebRepo★彡のフォント指定からsan-selfを削除"
-gitpush 
-git commit -am "トップページのタイトルを変更"
-gitpush 
-git commit -am "トップページのタイトルを変更"
-gitpush 
-cd
-cd bin/
-rcode _gitpulldep
-ls -l
-chmod 700 _gitpulldep 
-ls -l
-git commit -am "本番環境での pull を自動化するコマンドを作成"
-git commit --amend
-git status
-git add _gitpulldep 
-git status
-git commit -am "本番環境での pull を自動化するコマンドを作成"
-gitpush 
-git push -f
-git log
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-git commit -am "評価閲覧ページにTwitterのシェアボタンを追加"
-gitpush 
-ls
-cd volumes/go_app/views/
-ls
-rcode server.go
-rcode ../server.go
-rcode OAuth_signup.ace 
-git commit -am ".ac.jpのアドレスをキャリアメールの代わりに使えるように変更"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/go_app/
-rcode OAuth_signup.ace 
-rcode server.go
-docker-compose logs
-cd volumes/go_app
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "リダイレクトした時に404エラーが表示される問題を修正"
-gitpush 
-git status
-cd views/
-ls
-rcode font-family.ace 
-git commit -am "Yu Go Medi の指定が間違ってたので修正"
-gitpush 
-cd volumes/go_app/
-rcode server.go
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git status
-git commit -am "ie生で同意ボタンを押した後に501が出るかもしれない問題を修正"
 gitpush 
 docker-compose logs
 cd volumes/go_app/
@@ -998,3 +919,82 @@ rcode input_evaluation_
 rcode input_evaluation_url.ace 
 rcode register_page.ace 
 git log
+docker exec -it tuna_mysql_1 /bin/bash
+cd volumes/go_app/
+rcode server.go 
+rcode createPrevEvalPage.go 
+cd mysql/init/webrepo.sql 
+rcode mysql/init/webrepo.sql 
+git stauts
+git status
+git commit -am "DBの見やすさのカラムのnot null指定を解除"
+gitpush 
+docker-compose logs
+cd volumes/go_app/
+ls
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd views/
+rcode input_evaluation.ace 
+rcode ../createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+git log
+git commit -am "評価がついてない場合にgoでは処理せずSQLでデフォルトで 0 が入力されるように変更。"
+git commit --amend
+gitpush 
+rcode mypage_top.ace 
+rcode footer.ace 
+rcode ../server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ログアウト機能を追加"
+gitpush 
+git lo
+git log
+rcode tmp_preview_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "評価閲覧ページのコメント数の位置変更、星の間に間隔を追加"
+gitpush 
+cd volumes/go_app/
+ls
+cd views/
+ls

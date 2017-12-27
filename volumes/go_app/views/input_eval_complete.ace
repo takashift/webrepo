@@ -1,0 +1,23 @@
+= doctype html
+html lang=ja
+  head
+    = include common-setting
+    meta charset=utf-8
+    meta name="robots" content="noindex"
+    title 評価入力完了 | WebRepo☆彡
+    = include font-family
+    = css
+      #main {
+        /*width: 50rem;*/
+        margin: 2rem auto auto auto;
+        text-align: center;
+      }
+    = include JWT
+
+  body
+    = include header_menu
+    #main
+      p 評価が完了しました。
+      p 評価をシェアする
+      p
+        a 評価閲覧ページに移動する
