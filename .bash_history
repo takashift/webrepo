@@ -1,13 +1,4 @@
 gitpush 
-docker-compose logs
-cd volumes/go_app/
-rcode server.go 
-rcode createPrevEvalPage.go 
-git status
-git commit -am "ページ一覧でtemplate.HTMLEscapeString()するように変更"
-gitpush 
-git commit -am "評価閲覧ページでtemplate.HTMLEscapeString()するように変更"
-gitpush 
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +989,12 @@ cd volumes/go_app/
 ls
 cd views/
 ls
+cd volumes/go_app/views/
+ls
+rcode dangerous_complete.ace 
+cp dangerous_complete.ace input_eval_complete.ace
+rcode input_eval_complete.ace 
+git status
+git add input_eval_complete.ace 
+git commit -am "評価入力完了画面を追加"
+gitpush 
