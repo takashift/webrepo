@@ -14,6 +14,12 @@ html lang=ja
         /*padding-top: 0.1rem;*/
         background-color: rgba(0,0,0,0.05);
       }
+      .desc_center {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        font-size: 1.1rem;
+      }
       .form_block {
         margin: 2rem;
         display: flex;
@@ -171,6 +177,8 @@ html lang=ja
     = include header_menu
     form action="" method="post"
       .glay
+        .desc_center
+          p Webページの評価を行います。
         .form_block
           .subject
             h2 URL

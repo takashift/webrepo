@@ -1,10 +1,3 @@
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 git commit -am "評価閲覧ページで"\n"を"<br>"に変換するように変更"
 git commit -am '評価閲覧ページで"\n"を"<br>"に変換するように変更'
 gitpush 
@@ -997,4 +990,11 @@ rcode input_eval_complete.ace
 git status
 git add input_eval_complete.ace 
 git commit -am "評価入力完了画面を追加"
+gitpush 
+cd volumes/go_app/views/
+ls
+rcode register_page.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ページの登録のみ行います。文言を削除"
 gitpush 

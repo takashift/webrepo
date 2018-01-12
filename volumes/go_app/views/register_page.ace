@@ -73,8 +73,8 @@ html lang=ja
     = include header_menu
     form action="" method="post"
       .glay
-        / .desc_center
-          / p ページの登録のみ行います。
+        .desc_center
+          p 登録されてないWebページを新たに登録します（登録済みの場合は評価閲覧ページに移動します）。
         .form_block
           .subject
             h2 URL
