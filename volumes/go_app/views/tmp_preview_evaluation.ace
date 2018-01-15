@@ -74,6 +74,10 @@ html lang=ja
         margin-right: 2rem;
         flex-shrink: 0; /* サイズ固定 */
       }
+      .left #eval iframe {
+        display: inline-block;
+        margin-left: 0.5rem;
+      }
       .ScrPr {
         text-align: center;
         /height: 150px;
@@ -230,6 +234,9 @@ html lang=ja
             / h4 誤字脱字　　{{.NumTypo}}箇所
             a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="&#13;&#10;{{.Title}}の評価 | WebRepo★彡&#13;&#10;みんなも評価しよう" data-hashtags="WebRepo #Webページ評価" data-related="web_repo" data-show-count="false" Tweet
             script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"
+            a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="touch-counter" title="このエントリーをはてなブックマークに追加"
+              img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" 
+            script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"
         .right
           #cate
             h3 ジャンル

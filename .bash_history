@@ -1,16 +1,3 @@
-git commit -am "評価閲覧ページで"\n"を"<br>"に変換するように変更"
-git commit -am '評価閲覧ページで"\n"を"<br>"に変換するように変更'
-gitpush 
-git commit -am ''
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am '閲覧目的も"\'
-gitpush 
-cd views/
-rcode input_evaluation
-rcode input_evaluation.ace 
 rcode input_evaluation_url.ace 
 git commit -am '記述評価と閲覧日時を任意と明記'
 gitpush 
@@ -997,4 +984,17 @@ rcode register_page.ace
 docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "ページの登録のみ行います。文言を削除"
+gitpush 
+cd volumes/go_app/
+ls
+rcode server.go 
+cd views/
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+rcode register_page.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "入力フォームのトップに説明を追加"
 gitpush 
