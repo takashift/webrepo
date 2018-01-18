@@ -78,6 +78,10 @@ html lang=ja
         display: inline-block;
         margin-right: 0.3rem;
       }
+      .left #eval .pocket {
+        display: inline-block;
+        margin-right: 0.3rem;
+      }
       .ScrPr {
         text-align: center;
         /height: 150px;
@@ -197,7 +201,13 @@ html lang=ja
       onload = function() {
         document.getElementById("review_list").insertAdjacentHTML('afterbegin', {{.Content}});
       }
-
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.11';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     = include JWT
 
   body
@@ -233,10 +243,15 @@ html lang=ja
             / hr size="1.5" width="100%" color="#AAAAAA"
             / h4 誤字脱字　　{{.NumTypo}}箇所
             a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="&#13;&#10;{{.Title}}の評価 | WebRepo★彡&#13;&#10;みんなも評価しよう" data-hashtags="WebRepo #Webページ評価" data-related="web_repo" data-show-count="false" Tweet
-            script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"
+            script defer="" src="https://platform.twitter.com/widgets.js" charset="utf-8"
             a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="touch-counter" title="このエントリーをはてなブックマークに追加"
               img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" 
-            script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"
+            script defer="" type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"
+            .pocket
+              a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"
+            script type="text/javascript" !function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");
+            div id="fb-root"
+            div class="fb-like" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"
         .right
           #cate
             h3 ジャンル

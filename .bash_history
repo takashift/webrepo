@@ -1,31 +1,3 @@
-rcode input_evaluation_url.ace 
-git commit -am '記述評価と閲覧日時を任意と明記'
-gitpush 
-git commit -am '任意の位置が微妙だったので改行を追加'
-gitpush 
-rcode about.ace 
-rcode mypage_top.ace 
-git commit -am "マイページのタイトルがこのサイトについてだったので修正"
-gitpo
-gitpush 
-rcode cd echo/
-cd echo/
-rcode Dockerfile
-mysql -u rtuna -pUSER_PASSWORD Webrepo
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/go_app/
-ls
-cd views/
-ls
-rcode fo
-rcode font-family.ace 
-git commit -am "FireFox で Yu Go Medi を表示する設定を追加"
-gitpush 
-rcode search_
-cd
-cd volumes/go_app/
-ls
-rcode server.go 
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
@@ -998,3 +970,31 @@ docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "入力フォームのトップに説明を追加"
 gitpush 
+cd volumes/go_app/v
+cd volumes/go_app/views/
+rcode preview_evaluation.ace 
+ls
+rcode tmp_preview_evaluation.ace 
+cd volumes/go_app/
+ls
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "はてブのシェアボタンを追加"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "シェアボタンの間隔とmarginを右に変更。"
+gitpush 
+cd volumes/go_app/
+cd views/
+ls
+rcode tmp_preview_evaluation.ace 
