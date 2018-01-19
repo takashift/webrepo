@@ -44,5 +44,5 @@ html lang=ja
         {{"は@に直して下さい）。"}}
       p 　　　　　e145771
         span.star ★
-        {{"ie.u-ryukyu.ac.jp （Tsunashima 宛）"}}
+        {{"ie.u-ryukyu.ac.jp （綱島隆太 宛）"}}
     = include footer
