@@ -138,6 +138,7 @@ type (
 
 	MyPageValue struct {
 		UserName string
+		Rank     string
 		Content  string
 	}
 
@@ -319,7 +320,7 @@ func createJwt(c echo.Context, id int, email string, name string) error {
 	return nil
 }
 
-// Token によってサイン�����������������������������������ン状況をチェック（ログインが必須でないペー�����）
+// Token に�����������������������ってサイン���������������������������������������������������������ン状況をチェック（ログインが必須でないペー�����）
 // サイ��イン���������状況に応�����������������������てページの一部���������変更する
 func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
@@ -631,7 +632,7 @@ func inputEval(c echo.Context) error {
 		browseTime, err = time.Parse("2006-01-02", bro)
 	}
 	if err != nil {
-		fmt.Println("time型に出来ない")
+		fmt.Println("time型���出���な���")
 	} else {
 		indEval.BrowseTime = browseTime.Format(timeLayout)
 		fmt.Println(indEval.BrowseTime)
@@ -1185,7 +1186,7 @@ func main() {
 			userInfoDB userinfo
 		)
 
-		// OAuth、キャリアメールが本登録されてるか確認
+		// OAuth、���ャ���ア���ー���が���登録されてるか���認
 		_, err = dbSess.Select("id", "email", "name").From("userinfo").
 			Where("OAuth_userinfo = ?", userGoogle.Email).
 			Load(&userInfoDB)
@@ -1439,7 +1440,7 @@ func main() {
 		}
 		fmt.Println("Atoi OK")
 
-		// DB からページ属性を取得
+		// DB か��ペ��ジ��性��取��
 		_, err = dbSess.Select("id", "title", "URL", "register_date", "last_update",
 			"admin_user_id", "genre", "media",
 			"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
@@ -1578,11 +1579,42 @@ func main() {
 	r.GET("/mypage", func(c echo.Context) error {
 
 		var mypageValue MyPageValue
+		var rankNum int
 
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(jwt.MapClaims)
 		mypageValue.UserName = claims["name"].(string)
+		userID := int(claims["id"].(float64))
 
+		// 評価数順位
+		// 取り敢えず、ユーザー一人ひとりの評価数を取ってくる。
+		// 複数の評価データを格納するために構造体のスライスを作成
+		var individualEvalCount []IndividualEvalCount
+		_, err := dbSess.Select("evaluator_id", "count(num)").
+			From("individual_eval").
+			GroupBy("evaluator_id").Load(&individualEvalCount)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(individualEvalCount)
+
+		for i, v := range individualEvalCount {
+			if v.UserID == userID {
+				// 審議中の評価は外す。（未実装）
+				// 評価数の多い順にソートする。
+				sort.Slice(individualEvalCount, func(i, j int) bool {
+					return individualEvalCount[i].EvalCount > individualEvalCount[j].EvalCount
+				})
+				rankNum = i + 1
+				break
+			}
+		}
+
+		if rankNum == 0 {
+			mypageValue.Rank = "圏外"
+		} else {
+			mypageValue.Rank = strconv.Itoa(rankNum) + "位"
+		}
 		return c.Render(http.StatusOK, "mypage_top", mypageValue)
 	})
 
@@ -1688,7 +1720,7 @@ func main() {
 		)
 
 		newPS.URL = c.FormValue("url")
-		// URL のプロトコルが https でも http でも無い時は戻る。
+		// URL のプ��トコルが https ���も http でも無い時は戻る。
 		if !strings.HasPrefix(newPS.URL, "https://") && !strings.HasPrefix(newPS.URL, "http://") {
 			evalForm, _ := getPageStatusItem(c, -1)
 			return c.Render(http.StatusOK, "register_page", evalForm)
@@ -1952,7 +1984,7 @@ func main() {
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 
 		fmt.Println("URL:", dbPS.URL)
-		// ち�������とレスポンスが返���てこない時は死亡フラグを��てる
+		// ち�������とレスポンスが返���てこない時���死����フラグを��てる
 		resp, err := http.Get(dbPS.URL)
 		if err != nil {
 			newPS.Dead = 1
@@ -1972,7 +2004,7 @@ func main() {
 				fmt.Println(newPS.LastUpdate)
 			}
 
-			// ページタイトルを取得
+			// ページタイトルを取��
 			doc, err := goquery.NewDocumentFromResponse(resp)
 			if err != nil {
 				panic(err)

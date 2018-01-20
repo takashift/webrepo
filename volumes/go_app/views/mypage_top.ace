@@ -26,6 +26,7 @@ html lang=ja
     = include header_menu
     #main
       p#signin_status {{.UserName}}さん、こんにちは。
+      p#signin_status あなたの現在の評価数ランキングは{{.Rank}}です。      
       br
       p
         a href="my_eval_list" 過去に付けた評価の一覧
