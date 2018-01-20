@@ -55,9 +55,9 @@ html lang=ja
         text-align: center;
       }
     = javascript
-      onload = function() {
+      window.addEventListener("DOMContentLoaded", function() {
         document.getElementById("eval_list").insertAdjacentHTML('afterbegin', {{.Content}});
-      }
+      }, false);
 
   body
     = include header_menu

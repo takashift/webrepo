@@ -164,13 +164,13 @@ html lang=ja
         margin-bottom: 2rem;
       }
     = javascript
-      onload = function() {
+      window.addEventListener("DOMContentLoaded", function() {
       	var genre = document.getElementById({{.Genre.Select}});
       	genre.setAttribute("selected", "");
         var media = document.getElementById({{.Media.Select}});
         media.setAttribute("selected", "");
         document.getElementById("result").insertAdjacentHTML('afterbegin', {{.Content}});
-      }
+      }, false);
 
   body
     = include header_menu
