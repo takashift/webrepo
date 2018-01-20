@@ -47,9 +47,9 @@ html lang=ja
     #list
       .subject
         h2 
-          span.star ☆
+          span.star ★
           span {{.Title}}
-          span.star ☆
+          span.star ★
       #ranking
         / 順位とユーザー名と評価数を表示する。
         {{range .Ranking}}
