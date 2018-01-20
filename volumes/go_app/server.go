@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"os"
 	"reflect"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -214,6 +215,14 @@ type (
 		BecauseNumTypo       string `db:"because_num_typo"`
 	}
 
+	IndividualEvalCount struct {
+		UserID    int `db:"evaluator_id"`
+		UserName  string
+		EvalCount int `db:"count(num)"`
+		RankNum   int
+		// DeliberateCount int `db:"count(deliberate)"`
+	}
+
 	IndividualEvalComment struct {
 		Num             int    `db:"num"`
 		PageID          int    `db:"page_id"`
@@ -227,6 +236,10 @@ type (
 		RecommendBad    int    `db:"recommend_bad"`
 	}
 
+	RankingContent struct {
+		Ranking interface{}
+		Title   string
+	}
 	Typo struct {
 		Num               int    `db:"num"`
 		PageID            int    `db:"page_id"`
@@ -306,8 +319,8 @@ func createJwt(c echo.Context, id int, email string, name string) error {
 	return nil
 }
 
-// Token によってサインイン状況をチェック（ログインが必須でないページ）
-// サインインの状況に応じてページの一部���������変更する
+// Token によってサイン�������������������������������ン状況をチェック（ログインが必須でないペー�����）
+// サイ��イン���������状況に応�����������������������てページの一部���������変更する
 func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
 	// 	// もしログイン�����������������������みなら、
@@ -940,13 +953,13 @@ func main() {
 	// 	return c.String(http.StatusOK, up)
 	// })
 
-	// 検索時に呼び出される
+	// 検索時に呼び出され��
 	e.GET("/search", func(c echo.Context) error {
 		searchForm := PageValue{
 			Query: "",
 		}
 
-		// URLクエリパラメータを受け取る
+		// URLクエリパラメータ��������受け取る
 		q := c.QueryParam("q")
 		searchForm.Query = q
 
@@ -954,6 +967,7 @@ func main() {
 		// return signinCheck("search_result", c, searchForm)
 	})
 
+	// ジャンル、媒体で登録済みのページを一覧表示
 	e.GET("/page_list", func(c echo.Context) error {
 
 		evalForm, _ := getPageStatusItem(c, -1)
@@ -1038,6 +1052,7 @@ func main() {
 		return signinCheck("page_list", c, listPageValue)
 	})
 
+	// 特定ユーザーの評価の一覧を表示
 	e.GET("/search_user_eval_list", func(c echo.Context) error {
 
 		var mypageValue MyPageValue
@@ -1045,7 +1060,6 @@ func main() {
 		mypageValue.UserName = c.QueryParam("username")
 
 		// DB から特定ユーザーの評価を取得
-		// 複数の評価データを格納するために構造体のスライスを作成
 		evaluatorID, err := dbSess.Select("id").From("userinfo").
 			Where("name = ?", mypageValue.UserName).
 			ReturnString()
@@ -1055,6 +1069,7 @@ func main() {
 			return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
 		}
 
+		// 複数の評価データを格納するために構造体のスライスを作成
 		var individualEval []IndividualEval
 		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
 			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
@@ -1077,6 +1092,45 @@ func main() {
 		return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
 	})
 
+	// ユーザーのランキングを表示
+	e.GET("/ranking", func(c echo.Context) error {
+
+		// 取り敢えず、ユーザー一人ひとりの評価数を取ってくる。
+		// 複数の評価データを格納するために構造体のスライスを作成
+		var individualEvalCount []IndividualEvalCount
+		_, err := dbSess.Select("evaluator_id", "count(num)").
+			From("individual_eval").
+			GroupBy("evaluator_id").Load(&individualEvalCount)
+		if err != nil {
+			panic(err)
+		}
+
+		// 審議中の評価は外す。（未実装）
+
+		// 評価数の多い順にソートする。
+		sort.Slice(individualEvalCount, func(i, j int) bool {
+			return individualEvalCount[i].EvalCount > individualEvalCount[j].EvalCount
+		})
+
+		// DB からユーザー名を取得
+		for i, v := range individualEvalCount {
+			fmt.Println(v)
+			v.UserName, err = dbSess.Select("name").From("userinfo").
+				Where("id = ?", v.UserID).
+				ReturnString()
+			if err != nil {
+				panic(err)
+			}
+			v.RankNum = i + 1
+		}
+
+		var rankingContent RankingContent
+		rankingContent.Ranking = individualEvalCount
+		rankingContent.Title = "ユーザーの評価数ランキング"
+
+		return c.Render(http.StatusOK, "ranking", rankingContent)
+	})
+
 	// テスト環境のみ
 	// e.GET("/page_eval", func(c echo.Context) error {
 	// 	searchForm := PageValue{
@@ -1086,7 +1140,7 @@ func main() {
 	// 	return signinCheck("preview_evaluation", c, searchForm)
 	// })
 
-	// サインイン方法選択���面
+	// サインイン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
 		fmt.Println("signin_select")
 		// return c.Render(http.StatusOK, "signin_select", searchForm)
@@ -1138,8 +1192,8 @@ func main() {
 		sess, _ := session.Get("session", c)
 		sess.Values["GoogleMail"] = userGoogle.Email
 
-		// エラーを吐いた == 中身が入ってない場合
-		// 本登録されてない時
+		// エ����ーを吐���������� == 中身が���ってない場合
+		// ���登��������てな��時
 		if userInfoDB.Email == "" {
 			sess.Save(c.Request(), c.Response())
 
@@ -1193,7 +1247,7 @@ func main() {
 			fmt.Fprintf(os.Stderr, "insert userinfo:%s\n", result)
 		}
 
-		// OAuth、キャリアメールが本登録されてるか確認
+		// OAuth、キャリアメールが本登録されてるか確����
 		_, err = dbSess.Select("id", "email", "name").From("userinfo").
 			Where("OAuth_userinfo = ?", email).
 			Load(&userInfoDB)
@@ -1399,8 +1453,8 @@ func main() {
 			return c.String(http.StatusNotFound, "Not found 404")
 		}
 
-		// DB から評価を取得
-		// 複数の評価データを格納するために構造体のスライスを作成
+		// DB から���価を取得
+		// 複数の評価データを格納するため�����構造体のスライスを作成
 		var individualEval []IndividualEval
 		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
 			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
@@ -1671,7 +1725,7 @@ func main() {
 			}
 		}
 
-		fmt.Println("URLのチェックはOK")
+		fmt.Println("URLのチェッ������OK")
 
 		newPS.Genre = c.FormValue("genre")
 		newPS.Media = c.FormValue("media")
@@ -1680,7 +1734,7 @@ func main() {
 		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
 		// structVal.Field(i? + 9).Set(v)
 
-		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
+		// ������イスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
 		for i, v := range tag {
 			tagArr[i] = v
 			if i >= 9 {
@@ -1734,7 +1788,7 @@ func main() {
 			fmt.Println(newPS.LastUpdate)
 		}
 
-		// ページタイトルを取得
+		// ページタイト���を取得
 		doc, err := goquery.NewDocumentFromResponse(resp)
 		if err != nil {
 			panic(err)
@@ -1927,7 +1981,7 @@ func main() {
 			})
 		}
 
-		// Struct を Map に変換
+		// Struct �� Map に変換
 		structVal := reflect.Indirect(reflect.ValueOf(newPS))
 		typ := structVal.Type()
 		mapVal := make(map[string]interface{})
