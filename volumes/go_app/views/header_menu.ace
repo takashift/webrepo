@@ -54,4 +54,6 @@
     / span.hd_m_elem
       a href="http://b.hatena.ne.jp/" はてブ
     span.hd_m_elem
+      a href="/ranking" ランキング
+    span.hd_m_elem
       a href="/r/mypage" マイページ
