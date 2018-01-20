@@ -1,200 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "X-SJISの場合の正常な文字コード変換とcharsetが一つ目の属性にない場合に２番目以降を探す処理を追加"
-gitpush 
-docker-compose logs
-gitpush 
-git log
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git commit -am "charsetが大文字で書かれてる場合に対応"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-git log
-docker-compose logs
-git commit -am "charset=が含まれているかを明確に確認するように変更"
-gitpush 
-git commit -am "charsetが見つからなかった時はcontinueするように修正"
-gitp
-gitpush 
-git commit -am "metaタグが取って来れない場合もnilにならないみたいなので判定をcontent属性のある無しに変更"
-gitpush 
-git commit -am "HTML5の時に文字コードを大文字にする処理が無かったので追加"
-gitpush 
-cd volumes/go_app/views/
-l;s
-ls
-rcode about.ace 
-rcode mypage_top.ace 
-rcode p
-rcode page_list.ace 
-rcode OAuth_signup.ace 
-rcode input_evaluation
-rcode input_evaluation.ace 
-rcode input_evaluation_url.ace 
-rcode OAuth_signup.ace 
-rcode agree_signup.ace 
-pass
-rcode pass_signin.ace 
-rcode preview_evaluation.ace 
-rcode consent_form.ace 
-rcode register_page.ace 
-rcode dangerous_complete.ace 
-rcode search_result.ace 
-rcode edit_page_cate.ace 
-rcode search_top.ace 
-rcode font-family.ace 
-rcode signin_select.ace 
-rcode footer.ace 
-rcode term_of_service.ace 
-rcode header_menu.ace 
-rcode ie_OAuth_signup.ace 
-rcode individual_review.ace 
-rcode tmp_preview_evaluation.ace 
-rcode input_comment.ace 
-rcode search_top.ace 
-git status
-git commit -am "pe-jino "
-git commit --amend
-gitpush
-ls
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-ls
-git status
-gitpush 
-git commit -am "トップページのタイトルを変更"
-gitpush 
-git status
-ls
-rcode common-setting.ace
-git status
-git add common-setting.ace 
-rcode input_evaluation.ace 
-rcode input_evaluation_url.ace 
-rcode OAuth_signup.ace 
-rcode mypage_top.ace 
-rcode about.ace 
-rcode page_list.ace 
-rcode agree_signup.ace 
-pass_
-rcode pass_signin.ace 
-rcode preview_evaluation.ace 
-rcode consent_form.ace 
-rcode register_page.ace 
-rcode dangerous_complete.ace 
-rcode search_result.ace 
-rcode edit_page_cate.ace 
-rcode search_top.ace 
-rcode font-family.ace 
-rcode signin_select.ace 
-rcode term_of_service.ace 
-rcode header_menu.ace 
-rcode test.ace 
-rcode ie_OAuth_signup.ace 
-rcode individual_review.ace 
-rcode tmp_preview_evaluation.ace 
-rcode input_
-rcode input_comment.ace 
-rcode search_top.ace 
-git commit -am "各ページにファビコンを設定"
-gitpush 
-cd 
-cd echo/Dockerfile
-rcode echo/Dockerfile
-cd
-cd nginx/app.conf 
-rcode nginx/app.conf 
-rcode nginx/Dockerfile 
-rcode docker-compose.yml
-cd volumes/go_app/
-ls
-cd 
-cd nginx/
-ls
-cd www
-ls
-cd ..
-cd 
-cd volumes/
-ls
-web-vol/
-ls
-cd web-vol/
-ls
-mkdir logs
-mkdir nginx-logs
-ls -l
-ls -l ..
-cd ..
-mkdir nginx_log
-ls
-cd web-vol/
-cd volumes/go_app/
-ls
-rcode server.go 
-cd ..
-ls
 rm nginx_log/
 rm -r nginx_log/
 ls
@@ -998,3 +801,200 @@ cd volumes/go_app/
 cd views/
 ls
 rcode tmp_preview_evaluation.ace 
+rcode mysql/init/webrepo.sql 
+cd volumes/go_app/
+rcode server.go 
+rcode createPrevEvalPage.go 
+git commit -am "特定のユーザー評価検索機能を追加"
+gitpush 
+cd volumes/go_app/views/
+ls
+rcode tmp_preview_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "pocketとfacebookのボタンを追加"
+gitpush 
+rcode about.ace 
+
+gitpush 
+git commit -am "aboutの宛先をローマ字に修正"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode tmp_preview_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "scriptを全てdeferに変更。"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "defer to"
+git commit --amend
+gitpush 
+git log
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ぐぐたすのシェアボタン追加"
+gitpush 
+rcode search_user_eval_list.ace
+rcode my_eval_list.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode input_evaluation
+rcode input_evaluation.ace 
+rcode search_top.ace 
+rcode page_list.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git status
+git add search_user_eval_list.ace 
+git commit -amend
+git commit --amend
+gitpush 
+git push
+git push -f
+rcode header_menu.ace 
+git commit -am "ユーザーの評価検索ページへのリンクをヘッダーに追加"
+gitpush 
+cd volumes/go_app/views/
+rcode search_top.ace 
+rcode header_menu.ace 
+rcode input_evaluation
+rcode input_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+cd volumes/go_app/views/

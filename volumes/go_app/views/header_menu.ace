@@ -39,18 +39,18 @@
       a href="/r/input_evaluation" 評価入力
     span.hd_m_elem
       a href="/r/register_page" ページ登録
+  #header_menu_right
+    / span.hd_m_elem
+      / a href="https://www.google.co.jp/" Google
+    / span.hd_m_elem
+      / a href="https://www.yahoo.co.jp/" Yahoo!
+    / span.hd_m_elem
+      / a href="https://www.bing.com/" Bing
+    / span.hd_m_elem
+      a href="http://b.hatena.ne.jp/" はてブ
     span.hd_m_elem
       a href="/page_list?genre=*&media=文章" ページ一覧
     span.hd_m_elem
-      a href="/search_user_eval_list" ユーザー評価
-  #header_menu_right
-    span.hd_m_elem
-      a href="https://www.google.co.jp/" Google
-    span.hd_m_elem
-      a href="https://www.yahoo.co.jp/" Yahoo!
-    span.hd_m_elem
-      a href="https://www.bing.com/" Bing
-    span.hd_m_elem
-      a href="http://b.hatena.ne.jp/" はてブ
+      a href="/search_user_eval_list" ユーザー検索
     span.hd_m_elem
       a href="/r/mypage" マイページ

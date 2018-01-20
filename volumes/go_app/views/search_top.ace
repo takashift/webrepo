@@ -128,6 +128,7 @@ html lang=ja
       #space_h
         h3 このサイトは、自分の見たページが
           br どれだけ役に立ったかを評価できるサイトです。
+      h3 評価はどんなページでも構いません！
       #daily_theme
       a.new_eval href="r/input_evaluation"
         button.new_eval Webページを評価する
