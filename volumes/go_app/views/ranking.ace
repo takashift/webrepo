@@ -61,9 +61,9 @@ html lang=ja
       .subject
         h2 {{.Title}}
       #ranking
+        / 順位とユーザー名と評価数を表示する。
         {{range .individualEvalCount}}
-            / 順位とユーザー名と評価数を表示する。
-            h3 {{.RankNum}}位　{{.UserName}} 評価数{{.EvalCount}}
+          h3 {{.RankNum}}位　{{.UserName}} 評価数{{.EvalCount}}
         {{end}}
 
     #footer
