@@ -1,35 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-rcode server.go
-rcode ../../mysql/init/webrepo.sql 
-git commit -am "ユーザー名をTokenに含めるように修せお"
-git commit -amend
-git commit --amend
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit --amend
-git status
-git add server.go 
-git commit --amend
-git status
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-rcode server.go
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
 docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
@@ -998,3 +966,35 @@ git commit -am "平均評価の隣に★を表示"
 gitpush 
 rcode search_
 rcode ../server.go 
+cd volumes/go_app/
+cd views/
+rcode search_
+rcode ../server.go 
+rcode page_list.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ページリストを目的達成度が高い順に並び替えられるように改良。"
+git status
+gitpush 
+cd
+cd nginx/Dockerfile 
+rcode nginx/Dockerfile 
+rcode docker-compose.yml
+cd volumes/
+ls
+cd web-vol/
+ls

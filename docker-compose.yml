@@ -27,6 +27,8 @@ services:
                         - /etc/localtime:/etc/localtime:ro
                         - usock:/usock
                         - ./volumes/web-vol:/web
+                        - ./volumes/nginx-logs/nginx:/var/log/nginx
+                        - ./volumes/nginx-logs/echo:/root/logs/
 #                        - web-vol:/web
 
         mysql:
