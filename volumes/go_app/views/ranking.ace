@@ -28,7 +28,7 @@ html lang=ja
         border: solid 3px rgba(0,0,0,0.7);
       }
       #ranking {
-        margin: 0 0 0 40%;
+        / margin: 0 0 0 40%;
         padding: 0 0 0 0.5rem;
         min-height: 1500px;
       }
@@ -55,8 +55,8 @@ html lang=ja
     #list
       .subject
         h2 
-          span.star ★
-          span {{.Title}}
+          span.star ★ 
+          span {{.Title}} 
           span.star ★
       .box
         #ranking
