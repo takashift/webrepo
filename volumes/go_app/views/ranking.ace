@@ -56,8 +56,8 @@ html lang=ja
       .subject
         h2 
           span.star ★ 
-          span {{.Title}} 
-          span.star ★
+          span  {{.Title}} 
+          span.star  ★
       .box
         #ranking
           / 順位とユーザー名と評価数を表示する。
