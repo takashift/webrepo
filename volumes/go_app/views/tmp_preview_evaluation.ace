@@ -82,9 +82,13 @@ html lang=ja
         display: inline-block;
         margin-right: 0.3rem;
       }
+      .fb-like {
+        display: inline-block;       
+        margin-right: 0.3rem;
+      }
       .ScrPr {
         text-align: center;
-        /height: 150px;
+        / height: 150px;
       }
       .ScrPr img {
         width: 350px;
@@ -204,6 +208,7 @@ html lang=ja
     script defer="" src="https://platform.twitter.com/widgets.js" charset="utf-8"
     script defer="" type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"
     script defer="" (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.11';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+    script defer="" src="https://apis.google.com/js/platform.js" {lang: 'ja'}
     = include JWT
 
   body
@@ -244,8 +249,9 @@ html lang=ja
             .pocket
               a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"
             script defer="" !function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");
-            div id="fb-root"
-            div class="fb-like" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"
+            #fb-root
+            .fb-like data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"
+            .g-plus data-action="share"
         .right
           #cate
             h3 ジャンル
