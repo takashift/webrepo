@@ -62,7 +62,7 @@ html lang=ja
         h2 {{.Title}}
       #ranking
         / 順位とユーザー名と評価数を表示する。
-        {{range .individualEvalCount}}
+        {{range .Ranking}}
           h3 {{.RankNum}}位　{{.UserName}} 評価数{{.EvalCount}}
         {{end}}
 
