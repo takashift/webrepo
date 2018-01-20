@@ -281,7 +281,7 @@ func makePrevEvalComment(comment IndividualEvalComment, i int, j int, pageEvalCo
 		comment.PageID, comment.ReplyEvalNum, comment.Num)
 }
 
-// 自分のページの評価を表示用（通報、GoodBad、コメントボタン、コメント無し。）
+// 特定のユーザーの評価を表示用（通報、GoodBad、コメントボタン、コメント無し。）
 func makePrevMyEval(iEval int, eval IndividualEval) string {
 
 	// 審議中なら""を返す
@@ -291,7 +291,7 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 
 	fmt.Println(eval.Num)
 
-	// DB から評価ページのタイトル、タグ、媒体を取得
+	// DB から評価ページのタイトル、ジャンル、媒体、タグを取得
 	var pageStatus PageStatus
 	_, err := dbSess.Select("title", "genre", "media",
 		"tag1", "tag2", "tag3", "tag4", "tag5",
@@ -300,7 +300,7 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 		Where("id = ?", eval.PageID).
 		Load(&pageStatus)
 	if err != nil {
-		fmt.Println("タイトルの取得に失敗")
+		fmt.Println("評価ページの取得に失敗")
 		panic(err)
 	}
 

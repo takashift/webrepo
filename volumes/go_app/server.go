@@ -310,7 +310,7 @@ func createJwt(c echo.Context, id int, email string, name string) error {
 // サインインの状況に応じてページの一部を変更する
 func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
-	// 	// もしログイン済みなら、
+	// 	// もしログイン�����������������������みなら、
 	// 	// 上部メニューの"ログイン"のところを変更する
 	// 	searchForm.Login = ""
 	// }
@@ -1035,6 +1035,45 @@ func main() {
 			}
 		}
 		return signinCheck("page_list", c, listPageValue)
+	})
+
+	e.GET("/search_user_eval_list", func(c echo.Context) error {
+
+		var mypageValue MyPageValue
+
+		mypageValue.UserName = c.QueryParam("username")
+
+		// DB から特定ユーザーの評価を取得
+		// 複数の評価データを格納するために構造体のスライスを作成
+		evaluatorID, err := dbSess.Select("id").From("userinfo").
+			Where("name = ?", mypageValue.UserName).
+			ReturnString()
+
+		if err != nil {
+			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+			return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
+		}
+
+		var individualEval []IndividualEval
+		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+			"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+			From("individual_eval").
+			Where("evaluator_id = ?", evaluatorID).Load(&individualEval)
+		if err != nil {
+			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+			return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
+		}
+
+		if individualEval != nil {
+			// for文で回す
+			// Ace に入れる構造体に格納
+			for i, v := range individualEval {
+				mypageValue.Content += makePrevMyEval(i, v)
+			}
+		}
+
+		return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
 	})
 
 	// テスト環境のみ
