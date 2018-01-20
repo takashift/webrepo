@@ -189,6 +189,8 @@ type (
 		Tag8         string `db:"tag8"`
 		Tag9         string `db:"tag9"`
 		Tag10        string `db:"tag10"`
+		AveGFP       string
+		AveVisP      string
 	}
 
 	PageStatusTiny struct {
@@ -320,7 +322,7 @@ func createJwt(c echo.Context, id int, email string, name string) error {
 	return nil
 }
 
-// Token に�����������������������ってサイン���������������������������������������������������������ン状況をチェック（ログインが必須でないペー�����）
+// Token に�����������������������������������������������ってサイン���������������������������������������������������������ン状況をチェック（ログインが必須でないペー�����）
 // サイ��イン���������状況に応�����������������������てページの一部���������変更する
 func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
@@ -626,7 +628,7 @@ func inputEval(c echo.Context) error {
 
 	bro := strings.Replace(c.FormValue("browse"), "T", " ", -1)
 	fmt.Println(bro)
-	// 時刻のフォーマットが正しくセットできてない時は DB に値を入れない
+	// 時刻のフォーマットが正しくセットでき��な��時�� DB ���値���入���な���
 	browseTime, err = time.Parse("2006-01-02 15:04", bro)
 	if err != nil {
 		browseTime, err = time.Parse("2006-01-02", bro)
@@ -1023,8 +1025,6 @@ func main() {
 				resultNum := len(alivePS)
 				listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
 
-				listPageValue.PageStatusSlice = alivePS
-
 				// for i, v := range alivePS {
 
 				// 	listPageValue.Content +=
@@ -1046,6 +1046,47 @@ func main() {
 				// 			template.HTMLEscapeString(v.Tag9), template.HTMLEscapeString(v.Tag10),
 				// 			v.ID)
 				// }
+
+				// 平均評価の計算
+				// 複数の評価データを格納するために構造体のスライスを作成
+				for i, v := range alivePS {
+					var individualEval []IndividualEval
+					_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+						"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+						"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+						From("individual_eval").
+						Where("page_id = ?", v.ID).Load(&individualEval)
+
+					if err == nil {
+						var (
+							gfp       int
+							visp      int
+							enableNum int
+							visNum    int
+						)
+						// 平均評価を計算
+						for _, w := range individualEval {
+							// 審議なしか審議済みなら
+							if w.Deliberate <= 1 {
+								gfp += w.GoodnessOfFit
+								if w.Visibility >= 1 {
+									visp += w.Visibility
+									visNum++
+								}
+								enableNum++
+							}
+						}
+						// 10倍して四捨五入
+						gfpf := math.Floor((float64(gfp)/float64(enableNum))*math.Pow10(1) + 0.05)
+						vispf := math.Floor((float64(visp)/float64(visNum))*math.Pow10(1) + 0.05)
+						// 0.1倍して代入
+						alivePS[i].AveGFP = strconv.FormatFloat(gfpf*math.Pow10(-1), 'f', 1, 64)
+						alivePS[i].AveVisP = strconv.FormatFloat(vispf*math.Pow10(-1), 'f', 1, 64)
+					}
+				}
+
+				listPageValue.PageStatusSlice = alivePS
+
 			} else {
 				listPageValue.Content = "<p id=\"result_status\">検索結果：0件</p>"
 			}
@@ -1133,7 +1174,7 @@ func main() {
 		return c.Render(http.StatusOK, "ranking", rankingContent)
 	})
 
-	// テスト環境のみ
+	// テ���ト環境のみ
 	// e.GET("/page_eval", func(c echo.Context) error {
 	// 	searchForm := PageValue{
 	// 		Query: "",
@@ -1142,7 +1183,7 @@ func main() {
 	// 	return signinCheck("preview_evaluation", c, searchForm)
 	// })
 
-	// サインイン方法選択画面
+	// サイン��ン方法選択画面
 	e.GET("/signin_select", func(c echo.Context) error {
 		fmt.Println("signin_select")
 		// return c.Render(http.StatusOK, "signin_select", searchForm)
@@ -1455,7 +1496,7 @@ func main() {
 			return c.String(http.StatusNotFound, "Not found 404")
 		}
 
-		// DB から���価を取得
+		// DB から評価を取得
 		// 複数の評価データを格納するため�����構造体のスライスを作成
 		var individualEval []IndividualEval
 		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
@@ -1503,7 +1544,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		} else if individualEval != nil {
-			// for��で回す
+			// for文で回す
 			// Ace に入れる構造体に格納
 			for i, v := range individualEval {
 				pageValue.Content += makePrevEval(i, v)
@@ -1660,8 +1701,8 @@ func main() {
 		mypageValue.UserName = claims["name"].(string)
 		evaluatorID := int(claims["id"].(float64))
 
-		// DB から特定ユーザーの評価を取得
-		// 複数の評価データを格納するために構造体のスライスを作成
+		// DB から特定ユーザーの���価を取得
+		// 複数の評���データを格納するために構造体のスライスを作成
 		var individualEval []IndividualEval
 		_, err := dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
 			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
@@ -1944,11 +1985,11 @@ func main() {
 		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
 		i := 0
 		for j, v := range tag {
-			// スライスの中身が無くなったら、その後のタグは[]byte{13}で埋める。
+			// スライスの中身が無くなったら、その後のタグは[]byte{13}�����埋める�������
 			if len(tag)-1-j == 0 {
 				for n := i; n <= 9; n++ {
-					// byteスライスからstringへのキャストもメモリコピーが発生してしまう。
-					// だが、Sprintf()でも発生するらしいのでもう無理。
+					// byteスラ��スからstringへのキャストも��モリコピーが発生し�����しまう。
+					// だが、Sprintf()でも発生するら����いのでもう無理。
 					tagArr[n] = byte13Str
 					fmt.Println(n)
 					fmt.Println(*(*[]byte)(unsafe.Pointer(&tagArr[n])))
@@ -1984,7 +2025,7 @@ func main() {
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 
 		fmt.Println("URL:", dbPS.URL)
-		// ち�������とレスポンスが返���てこない時���死����フラグを��てる
+		// ち��������とレスポンスが返���てこない時���死������フラグを��てる
 		resp, err := http.Get(dbPS.URL)
 		if err != nil {
 			newPS.Dead = 1

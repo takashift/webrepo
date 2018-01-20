@@ -223,12 +223,13 @@ html lang=ja
 
     #result
       / ここにはServer.goで生成した検索結果が入る。
-      {{range $i, $v := .PageStatusSlice}}
+      {{range .PageStatusSlice}}
         .page_status
-          h3 <a href="/preview_evaluation/{{$v.ID}}">{{$v.Title}}</a>　（<a href="{{$v.URL}}">{{$v.URL}}</a>）
-          .cate ジャンル：{{$v.Genre}}　媒体：{{$v.Media}}
-          .tag タグ： {{$v.Tag1}} {{$v.Tag2}} {{$v.Tag3}} {{$v.Tag4}} {{$v.Tag5}} {{$v.Tag6}} {{$v.Tag7}} {{$v.Tag8}} {{$v.Tag9}} {{$v.Tag10}}
-          h4 <a href="/r/input_evaluation/{{$v.ID}}">評価する</a>
+          h3 <a href="/preview_evaluation/{{.ID}}">{{.Title}}</a>　（<a href="{{.URL}}">{{.URL}}</a>）
+          h4 平均評価　目的達成度：{{.AveGFP}}　見やすさ：{{.AveVisP}}
+          .cate ジャンル：{{.Genre}}　媒体：{{.Media}}
+          .tag タグ： {{.Tag1}} {{.Tag2}} {{.Tag3}} {{.Tag4}} {{.Tag5}} {{.Tag6}} {{.Tag7}} {{.Tag8}} {{.Tag9}} {{.Tag10}}
+          h4 <a href="/r/input_evaluation/{{.ID}}">評価する</a>
         .
       {{end}}
 
