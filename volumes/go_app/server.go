@@ -134,6 +134,7 @@ type (
 		EvalForm
 		Content         string
 		PageStatusSlice []PageStatus
+		SortSelected    string
 	}
 
 	MyPageValue struct {
@@ -981,6 +982,7 @@ func main() {
 			err           error
 			genreQ        = c.QueryParam("genre")
 			mediaQ        = c.QueryParam("media")
+			sortQ         = c.QueryParam("sort")
 		)
 
 		listPageValue.EvalForm = evalForm
@@ -1085,6 +1087,17 @@ func main() {
 					}
 				}
 
+				if sortQ == "" {
+
+					// 目的達成度が高い順にソートする。
+					sort.Slice(alivePS, func(i, j int) bool {
+						return alivePS[i].AveGFP > alivePS[j].AveGFP
+					})
+					listPageValue.SortSelected = ""
+				} else {
+					listPageValue.SortSelected = "sortX1"
+				}
+
 				listPageValue.PageStatusSlice = alivePS
 
 			} else {
@@ -1154,7 +1167,7 @@ func main() {
 			return individualEvalCount[i].EvalCount > individualEvalCount[j].EvalCount
 		})
 
-		// DB からユーザー名を取得
+		// DB から��ーザー名を取得
 		for i, v := range individualEvalCount {
 			// 恐らく参照渡しなので、v.に代入しても意味がない。
 			individualEvalCount[i].UserName, err = dbSess.Select("name").From("userinfo").
@@ -1691,7 +1704,7 @@ func main() {
 		return c.Redirect(http.StatusSeeOther, "mypage")
 	})
 
-	// 自分の付けた評価の一覧
+	// 自分の������け��評価の一覧
 	r.GET("/my_eval_list", func(c echo.Context) error {
 
 		var mypageValue MyPageValue
@@ -1982,7 +1995,7 @@ func main() {
 		// structVal := reflect.Indirect(reflect.ValueOf(newPS))
 		// structVal.Field(i? + 9).Set(v)
 
-		// スライスは tag が入力された個数までしか作られないので、入力された分を配列にコピーする。
+		// スライス��� tag ��入力された個数���でしか作られないので、���力された分を配列にコピーする。
 		i := 0
 		for j, v := range tag {
 			// スライスの中身が無くなったら、その後のタグは[]byte{13}�����埋める�������

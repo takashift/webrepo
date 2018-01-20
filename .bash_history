@@ -1,242 +1,3 @@
-rm nginx_log/
-rm -r nginx_log/
-ls
-cd
-cd echo/
-/\ls
-ls
-rcode Dockerfile
-cd
-rcode docker-compose.yml
-cd volumes/
-ls
-cd
-cd nginx/
-ls
-rcode app.conf 
-cd
-cd volumes/go_app/views/
-rcode common-setting.ace 
-cd
-ls
-mv Twitter3.1（仮）.png favicon.png
-ls
-mv favicon.png volumes/web-vol/
-chown tuna volumes/web-vol/
-sudo chown tuna volumes/web-vol/
-ls volumes/web-vol/
-ls -l volumes/
-mv favicon.png volumes/web-vol/
-cd volumes/web-vol/
-mkdir image
-mv favicon.png image/
-docker stop tuna_echo_1
-docker stop tuna_nginx_1
-docker-compose up -d --build
-ls
-docker-compose logs
-ls
-docker stop tuna_nginx_1
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_nginx_1
-docker-compose up -d --build
-docker stop tuna_nginx_1
-docker-compose up -d --build
-ls volumes/web-vol/
-ls
-cd
-mv Twitter3.1拡大.png favicon.png
-mv favicon.png image/
-ls
-mv favicon.png volumes/web-vol/image/
-cd volumes/web-vol/image/
-ls
-git status
-cd
-git status
-git add volumes/web-vol/
-git commit -am 'ファビコンを設定'
-gitpush 
-ls
-rm Twitter3.1拡大.png 
-rcode volumes/go_app/
-ls volumes/go_app/views/
-ls
-
-cd  volumes/go_app/views/
-cd volumes/go_app/views/
-ls
-rcode input_evaluation.ace 
-rcode input_evaluation_url.ace 
-git stauts
-git stautus
-git status
-git commit -am "目的達成度の説明を変更"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-rcode header_menu.ace 
-git stautus
-git stauts
-git status
-git commit -am "FAQへのリンクを追加"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-ls
-rcode page_list.ace 
-rcode search_top.ace 
-cd ..
-rcode server.go 
-rcode JWT.ace
-cd views/
-rcode JWT.ace
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-rcode JWT.js 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-git status
-git commit -am 'ツイートを取得するjavaScriptコードをトップページに記述（まだエラー）'
-gitpush 
-cd volumes/go_app/ls
-cd volumes/go_app/
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-git commit -am 'トップページにサイトの説明の追加、見た目を改良'
-cd volumes/go_app/views/
-ls
-rcode mypage_top.ace 
-rcode search_top.ace 
-rcode footer.ace 
-rcode search_top.ace 
-rcode mypage_top.ace 
-rcode user_config.ace
-rcode page_list.ace 
-cd volumes/go_app/
-ls;
-ls
-git status
-gitpush 
-git status
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-git commit -am "トップページでブックマークを推奨"
-gitpush 
-git status
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker stop tuna_echo_1
@@ -998,3 +759,242 @@ docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
 cd volumes/go_app/views/
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+cd volumes/go_app/
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode ~/mysql/init/
+rcode ~/mysql/init/webrepo.sql 
+docker exec -it tuna_mysql_1 /bin/bash
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker exec -it tuna_mysql_1 /bin/bash
+git commit -a
+cd volumes/go_app/views/
+rcode input_evaluation_url.ace 
+rcode input_evaluation.ace 
+docker stop tuna_echo_1
+git add input_evaluation.ace 
+git add input_evaluation_url.ace 
+git status
+git commit --amend
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode page_list.ace 
+rcode my_eval_list.ace 
+rcode search_user_eval_list.ace 
+rcode search_result.ace 
+git status
+git commit -am "ページ一覧、自分の評価一覧をDOMContentLoadedに変更"
+gitpush 
+rcode search_top.ace 
+git commit -am "トップの説明をGoogleインデックスのためにページではなく、Webページに変更"
+gitpush 
+cp page_list.ace page_list_test.ace 
+rcode page
+rcode page_list_test.ace 
+mv page_list_test.ace page_list.ace 
+rcode page_list.ace 
+git commit -am "検索結果をJSではなく、Goで出力するように変更。"
+gitpush 
+git commit -am "トップに汚い文字があったので修正"
+gitpush 
+rcode ranking.ace
+rcode header_menu.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "評価数ランキングを追加"
+gitpush 
+git status
+git add ranking.ace 
+git commit --amend
+git push
+git push -f
+rcode ranking.ace
+git commit -am "ランキングページを修正"
+gitpush 
+git commit -am "ランキングページに指定していたスライスの名前が間違っていたので修正"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git commit -am "ランキングのページ構成を修正"
+gitpush 
+git commit -am "ランキングの表示位置を修正"
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ヘッダーにランキングへのリンクを追加"
+gitpush 
+rcode mypage_top.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "マイページにも評価数順位を表示するように変更"
+gip
+gitpush 
+git commit -am "ランキングに星を追加"
+git commit --amend
+gitpush 
+git commit -am "ランキングに枠を追加"
+gitpush 
+git commit -am "枠内の空白を削除"
+gitpush 
+rcode ../server.go 
+rcode ../createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode tmp_preview_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ページリストに平均評価を表示するように変更。"
+git status
+giut
+gitpush 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "平均評価の隣に★を表示"
+gitpush 
+rcode search_
+rcode ../server.go 
