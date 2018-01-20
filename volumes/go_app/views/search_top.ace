@@ -126,9 +126,9 @@ html lang=ja
         span.green o
         span.yellow ★彡
       #space_h
-        h3 このサイトは、自分の見たページが
+        h3 このサイトは、自分の見た Webページが
           br どれだけ役に立ったかを評価できるサイトです。
-      h3 評価はどんなページでも構いません！
+      h3 評価はどんな Webページでも構いません！
       #daily_theme
       a.new_eval href="r/input_evaluation"
         button.new_eval Webページを評価する
