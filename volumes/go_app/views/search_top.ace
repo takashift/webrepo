@@ -115,7 +115,7 @@ html lang=ja
 
   body
     = include header_menu
-    #search
+    #search <p>うんこ</p>
       h1
         span.blue W
         span.red e

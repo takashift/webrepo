@@ -12,7 +12,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"html/template"
 	"io"
 	"math"
 	"net"
@@ -132,7 +131,8 @@ type (
 
 	ListPageValue struct {
 		EvalForm
-		Content string
+		Content         string
+		PageStatusSlice []PageStatus
 	}
 
 	MyPageValue struct {
@@ -307,7 +307,7 @@ func createJwt(c echo.Context, id int, email string, name string) error {
 }
 
 // Token によってサインイン状況をチェック（ログインが必須でないページ）
-// サインインの状況に応じてページの一部を変更する
+// サインインの状況に応じてページの一部���������変更する
 func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
 	// 	// もしログイン�����������������������みなら、
@@ -959,15 +959,14 @@ func main() {
 		evalForm, _ := getPageStatusItem(c, -1)
 
 		var (
-			listPageValue = ListPageValue{
-				EvalForm: evalForm,
-				Content:  "",
-			}
-			dbPS   []PageStatus
-			err    error
-			genreQ = c.QueryParam("genre")
-			mediaQ = c.QueryParam("media")
+			listPageValue ListPageValue
+			dbPS          []PageStatus
+			err           error
+			genreQ        = c.QueryParam("genre")
+			mediaQ        = c.QueryParam("media")
 		)
+
+		listPageValue.EvalForm = evalForm
 
 		// DBから指定したジャンルと媒体のページを取得
 		if genreQ == "*" && mediaQ == "*" {
@@ -1009,27 +1008,29 @@ func main() {
 				resultNum := len(alivePS)
 				listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
 
-				for i, v := range alivePS {
+				listPageValue.PageStatusSlice = alivePS
 
-					listPageValue.Content +=
-						fmt.Sprintf(
-							`
-						<div class="page_status">
-							<h3>%d： <a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
-							<div class="cate">ジャンル：%s　媒体：%s</div>
-							<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
-							<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
-						</div>
-					`, i+1, v.ID, template.HTMLEscapeString(v.Title),
-							template.HTMLEscapeString(v.URL), template.HTMLEscapeString(v.URL),
-							template.HTMLEscapeString(v.Genre), template.HTMLEscapeString(v.Media),
-							template.HTMLEscapeString(v.Tag1), template.HTMLEscapeString(v.Tag2),
-							template.HTMLEscapeString(v.Tag3), template.HTMLEscapeString(v.Tag4),
-							template.HTMLEscapeString(v.Tag5), template.HTMLEscapeString(v.Tag6),
-							template.HTMLEscapeString(v.Tag7), template.HTMLEscapeString(v.Tag8),
-							template.HTMLEscapeString(v.Tag9), template.HTMLEscapeString(v.Tag10),
-							v.ID)
-				}
+				// for i, v := range alivePS {
+
+				// 	listPageValue.Content +=
+				// 		fmt.Sprintf(
+				// 			`
+				// 		<div class="page_status">
+				// 			<h3>%d： <a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
+				// 			<div class="cate">ジャンル：%s　媒体：%s</div>
+				// 			<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
+				// 			<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
+				// 		</div>
+				// 	`, i+1, v.ID, template.HTMLEscapeString(v.Title),
+				// 			template.HTMLEscapeString(v.URL), template.HTMLEscapeString(v.URL),
+				// 			template.HTMLEscapeString(v.Genre), template.HTMLEscapeString(v.Media),
+				// 			template.HTMLEscapeString(v.Tag1), template.HTMLEscapeString(v.Tag2),
+				// 			template.HTMLEscapeString(v.Tag3), template.HTMLEscapeString(v.Tag4),
+				// 			template.HTMLEscapeString(v.Tag5), template.HTMLEscapeString(v.Tag6),
+				// 			template.HTMLEscapeString(v.Tag7), template.HTMLEscapeString(v.Tag8),
+				// 			template.HTMLEscapeString(v.Tag9), template.HTMLEscapeString(v.Tag10),
+				// 			v.ID)
+				// }
 			} else {
 				listPageValue.Content = "<p id=\"result_status\">検索結果：0件</p>"
 			}
@@ -1085,7 +1086,7 @@ func main() {
 	// 	return signinCheck("preview_evaluation", c, searchForm)
 	// })
 
-	// サインイン方法選択画面
+	// サインイン方法選択���面
 	e.GET("/signin_select", func(c echo.Context) error {
 		fmt.Println("signin_select")
 		// return c.Render(http.StatusOK, "signin_select", searchForm)
@@ -1341,7 +1342,7 @@ func main() {
 		// tF := t.Format(timeLayout)
 		// fmt.Fprintf(os.Stderr, "time: %s\n", tF)
 
-		// 正規のユーザーテーブルに追加
+		// 正規のユーザー��ーブルに追加
 		result, err := dbSess.InsertInto("userinfo").
 			Columns("OAuth_service", "OAuth_userinfo", "email").
 			Values(tmpUser.OAuthService, tmpUser.OAuthUserinfo, tmpUser.Email).
@@ -1352,7 +1353,7 @@ func main() {
 			fmt.Fprintf(os.Stderr, "insert userinfo:%s\n", result)
 		}
 
-		// 一時ユーザーのテーブルから削除
+		// 一時������ザーのテーブルから削除
 		result, err = dbSess.DeleteFrom("tmp_user").Where("email = ?", tmpUser.Email).Exec()
 		if err != nil {
 			panic(err)
@@ -1446,7 +1447,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		} else if individualEval != nil {
-			// for文で回す
+			// for��で回す
 			// Ace に入れる構造体に格納
 			for i, v := range individualEval {
 				pageValue.Content += makePrevEval(i, v)
@@ -1896,7 +1897,7 @@ func main() {
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 
 		fmt.Println("URL:", dbPS.URL)
-		// ちゃんとレスポンスが返ってこない時は死亡フラグを立てる
+		// ち�������とレスポンスが返���てこない時は死亡フラグを��てる
 		resp, err := http.Get(dbPS.URL)
 		if err != nil {
 			newPS.Dead = 1
