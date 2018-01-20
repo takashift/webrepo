@@ -319,7 +319,7 @@ func createJwt(c echo.Context, id int, email string, name string) error {
 	return nil
 }
 
-// Token によってサイン�������������������������������ン状況をチェック（ログインが必須でないペー�����）
+// Token によってサイン�����������������������������������ン状況をチェック（ログインが必須でないペー�����）
 // サイ��イン���������状況に応�����������������������てページの一部���������変更する
 func signinCheck(page string, c echo.Context, value interface{}) error {
 	// if client != nil {
@@ -1114,14 +1114,15 @@ func main() {
 
 		// DB からユーザー名を取得
 		for i, v := range individualEvalCount {
-			fmt.Println(v)
-			v.UserName, err = dbSess.Select("name").From("userinfo").
+			// 恐らく参照渡しなので、v.に代入しても意味がない。
+			individualEvalCount[i].UserName, err = dbSess.Select("name").From("userinfo").
 				Where("id = ?", v.UserID).
 				ReturnString()
 			if err != nil {
 				panic(err)
 			}
-			v.RankNum = i + 1
+			individualEvalCount[i].RankNum = i + 1
+			fmt.Println(v)
 		}
 
 		var rankingContent RankingContent
