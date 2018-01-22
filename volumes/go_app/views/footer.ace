@@ -29,6 +29,6 @@
   p
     a href="/about" このサイトについて
   #copy Copyright &copy 2017 Tsunashima@
-    a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
+    a href="https://ie.u-ryukyu.ac.jp/~tnal/" target="_blank" NALlab
     {{HTML ". All rights reserved."}}
 
