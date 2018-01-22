@@ -1,13 +1,3 @@
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
 docker-compose up -d --build
@@ -998,3 +988,13 @@ cd volumes/
 ls
 cd web-vol/
 ls
+rcode nginx/app.conf 
+git log
+rcode docker-compose.yml
+rcode nginx/app.conf 
+git commit -am "dokcer-compose.ymlのnginxのボリューム設定を変更。"
+gitpush 
+cd volumes/
+ls
+mkdir nginx_logs
+git status

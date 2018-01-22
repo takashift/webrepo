@@ -31,9 +31,9 @@
     span.hd_m_elem
       a href="/"  WebRepo★彡
     span.hd_m_elem
-      a href="https://twitter.com/web_repo" Twitter(更新・障害)
+      a href="https://twitter.com/web_repo" target="_blank" Twitter(更新・障害)
     span.hd_m_elem
-      a href="https://qiita.com/higechira/items/0522da284977ad9f942a" FAQ
+      a href="https://qiita.com/higechira/items/0522da284977ad9f942a" target="_blank" FAQ
   #header_menu_center
     span.hd_m_elem
       a href="/r/input_evaluation" 評価入力

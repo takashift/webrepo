@@ -228,7 +228,7 @@ html lang=ja
         a href="/r/input_evaluation/{{.ID}}"
           .button#input_eval 以下のページを評価する
         #title
-          a href="{{.URL}}" style="text-decoration: none;"
+          a href="{{.URL}}" target="_blank" style="text-decoration: none;"
             h1 {{.Title}}
             h2 {{.URL}}
       #status
