@@ -1,7 +1,3 @@
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
 docker-compose up -d --build
 docker-compose logs
 docker stop tuna_echo_1
@@ -997,4 +993,8 @@ rcode page_list.ace
 docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "ページリストの件数が「目的達成度が高い順」にした時に表示されなくなっていたので修正。"
+gitpush 
+rcode volumes/go_app/views/input_evaluation.ace 
+rcode volumes/go_app/views/input_evaluation_url.ace 
+git commit -am "URLを入力する方の評価フォームの目的例を変更"
 gitpush 
