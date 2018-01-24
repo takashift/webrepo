@@ -1,9 +1,3 @@
-ls
-cat gitpush 
-cd
-ls .ssh/
-cat .gitconfig 
-cd volumes/go_app/
 rcode server.go 
 docker stop tuna_echo_1
 docker-compose up -d --build
@@ -997,4 +991,10 @@ rcode input_evaluation_url.ace
 docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "閲覧目的の例を変更。"
+gitpush 
+cd volumes/go_app/views/
+rcode page_list.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ページリストの件数が「目的達成度が高い順」にした時に表示されなくなっていたので修正。"
 gitpush 
