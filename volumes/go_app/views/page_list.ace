@@ -174,9 +174,10 @@ html lang=ja
       	genre.setAttribute("selected", "");
         var media = document.getElementById({{.Media.Select}});
         media.setAttribute("selected", "");
+        document.getElementById("result").insertAdjacentHTML('afterbegin', {{.Content}});
+        /* クエリが無いと処理が止まってしまうようなので設定する。 */
         var sort = document.getElementById({{.SortSelected}});
         sort.setAttribute("selected", "");
-        document.getElementById("result").insertAdjacentHTML('afterbegin', {{.Content}});
       }, false);
 
   body

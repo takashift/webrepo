@@ -1,31 +1,3 @@
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git status
-git commit -am "マイページにユーザー名を表示するように変更"
-gitpush 
-cd volumes/go_app/
-ls
-rcode server.go 
-cd 
-ls
-cd bin/
 ls
 cat gitpush 
 cd
@@ -998,3 +970,31 @@ cd volumes/
 ls
 mkdir nginx_logs
 git status
+cd volumes/go_app/views/
+rcode tmp
+rcode tmp_preview_evaluation.ace 
+rcode page_list.ace 
+rcode header_menu.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "外部サイトへの移動は新規タブを開くように変更。"
+git status
+git add ~/volumes/nginx-logs/
+git commit --amend
+git reset HEAD
+git status
+git reset HEAD^
+git status
+git commit -am "外部サイトへの移動は新規タブを開くように変更。"
+gitpush 
+rcode footer.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "フッターのNALlabも新規タブで開くように変更。"
+gitpush 
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "閲覧目的の例を変更。"
+gitpush 
