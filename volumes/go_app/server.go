@@ -1110,32 +1110,40 @@ func main() {
 	// 特定ユーザーの評価の一覧を表示
 	e.GET("/search_user_eval_list", func(c echo.Context) error {
 
-		var mypageValue MyPageValue
+		var (
+			mypageValue MyPageValue
+			evaluatorID []int
+		)
 
 		mypageValue.UserName = c.QueryParam("username")
 
 		// DB から特定ユーザーの評価を取得
-		evaluatorID, err := dbSess.Select("id").From("userinfo").
+		_, err := dbSess.Select("id").From("userinfo").
 			Where("name = ?", mypageValue.UserName).
-			ReturnString()
+			Load(&evaluatorID)
 
-		if err != nil {
+		if err != nil || len(evaluatorID) <= 0 {
 			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
 			return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
 		}
 
 		// 複数の評価データを格納するために構造体のスライスを作成
 		var individualEval []IndividualEval
-		_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
-			"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
-			"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
-			From("individual_eval").
-			Where("evaluator_id = ?", evaluatorID).Load(&individualEval)
-		if err != nil {
-			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
-			return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
-		}
+		// 同じユーザー名の人がいる場合にも対応
+		for _, v := range evaluatorID {
+			var tmpIndiEval []IndividualEval
 
+			_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+				"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+				"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+				From("individual_eval").
+				Where("evaluator_id = ?", v).Load(&tmpIndiEval)
+			if err != nil {
+				mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+				return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
+			}
+			individualEval = append(individualEval, tmpIndiEval...)
+		}
 		if individualEval != nil {
 			// for文で回す
 			// Ace に入れる構造体に格納
@@ -1169,7 +1177,7 @@ func main() {
 
 		tmpEvalCount := 0
 		tmpRank := 0
-		// DB から��ーザー名を取得
+		// DB から��ーザー名を���得
 		for i, v := range individualEvalCount {
 			// 恐らく参照渡しなので、v.に代入しても意味がない。
 			individualEvalCount[i].UserName, err = dbSess.Select("name").From("userinfo").
@@ -1423,7 +1431,7 @@ func main() {
 				m.SetHeader("To", email)
 				m.SetHeader("Subject", "メールアドレスの確認")
 				m.SetBody("text/plain",
-					"WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、このURLは無効となるので再度メールアドレスの登録をお願いします。\nhttps://"+host+"/email_check?act="+act)
+					"WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、こ���URL�����無効となるので再度メールア�����レスの登録をお願いします。\nhttps://"+host+"/email_check?act="+act)
 
 				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: "USER_PASSWORD"}
 				if err := d.DialAndSend(m); err != nil {
@@ -1691,7 +1699,7 @@ func main() {
 		return c.Render(http.StatusOK, "user_settings", mypageValue)
 	})
 
-	// ユーザー設定送信後の処理
+	// ������ザー設定送信����の処理
 	r.POST("/user_settings", func(c echo.Context) error {
 
 		user := c.Get("user").(*jwt.Token)
