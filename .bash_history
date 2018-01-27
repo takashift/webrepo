@@ -1,79 +1,3 @@
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
 docker stop tuna_echo_1
@@ -998,3 +922,79 @@ rcode volumes/go_app/views/input_evaluation.ace
 rcode volumes/go_app/views/input_evaluation_url.ace 
 git commit -am "URLを入力する方の評価フォームの目的例を変更"
 gitpush 
+cd volumes/go_app/
+ls
+cd views/
+ls
+rcode search_top.ace 
+rcode tmp_preview_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git status
+git commit -am "トップページにシェアボタンを追加"
+gitpq
+gitpush 
+docker stop tuna_echo_1
+git status
+docker-compose up -d --build
+git status
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit --amend
+docker-compose up -d --build
+git commit --amend
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit --amend
+git p
+git push
+git push -f
+git commit --amend
+git add search_top.ace 
+git commit --amend
+git push -f
+ls
+cd nginx/
+cd

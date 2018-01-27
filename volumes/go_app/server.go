@@ -1167,6 +1167,8 @@ func main() {
 			return individualEvalCount[i].EvalCount > individualEvalCount[j].EvalCount
 		})
 
+		tmpEvalCount := 0
+		tmpRank := 0
 		// DB から��ーザー名を取得
 		for i, v := range individualEvalCount {
 			// 恐らく参照渡しなので、v.に代入しても意味がない。
@@ -1176,8 +1178,12 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			individualEvalCount[i].RankNum = i + 1
-			fmt.Println(v)
+			// 評価数が同じ場合は同順位に設定する
+			if v.EvalCount == tmpEvalCount {
+			} else {
+				tmpRank++
+			}
+			individualEvalCount[i].RankNum = tmpRank
 		}
 
 		var rankingContent RankingContent
