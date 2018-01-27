@@ -1,10 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "ユーザー設定のページを作成"
 git status
 git commit -am "ユーザー設定のページを作成"
 gitpush 
@@ -998,3 +991,10 @@ git push -f
 ls
 cd nginx/
 cd
+cd volumes/go_app/
+rcode server.go 
+git commit --amend
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "ランキングに同順位の処理が無かったので追加"
+gitpush 

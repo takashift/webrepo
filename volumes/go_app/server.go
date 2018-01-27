@@ -1182,6 +1182,7 @@ func main() {
 			if v.EvalCount == tmpEvalCount {
 			} else {
 				tmpRank++
+				tmpEvalCount = v.EvalCount
 			}
 			individualEvalCount[i].RankNum = tmpRank
 		}
