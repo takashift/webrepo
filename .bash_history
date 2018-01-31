@@ -1,11 +1,3 @@
-git commit -am "ユーザーの付けた評価の一覧ページを用意"
-gitpush 
-cd volumes/go_app/views/
-ls
-rcode mypage_top.ace 
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "マイページに自分の付けた評価一覧へのリンクを用意"
 gitpush 
 git log
 git status
@@ -998,3 +990,11 @@ git commit -am "閲覧目的の例を〜したいに変更。"
 git commit -am "閲覧目的のフォームの説明内容を変更。"
 gitpq
 gitpush 
+cd volumes/go_app/views/
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+git commit -am "閲覧目的の説明を修正"
+gitpush 
+git commit -am "閲覧目的の説明をさらに修正"
+gitpush 
+rcode input_evaluation_url.ace 
