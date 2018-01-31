@@ -1,17 +1,3 @@
-gitpush 
-git log
-git status
-cd volumes/go_app/
-ls
-rcode server.go 
-cd volumes/go_app/
-ls
-rcode server.go 
-docker-compose up -d --build
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
 docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
@@ -998,3 +984,17 @@ gitpush
 git commit -am "閲覧目的の説明をさらに修正"
 gitpush 
 rcode input_evaluation_url.ace 
+cd volumes/go_app/views/
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+rcode input_evaluation.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "閲覧目的のヒントをさらに具体的に変更"
+gitpush 
