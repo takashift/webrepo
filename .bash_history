@@ -1,35 +1,3 @@
-git status
-git commit -am "ユーザー設定のページを作成"
-gitpush 
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-rcode ~/mysql/init/webrepo.sql 
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "ユーザー名の更新機能を実装"
-git status
-gitpush 
-cd volumes/go_app/views/
-ls
-rcode user_config.ace
-rcode mypage_top.ace 
 rcode input_comment.ace 
 mv user_config.ace user_settings.ace 
 rcode user_settings.ace 
@@ -998,3 +966,35 @@ docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "ランキングに同順位の処理が無かったので追加"
 gitpush 
+git log
+gitpush 
+git log
+gitpush 
+git log
+git push -f
+cd volumes/go_app/
+rcode server.go 
+git commit -am "評価数を一時保存し忘れてたので修正"
+gitpush 
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "同じユーザー名が複数ある場合でも検索できるように変更"
+gitpush 
+cd volumes/go_app/
+ls
+rcode server.go 

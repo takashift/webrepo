@@ -150,7 +150,7 @@ html lang=ja
       h3 評価はどんな Webページでも構いません！
       / #daily_theme
       a.new_eval href="r/input_evaluation"
-        button.new_eval Webページを評価する
+        button.new_eval 評価を入力する
           br
             span ★★★★★
           #recom ブックマーク推奨
