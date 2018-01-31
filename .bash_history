@@ -1,23 +1,3 @@
-rcode input_comment.ace 
-mv user_config.ace user_settings.ace 
-rcode user_settings.ace 
-git commit -am "マイページにユーザー設定へのリンクを追加。ユーザー設定のページの作成"
-gitpush 
-rcode eval_form_css.ace
-rcode common-setting.ace 
-rcode input_evaluation.ace 
-rcode search_top.ace 
-git add eval_form_css.ace user_settings.ace 
-cd volumes/go_app/views/
-ls
-rcode my_eval_list.ace
-rcode mypage_top.ace 
-rcode user_settings.ace 
-rcode search_result.ace 
-rcode tmp_preview_evaluation.ace 
-rcode page_list.ace 
-git status
-git add my_eval_list.ace 
 git commit -am "ユーザーの付けた評価の一覧ページを用意"
 gitpush 
 cd volumes/go_app/views/
@@ -998,3 +978,23 @@ gitpush
 cd volumes/go_app/
 ls
 rcode server.go 
+cd volumes/go_app/views/
+rcode search_top.ace 
+git commit -am "トップページのボタンを「評価を入力する」に変更。"
+gitpush 
+rcode page_list.ace 
+git commit -am "ページリストのタグを全角空白区切りに変更。"
+gito
+gitpush 
+rcode header_menu.ace 
+git commit -am "ヘッダーのページ一覧の表記を登録ページ一覧に変更。"
+rcode page_list.ace 
+git commit -am "ページリストのタグ：の後にもスペース追加"
+gitpush 
+rcode input_evaluation.ace 
+rcode input_evaluation_url.ace 
+git log
+git commit -am "閲覧目的の例を〜したいに変更。"
+git commit -am "閲覧目的のフォームの説明内容を変更。"
+gitpq
+gitpush 
