@@ -243,7 +243,7 @@ html lang=ja
             span.star ★ 
             span  目的達成度：{{.AveGFP}}　見やすさ：{{.AveVisP}}
           .cate ジャンル：{{.Genre}}　媒体：{{.Media}}
-          .tag タグ：{{.Tag1}}　{{.Tag2}}　{{.Tag3}}　{{.Tag4}}　{{.Tag5}}　{{.Tag6}}　{{.Tag7}}　{{.Tag8}}　{{.Tag9}}　{{.Tag10}}
+          .tag タグ：　{{.Tag1}}　{{.Tag2}}　{{.Tag3}}　{{.Tag4}}　{{.Tag5}}　{{.Tag6}}　{{.Tag7}}　{{.Tag8}}　{{.Tag9}}　{{.Tag10}}
           h4 <a href="/r/input_evaluation/{{.ID}}">評価する</a>
         .
       {{end}}
