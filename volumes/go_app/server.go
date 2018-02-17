@@ -141,6 +141,7 @@ type (
 		UserName string
 		Rank     string
 		Content  string
+		Tag      string
 	}
 
 	// データベースのテスト
@@ -1223,19 +1224,28 @@ func main() {
 		return signinCheck("tag_search", c, listPageValue)
 	})
 
-	// 入力されたタグの付いたページの評価を検索
-	e.GET("/tag_search_eval", func(c echo.Context) error {
+	// 特定のユーザー、入力されたタグの付いたページの評価を検索
+	e.GET("/search_eval", func(c echo.Context) error {
 
 		var (
 			mypageValue MyPageValue
+			evaluatorID []int
 			pageIDs     []int
 			err         error
 			tags        = c.QueryParam("tag")
 			where       string
+			ace         = "search_eval"
 		)
 
-		mypageValue.UserName = tags
+		mypageValue.UserName = c.QueryParam("username")
+		mypageValue.Tag = tags
 
+		// DB から特定ユーザーの評価を取得
+		if mypageValue.UserName != "" {
+			_, err = dbSess.Select("id").From("userinfo").
+				Where("name = ?", mypageValue.UserName).
+				Load(&evaluatorID)
+		}
 		// DBから入力されたタグの付いたページを取得
 		if tags != "" {
 			tags = strings.Replace(tags, "　", " ", -1)
@@ -1254,28 +1264,64 @@ func main() {
 				Where(where).
 				Load(&pageIDs)
 		}
-		if err != nil || len(pageIDs) <= 0 {
-			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
-			return c.Render(http.StatusOK, "tag_search_eval", mypageValue)
+		if err != nil {
+			mypageValue.Content = "<div class=\"subject\">DBエラー</div>"
+			return c.Render(http.StatusOK, ace, mypageValue)
 		}
-		fmt.Println(pageIDs)
+		if len(pageIDs) <= 0 && len(evaluatorID) <= 0 {
+			return c.Render(http.StatusOK, ace, mypageValue)
+		}
 
 		// 複数の評価データを格納するために構造体のスライスを作成
 		var individualEval []IndividualEval
 		// 同じユーザー名の人がいる場合にも対応
-		for _, v := range pageIDs {
-			var tmpIndiEval []IndividualEval
+		if len(pageIDs) <= 0 {
+			for _, v := range evaluatorID {
+				var tmpIndiEval []IndividualEval
 
-			_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
-				"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
-				"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
-				From("individual_eval").
-				Where("page_id = ?", v).Load(&tmpIndiEval)
-			if err != nil {
-				mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
-				return c.Render(http.StatusOK, "tag_search_eval", mypageValue)
+				_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+					"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+					"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+					From("individual_eval").
+					Where("evaluator_id = ?", v).Load(&tmpIndiEval)
+				if err != nil {
+					mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+					return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
+				}
+				individualEval = append(individualEval, tmpIndiEval...)
 			}
-			individualEval = append(individualEval, tmpIndiEval...)
+		} else if len(evaluatorID) <= 0 {
+			for _, v := range pageIDs {
+				var tmpIndiEval []IndividualEval
+
+				_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+					"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+					"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+					From("individual_eval").
+					Where("page_id = ?", v).Load(&tmpIndiEval)
+				if err != nil {
+					mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+					return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
+				}
+				individualEval = append(individualEval, tmpIndiEval...)
+			}
+		} else {
+			for _, v := range evaluatorID {
+				for _, w := range pageIDs {
+					var tmpIndiEval []IndividualEval
+
+					_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+						"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+						"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+						From("individual_eval").
+						Where("evaluator_id = ? AND page_id = ?", v, w).Load(&tmpIndiEval)
+					if err != nil {
+						mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+						return c.Render(http.StatusOK, ace, mypageValue)
+					}
+					individualEval = append(individualEval, tmpIndiEval...)
+				}
+			}
 		}
 		if individualEval != nil {
 			// for文で回す
@@ -1285,55 +1331,7 @@ func main() {
 			}
 		}
 
-		return c.Render(http.StatusOK, "tag_search_eval", mypageValue)
-	})
-
-	// 特定ユーザーの評価の一覧を表示
-	e.GET("/search_user_eval_list", func(c echo.Context) error {
-
-		var (
-			mypageValue MyPageValue
-			evaluatorID []int
-		)
-
-		mypageValue.UserName = c.QueryParam("username")
-
-		// DB から特定ユーザーの評価を取得
-		_, err := dbSess.Select("id").From("userinfo").
-			Where("name = ?", mypageValue.UserName).
-			Load(&evaluatorID)
-
-		if err != nil || len(evaluatorID) <= 0 {
-			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
-			return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
-		}
-
-		// 複数の評価データを格納するために構造体のスライスを作成
-		var individualEval []IndividualEval
-		// 同じユーザー名の人がいる場合にも対応
-		for _, v := range evaluatorID {
-			var tmpIndiEval []IndividualEval
-
-			_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
-				"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
-				"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
-				From("individual_eval").
-				Where("evaluator_id = ?", v).Load(&tmpIndiEval)
-			if err != nil {
-				mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
-				return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
-			}
-			individualEval = append(individualEval, tmpIndiEval...)
-		}
-		if individualEval != nil {
-			// for文で回す
-			// Ace に入れる構造体に格納
-			for i, v := range individualEval {
-				mypageValue.Content += makePrevMyEval(i, v)
-			}
-		}
-
-		return c.Render(http.StatusOK, "search_user_eval_list", mypageValue)
+		return c.Render(http.StatusOK, ace, mypageValue)
 	})
 
 	// ユーザーのランキングを表示

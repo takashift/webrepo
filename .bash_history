@@ -1,157 +1,3 @@
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd volumes/go_app/
-ls
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "ページ登録画面に説明を追加"
-gitpq
-gitpush 
-cd volumes/go_app/views/
-ls
-rcode input_evaluation.ace 
-rcode input_evaluation_
-rcode input_evaluation_url.ace 
-rcode register_page.ace 
-git log
-docker exec -it tuna_mysql_1 /bin/bash
-cd volumes/go_app/
-rcode server.go 
-rcode createPrevEvalPage.go 
-cd mysql/init/webrepo.sql 
-rcode mysql/init/webrepo.sql 
-git stauts
-git status
-git commit -am "DBの見やすさのカラムのnot null指定を解除"
-gitpush 
-docker-compose logs
-cd volumes/go_app/
-ls
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-cd views/
-rcode input_evaluation.ace 
-rcode ../createPrevEvalPage.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose logs
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
-docker-compose up -d --build
-git log
-git commit -am "評価がついてない場合にgoでは処理せずSQLでデフォルトで 0 が入力されるように変更。"
-git commit --amend
-gitpush 
-rcode mypage_top.ace 
-rcode footer.ace 
-rcode ../server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "ログアウト機能を追加"
-gitpush 
-git lo
-git log
-rcode tmp_preview_evaluation.ace 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "評価閲覧ページのコメント数の位置変更、星の間に間隔を追加"
-gitpush 
-cd volumes/go_app/
-ls
-cd views/
-ls
-cd volumes/go_app/views/
-ls
-rcode dangerous_complete.ace 
-cp dangerous_complete.ace input_eval_complete.ace
-rcode input_eval_complete.ace 
-git status
-git add input_eval_complete.ace 
-git commit -am "評価入力完了画面を追加"
-gitpush 
-cd volumes/go_app/views/
-ls
-rcode register_page.ace 
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "ページの登録のみ行います。文言を削除"
-gitpush 
-cd volumes/go_app/
-ls
-rcode server.go 
-cd views/
 rcode input_evaluation.ace 
 rcode input_evaluation_url.ace 
 rcode register_page.ace 
@@ -998,3 +844,157 @@ mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock 
 sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
 docker exec -it tuna_mysql_1 /bin/bash
 sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+cd volumes/go_app/
+rcode server.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode views/header_menu.ace 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+git commit -am "タグでページを検索できる機能を追加"
+gitpush 
+git commit -am "タグ検索をヘッダーに追加"
+gitpush 
+git commit -am "タグ検索のテンプレfileを追加し忘れてたので追加"
+git add views/tag_search.ace 
+ls ../nginx-logs/
+ls ../nginx-logs/echo/
+git add ../nginx-logs/ ../../cron/pub_Dockerfile ../../mysql/pub_Dockerfile ../../nginx/pub_Dockerfile
+git commit -am "タグ検索のテンプレfileを追加し忘れてたので追加"
+gitp
+gitpush 
+git commit --amend
+ls -; ../nginx-logs/echo/
+ls -l ../nginx-logs/echo/
+ls -l ../nginx-logs/nginx/
+git commit --soft HEAD^
+git reset --soft HEAD^
+git status
+git reset --soft HEAD
+git status
+git log
+git reset HEAD
+git status
+git add ../../cron/pub_Dockerfile ../../mysql/pub_Dockerfile ../../nginx/pub_Dockerfile
+git add views/tag_search.ace 
+git commit -am "タグ検索のテンプレfileを追加し忘れてたので追加"
+git push -f
+docker stop tuna_echo_1
+docker-compose up -d --build
+cd views/
+rcode search_user_eval_list.ace 
+rcode tag_search_eval.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git statsu
+git statis
+git status
+git add tag_search_eval.ace 
+git commit -am "タグで評価を検索する機能を追加"
+gitpush 
+cd ..
+rcode createPrevEvalPage.go 
+git commit -am "評価検索結果のタグの行間をスペースに変更"
+gitpush 

@@ -82,11 +82,14 @@ html lang=ja
     = include header_menu
     #list
       .subject
+        h2 評価の検索
         form action="" method="get"
-          h3 評価を付けたユーザー名　
-            input.search name="username" required=""
+          h3 評価を付けたユーザー名（一人）　
+            input.search name="username" value={{.UserName}}
+          h3 評価されたページのタグ　
+            input.search name="tag" value={{.Tag}}
+          h3
             input.button type="submit" value="表示"
-        h2 {{.UserName}}さんの付けた評価一覧
       #eval_list
 
     #footer
@@ -96,4 +99,3 @@ html lang=ja
         a href="/about" このサイトについて
       #copy Copyright &copy 2017 Tsunashima@
         a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
-
