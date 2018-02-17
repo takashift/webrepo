@@ -1269,7 +1269,12 @@ func main() {
 			mypageValue.Content = "<div class=\"subject\">DBエラー</div>"
 			return c.Render(http.StatusOK, ace, mypageValue)
 		}
-		if len(pageIDs) <= 0 && len(evaluatorID) <= 0 {
+		if len(evaluatorID) <= 0 && len(pageIDs) <= 0 {
+			if mypageValue.UserName != "" {
+				mypageValue.Content = "<div class=\"subject\">ユーザー「" + mypageValue.UserName + "」は見つかりませんでした。</div>"
+			} else if tags != "" {
+				mypageValue.Content = "<div class=\"subject\">タグ「" + tags + "」は見つかりませんでした。</div>"
+			}
 			return c.Render(http.StatusOK, ace, mypageValue)
 		}
 
@@ -1277,7 +1282,7 @@ func main() {
 		var individualEval []IndividualEval
 		// 同じユーザー名の人がいる場合にも対応
 		if len(pageIDs) <= 0 {
-			mypageValue.Content = "<div class=\"subject\">タグ「" + mypageValue.Tag + "」は見つかりませんでした。以下はユーザー名のみで検索した結果です。</div>"
+			mypageValue.Content = "<div class=\"subject\">タグ「" + tags + "」は見つかりませんでした。以下はユーザー名のみで検索した結果です。</div>"
 			for _, v := range evaluatorID {
 				var tmpIndiEval []IndividualEval
 
