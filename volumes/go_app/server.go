@@ -12,6 +12,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"html/template"
 	"io"
 	"math"
 	"net"
@@ -1276,6 +1277,7 @@ func main() {
 		var individualEval []IndividualEval
 		// 同じユーザー名の人がいる場合にも対応
 		if len(pageIDs) <= 0 {
+			mypageValue.Content = "<div class=\"subject\">" + mypageValue.Tag + "は見つかりませんでした。</div>"
 			for _, v := range evaluatorID {
 				var tmpIndiEval []IndividualEval
 
@@ -1291,6 +1293,7 @@ func main() {
 				individualEval = append(individualEval, tmpIndiEval...)
 			}
 		} else if len(evaluatorID) <= 0 {
+			mypageValue.Content = "<div class=\"subject\">" + mypageValue.UserName + "は見つかりませんでした。</div>"
 			for _, v := range pageIDs {
 				var tmpIndiEval []IndividualEval
 
@@ -1886,6 +1889,7 @@ func main() {
 		userID := claims["id"].(float64)
 
 		userName := c.FormValue("user_name")
+		userName = template.HTMLEscapeString(userName)
 
 		_, err := dbSess.Update("userinfo").Set("name", userName).Where("id = ?", userID).Exec()
 		if err != nil {
@@ -2029,16 +2033,16 @@ func main() {
 			// 	structVal.Field(i + 9).Set(v)
 		}
 
-		newPS.Tag1 = tagArr[0]
-		newPS.Tag2 = tagArr[1]
-		newPS.Tag3 = tagArr[2]
-		newPS.Tag4 = tagArr[3]
-		newPS.Tag5 = tagArr[4]
-		newPS.Tag6 = tagArr[5]
-		newPS.Tag7 = tagArr[6]
-		newPS.Tag8 = tagArr[7]
-		newPS.Tag9 = tagArr[8]
-		newPS.Tag10 = tagArr[9]
+		newPS.Tag1 = template.HTMLEscapeString(tagArr[0])
+		newPS.Tag2 = template.HTMLEscapeString(tagArr[1])
+		newPS.Tag3 = template.HTMLEscapeString(tagArr[2])
+		newPS.Tag4 = template.HTMLEscapeString(tagArr[3])
+		newPS.Tag5 = template.HTMLEscapeString(tagArr[4])
+		newPS.Tag6 = template.HTMLEscapeString(tagArr[5])
+		newPS.Tag7 = template.HTMLEscapeString(tagArr[6])
+		newPS.Tag8 = template.HTMLEscapeString(tagArr[7])
+		newPS.Tag9 = template.HTMLEscapeString(tagArr[8])
+		newPS.Tag10 = template.HTMLEscapeString(tagArr[9])
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 		fmt.Println("tag10:", newPS.Tag9)
 
@@ -2219,16 +2223,16 @@ func main() {
 		}
 		// structVal.Field(i + 9).Set(v)
 
-		newPS.Tag1 = tagArr[0]
-		newPS.Tag2 = tagArr[1]
-		newPS.Tag3 = tagArr[2]
-		newPS.Tag4 = tagArr[3]
-		newPS.Tag5 = tagArr[4]
-		newPS.Tag6 = tagArr[5]
-		newPS.Tag7 = tagArr[6]
-		newPS.Tag8 = tagArr[7]
-		newPS.Tag9 = tagArr[8]
-		newPS.Tag10 = tagArr[9]
+		newPS.Tag1 = template.HTMLEscapeString(tagArr[0])
+		newPS.Tag2 = template.HTMLEscapeString(tagArr[1])
+		newPS.Tag3 = template.HTMLEscapeString(tagArr[2])
+		newPS.Tag4 = template.HTMLEscapeString(tagArr[3])
+		newPS.Tag5 = template.HTMLEscapeString(tagArr[4])
+		newPS.Tag6 = template.HTMLEscapeString(tagArr[5])
+		newPS.Tag7 = template.HTMLEscapeString(tagArr[6])
+		newPS.Tag8 = template.HTMLEscapeString(tagArr[7])
+		newPS.Tag9 = template.HTMLEscapeString(tagArr[8])
+		newPS.Tag10 = template.HTMLEscapeString(tagArr[9])
 		// fmt.Printf("tag10:%s\n", structVal.Field())
 
 		fmt.Println("URL:", dbPS.URL)
