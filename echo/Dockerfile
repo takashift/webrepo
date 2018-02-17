@@ -22,6 +22,7 @@ RUN go get -u github.com/dgrijalva/jwt-go
 RUN go get -u github.com/satori/go.uuid
 RUN go get -u golang.org/x/oauth2
 RUN go get -u google.golang.org/api/oauth2/v2
+
 # RUN go get -u google.golang.org/appengine
 RUN go get -u cloud.google.com/go/compute/metadata
 RUN go get -u github.com/dchest/uniuri

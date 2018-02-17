@@ -1107,6 +1107,144 @@ func main() {
 		return signinCheck("page_list", c, listPageValue)
 	})
 
+	// タグで登録済みのページを一覧表示
+	e.GET("/tag_search", func(c echo.Context) error {
+
+		evalForm, _ := getPageStatusItem(c, -1)
+
+		var (
+			listPageValue ListPageValue
+			dbPS          []PageStatus
+			err           error
+			tags          = c.QueryParam("tag")
+			where         string
+			sortQ         = c.QueryParam("sort")
+		)
+
+		listPageValue.EvalForm = evalForm
+
+		// DBから指定したジャンルと媒体のページを取得
+		if tags == "" {
+			listPageValue.Content = "<p>タグを入力して下さい。</p>"
+		} else {
+			tags = strings.Replace(tags, "　", " ", -1)
+			tag := strings.Fields(tags)
+
+			for i, v := range tag {
+				// タグ入力時に byte13Str を入れてしまっているので、検索時にも全てに付与する。
+				w := "\"" + v + byte13Str + "\""
+				if i > 0 {
+					where += " AND "
+				}
+				where += "(tag1 = " + w + " OR tag2 = " + w + " OR tag3 = " + w + " OR tag4 = " + w + " OR tag5 = " + w + " OR tag6 = " + w + " OR tag7 = " + w + " OR tag8 = " + w + " OR tag9 = " + w + " OR tag10 = " + w + ")"
+			}
+			_, err = dbSess.Select("id", "title", "URL",
+				"genre", "media", "dead",
+				"tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10").
+				From("page_status").
+				Where(where).
+				Load(&dbPS)
+		}
+		if err != nil {
+			panic(err)
+		}
+
+		if listPageValue.Content == "" {
+			if dbPS != nil {
+
+				// dead が 0 以外のものは除外
+				var alivePS []PageStatus
+				for i := 0; i < len(dbPS); i++ {
+					if dbPS[i].Dead == 0 {
+						alivePS = append(alivePS, dbPS[i])
+					}
+				}
+				// スライスの要素数からページの件数を取得
+				resultNum := len(alivePS)
+				listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
+
+				// for i, v := range alivePS {
+
+				// 	listPageValue.Content +=
+				// 		fmt.Sprintf(
+				// 			`
+				// 		<div class="page_status">
+				// 			<h3>%d： <a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
+				// 			<div class="cate">ジャンル：%s　媒体：%s</div>
+				// 			<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
+				// 			<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
+				// 		</div>
+				// 	`, i+1, v.ID, template.HTMLEscapeString(v.Title),
+				// 			template.HTMLEscapeString(v.URL), template.HTMLEscapeString(v.URL),
+				// 			template.HTMLEscapeString(v.Genre), template.HTMLEscapeString(v.Media),
+				// 			template.HTMLEscapeString(v.Tag1), template.HTMLEscapeString(v.Tag2),
+				// 			template.HTMLEscapeString(v.Tag3), template.HTMLEscapeString(v.Tag4),
+				// 			template.HTMLEscapeString(v.Tag5), template.HTMLEscapeString(v.Tag6),
+				// 			template.HTMLEscapeString(v.Tag7), template.HTMLEscapeString(v.Tag8),
+				// 			template.HTMLEscapeString(v.Tag9), template.HTMLEscapeString(v.Tag10),
+				// 			v.ID)
+				// }
+
+				// 平均評価の計算
+				// 複数の評価データを格納するために構造体のスライスを作成
+				for i, v := range alivePS {
+					var individualEval []IndividualEval
+					_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+						"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+						"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+						From("individual_eval").
+						Where("page_id = ?", v.ID).Load(&individualEval)
+
+					if err == nil {
+						var (
+							gfp       int
+							visp      int
+							enableNum int
+							visNum    int
+						)
+						// 平均評価を計算
+						for _, w := range individualEval {
+							// 審議なしか審議済みなら
+							if w.Deliberate <= 1 {
+								gfp += w.GoodnessOfFit
+								if w.Visibility >= 1 {
+									visp += w.Visibility
+									visNum++
+								}
+								enableNum++
+							}
+						}
+						// 10倍して四捨五入
+						gfpf := math.Floor((float64(gfp)/float64(enableNum))*math.Pow10(1) + 0.05)
+						vispf := math.Floor((float64(visp)/float64(visNum))*math.Pow10(1) + 0.05)
+						// 0.1倍して代入
+						alivePS[i].AveGFP = strconv.FormatFloat(gfpf*math.Pow10(-1), 'f', 1, 64)
+						alivePS[i].AveVisP = strconv.FormatFloat(vispf*math.Pow10(-1), 'f', 1, 64)
+					}
+				}
+
+				if sortQ == "" {
+
+					// 目的達成度が高い順にソートする。
+					sort.Slice(alivePS, func(i, j int) bool {
+						return alivePS[i].AveGFP > alivePS[j].AveGFP
+					})
+					listPageValue.SortSelected = ""
+				} else {
+					listPageValue.SortSelected = "sortX1"
+				}
+
+				listPageValue.PageStatusSlice = alivePS
+
+			} else {
+				listPageValue.Content = "<p id=\"result_status\">検索結果：0件</p>"
+			}
+
+			listPageValue.Tag = tags
+		}
+		return signinCheck("tag_search", c, listPageValue)
+	})
+
 	// 特定ユーザーの評価の一覧を表示
 	e.GET("/search_user_eval_list", func(c echo.Context) error {
 
