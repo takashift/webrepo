@@ -1277,7 +1277,7 @@ func main() {
 		var individualEval []IndividualEval
 		// 同じユーザー名の人がいる場合にも対応
 		if len(pageIDs) <= 0 {
-			mypageValue.Content = "<div class=\"subject\">" + mypageValue.Tag + "は見つかりませんでした。</div>"
+			mypageValue.Content = "<div class=\"subject\">タグ「" + mypageValue.Tag + "」は見つかりませんでした。以下はユーザー名のみで検索した結果です。</div>"
 			for _, v := range evaluatorID {
 				var tmpIndiEval []IndividualEval
 
@@ -1293,7 +1293,7 @@ func main() {
 				individualEval = append(individualEval, tmpIndiEval...)
 			}
 		} else if len(evaluatorID) <= 0 {
-			mypageValue.Content = "<div class=\"subject\">" + mypageValue.UserName + "は見つかりませんでした。</div>"
+			mypageValue.Content = "<div class=\"subject\">ユーザー「" + mypageValue.UserName + "」は見つかりませんでした。以下はタグのみで検索した結果です。</div>"
 			for _, v := range pageIDs {
 				var tmpIndiEval []IndividualEval
 

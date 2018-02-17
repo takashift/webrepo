@@ -1,87 +1,3 @@
-rcode input_evaluation.ace 
-rcode input_evaluation_url.ace 
-rcode register_page.ace 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "入力フォームのトップに説明を追加"
-gitpush 
-cd volumes/go_app/v
-cd volumes/go_app/views/
-rcode preview_evaluation.ace 
-ls
-rcode tmp_preview_evaluation.ace 
-cd volumes/go_app/
-ls
-rcode server.go 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "はてブのシェアボタンを追加"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "シェアボタンの間隔とmarginを右に変更。"
-gitpush 
-cd volumes/go_app/
-cd views/
-ls
-rcode tmp_preview_evaluation.ace 
-rcode mysql/init/webrepo.sql 
-cd volumes/go_app/
-rcode server.go 
-rcode createPrevEvalPage.go 
-git commit -am "特定のユーザー評価検索機能を追加"
-gitpush 
-cd volumes/go_app/views/
-ls
-rcode tmp_preview_evaluation.ace 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "pocketとfacebookのボタンを追加"
-gitpush 
-rcode about.ace 
-
-gitpush 
-git commit -am "aboutの宛先をローマ字に修正"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-rcode tmp_preview_evaluation.ace 
-docker stop tuna_echo_1
-docker-compose up -d --build
 docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "scriptを全てdeferに変更。"
@@ -997,4 +913,88 @@ gitpush
 cd ..
 rcode createPrevEvalPage.go 
 git commit -am "評価検索結果のタグの行間をスペースに変更"
+gitpush 
+cd volumes/go_app/
+ls
+rcode server.go 
+cd views/
+rcode tag_search.ace 
+rcode tag_search_eval.ace 
+rcode search_user_eval_list.ace 
+cp tag_search_eval.ace search_eval.ace 
+rcode search_eval.ace 
+rcode search_top.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose logs
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+cd ..
+rcode views/header_menu.ace 
+docker stop tuna_echo_1
+docker-compose up -d --build
+rcode createPrevEvalPage.go 
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+git add views/search_eval.ace 
+git commit -am "評価の検索を統一"
+gitpush 
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker-compose logs
+git status
+git log
+git status
+git commit -am "タグの入力をエスケープするように変更"
+gitpush 
+cd views/ls
+cd views/
+ls
+mv search_user_eval_list.ace archive/
+mv tag_search_eval.ace archive/
+git status
+ls archive/
+git add archive/
+git status
+git commit -am "不要になった評価検索のテンプレをアーカイブ"
 gitpush 
