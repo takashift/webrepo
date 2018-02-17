@@ -1131,7 +1131,7 @@ func main() {
 			tag := strings.Fields(tags)
 
 			for i, v := range tag {
-				// タグ入力時に byte13Str を入れてしまっているので、検索時にも全てに付与する。
+				// タグ入力時に byte13Str を入れてしまっているので、検索時にも全てに付与する
 				w := "\"" + v + byte13Str + "\""
 				if i > 0 {
 					where += " AND "

@@ -43,6 +43,8 @@
     span.hd_m_elem
       a href="/page_list?genre=*&media=文章" 登録済みページ
     span.hd_m_elem
+      a href="/tag_search" タグ検索
+    span.hd_m_elem
       a href="/search_user_eval_list" ユーザー検索
   #header_menu_right
     / span.hd_m_elem
