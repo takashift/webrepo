@@ -1,0 +1,7 @@
+FROM alpine:latest
+
+RUN apk --no-cache add mysql-client
+RUN echo '*/5 * * * * mysql -u ユーザー名 -pパスワード -S /ソケットのあるディレクトリ名 データベース名 -e "DELETE FROM テーブル名 WHERE send_time < CURRENT_TIMESTAMP - INTERVAL 12 HOUR;"' > /etc/crontabs/root
+
+# 登録から12時間を経過している一時ユーザーは削除
+CMD [ "crond", "-l", "2", "-f" ]

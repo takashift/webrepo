@@ -1,0 +1,21 @@
+FROM mysql:latest
+
+ADD ./初期化用SQLファイル /docker-entrypoint-initdb.d
+
+ENV MYSQL_DATABASE データベース名
+ENV MYSQL_USER ユーザー名
+ENV MYSQL_PASSWORD パスワード
+ENV MYSQL_ROOT_PASSWORD ルートパスワード
+
+RUN { \
+    echo '[mysqld]'; \
+    echo 'character-set-server=utf8mb4'; \
+    echo 'collation-server=utf8mb4_general_ci'; \
+    echo 'max_allowed_packet=100MB'; \
+    echo 'explicit_defaults_for_timestamp=1'; \
+    echo 'innodb_large_prefix=1'; \
+    echo 'innodb_file_per_table'; \
+    echo 'innodb_file_format=barracuda'; \
+    echo '[client]'; \
+    echo 'default-character-set=utf8mb4'; \
+} > /etc/mysql/conf.d/charset.cnf
