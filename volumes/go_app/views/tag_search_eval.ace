@@ -1,0 +1,98 @@
+= doctype html
+html lang=ja
+  head
+    = include common-setting
+    = include font-family
+    title {{.UserName}}さんの付けた評価一覧 | WebRepo☆彡
+    = css
+      #list {
+        / margin: 0 0 0 150px;
+        padding: 0 0 2rem 0;
+        min-height: 1500px;
+      }
+      .subject {
+        margin: 3.5rem;
+        text-align: center;
+      }
+      input.search {
+        height: 1.5rem;
+        width: 200px;
+        border-width: 1px;
+        border-color: rgba(0,0,0,0.08);
+        font-size: 16px;
+        padding: 9px 15px;
+        margin: auto;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,0.3); 
+      }
+      .button {
+        font-size: 1rem;
+        color: #555; 
+        border-style: none;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+        background-color: #EEE;
+      }
+      .eval_list {
+        margin: 0.5rem 1rem 1rem 1rem;
+      }
+      .review {
+        / flex-shrink: 0;
+        / flex-basis: 400px;
+        margin: 1.5rem 10%;
+        padding: 2rem;
+        background-color: rgba(255,255,255,1);
+        border: solid 3px rgba(0,0,0,0.7);
+      }
+      .review .page_tilte {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .review .page_tilte a {
+        text-decoration: none;
+      }
+      .star {
+        color: rgba(255,230,0,1);
+        -webkit-text-stroke: 2px rgba(0,0,0,0.7);
+        text-stroke: 2px rgba(0,0,0,0.7);
+      }
+      #footer {
+        margin-top: 2rem 0;
+        padding: 1rem 130px;
+        background-color: rgba(242,242,242,1);
+      }
+      #footer p {
+        display: inline-block;
+        padding-left: 2rem;
+      }
+      #footer p a {
+        text-decoration: none;
+        color: rgba(0,0,0,0.7);
+      }
+      #copy {
+        margin: 1rem auto 2rem auto;
+        text-align: center;
+      }
+    = javascript
+      window.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("eval_list").insertAdjacentHTML('afterbegin', {{.Content}});
+      }, false);
+
+  body
+    = include header_menu
+    #list
+      .subject
+        form action="" method="get"
+          h3 指定タグの付いたページの評価を検索　
+            input.search name="tag" required=""
+            input.button type="submit" value="表示"
+        h2 タグ「{{.UserName}}」の付いたページの評価一覧
+      #eval_list
+
+    #footer
+      p
+        a href="/term_of_service" 利用規約
+      p
+        a href="/about" このサイトについて
+      #copy Copyright &copy 2017 Tsunashima@
+        a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab

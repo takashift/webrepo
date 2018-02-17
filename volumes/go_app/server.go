@@ -1107,7 +1107,7 @@ func main() {
 		return signinCheck("page_list", c, listPageValue)
 	})
 
-	// タグで登録済みのページを一覧表示
+	// タグで登録済みのページを検索
 	e.GET("/tag_search", func(c echo.Context) error {
 
 		evalForm, _ := getPageStatusItem(c, -1)
@@ -1123,7 +1123,7 @@ func main() {
 
 		listPageValue.EvalForm = evalForm
 
-		// DBから指定したジャンルと媒体のページを取得
+		// DBから入力されたタグの付いたページを取得
 		if tags == "" {
 			listPageValue.Content = "<p>タグを入力して下さい。</p>"
 		} else {
@@ -1162,28 +1162,6 @@ func main() {
 				// スライスの要素数からページの件数を取得
 				resultNum := len(alivePS)
 				listPageValue.Content = fmt.Sprintf(`<p id="result_status">検索結果：%d件</p>`, resultNum)
-
-				// for i, v := range alivePS {
-
-				// 	listPageValue.Content +=
-				// 		fmt.Sprintf(
-				// 			`
-				// 		<div class="page_status">
-				// 			<h3>%d： <a href="/preview_evaluation/%d">%s</a>　（<a href="%s">%s</a>）</h3>
-				// 			<div class="cate">ジャンル：%s　媒体：%s</div>
-				// 			<div class="tag">タグ： %s %s %s %s %s %s %s %s %s %s</div>
-				// 			<h4><a href="/r/input_evaluation/%d">評価する</a></h4>
-				// 		</div>
-				// 	`, i+1, v.ID, template.HTMLEscapeString(v.Title),
-				// 			template.HTMLEscapeString(v.URL), template.HTMLEscapeString(v.URL),
-				// 			template.HTMLEscapeString(v.Genre), template.HTMLEscapeString(v.Media),
-				// 			template.HTMLEscapeString(v.Tag1), template.HTMLEscapeString(v.Tag2),
-				// 			template.HTMLEscapeString(v.Tag3), template.HTMLEscapeString(v.Tag4),
-				// 			template.HTMLEscapeString(v.Tag5), template.HTMLEscapeString(v.Tag6),
-				// 			template.HTMLEscapeString(v.Tag7), template.HTMLEscapeString(v.Tag8),
-				// 			template.HTMLEscapeString(v.Tag9), template.HTMLEscapeString(v.Tag10),
-				// 			v.ID)
-				// }
 
 				// 平均評価の計算
 				// 複数の評価データを格納するために構造体のスライスを作成
@@ -1243,6 +1221,71 @@ func main() {
 			listPageValue.Tag = tags
 		}
 		return signinCheck("tag_search", c, listPageValue)
+	})
+
+	// 入力されたタグの付いたページの評価を検索
+	e.GET("/tag_search_eval", func(c echo.Context) error {
+
+		var (
+			mypageValue MyPageValue
+			pageIDs     []int
+			err         error
+			tags        = c.QueryParam("tag")
+			where       string
+		)
+
+		mypageValue.UserName = tags
+
+		// DBから入力されたタグの付いたページを取得
+		if tags != "" {
+			tags = strings.Replace(tags, "　", " ", -1)
+			tag := strings.Fields(tags)
+
+			for i, v := range tag {
+				// タグ入力時に byte13Str を入れてしまっているので、検索時にも全てに付与する
+				w := "\"" + v + byte13Str + "\""
+				if i > 0 {
+					where += " AND "
+				}
+				where += "(tag1 = " + w + " OR tag2 = " + w + " OR tag3 = " + w + " OR tag4 = " + w + " OR tag5 = " + w + " OR tag6 = " + w + " OR tag7 = " + w + " OR tag8 = " + w + " OR tag9 = " + w + " OR tag10 = " + w + ")"
+			}
+			_, err = dbSess.Select("id").
+				From("page_status").
+				Where(where).
+				Load(&pageIDs)
+		}
+		if err != nil || len(pageIDs) <= 0 {
+			mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+			return c.Render(http.StatusOK, "tag_search_eval", mypageValue)
+		}
+		fmt.Println(pageIDs)
+
+		// 複数の評価データを格納するために構造体のスライスを作成
+		var individualEval []IndividualEval
+		// 同じユーザー名の人がいる場合にも対応
+		for _, v := range pageIDs {
+			var tmpIndiEval []IndividualEval
+
+			_, err = dbSess.Select("num", "page_id", "evaluator_id", "posted", "browse_time",
+				"browse_purpose", "deliberate", "description_eval", "goodness_of_fit",
+				"recommend_good", "recommend_bad", "device", "visibility", "num_typo").
+				From("individual_eval").
+				Where("page_id = ?", v).Load(&tmpIndiEval)
+			if err != nil {
+				mypageValue.Content = "<div class=\"subject\">評価が見つかりませんでした。</div>"
+				return c.Render(http.StatusOK, "tag_search_eval", mypageValue)
+			}
+			individualEval = append(individualEval, tmpIndiEval...)
+		}
+		if individualEval != nil {
+			// for文で回す
+			// Ace に入れる構造体に格納
+			for i, v := range individualEval {
+				mypageValue.Content += makePrevMyEval(i, v)
+			}
+		}
+
+		return c.Render(http.StatusOK, "tag_search_eval", mypageValue)
 	})
 
 	// 特定ユーザーの評価の一覧を表示
