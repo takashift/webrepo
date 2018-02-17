@@ -377,7 +377,7 @@ func makePrevMyEval(iEval int, eval IndividualEval) string {
 		`<div class="review">
 		<h3 class="page_tilte">No.%d　　<a href="/preview_evaluation/%d">%s</a></h3>
 		<div class="cate">ジャンル：%s　媒体：%s</div>
-		<div class="tag">タグ：%s %s %s %s %s %s %s %s %s %s</div>
+		<div class="tag">タグ：%s　%s　%s　%s　%s　%s　%s　%s　%s　%s</div>
 		<h3>目的：%s</h3>
 		<p class="date">閲覧日　%s</p>
 		<h4 class="first">目的達成度　%s</h4>
