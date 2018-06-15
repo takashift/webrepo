@@ -1,51 +1,3 @@
-docker stop tuna_echo_1
-docker-compose up -d --build
-git commit -am "scriptを全てdeferに変更。"
-gitpush 
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker stop tuna_echo_1
-docker-compose up -d --build
-docker-compose logs
-docker stop tuna_echo_1
 docker-compose up -d --build
 git commit -am "defer to"
 git commit --amend
@@ -998,3 +950,51 @@ git add archive/
 git status
 git commit -am "不要になった評価検索のテンプレをアーカイブ"
 gitpush 
+rcode volumes/go_app/server.go
+docker stop tuna_echo_1
+docker-compose up -d --build
+gitpulldep 
+rcode volumes/go_app/server.go
+docker stop tuna_echo_1
+docker-compose up -d --build
+docker stop tuna_echo_1
+docker-compose up -d --build
+gitpulldep 
+rcode volumes/go_app/server.go
+docker stop tuna_echo_1
+docker-compose up -d --build
+gitpulldep 
+rcode volumes/go_app/server.go
+docker stop tuna_echo_1
+docker-compose up -d --build
+sudo mysql -u rtuna -p --socket=/var/lib/docker/volumes/tuna_usock/_data/mysqld.sock Webrepo
+docker ps
+ls
+cd /etc/ssh/sshd_config
+vim /etc/ssh/sshd_config
+sudovim /etc/ssh/sshd_config
+sudo vim /etc/ssh/sshd_config
+ls -la
+cd volumes/db_data/
+ls
+ls Webrepo/
+sudo ls Webrepo/
+ls -l
+groups
+usermod -G wheel,docker,ssh_keys
+sudo usermod -G wheel,docker,ssh_keys
+sudo usermod -G wheel,docker,ssh_keys tuna
+usermod -G wheel,docker,ssh_keys
+groups
+sudo usermod -G wheel,docker,ssh_keys tuna
+groups
+sudo vim /etc/ssh/sshd_config
+service sshd restart
+sudo vim /etc/ssh/sshd_config
+service sshd restart
+sudo usermod -G wheel,docker,root tuna
+groups
+sudo usermod -G wheel,docker tuna
+visudo
+sudo visudo
+sudo rsync

@@ -49,8 +49,8 @@ const (
 	timeLayout = "2006-01-02 15:04:05"
 	tablename  = "userinfo"
 
-	host = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
-	// host         = "webrepo.nal.ie.u-ryukyu.ac.jp" 	// 本番環境
+	// host = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
+	host         = "webrepo.nal.ie.u-ryukyu.ac.jp" // 本番環境
 	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 
@@ -65,11 +65,11 @@ var (
 
 	googleOauthConfig = &oauth2.Config{
 		// テスト環境
-		ClientID:     "370442566774-868h6rc57kmfm82lu4hsviliuo9l6o07.apps.googleusercontent.com",
-		ClientSecret: "cX7ua-IKGwIJNsVxILni7vfp",
+		// ClientID:     "370442566774-868h6rc57kmfm82lu4hsviliuo9l6o07.apps.googleusercontent.com",
+		// ClientSecret: "cX7ua-IKGwIJNsVxILni7vfp",
 		// 本番環境
-		// ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
-		// ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
+		ClientID:     "370442566774-osi0bgsn710brv1v3uc1s7hk24blhdq2.apps.googleusercontent.com",
+		ClientSecret: "E46tGSdcop7sU9L8pF30Nz_u",
 
 		Endpoint:    google.Endpoint,
 		RedirectURL: "https://" + host + "/oauth2callback_google",
