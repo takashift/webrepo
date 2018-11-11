@@ -15,7 +15,7 @@ services:
                 links:
                         - mysql
                 environment:
-                        - USER_PASSWORD
+                        - MYSQL_PASSWORD
 
         nginx:
                 build: nginx
@@ -44,8 +44,8 @@ services:
 #                        - db_data:/var/lib/mysql
                 environment:
                         - TZ=Asia/Tokyo
-                        - USER_PASSWORD
-                        - ROOT_PASSWORD
+                        - MYSQL_PASSWORD
+                        - MYSQL_ROOT_PASSWORD
 
         cron:
                 build: cron
@@ -55,7 +55,7 @@ services:
                         - /etc/localtime:/etc/localtime:ro
                 environment:
                         - TZ=Asia/Tokyo
-                        - USER_PASSWORD
+                        - MYSQL_PASSWORD
 
 
 volumes:
