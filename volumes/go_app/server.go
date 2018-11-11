@@ -57,9 +57,11 @@ const (
 var (
 	e = echo.New()
 
+	userPassword = os.Getenv("USER_PASSWORD")
+
 	seq = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス
-	conn, dberr = dbr.Open("mysql", "rtuna:USER_PASSWORD@unix(/usock/mysqld.sock)/Webrepo", nil)
+	conn, dberr = dbr.Open("mysql", "rtuna:" + userPassword + "@unix(/usock/mysqld.sock)/Webrepo", nil)
 	dbSess      = conn.NewSession(nil)
 	byte13Str   = string([]byte{13})
 
@@ -1620,7 +1622,7 @@ func main() {
 				m.SetBody("text/plain",
 					"WebRepo☆彡 に登録いただきありがとうございます。\nメールアドレスの確認を行うため、以下のURLへアクセスして下さい。\nなお、このメールの送信から12時間が経過した場合、こ���URL�����無効となるので再度メールア�����レスの登録をお願いします。\nhttps://"+host+"/email_check?act="+act)
 
-				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: "USER_PASSWORD"}
+				d := gomail.Dialer{Host: "smtp.eve.u-ryukyu.ac.jp", Port: 587, Username: "e145771@eve.u-ryukyu.ac.jp", Password: userPassword}
 				if err := d.DialAndSend(m); err != nil {
 					panic(err)
 				}
