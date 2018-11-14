@@ -50,7 +50,7 @@ const (
 	tablename  = "userinfo"
 
 	// host = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
-	host         = "webrepo.nal.ie.u-ryukyu.ac.jp" // 本番環境
+	host         = "webrepo.japaneast.cloudapp.azure.com" // 本番環境
 	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 

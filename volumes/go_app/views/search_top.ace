@@ -4,7 +4,8 @@ html lang=ja
     = include common-setting
     meta charset="utf-8"
     title WebRepo☆彡 - Webページの有用性評価サイト
-    meta name="google-site-verification" content="LiPXRwYVnSBCK63XRzBq2jllBrXQD-3_NAqERix9xMw"
+    / meta name="google-site-verification" content="LiPXRwYVnSBCK63XRzBq2jllBrXQD-3_NAqERix9xMw"
+    meta name="google-site-verification" content="zhFeQxWWH0w3ntikBPr6O9EPbUh7xACs5T5NKPJftIs"
     = include font-family
     = css
       body {
