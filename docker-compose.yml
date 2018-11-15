@@ -30,7 +30,7 @@ services:
                         - usock:/usock
                         - ./volumes/nginx/web-vol:/web
                         - ./volumes/nginx/web-root:/web-root
-                        - ./volumes/nginx/keys:/etc/nginx/
+                        - ./volumes/nginx/keys:/keys/
                         - ./volumes/nginx-logs/nginx:/var/log/nginx
                         - ./volumes/nginx-logs/echo:/root/logs/
 

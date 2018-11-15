@@ -10,6 +10,12 @@ ADD ./app.conf /etc/nginx/nginx.conf
 # ADD ./keys/server.key /etc/nginx/server.key
 ADD ./usock.conf /etc/tmpfiles.d/usock.conf
 
+# Let's Encrypt の　設定
+RUN apk --no-cache add certbot
+# RUN mkdir /acme/
+# RUN certbot certonly --webroot -w /web/ -d webrepo.japaneast.cloudapp.azure.com -m e145771@ie.u-ryukyu.ac.jp --agree-tos -n
+RUN certbot certonly --standalone -d webrepo.japaneast.cloudapp.azure.com -m e145771@ie.u-ryukyu.ac.jp --agree-tos -n
+
 RUN apk --no-cache add shadow
 RUN mkdir /root/logs
 RUN chmod 755 -R /root
