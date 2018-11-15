@@ -30,7 +30,7 @@ services:
                         - usock:/usock
                         - ./volumes/nginx/web-vol:/web
                         - ./volumes/nginx/web-root:/web-root
-                        - ./volumes/nginx/keys:/keys/
+                        # - ./volumes/nginx/keys:/keys/
                         - ./volumes/nginx-logs/nginx:/var/log/nginx
                         - ./volumes/nginx-logs/echo:/root/logs/
 
@@ -54,6 +54,7 @@ services:
                 volumes:
                         - usock:/usock
                         - /etc/localtime:/etc/localtime:ro
+                        - ./volumes/db_backup:/db_backup
                 environment:
                         - TZ=Asia/Tokyo
                         - MYSQL_PASSWORD
