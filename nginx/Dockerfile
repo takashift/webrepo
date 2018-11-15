@@ -5,9 +5,8 @@ MAINTAINER hgcr
 #ADD ./www /root/www
 #ADD ./app.conf /etc/nginx/conf.d/app.conf
 ADD ./app.conf /etc/nginx/nginx.conf
-# ADD ./keys/server.crt /etc/nginx/server.crt
-# ADD ./keys/server.crt /etc/nginx/server.csr
-# ADD ./keys/server.key /etc/nginx/server.key
+ADD ./keys/fullchain.pem /keys/fullchain.pem
+ADD ./keys/privkey.pem /keys/privkey.pem
 ADD ./usock.conf /etc/tmpfiles.d/usock.conf
 
 # Let's Encrypt の　設定
@@ -19,8 +18,8 @@ RUN certbot certonly --standalone -d webrepo.japaneast.cloudapp.azure.com -m e14
 RUN apk --no-cache add shadow
 RUN mkdir /root/logs
 RUN chmod 755 -R /root
-# RUN chmod 400 /etc/nginx/server.crt /etc/nginx/server.csr /etc/nginx/server.key
-# RUN chown root:root /etc/nginx/server.crt /etc/nginx/server.csr /etc/nginx/server.key
+RUN chmod 400 /keys/fullchain.pem /keys/privkey.pem
+RUN chown root:root /keys/fullchain.pem /keys/privkey.pem
 RUN usermod -u 1000 nginx \
     && groupmod -g 1000 nginx
 #RUN chmod 660 /web/domain.sock
