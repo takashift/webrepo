@@ -30,7 +30,8 @@ services:
                         - usock:/usock
                         - ./volumes/nginx/web-vol:/web
                         - ./volumes/nginx/web-root:/web-root
-                        # - ./volumes/nginx/keys:/keys/
+                        - ./volumes/nginx/acme:/acme
+                        - /etc/letsencrypt:/etc/letsencrypt
                         - ./volumes/nginx-logs/nginx:/var/log/nginx
                         - ./volumes/nginx-logs/echo:/root/logs/
 
@@ -51,9 +52,12 @@ services:
         cron:
                 build: cron
                 restart: always
+                depends_on: nginx
                 volumes:
                         - usock:/usock
                         - /etc/localtime:/etc/localtime:ro
+                        - /etc/letsencrypt:/etc/letsencrypt
+                        - ./volumes/nginx/acme:/acme
                         - ./volumes/db_backup:/db_backup
                 environment:
                         - TZ=Asia/Tokyo
