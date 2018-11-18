@@ -19,7 +19,7 @@ RUN go get -u github.com/yosssi/ace
 RUN go get -u github.com/dgrijalva/jwt-go
 
 # OAuth2
-RUN go get -u github.com/satori/go.uuid
+# RUN go get -u github.com/satori/go.uuid
 RUN go get -u golang.org/x/oauth2
 RUN go get -u google.golang.org/api/oauth2/v2
 

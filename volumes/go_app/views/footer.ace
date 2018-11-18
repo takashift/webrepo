@@ -28,7 +28,7 @@
     a href="/term_of_service" 利用規約
   p
     a href="/about" このサイトについて
-  #copy Copyright &copy 2017  
+  #copy Copyright &copy 2017\ 
     a href="https://twitter.com/higechira" target="_blank" 髭散化汰
     {{HTML ". All rights reserved."}}
 

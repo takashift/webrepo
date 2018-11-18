@@ -41,8 +41,8 @@ html lang=ja
       p 本サイト、構想については以下までご連絡ください（
         span.star ★
         {{"は@に直して下さい）。"}}
-      p 　　　　　tsunashima
+      p メール：tsunashima
         span.star ★
         {{"hpcs.cs.tsukuba.ac.jp"}}
-        br Twitter：@higechira
+          br Twitter：@higechira
     = include footer
