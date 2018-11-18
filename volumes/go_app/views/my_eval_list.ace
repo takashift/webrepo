@@ -66,11 +66,12 @@ html lang=ja
         h2 {{.UserName}}さんの付けた評価一覧
       #eval_list
 
-    #footer
-      p
-        a href="/term_of_service" 利用規約
-      p
-        a href="/about" このサイトについて
-      #copy Copyright &copy 2017 Tsunashima@
-        a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
+    = include footer
+    / #footer
+    /   p
+    /     a href="/term_of_service" 利用規約
+    /   p
+    /     a href="/about" このサイトについて
+    /   #copy Copyright &copy 2017 Tsunashima@
+    /     a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
 

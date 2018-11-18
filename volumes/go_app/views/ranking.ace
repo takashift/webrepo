@@ -65,11 +65,12 @@ html lang=ja
             h3 {{.RankNum}}位　{{.UserName}} 評価数{{.EvalCount}}
           {{end}}
 
-    #footer
-      p
-        a href="/term_of_service" 利用規約
-      p
-        a href="/about" このサイトについて
-      #copy Copyright &copy 2017 Tsunashima@
-        a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
+    = include footer
+    / #footer
+    /   p
+    /     a href="/term_of_service" 利用規約
+    /   p
+    /     a href="/about" このサイトについて
+    /   #copy Copyright &copy 2017 Tsunashima@
+    /     a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
 

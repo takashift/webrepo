@@ -92,10 +92,11 @@ html lang=ja
             input.button type="submit" value="表示"
       #eval_list
 
-    #footer
-      p
-        a href="/term_of_service" 利用規約
-      p
-        a href="/about" このサイトについて
-      #copy Copyright &copy 2017 Tsunashima@
-        a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
+    = include footer
+    / #footer
+    /   p
+    /     a href="/term_of_service" 利用規約
+    /   p
+    /     a href="/about" このサイトについて
+    /   #copy Copyright &copy 2017 Tsunashima@
+    /     a href="https://ie.u-ryukyu.ac.jp/~tnal/" NALlab
