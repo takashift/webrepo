@@ -971,7 +971,7 @@ func main() {
 		q := c.QueryParam("q")
 		searchForm.Query = q
 
-		return c.Redirect(http.StatusSeeOther, "https://www.google.co.jp/search?q=site%3Awebrepo.nal.ie.u-ryukyu.ac.jp+"+q)
+		return c.Redirect(http.StatusSeeOther, "https://www.google.co.jp/search?q=site%3Awebrepo.japaneast.cloudapp.azure.com+"+q)
 		// return signinCheck("search_result", c, searchForm)
 	})
 
