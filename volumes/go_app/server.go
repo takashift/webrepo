@@ -49,8 +49,6 @@ const (
 	timeLayout = "2006-01-02 15:04:05"
 	tablename  = "userinfo"
 
-	// host = "xn--rvz.nal.ie.u-ryukyu.ac.jp" // テスト環境
-	host         = "webrepo.japaneast.cloudapp.azure.com" // 本番環境
 	sendMailAdrr = "Webrepo@nal.ie.u-ryukyu.ac.jp"
 )
 
@@ -58,6 +56,7 @@ var (
 	e = echo.New()
 
 	mysqlPassword = os.Getenv("MYSQL_PASSWORD")
+	host = os.Getenv("HOSTNAME")
 
 	seq = 1
 	// ここで指定している Unixソケット の場所は Echoコンテナ のパス

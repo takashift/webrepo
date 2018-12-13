@@ -48,6 +48,7 @@ services:
                         - TZ=Asia/Tokyo
                         - MYSQL_PASSWORD
                         - MYSQL_ROOT_PASSWORD
+                        - HOSTNAME
 
         cron:
                 build: cron
